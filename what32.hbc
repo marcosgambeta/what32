@@ -1,0 +1,6 @@
+# To compile using xHarbour and hbmk2:
+# hbmk2 yourprogram.prg what32.hbc
+
+incpaths=include
+libpaths=lib/${hb_plat}/${hb_comp}
+libs=what32
