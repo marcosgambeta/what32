@@ -1,3 +1,6 @@
+# To compile using xHarbour and hbmk2:
+# hbmk2 what32.hbp -xhb
+
 -inc
 
 -hblib
