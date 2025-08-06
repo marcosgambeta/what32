@@ -1,11 +1,11 @@
 // What32
 // Shell API
 
-#define _WIN32_WINNT   0x0400
+#define _WIN32_WINNT 0x0400
 
 #include <windows.h>
 #include <shlobj.h>
-//#include <commctrl.h>
+// #include <commctrl.h>
 
 #include "hbapi.h"
 #include "hbvm.h"
@@ -19,106 +19,85 @@ DWORD WINAPI DoEnvironmentSubst(LPSTR szString, UINT cchString);
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(UINT) DragQueryFileA(HDROP,UINT,LPSTR,UINT);
 
-
-HB_FUNC( DRAGQUERYFILE )
+HB_FUNC(DRAGQUERYFILE)
 {
 
-  char *cFile ;
-  UINT iRet   ;
+  char *cFile;
+  UINT iRet;
 
-  if ( hb_parni( 4 ) > 0  )
-    cFile = (char*) hb_xgrab( hb_parni(4) + 1 );
+  if (hb_parni(4) > 0)
+    cFile = (char *)hb_xgrab(hb_parni(4) + 1);
   else
-    cFile = (char*) hb_xgrab( strlen( hb_parcx(3) ) + 1 );
+    cFile = (char *)hb_xgrab(strlen(hb_parcx(3)) + 1);
 
+  iRet = DragQueryFile((HDROP)hb_parnl(1), (UINT)hb_parni(2), hb_parni(4) > 0 ? cFile : NULL, (UINT)hb_parni(4));
 
-  iRet = DragQueryFile( (HDROP) hb_parnl( 1 ),
-                        (UINT) hb_parni( 2 ) ,
-                        hb_parni(4) > 0 ? cFile : NULL ,
-                        (UINT) hb_parni( 4 )
-                      ) ;
-
-   if (hb_parni( 4 ) > 0)
-   {
-      hb_storclen( cFile, iRet, 3 ) ;
-      hb_xfree( cFile );
-   }
-   hb_retni( iRet ) ;
- }
-
+  if (hb_parni(4) > 0)
+  {
+    hb_storclen(cFile, iRet, 3);
+    hb_xfree(cFile);
+  }
+  hb_retni(iRet);
+}
 
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(BOOL) DragQueryPoint(HDROP,LPPOINT);
 
-
-HB_FUNC( DRAGQUERYPOINT )
+HB_FUNC(DRAGQUERYPOINT)
 {
-   POINT lpPoInt ;
-   BOOL lRet ;
-   lRet = DragQueryPoint( (HDROP) hb_parnl( 1 ),(LPPOINT) &lpPoInt )  ;
-   if (ISBYREF( 2 ) ){
-      hb_stornl(2,lpPoInt.x,1);
-      hb_stornl(2,lpPoInt.y,2);
-   }
-   hb_retl( lRet ) ;
-
+  POINT lpPoInt;
+  BOOL lRet;
+  lRet = DragQueryPoint((HDROP)hb_parnl(1), (LPPOINT)&lpPoInt);
+  if (ISBYREF(2))
+  {
+    hb_stornl(2, lpPoInt.x, 1);
+    hb_stornl(2, lpPoInt.y, 2);
+  }
+  hb_retl(lRet);
 }
-
 
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(void) DragFinish(HDROP);
 
-
-HB_FUNC( DRAGFINISH )
+HB_FUNC(DRAGFINISH)
 {
-   DragFinish( (HDROP) hb_parnl( 1 ) ) ;
+  DragFinish((HDROP)hb_parnl(1));
 }
 
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(void) DragAcceptFiles(HWND,BOOL);
 
-
-HB_FUNC( DRAGACCEPTFILES )
+HB_FUNC(DRAGACCEPTFILES)
 {
-   DragAcceptFiles( (HWND) hb_parnl( 1 ), hb_parl( 2 ) ) ;
+  DragAcceptFiles((HWND)hb_parnl(1), hb_parl(2));
 }
 
 //-----------------------------------------------------------------------------
-// SHSTDAPI_(HINSTANCE) ShellExecuteA(HWND hwnd, LPCSTR lpOperation, LPCSTR lpFile, LPCSTR lpParameters, LPCSTR lpDirectory, INT nShowCmd);
+// SHSTDAPI_(HINSTANCE) ShellExecuteA(HWND hwnd, LPCSTR lpOperation, LPCSTR lpFile, LPCSTR lpParameters, LPCSTR
+// lpDirectory, INT nShowCmd);
 
-
-HB_FUNC( SHELLEXECUTE )
+HB_FUNC(SHELLEXECUTE)
 {
-   hb_retnl( (LONG) ShellExecute( (HWND) hb_parnl( 1 )     ,
-                                  (LPCSTR) hb_parcx( 2 )    ,
-                                  (LPCSTR) hb_parcx( 3 )    ,
-                                  ISNIL(4) ? NULL : (LPCSTR) hb_parcx( 4 )    ,
-                                  (LPCSTR) hb_parcx( 5 )    ,
-                                   hb_parni( 6 )
-                                 ) ) ;
+  hb_retnl((LONG)ShellExecute((HWND)hb_parnl(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3),
+                              ISNIL(4) ? NULL : (LPCSTR)hb_parcx(4), (LPCSTR)hb_parcx(5), hb_parni(6)));
 }
 
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(HINSTANCE) FindExecutableA(LPCSTR lpFile, LPCSTR lpDirectory, LPSTR lpResult);
 
-HB_FUNC( FINDEXECUTABLE )
+HB_FUNC(FINDEXECUTABLE)
 {
 
   char cBuffer[MAX_PATH];
-  HINSTANCE hInst ;
+  HINSTANCE hInst;
 
+  hInst = FindExecutable((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), (LPSTR)cBuffer);
 
-   hInst = FindExecutable( (LPCSTR) hb_parcx( 1 )    ,
-                           (LPCSTR) hb_parcx( 2 )    ,
-                           (LPSTR)  cBuffer
-                         ) ;
+  hb_retnl((LONG)hInst);
 
-   hb_retnl( (LONG) hInst) ;
-
-   if ( (LONG) hInst > 32 )
-      hb_storc( cBuffer, 3 ) ;
+  if ((LONG)hInst > 32)
+    hb_storc(cBuffer, 3);
 }
-
 
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(LPWSTR *) CommandLineToArgvW(LPCWSTR lpCmdLine, int*pNumArgs);
@@ -143,15 +122,11 @@ HB_FUNC( COMMANDLINETOARGVW )
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(INT) ShellAboutA(HWND hWnd, LPCSTR szApp, LPCSTR szOtherStuff, HICON hIcon);
 
-HB_FUNC( SHELLABOUT )
+HB_FUNC(SHELLABOUT)
 {
-   hb_retni( ShellAbout( (HWND) hb_parnl(1),
-                         (LPCSTR) hb_parcx(2),
-                         (LPCSTR) hb_parcx(3),
-                         (ISNIL(4) ? NULL : (HICON) hb_parnl(4) )
-                       ) );
+  hb_retni(
+      ShellAbout((HWND)hb_parnl(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3), (ISNIL(4) ? NULL : (HICON)hb_parnl(4))));
 }
-
 
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(UINT) SHAppBarMessage(DWORD dwMessage, PAPPBARDATA pData);
@@ -173,11 +148,9 @@ HB_FUNC( SHAPPBARMESSAGE )
 // SHSTDAPI_(DWORD) DoEnvironmentSubstA(LPSTR szString, UINT cchString);
 
 #ifndef __WATCOMC__
-HB_FUNC( DOENVIRONMENTSUBST )
+HB_FUNC(DOENVIRONMENTSUBST)
 {
-   hb_retnl((LONG) DoEnvironmentSubst( (LPSTR) hb_parcx( 1 ) ,
-                                       (UINT) hb_parni( 2 )
-                                     ) ) ;
+  hb_retnl((LONG)DoEnvironmentSubst((LPSTR)hb_parcx(1), (UINT)hb_parni(2)));
 }
 #endif
 //-----------------------------------------------------------------------------
@@ -207,18 +180,18 @@ HB_FUNC( EXTRACTICONEX )
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(int) SHFileOperationA(LPSHFILEOPSTRUCTA lpFileOp);
 
-HB_FUNC( SHFILEOPERATION )
+HB_FUNC(SHFILEOPERATION)
 {
-   SHFILEOPSTRUCT *sfo = (SHFILEOPSTRUCT *) hb_param(1, HB_IT_STRING)->item.asString.value;
-   hb_retni( SHFileOperation( sfo ) ) ;
+  SHFILEOPSTRUCT *sfo = (SHFILEOPSTRUCT *)hb_param(1, HB_IT_STRING)->item.asString.value;
+  hb_retni(SHFileOperation(sfo));
 }
 
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(void) SHFreeNameMappings(HANDLE hNameMappings);
 
-HB_FUNC( SHFREENAMEMAPPINGS )
+HB_FUNC(SHFREENAMEMAPPINGS)
 {
-   SHFreeNameMappings( (HANDLE) hb_parnl( 1 ) ) ;
+  SHFreeNameMappings((HANDLE)hb_parnl(1));
 }
 
 //-----------------------------------------------------------------------------
@@ -226,13 +199,11 @@ HB_FUNC( SHFREENAMEMAPPINGS )
 
 // uses structure
 
-HB_FUNC( SHELLEXECUTEEX )
+HB_FUNC(SHELLEXECUTEEX)
 {
-   SHELLEXECUTEINFO *ExecInfo = (SHELLEXECUTEINFO *) hb_param(1, HB_IT_STRING)->item.asString.value;
-   hb_retl( ShellExecuteEx( ExecInfo ) ) ;
+  SHELLEXECUTEINFO *ExecInfo = (SHELLEXECUTEINFO *)hb_param(1, HB_IT_STRING)->item.asString.value;
+  hb_retl(ShellExecuteEx(ExecInfo));
 }
-
-
 
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(void) WinExecErrorA(HWND hwnd, int error, LPCSTR lpstrFileName, LPCSTR lpstrTitle);
@@ -291,15 +262,11 @@ HB_FUNC( SHQUERYRECYCLEBIN )
 
 // check the prototype
 
+#if (WINVER >= 0x0500)
 
-#if(WINVER >= 0x0500)
-
-HB_FUNC( SHEMPTYRECYCLEBIN )
+HB_FUNC(SHEMPTYRECYCLEBIN)
 {
-   hb_retnl(  SHEmptyRecycleBin( (HWND) hb_parnl( 1 ) ,
-                                 (LPCSTR) hb_parcx( 2 ),
-                                 (DWORD) hb_parnl( 3 )
-                                ) ) ;
+  hb_retnl(SHEmptyRecycleBin((HWND)hb_parnl(1), (LPCSTR)hb_parcx(2), (DWORD)hb_parnl(3)));
 }
 
 #endif
@@ -307,18 +274,17 @@ HB_FUNC( SHEMPTYRECYCLEBIN )
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(BOOL) Shell_NotifyIconA(DWORD dwMessage, PNOTIFYICONDATAA lpData);
 
-//uses structure
+// uses structure
 
-HB_FUNC( SHELL_NOTIFYICON )
+HB_FUNC(SHELL_NOTIFYICON)
 {
-   NOTIFYICONDATA * Data =  (NOTIFYICONDATA * ) hb_param(2, HB_IT_STRING)->item.asString.value;
-   hb_retl( Shell_NotifyIcon( (DWORD) hb_parnl( 1 ), Data ) ) ;
+  NOTIFYICONDATA *Data = (NOTIFYICONDATA *)hb_param(2, HB_IT_STRING)->item.asString.value;
+  hb_retl(Shell_NotifyIcon((DWORD)hb_parnl(1), Data));
 }
 
-
-
 //-----------------------------------------------------------------------------
-// SHSTDAPI_(DWORD_PTR) SHGetFileInfoA(LPCSTR pszPath, DWORD dwFileAttributes, SHFILEINFOA *psfi, UINT cbFileInfo, UINT uFlags);
+// SHSTDAPI_(DWORD_PTR) SHGetFileInfoA(LPCSTR pszPath, DWORD dwFileAttributes, SHFILEINFOA *psfi, UINT cbFileInfo, UINT
+// uFlags);
 
 /*
 
@@ -339,7 +305,8 @@ HB_FUNC( SHGETFILEINFO )
 */
 
 //-----------------------------------------------------------------------------
-// SHSTDAPI_(BOOL) SHGetDiskFreeSpaceExA(LPCSTR pszDirectoryName, ULARGE_INTEGER* pulFreeBytesAvailableToCaller, ULARGE_INTEGER* pulTotalNumberOfBytes, ULARGE_INTEGER* pulTotalNumberOfFreeBytes);
+// SHSTDAPI_(BOOL) SHGetDiskFreeSpaceExA(LPCSTR pszDirectoryName, ULARGE_INTEGER* pulFreeBytesAvailableToCaller,
+// ULARGE_INTEGER* pulTotalNumberOfBytes, ULARGE_INTEGER* pulTotalNumberOfFreeBytes);
 
 /*
 
@@ -379,16 +346,12 @@ HB_FUNC( SHGETNEWLINKINFO )
 //-----------------------------------------------------------------------------
 // SHSTDAPI_(BOOL) SHInvokePrinterCommandA(HWND hwnd, UINT uAction, LPCSTR lpBuf1, LPCSTR lpBuf2, BOOL fModal);
 
-#if(WINVER >= 0x0500)
+#if (WINVER >= 0x0500)
 
-HB_FUNC( SHINVOKEPRINTERCOMMAND )
+HB_FUNC(SHINVOKEPRINTERCOMMAND)
 {
-   hb_retl( SHInvokePrinterCommand( (HWND) hb_parnl( 1 ) ,
-                                    (UINT) hb_parni( 2 ) ,
-                                    (LPCSTR) hb_parcx( 3 ),
-                                    (LPCSTR) hb_parcx( 4 ),
-                                     hb_parl( 5 )
-                                   ) ) ;
+  hb_retl(SHInvokePrinterCommand((HWND)hb_parnl(1), (UINT)hb_parni(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4),
+                                 hb_parl(5)));
 }
 
 #endif

@@ -1,166 +1,148 @@
 
 
-
 // Windows message functions
 
-
-#define _WIN32_WINNT   0x0400
+#define _WIN32_WINNT 0x0400
 
 #include <windows.h>
 #include <shlobj.h>
-//#include <commctrl.h>
+// #include <commctrl.h>
 
 #include "hbapi.h"
 #include "hbvm.h"
 #include "hbstack.h"
 #include "hbapiitm.h"
 
-
-
-
-
 //-----------------------------------------------------------------------------
 
-HB_FUNC( _ISDIALOGMESSAGE )
+HB_FUNC(_ISDIALOGMESSAGE)
 {
-  hb_retl(IsDialogMessage( (HWND) hb_parnl(1), (MSG*) hb_parcx(2) )) ;
+  hb_retl(IsDialogMessage((HWND)hb_parnl(1), (MSG *)hb_parcx(2)));
 }
-
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI BOOL WINAPI TranslateMDISysAccel( IN HWND hWndClient, IN LPMSG lpMsg);
 
-HB_FUNC( TRANSLATEMDISYSACCEL )
+HB_FUNC(TRANSLATEMDISYSACCEL)
 {
-   hb_retl( TranslateMDISysAccel( (HWND) hb_parnl( 1 ), (MSG*) hb_parcx( 2 ) ) ) ;
-}
-
-
-//-----------------------------------------------------------------------------
-
-HB_FUNC( TRANSLATEMESSAGE )
-{
-  hb_retl(TranslateMessage( (MSG*) hb_parcx(1))) ;
+  hb_retl(TranslateMDISysAccel((HWND)hb_parnl(1), (MSG *)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------
 
-HB_FUNC( DISPATCHMESSAGE )
+HB_FUNC(TRANSLATEMESSAGE)
 {
-  hb_retnl(DispatchMessage( (MSG*) hb_parcx(1))) ;
+  hb_retl(TranslateMessage((MSG *)hb_parcx(1)));
 }
 
 //-----------------------------------------------------------------------------
 
-HB_FUNC( POSTQUITMESSAGE )
+HB_FUNC(DISPATCHMESSAGE)
+{
+  hb_retnl(DispatchMessage((MSG *)hb_parcx(1)));
+}
+
+//-----------------------------------------------------------------------------
+
+HB_FUNC(POSTQUITMESSAGE)
 {
   PostQuitMessage(hb_parni(1));
 }
 
 //-----------------------------------------------------------------------------
 
-
-HB_FUNC( POSTMESSAGE )
+HB_FUNC(POSTMESSAGE)
 {
 
-   char *cText = NULL;
+  char *cText = NULL;
 
-   if (ISBYREF(4))
-   {
-      cText = (char*) hb_xgrab( hb_parcsiz(4) );
-      hb_xmemcpy( cText, hb_parcx(4), hb_parcsiz(4) );
-   }
+  if (ISBYREF(4))
+  {
+    cText = (char *)hb_xgrab(hb_parcsiz(4));
+    hb_xmemcpy(cText, hb_parcx(4), hb_parcsiz(4));
+  }
 
+  hb_retnl((LONG)PostMessage(
+      (HWND)hb_parnl(1), (UINT)hb_parni(2), (ISNIL(3) ? 0 : (WPARAM)hb_parnl(3)),
+      (ISNIL(4)
+           ? 0
+           : (ISBYREF(4) ? (LPARAM)(LPSTR)cText : (ISCHAR(4) ? (LPARAM)(LPSTR)hb_parcx(4) : (LPARAM)hb_parnl(4))))));
 
-   hb_retnl( (LONG) PostMessage( (HWND) hb_parnl( 1 ), (UINT) hb_parni( 2 ),
-                                (ISNIL(3) ? 0 : (WPARAM) hb_parnl( 3 ))   ,
-                                (ISNIL(4) ? 0 : ( ISBYREF(4)? (LPARAM) (LPSTR) cText : ( ISCHAR(4) ? (LPARAM)(LPSTR) hb_parcx(4) : (LPARAM) hb_parnl( 4 ))))
-                               )
-            );
-
-
-   if( ISBYREF( 4 ) )
-   {
-      hb_storclen( cText, hb_parcsiz(4), 4 ) ;
-      hb_xfree( cText );
-   }
+  if (ISBYREF(4))
+  {
+    hb_storclen(cText, hb_parcsiz(4), 4);
+    hb_xfree(cText);
+  }
 }
 
 //-----------------------------------------------------------------------------
 
-HB_FUNC( SENDMESSAGE )
+HB_FUNC(SENDMESSAGE)
 {
 
-   char *cText = NULL;
+  char *cText = NULL;
 
+  if (ISBYREF(4))
+  {
+    cText = (char *)hb_xgrab(hb_parcsiz(4));
+    hb_xmemcpy(cText, hb_parcx(4), hb_parcsiz(4));
+  }
 
-   if( ISBYREF(4) )
-   {
-      cText = (char*) hb_xgrab( hb_parcsiz(4) );
-      hb_xmemcpy( cText, hb_parcx(4), hb_parcsiz(4) );
-   }
+  hb_retnl((ULONG)SendMessage(
+      (HWND)hb_parnl(1), (UINT)hb_parni(2), (ISNIL(3) ? 0 : (WPARAM)hb_parnl(3)),
+      (ISNIL(4)
+           ? 0
+           : (ISBYREF(4) ? (LPARAM)(LPSTR)cText : (ISCHAR(4) ? (LPARAM)(LPSTR)hb_parcx(4) : (LPARAM)hb_parnl(4))))));
 
-   hb_retnl( (ULONG) SendMessage( (HWND) hb_parnl( 1 ), (UINT) hb_parni( 2 ),
-                                  (ISNIL(3) ? 0 : (WPARAM) hb_parnl( 3 ))   ,
-                                  (ISNIL(4) ? 0 : ( ISBYREF(4)? (LPARAM) (LPSTR) cText : ( ISCHAR(4) ? (LPARAM)(LPSTR) hb_parcx(4) : (LPARAM) hb_parnl( 4 ))))
-                                )
-           );
-
-
-   if (ISBYREF( 4 ))
-   {
-      hb_storclen( cText, hb_parcsiz(4), 4 ) ;
-      hb_xfree( cText );
-   }
+  if (ISBYREF(4))
+  {
+    hb_storclen(cText, hb_parcsiz(4), 4);
+    hb_xfree(cText);
+  }
 }
-
 
 //-----------------------------------------------------------------------------
 
-HB_FUNC( SENDDLGITEMMESSAGE )
+HB_FUNC(SENDDLGITEMMESSAGE)
 {
-   char *cText;
-   PHB_ITEM pText = hb_param( 5, HB_IT_STRING );
+  char *cText;
+  PHB_ITEM pText = hb_param(5, HB_IT_STRING);
 
-   if( pText )
-   {
-      cText = (char*) hb_xgrab( pText->item.asString.length + 1 );
-      hb_xmemcpy( cText, pText->item.asString.value, pText->item.asString.length + 1 );
-   }
-   else
-   {
-      cText = NULL;
-   }
+  if (pText)
+  {
+    cText = (char *)hb_xgrab(pText->item.asString.length + 1);
+    hb_xmemcpy(cText, pText->item.asString.value, pText->item.asString.length + 1);
+  }
+  else
+  {
+    cText = NULL;
+  }
 
-   hb_retnl( (LONG) SendDlgItemMessage( (HWND) hb_parnl( 1 ) ,
-                                        (int)  hb_parni( 2 ) ,
-                                        (UINT) hb_parni( 3 ) ,
-                                        (ISNIL(4) ? 0 : (WPARAM) hb_parnl( 4 ))   ,
-                                        (cText ? (LPARAM) cText : (LPARAM) hb_parnl( 5 ))
-                                      )
-            );
+  hb_retnl((LONG)SendDlgItemMessage((HWND)hb_parnl(1), (int)hb_parni(2), (UINT)hb_parni(3),
+                                    (ISNIL(4) ? 0 : (WPARAM)hb_parnl(4)),
+                                    (cText ? (LPARAM)cText : (LPARAM)hb_parnl(5))));
 
   // Will be ignored if not BYREF.
-  if( pText )
+  if (pText)
   {
-     hb_storclen( cText, pText->item.asString.length, 5 ) ;
+    hb_storclen(cText, pText->item.asString.length, 5);
   }
 
-  if( cText )
+  if (cText)
   {
-     hb_xfree( cText );
+    hb_xfree(cText);
   }
 
-/*
-   hb_retnl( SendDlgItemMessage( (HWND) hb_parnl(1) ,     // handle of dialog box
-                                (int)   hb_parni(2) ,     // identifier of control
-                                (UINT)  hb_parni(3) ,     // message to send
-                                (ISNIL(4) ? 0 : (WPARAM) hb_parni(4) ) ,  // first message parameter
-                                (ISNIL(5) ? 0 : (hb_parinfo(5)==HB_IT_STRING ? (LPARAM) (LPSTR) hb_parcx(5) : (LPARAM) hb_parnl( 5 )) )   // second message parameter
-                              ));
+  /*
+     hb_retnl( SendDlgItemMessage( (HWND) hb_parnl(1) ,     // handle of dialog box
+                                  (int)   hb_parni(2) ,     // identifier of control
+                                  (UINT)  hb_parni(3) ,     // message to send
+                                  (ISNIL(4) ? 0 : (WPARAM) hb_parni(4) ) ,  // first message parameter
+                                  (ISNIL(5) ? 0 : (hb_parinfo(5)==HB_IT_STRING ? (LPARAM) (LPSTR) hb_parcx(5) : (LPARAM)
+     hb_parnl( 5 )) )   // second message parameter
+                                ));
 
-*/
-
+  */
 }
 
 //-----------------------------------------------------------------------------
@@ -169,101 +151,86 @@ HB_FUNC( SENDDLGITEMMESSAGE )
 
 // add error handling and recovery
 
-HB_FUNC( GETMESSAGE )
+HB_FUNC(GETMESSAGE)
 {
-  MSG Msg ;
+  MSG Msg;
 
-  if (GetMessage( &Msg,
-                  ISNIL(2) ? NULL : (HWND) hb_parnl(2),
-                  ISNIL(3) ? 0 : hb_parnl(3),
-                  ISNIL(4) ? 0 : hb_parnl(4) ) )
-    {
-      hb_storclen( (LPSTR) &Msg, sizeof(MSG), 1 ) ;
-      hb_retl( 1 ) ;
-    }
+  if (GetMessage(&Msg, ISNIL(2) ? NULL : (HWND)hb_parnl(2), ISNIL(3) ? 0 : hb_parnl(3), ISNIL(4) ? 0 : hb_parnl(4)))
+  {
+    hb_storclen((LPSTR)&Msg, sizeof(MSG), 1);
+    hb_retl(1);
+  }
   else
-    hb_retl ( 0 ) ;
+    hb_retl(0);
 }
 
 //-----------------------------------------------------------------------------
 
-HB_FUNC( PEEKMESSAGE )
+HB_FUNC(PEEKMESSAGE)
 {
-  MSG Msg ;
+  MSG Msg;
 
-   if (PeekMessage( (MSG*) &Msg,
-                    ISNIL(2) ? NULL :(HWND) hb_parnl(2),
-                    ISNIL(3) ? 0 : hb_parnl(3),
-                    ISNIL(4) ? 0 : hb_parnl(4),
-                    ISNIL(5) ? PM_NOREMOVE : hb_parnl(5)))
-     {
-       hb_storclen( (LPSTR) &Msg, sizeof(MSG),1) ;
-       hb_retl( 1 ) ;
-     }
+  if (PeekMessage((MSG *)&Msg, ISNIL(2) ? NULL : (HWND)hb_parnl(2), ISNIL(3) ? 0 : hb_parnl(3),
+                  ISNIL(4) ? 0 : hb_parnl(4), ISNIL(5) ? PM_NOREMOVE : hb_parnl(5)))
+  {
+    hb_storclen((LPSTR)&Msg, sizeof(MSG), 1);
+    hb_retl(1);
+  }
   else
-     hb_retl ( 0 ) ;
-
+    hb_retl(0);
 }
-
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI UINT WINAPI RegisterWindowMessage( IN LPCWSTR lpString);
 
-
-HB_FUNC( REGISTERWINDOWMESSAGE )
+HB_FUNC(REGISTERWINDOWMESSAGE)
 {
-   hb_retni( RegisterWindowMessageA( (LPCSTR) hb_parcx( 1 ) ) ) ;
+  hb_retni(RegisterWindowMessageA((LPCSTR)hb_parcx(1)));
 }
-
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI BOOL WINAPI SetMessageQueue( IN int cMessagesMax);
 
-
-HB_FUNC( SETMESSAGEQUEUE )
+HB_FUNC(SETMESSAGEQUEUE)
 {
-   hb_retl( SetMessageQueue( hb_parni( 1 ) ) ) ;
+  hb_retl(SetMessageQueue(hb_parni(1)));
 }
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI DWORD WINAPI GetMessagePos( VOID);
 
-
-HB_FUNC( GETMESSAGEPOS )
+HB_FUNC(GETMESSAGEPOS)
 {
-   hb_retnl( (LONG) GetMessagePos(  ) ) ;
+  hb_retnl((LONG)GetMessagePos());
 }
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI LONG WINAPI GetMessageTime( VOID);
 
-
-HB_FUNC( GETMESSAGETIME )
+HB_FUNC(GETMESSAGETIME)
 {
-   hb_retnl( (LONG) GetMessageTime(  ) ) ;
+  hb_retnl((LONG)GetMessageTime());
 }
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI LPARAM WINAPI GetMessageExtraInfo( VOID);
 
-
-HB_FUNC( GETMESSAGEEXTRAINFO )
+HB_FUNC(GETMESSAGEEXTRAINFO)
 {
-   hb_retnl( (LONG) GetMessageExtraInfo(  ) ) ;
+  hb_retnl((LONG)GetMessageExtraInfo());
 }
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI LPARAM WINAPI SetMessageExtraInfo( IN LPARAM lParam);
 
-
-HB_FUNC( SETMESSAGEEXTRAINFO )
+HB_FUNC(SETMESSAGEEXTRAINFO)
 {
-   hb_retnl( (LONG) SetMessageExtraInfo( (LPARAM) hb_parnl( 1 ) ) ) ;
+  hb_retnl((LONG)SetMessageExtraInfo((LPARAM)hb_parnl(1)));
 }
 
-
 //-----------------------------------------------------------------------------
-// WINUSERAPI LRESULT WINAPI SendMessageTimeoutA( IN HWND hWnd, IN UINT Msg, IN WPARAM wParam, IN LPARAM lParam, IN UINT fuFlags, IN UINT uTimeout, OUT PDWORD_PTR lpdwResult);
+// WINUSERAPI LRESULT WINAPI SendMessageTimeoutA( IN HWND hWnd, IN UINT Msg, IN WPARAM wParam, IN LPARAM lParam, IN UINT
+// fuFlags, IN UINT uTimeout, OUT PDWORD_PTR lpdwResult);
 
 /*
 
@@ -288,110 +255,87 @@ HB_FUNC( SENDMESSAGETIMEOUT )
 //-----------------------------------------------------------------------------
 // WINUSERAPI BOOL WINAPI SendNotifyMessageA( IN HWND hWnd, IN UINT Msg, IN WPARAM wParam, IN LPARAM lParam);
 
-
-HB_FUNC( SENDNOTIFYMESSAGE )
+HB_FUNC(SENDNOTIFYMESSAGE)
 {
-   hb_retl( SendNotifyMessage( (HWND) hb_parnl( 1 )  ,
-                               (UINT) hb_parni( 2 )  ,
-                               (WPARAM) hb_parnl( 3 ),
-                               (LPARAM) hb_parnl( 4 )
-                             ) ) ;
+  hb_retl(SendNotifyMessage((HWND)hb_parnl(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
 }
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI BOOL WINAPI PostThreadMessageA( IN DWORD idThread, IN UINT Msg, IN WPARAM wParam, IN LPARAM lParam);
 
-
-HB_FUNC( POSTTHREADMESSAGE )
+HB_FUNC(POSTTHREADMESSAGE)
 {
-   hb_retl( PostThreadMessage( (DWORD) hb_parnl( 1 ) ,
-                               (UINT) hb_parni( 2 )  ,
-                               (WPARAM) hb_parnl( 3 ),
-                               (LPARAM) hb_parnl( 4 )
-                             ) ) ;
+  hb_retl(PostThreadMessage((DWORD)hb_parnl(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
 }
 
 //----------------------------------------------------------------------------
 // WINUSERAPI BOOL WINAPI ReplyMessage( IN LRESULT lResult);
 
-HB_FUNC( REPLYMESSAGE )
+HB_FUNC(REPLYMESSAGE)
 {
-   hb_retl( ReplyMessage( (LRESULT) hb_parnl( 1 ) ) ) ;
+  hb_retl(ReplyMessage((LRESULT)hb_parnl(1)));
 }
-
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI BOOL WINAPI WaitMessage( VOID);
 
-HB_FUNC( WAITMESSAGE )
+HB_FUNC(WAITMESSAGE)
 {
-   hb_retl( WaitMessage(  ) ) ;
+  hb_retl(WaitMessage());
 }
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI DWORD WINAPI WaitForInputIdle( IN HANDLE hProcess, IN DWORD dwMilliseconds);
 
-HB_FUNC( WAITFORINPUTIDLE )
+HB_FUNC(WAITFORINPUTIDLE)
 {
-   hb_retnl( (LONG) WaitForInputIdle( (HANDLE) hb_parnl( 1 ),
-                                      (DWORD) hb_parnl( 2 )
-                                    ) ) ;
+  hb_retnl((LONG)WaitForInputIdle((HANDLE)hb_parnl(1), (DWORD)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI BOOL WINAPI InSendMessage( VOID);
 
-HB_FUNC( INSENDMESSAGE )
+HB_FUNC(INSENDMESSAGE)
 {
-   hb_retl( InSendMessage(  ) ) ;
+  hb_retl(InSendMessage());
 }
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI DWORD WINAPI InSendMessageEx( IN LPVOID lpReserved);
 
+#if (WINVER >= 0x0500)
 
-#if(WINVER >= 0x0500)
-
-HB_FUNC( INSENDMESSAGEEX )
+HB_FUNC(INSENDMESSAGEEX)
 {
 
-   hb_retnl( (LONG) InSendMessageEx( NULL ) ) ; // param reserved must be NULL
+  hb_retnl((LONG)InSendMessageEx(NULL)); // param reserved must be NULL
 }
 
 #endif
 
-
 //-----------------------------------------------------------------------------
-// WINUSERAPI DWORD WINAPI MsgWaitForMultipleObjects( IN DWORD nCount, IN CONST HANDLE *pHandles, IN BOOL fWaitAll, IN DWORD dwMilliseconds, IN DWORD dwWakeMask);
+// WINUSERAPI DWORD WINAPI MsgWaitForMultipleObjects( IN DWORD nCount, IN CONST HANDLE *pHandles, IN BOOL fWaitAll, IN
+// DWORD dwMilliseconds, IN DWORD dwWakeMask);
 
-
-HB_FUNC( MSGWAITFORMULTIPLEOBJECTS )
+HB_FUNC(MSGWAITFORMULTIPLEOBJECTS)
 {
-   hb_retnl( (LONG) MsgWaitForMultipleObjects( (DWORD) hb_parnl( 1 ) ,
-                                               (HANDLE *) hb_parnl( 2 ),
-                                               hb_parl( 3 ) ,
-                                               (DWORD) hb_parnl( 4 ) ,
-                                               (DWORD) hb_parnl( 5 )
-                                             ) ) ;
+  hb_retnl((LONG)MsgWaitForMultipleObjects((DWORD)hb_parnl(1), (HANDLE *)hb_parnl(2), hb_parl(3), (DWORD)hb_parnl(4),
+                                           (DWORD)hb_parnl(5)));
 }
 
 //-----------------------------------------------------------------------------
-// WINUSERAPI DWORD WINAPI MsgWaitForMultipleObjectsEx( IN DWORD nCount, IN CONST HANDLE *pHandles, IN DWORD dwMilliseconds, IN DWORD dwWakeMask, IN DWORD dwFlags);
+// WINUSERAPI DWORD WINAPI MsgWaitForMultipleObjectsEx( IN DWORD nCount, IN CONST HANDLE *pHandles, IN DWORD
+// dwMilliseconds, IN DWORD dwWakeMask, IN DWORD dwFlags);
 
-
-HB_FUNC( MSGWAITFORMULTIPLEOBJECTSEX )
+HB_FUNC(MSGWAITFORMULTIPLEOBJECTSEX)
 {
-   hb_retnl( (LONG) MsgWaitForMultipleObjectsEx( (DWORD) hb_parnl( 1 ) ,
-                                                 (HANDLE *) hb_parnl( 2 ),
-                                                 (DWORD) hb_parnl( 3 ) ,
-                                                 (DWORD) hb_parnl( 4 ) ,
-                                                 (DWORD) hb_parnl( 5 )
-                                               ) ) ;
+  hb_retnl((LONG)MsgWaitForMultipleObjectsEx((DWORD)hb_parnl(1), (HANDLE *)hb_parnl(2), (DWORD)hb_parnl(3),
+                                             (DWORD)hb_parnl(4), (DWORD)hb_parnl(5)));
 }
 
-
 //-----------------------------------------------------------------------------
-// WINUSERAPI BOOL WINAPI SendMessageCallbackA( IN HWND hWnd, IN UINT Msg, IN WPARAM wParam, IN LPARAM lParam, IN SENDASYNCPROC lpResultCallBack, IN ULONG_PTR dwData);
+// WINUSERAPI BOOL WINAPI SendMessageCallbackA( IN HWND hWnd, IN UINT Msg, IN WPARAM wParam, IN LPARAM lParam, IN
+// SENDASYNCPROC lpResultCallBack, IN ULONG_PTR dwData);
 
 /*
 
@@ -456,7 +400,8 @@ HB_FUNC( BROADCASTSYSTEMMESSAGE )
 */
 
 //-----------------------------------------------------------------------------
-// WINUSERAPI HDEVNOTIFY WINAPI RegisterDeviceNotificationA( IN HANDLE hRecipient, IN LPVOID NotificationFilter, IN DWORD Flags );
+// WINUSERAPI HDEVNOTIFY WINAPI RegisterDeviceNotificationA( IN HANDLE hRecipient, IN LPVOID NotificationFilter, IN
+// DWORD Flags );
 
 /*
 
@@ -477,11 +422,11 @@ HB_FUNC( REGISTERDEVICENOTIFICATION )
 //-----------------------------------------------------------------------------
 // WINUSERAPI BOOL WINAPI UnregisterDeviceNotification( IN HDEVNOTIFY Handle );
 
-#if(WINVER >= 0x0500)
+#if (WINVER >= 0x0500)
 
-HB_FUNC( UNREGISTERDEVICENOTIFICATION )
+HB_FUNC(UNREGISTERDEVICENOTIFICATION)
 {
-   hb_retl( UnregisterDeviceNotification( (HDEVNOTIFY) hb_parnl( 1 ) ) ) ;
+  hb_retl(UnregisterDeviceNotification((HDEVNOTIFY)hb_parnl(1)));
 }
 
 #endif
@@ -489,45 +434,18 @@ HB_FUNC( UNREGISTERDEVICENOTIFICATION )
 //-----------------------------------------------------------------------------
 // WINUSERAPI BOOL WINAPI AttachThreadInput( IN DWORD idAttach, IN DWORD idAttachTo, IN BOOL fAttach);
 
-
-HB_FUNC( ATTACHTHREADINPUT )
+HB_FUNC(ATTACHTHREADINPUT)
 {
 
-   hb_retl( AttachThreadInput( (DWORD) hb_parnl( 1 ) ,
-                               (DWORD) hb_parnl( 2 ) ,
-                               hb_parl( 3 )
-                             ) ) ;
+  hb_retl(AttachThreadInput((DWORD)hb_parnl(1), (DWORD)hb_parnl(2), hb_parl(3)));
 }
-
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI BOOL WINAPI CallMsgFilterA( IN LPMSG lpMsg, IN int nCode);
 
-HB_FUNC( CALLMSGFILTER )
+HB_FUNC(CALLMSGFILTER)
 {
-   MSG *Msg = (MSG * ) hb_param( 1, HB_IT_STRING )->item.asString.value;
+  MSG *Msg = (MSG *)hb_param(1, HB_IT_STRING)->item.asString.value;
 
-   hb_retl( CallMsgFilter( Msg, hb_parni( 2 ) ) ) ;
+  hb_retl(CallMsgFilter(Msg, hb_parni(2)));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

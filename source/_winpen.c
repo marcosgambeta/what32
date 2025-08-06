@@ -2,28 +2,26 @@
 
 // Graphic Pen functions
 
-
 #define HB_OS_WIN_USED
-#define _WIN32_WINNT   0x0400
+#define _WIN32_WINNT 0x0400
 
-//#include <shlobj.h>
+// #include <shlobj.h>
 #include <windows.h>
 #include "item.api"
-//#include "hbapiitm.h"
+// #include "hbapiitm.h"
 #include "hbapi.h"
-//#include "hbvm.h"
-//#include "hbstack.h"
+// #include "hbvm.h"
+// #include "hbstack.h"
 
 //-----------------------------------------------------------------------------
 // WINGDIAPI HPEN WINAPI CreatePen( IN int, IN int, IN COLORREF);
 
-HB_FUNC( CREATEPEN )
+HB_FUNC(CREATEPEN)
 {
-   hb_retnl( (LONG) CreatePen(
-               hb_parni( 1 ),	// pen style
-               hb_parni( 2 ),	// pen width
-               (COLORREF) hb_parnl( 3 ) 	// pen color
-             ) );
+  hb_retnl((LONG)CreatePen(hb_parni(1),          // pen style
+                           hb_parni(2),          // pen width
+                           (COLORREF)hb_parnl(3) // pen color
+                           ));
 }
 
 //-----------------------------------------------------------------------------
@@ -92,34 +90,3 @@ HB_FUNC( EXTCREATEPEN )
 }
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

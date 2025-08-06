@@ -51,135 +51,122 @@
  */
 
 #define HB_OS_WIN_USED
-#define _WIN32_WINNT   0x0400
+#define _WIN32_WINNT 0x0400
 
-//#include <shlobj.h>
+// #include <shlobj.h>
 #include <windows.h>
-//#include <commctrl.h>
+// #include <commctrl.h>
 #include "hbapi.h"
 #include "tchar.h"
-//#include "hbstack.h"
-//#include "hbapiitm.h"
-
+// #include "hbstack.h"
+// #include "hbapiitm.h"
 
 //-----------------------------------------------------------------------------
-HB_FUNC( GETPROFILESTRING )
+HB_FUNC(GETPROFILESTRING)
 {
-   DWORD nSize = 1024 ;
-   LPTSTR bBuffer = (LPTSTR) hb_xgrab( nSize ) ;
-   DWORD dwLen ;
-   char * lpSection = ISNIL( 1 ) ? NULL : ( char* ) hb_parcx( 1 ) ;
-   char * lpEntry   = ISNIL( 2 ) ? NULL : ( char* ) hb_parcx( 2 ) ;
-   char * lpDefault = ( char* ) hb_parc ( 3 );
+  DWORD nSize = 1024;
+  LPTSTR bBuffer = (LPTSTR)hb_xgrab(nSize);
+  DWORD dwLen;
+  char *lpSection = ISNIL(1) ? NULL : (char *)hb_parcx(1);
+  char *lpEntry = ISNIL(2) ? NULL : (char *)hb_parcx(2);
+  char *lpDefault = (char *)hb_parc(3);
 
-   while ( TRUE )
-   {
-      dwLen = GetProfileString( lpSection , lpEntry ,lpDefault , bBuffer, nSize );
-      if ( ( ( ( lpSection == NULL ) || ( lpEntry == NULL ) ) && ( nSize - dwLen == 2 ) ) || ( ( lpSection && lpEntry ) && ( nSize - dwLen == 1 ) ) )
-      {
-        hb_xfree( bBuffer ) ;
-        nSize *= 2 ;
-        bBuffer = (LPTSTR) hb_xgrab( nSize ) ;
-      }
-      else
-        break ;
+  while (TRUE)
+  {
+    dwLen = GetProfileString(lpSection, lpEntry, lpDefault, bBuffer, nSize);
+    if ((((lpSection == NULL) || (lpEntry == NULL)) && (nSize - dwLen == 2)) ||
+        ((lpSection && lpEntry) && (nSize - dwLen == 1)))
+    {
+      hb_xfree(bBuffer);
+      nSize *= 2;
+      bBuffer = (LPTSTR)hb_xgrab(nSize);
+    }
+    else
+      break;
+  }
 
-   }
+  if (dwLen)
+    hb_retclen((char *)bBuffer, dwLen);
+  else
+    hb_retc(lpDefault);
 
-   if( dwLen )
-     hb_retclen( ( char * ) bBuffer, dwLen );
-   else
-      hb_retc( lpDefault );
-
-   hb_xfree( bBuffer ) ;
-
+  hb_xfree(bBuffer);
 }
 
 //-----------------------------------------------------------------------------
-HB_FUNC( GETPRIVATEPROFILESTRING )
+HB_FUNC(GETPRIVATEPROFILESTRING)
 {
-   DWORD nSize = 1024 ;
-   LPTSTR bBuffer = (LPTSTR) hb_xgrab( nSize ) ;
-   DWORD dwLen ;
-   char * lpSection  = ISNIL( 1 ) ? NULL : ( char* ) hb_parcx( 1 );
-   char * lpEntry    = ISNIL( 2 ) ? NULL : ( char* ) hb_parcx( 2 ) ;
-   char * lpDefault  = ( char* ) hb_parcx( 3 );
-   char * lpFileName = ( char* ) hb_parcx( 4 );
+  DWORD nSize = 1024;
+  LPTSTR bBuffer = (LPTSTR)hb_xgrab(nSize);
+  DWORD dwLen;
+  char *lpSection = ISNIL(1) ? NULL : (char *)hb_parcx(1);
+  char *lpEntry = ISNIL(2) ? NULL : (char *)hb_parcx(2);
+  char *lpDefault = (char *)hb_parcx(3);
+  char *lpFileName = (char *)hb_parcx(4);
 
-   while ( TRUE )
-   {
-      dwLen = GetPrivateProfileString( lpSection , lpEntry ,lpDefault , bBuffer, nSize , lpFileName) ;
-      if ( ( ( ( lpSection == NULL ) || ( lpEntry == NULL ) ) && ( nSize - dwLen == 2 ) ) || ( ( lpSection && lpEntry ) && ( nSize - dwLen == 1 ) ) )
-      {
-        hb_xfree( bBuffer ) ;
-        nSize *= 2 ;
-        bBuffer = (LPTSTR) hb_xgrab( nSize ) ;
-      }
-      else
-        break ;
+  while (TRUE)
+  {
+    dwLen = GetPrivateProfileString(lpSection, lpEntry, lpDefault, bBuffer, nSize, lpFileName);
+    if ((((lpSection == NULL) || (lpEntry == NULL)) && (nSize - dwLen == 2)) ||
+        ((lpSection && lpEntry) && (nSize - dwLen == 1)))
+    {
+      hb_xfree(bBuffer);
+      nSize *= 2;
+      bBuffer = (LPTSTR)hb_xgrab(nSize);
+    }
+    else
+      break;
+  }
+  if (dwLen)
+    hb_retclen((char *)bBuffer, dwLen);
+  else
+    hb_retc(lpDefault);
 
-   }
-   if( dwLen )
-     hb_retclen( ( char * ) bBuffer, dwLen );
-   else
-      hb_retc( lpDefault );
-
-   hb_xfree( bBuffer ) ;
-
+  hb_xfree(bBuffer);
 }
 
 //-----------------------------------------------------------------------------
-HB_FUNC( WRITEPROFILESTRING )
+HB_FUNC(WRITEPROFILESTRING)
 {
-   char * lpSection = ( char* ) hb_parcx( 1 );
-   char * lpEntry = ISCHAR(2) ? ( char* ) hb_parcx( 2 ) : NULL ;
-   char * lpData = ISCHAR(3) ? ( char* ) hb_parcx( 3 ) : NULL ;
+  char *lpSection = (char *)hb_parcx(1);
+  char *lpEntry = ISCHAR(2) ? (char *)hb_parcx(2) : NULL;
+  char *lpData = ISCHAR(3) ? (char *)hb_parcx(3) : NULL;
 
-   if ( WriteProfileString( lpSection , lpEntry , lpData) )
-      hb_retl( TRUE ) ;
-   else
-      hb_retl(FALSE);
+  if (WriteProfileString(lpSection, lpEntry, lpData))
+    hb_retl(TRUE);
+  else
+    hb_retl(FALSE);
 }
 
 //-----------------------------------------------------------------------------
-HB_FUNC( WRITEPRIVATEPROFILESTRING )
+HB_FUNC(WRITEPRIVATEPROFILESTRING)
 {
-   char * lpSection = ( char* ) hb_parcx( 1 );
-   char * lpEntry = ISCHAR(2) ? ( char* ) hb_parcx( 2 ) : NULL ;
-   char * lpData = ISCHAR(3) ? ( char* ) hb_parcx( 3 ) : NULL ;
-   char * lpFileName = ( char* ) hb_parcx( 4 );
+  char *lpSection = (char *)hb_parcx(1);
+  char *lpEntry = ISCHAR(2) ? (char *)hb_parcx(2) : NULL;
+  char *lpData = ISCHAR(3) ? (char *)hb_parcx(3) : NULL;
+  char *lpFileName = (char *)hb_parcx(4);
 
-   if ( WritePrivateProfileString( lpSection , lpEntry , lpData , lpFileName ) )
-      hb_retl( TRUE ) ;
-   else
-      hb_retl(FALSE);
+  if (WritePrivateProfileString(lpSection, lpEntry, lpData, lpFileName))
+    hb_retl(TRUE);
+  else
+    hb_retl(FALSE);
 }
-
 
 //-----------------------------------------------------------------------------
-// WINBASEAPI UINT WINAPI GetPrivateProfileInt( IN LPCSTR lpAppName, IN LPCSTR lpKeyName, IN INT nDefault, IN LPCSTR lpFileName );
+// WINBASEAPI UINT WINAPI GetPrivateProfileInt( IN LPCSTR lpAppName, IN LPCSTR lpKeyName, IN INT nDefault, IN LPCSTR
+// lpFileName );
 
-
-HB_FUNC( GETPRIVATEPROFILEINT )
+HB_FUNC(GETPRIVATEPROFILEINT)
 {
-   hb_retni( GetPrivateProfileIntA( (LPCSTR) hb_parcx( 1 ),
-                                    (LPCSTR) hb_parcx( 2 ),
-                                    hb_parni( 3 )        ,
-                                    (LPCSTR) hb_parcx( 4 )
-                                    ) ) ;
+  hb_retni(GetPrivateProfileIntA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), hb_parni(3), (LPCSTR)hb_parcx(4)));
 }
-
 
 //-----------------------------------------------------------------------------
 // WINBASEAPI UINT WINAPI GetProfileInt( IN LPCSTR lpAppName, IN LPCSTR lpKeyName, IN INT nDefault );
 
-
-HB_FUNC( GETPROFILEINT )
+HB_FUNC(GETPROFILEINT)
 {
-   hb_retni( GetProfileIntA( (LPCSTR) hb_parcx( 1 ),
-                             (LPCSTR) hb_parcx( 2 ),
-                             hb_parni( 3 )
-                             ) ) ;
+  hb_retni(GetProfileIntA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -198,15 +185,15 @@ HB_FUNC( GETPROFILESECTION )
 //-----------------------------------------------------------------------------
 // WINBASEAPI BOOL WINAPI WriteProfileSection( IN LPCSTR lpAppName, IN LPCSTR lpString );
 
-
-HB_FUNC( WRITEPROFILESECTION )
+HB_FUNC(WRITEPROFILESECTION)
 {
-   hb_retl( WriteProfileSectionA( (LPCSTR) hb_parcx( 1 ), (LPCSTR) hb_parcx( 2 ) ) ) ;
+  hb_retl(WriteProfileSectionA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2)));
 }
 
 /*
 //-----------------------------------------------------------------------------
-// WINBASEAPI DWORD WINAPI GetPrivateProfileSection( IN LPCSTR lpAppName, OUT LPSTR lpReturnedString, IN DWORD nSize, IN LPCSTR lpFileName );
+// WINBASEAPI DWORD WINAPI GetPrivateProfileSection( IN LPCSTR lpAppName, OUT LPSTR lpReturnedString, IN DWORD nSize, IN
+LPCSTR lpFileName );
 
 
 HB_FUNC( GETPRIVATEPROFILESECTION )
@@ -222,18 +209,15 @@ HB_FUNC( GETPRIVATEPROFILESECTION )
 //-----------------------------------------------------------------------------
 // WINBASEAPI BOOL WINAPI WritePrivateProfileSectionA( IN LPCSTR lpAppName, IN LPCSTR lpString, IN LPCSTR lpFileName );
 
-
-HB_FUNC( WRITEPRIVATEPROFILESECTION )
+HB_FUNC(WRITEPRIVATEPROFILESECTION)
 {
-   hb_retl( WritePrivateProfileSectionA( (LPCSTR) hb_parcx( 1 ),
-                                         (LPCSTR) hb_parcx( 2 ),
-                                         (LPCSTR) hb_parcx( 3 )
-                                         ) ) ;
+  hb_retl(WritePrivateProfileSectionA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3)));
 }
 
 /*
 //-----------------------------------------------------------------------------
-// WINBASEAPI DWORD WINAPI GetPrivateProfileSectionNamesA( OUT LPSTR lpszReturnBuffer, IN DWORD nSize, IN LPCSTR lpFileName );
+// WINBASEAPI DWORD WINAPI GetPrivateProfileSectionNamesA( OUT LPSTR lpszReturnBuffer, IN DWORD nSize, IN LPCSTR
+lpFileName );
 
 
 HB_FUNC( GETPRIVATEPROFILESECTIONNAMES )
@@ -245,7 +229,8 @@ HB_FUNC( GETPRIVATEPROFILESECTIONNAMES )
 }
 */
 //-----------------------------------------------------------------------------
-// WINBASEAPI BOOL WINAPI GetPrivateProfileStruct( IN LPCSTR lpszSection, IN LPCSTR lpszKey, OUT LPVOID lpStruct, IN UINT uSizeStruct, IN LPCSTR szFile );
+// WINBASEAPI BOOL WINAPI GetPrivateProfileStruct( IN LPCSTR lpszSection, IN LPCSTR lpszKey, OUT LPVOID lpStruct, IN
+// UINT uSizeStruct, IN LPCSTR szFile );
 
 /*
 
@@ -266,7 +251,8 @@ HB_FUNC( GETPRIVATEPROFILESTRUCT )
 */
 
 //-----------------------------------------------------------------------------
-// WINBASEAPI BOOL WINAPI WritePrivateProfileStruct( IN LPCSTR lpszSection, IN LPCSTR lpszKey, IN LPVOID lpStruct, IN UINT uSizeStruct, IN LPCSTR szFile );
+// WINBASEAPI BOOL WINAPI WritePrivateProfileStruct( IN LPCSTR lpszSection, IN LPCSTR lpszKey, IN LPVOID lpStruct, IN
+// UINT uSizeStruct, IN LPCSTR szFile );
 
 /*
 
@@ -285,8 +271,3 @@ HB_FUNC( WRITEPRIVATEPROFILESTRUCT )
 }
 
 */
-
-
-
-
-

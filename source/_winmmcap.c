@@ -10,102 +10,110 @@
  */
 
 #define HB_OS_WIN_USED
-#define _WIN32_WINNT   0x0400
+#define _WIN32_WINNT 0x0400
 
 #include <hbapi.h>
 #include <windows.h>
 #include <vfw.h>
 
-#if ( ( defined( __GNUC__ )&&( __GNUC__ < 4 ) ) || ( defined( __WATCOMC__ ) && (__WATCOMC__<1290) ) )
-#define WM_CAP_START                    WM_USER
-#define WM_CAP_ABORT                    (WM_CAP_START+  69)
-#define WM_CAP_SEQUENCE                 (WM_CAP_START+  62)
-#define WM_CAP_SEQUENCE_NOFILE          (WM_CAP_START+  63)
-#define WM_CAP_STOP                     (WM_CAP_START+  68)
-#define WM_CAP_SINGLE_FRAME_OPEN        (WM_CAP_START+  70)
-#define WM_CAP_SINGLE_FRAME_CLOSE       (WM_CAP_START+  71)
-#define WM_CAP_SINGLE_FRAME             (WM_CAP_START+  72)
-#define WM_CAP_DLG_VIDEOFORMAT          (WM_CAP_START+  41)
-#define WM_CAP_DLG_VIDEOSOURCE          (WM_CAP_START+  42)
-#define WM_CAP_DLG_VIDEODISPLAY         (WM_CAP_START+  43)
-#define WM_CAP_GET_VIDEOFORMAT          (WM_CAP_START+  44)
-#define WM_CAP_SET_VIDEOFORMAT          (WM_CAP_START+  45)
-#define WM_CAP_DLG_VIDEOCOMPRESSION     (WM_CAP_START+  46)
-#define WM_CAP_DRIVER_CONNECT           (WM_CAP_START+  10)
-#define WM_CAP_DRIVER_DISCONNECT        (WM_CAP_START+  11)
-#define WM_CAP_FILE_SET_CAPTURE_FILEA  (WM_CAP_START+  20)
-#define WM_CAP_FILE_GET_CAPTURE_FILEA  (WM_CAP_START+  21)
-#define WM_CAP_FILE_SAVEASA            (WM_CAP_START+  23)
-#define WM_CAP_FILE_SAVEDIBA           (WM_CAP_START+  25)
-#define WM_CAP_FILE_SET_CAPTURE_FILE    WM_CAP_FILE_SET_CAPTURE_FILEA
-#define WM_CAP_FILE_GET_CAPTURE_FILE    WM_CAP_FILE_GET_CAPTURE_FILEA
-#define WM_CAP_FILE_SAVEAS              WM_CAP_FILE_SAVEASA
-#define WM_CAP_FILE_SAVEDIB             WM_CAP_FILE_SAVEDIBA
-#define WM_CAP_FILE_ALLOCATE            (WM_CAP_START+  22)
-#define WM_CAP_PAL_OPENA               (WM_CAP_START+  80)
-#define WM_CAP_PAL_SAVEA               (WM_CAP_START+  81)
-#define WM_CAP_PAL_OPENW               (WM_CAP_UNICODE_START+  80)
-#define WM_CAP_PAL_SAVEW               (WM_CAP_UNICODE_START+  81)
-#define WM_CAP_PAL_OPEN                 WM_CAP_PAL_OPENA
-#define WM_CAP_PAL_SAVE                 WM_CAP_PAL_SAVEA
-#define WM_CAP_PAL_PASTE                (WM_CAP_START+  82)
-#define WM_CAP_PAL_AUTOCREATE           (WM_CAP_START+  83)
-#define WM_CAP_PAL_MANUALCREATE         (WM_CAP_START+  84)
-#define WM_CAP_GET_USER_DATA		(WM_CAP_START+  8)
-#define WM_CAP_SET_USER_DATA		(WM_CAP_START+  9)
-#define WM_CAP_EDIT_COPY                (WM_CAP_START+  30)
-#define WM_CAP_SET_AUDIOFORMAT          (WM_CAP_START+  35)
-#define WM_CAP_GET_AUDIOFORMAT          (WM_CAP_START+  36)
-#define WM_CAP_GET_VIDEOFORMAT          (WM_CAP_START+  44)
-#define WM_CAP_SET_VIDEOFORMAT          (WM_CAP_START+  45)
-#define WM_CAP_SET_PREVIEW              (WM_CAP_START+  50)
-#define WM_CAP_SET_OVERLAY              (WM_CAP_START+  51)
-#define WM_CAP_SET_PREVIEWRATE          (WM_CAP_START+  52)
-#define WM_CAP_SET_SCALE                (WM_CAP_START+  53)
-#define WM_CAP_GRAB_FRAME               (WM_CAP_START+  60)
-#define WM_CAP_GRAB_FRAME_NOSTOP        (WM_CAP_START+  61)
-#define WM_CAP_SET_MCI_DEVICE           (WM_CAP_START+  66)
-#define WM_CAP_SET_USER_DATA		(WM_CAP_START+  9)
-#define AVICapSM(hwnd,m,w,l) ( (IsWindow(hwnd)) ?   SendMessage(hwnd,m,w,l) : 0)
-#define capCaptureAbort(hwnd)                      ((BOOL)AVICapSM(hwnd, WM_CAP_ABORT, (WPARAM)0, (LPARAM)0L))
-#define capCaptureSequence(hwnd)                   ((BOOL)AVICapSM(hwnd, WM_CAP_SEQUENCE, (WPARAM)0, (LPARAM)0L))
-#define capCaptureSequenceNoFile(hwnd)             ((BOOL)AVICapSM(hwnd, WM_CAP_SEQUENCE_NOFILE, (WPARAM)0, (LPARAM)0L))
-#define capCaptureStop(hwnd)                       ((BOOL)AVICapSM(hwnd, WM_CAP_STOP, (WPARAM)0, (LPARAM)0L))
-#define capCaptureAbort(hwnd)                      ((BOOL)AVICapSM(hwnd, WM_CAP_ABORT, (WPARAM)0, (LPARAM)0L))
-#define capCaptureSingleFrameOpen(hwnd)            ((BOOL)AVICapSM(hwnd, WM_CAP_SINGLE_FRAME_OPEN, (WPARAM)0, (LPARAM)0L))
-#define capCaptureSingleFrameClose(hwnd)           ((BOOL)AVICapSM(hwnd, WM_CAP_SINGLE_FRAME_CLOSE, (WPARAM)0, (LPARAM)0L))
-#define capCaptureSingleFrame(hwnd)                ((BOOL)AVICapSM(hwnd, WM_CAP_SINGLE_FRAME, (WPARAM)0, (LPARAM)0L))
-#define capDlgVideoFormat(hwnd)                    ((BOOL)AVICapSM(hwnd, WM_CAP_DLG_VIDEOFORMAT, 0, 0L))
-#define capDlgVideoSource(hwnd)                    ((BOOL)AVICapSM(hwnd, WM_CAP_DLG_VIDEOSOURCE, 0, 0L))
-#define capDlgVideoDisplay(hwnd)                   ((BOOL)AVICapSM(hwnd, WM_CAP_DLG_VIDEODISPLAY, 0, 0L))
-#define capDlgVideoCompression(hwnd)               ((BOOL)AVICapSM(hwnd, WM_CAP_DLG_VIDEOCOMPRESSION, 0, 0L))
-#define capDriverConnect(hwnd, i)                  ((BOOL)AVICapSM(hwnd, WM_CAP_DRIVER_CONNECT, (WPARAM)(i), 0L))
-#define capDriverDisconnect(hwnd)                  ((BOOL)AVICapSM(hwnd, WM_CAP_DRIVER_DISCONNECT, (WPARAM)0, 0L))
-#define capFileSetCaptureFile(hwnd, szName)        ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_SET_CAPTURE_FILE, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
-#define capFileGetCaptureFile(hwnd, szName, wSize) ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_GET_CAPTURE_FILE, (WPARAM)(wSize), (LPARAM)(LPVOID)(LPTSTR)(szName)))
-#define capFileAlloc(hwnd, dwSize)                 ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_ALLOCATE, 0, (LPARAM)(DWORD)(dwSize)))
-#define capFileSaveAs(hwnd, szName)                ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_SAVEAS, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
-#define capFileSetInfoChunk(hwnd, lpInfoChunk)     ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_SET_INFOCHUNK, (WPARAM)0, (LPARAM)(LPCAPINFOCHUNK)(lpInfoChunk)))
-#define capFileSaveDIB(hwnd, szName)               ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_SAVEDIB, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
-#define capPaletteOpen(hwnd, szName)               ((BOOL)AVICapSM(hwnd, WM_CAP_PAL_OPEN, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
-#define capPaletteSave(hwnd, szName)               ((BOOL)AVICapSM(hwnd, WM_CAP_PAL_SAVE, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
-#define capPalettePaste(hwnd)                      ((BOOL)AVICapSM(hwnd, WM_CAP_PAL_PASTE, (WPARAM) 0, (LPARAM)0L))
-#define capPaletteAuto(hwnd, iFrames, iColors)     ((BOOL)AVICapSM(hwnd, WM_CAP_PAL_AUTOCREATE, (WPARAM)(iFrames), (LPARAM)(DWORD)(iColors)))
-#define capPaletteManual(hwnd, fGrab, iColors)     ((BOOL)AVICapSM(hwnd, WM_CAP_PAL_MANUALCREATE, (WPARAM)(fGrab), (LPARAM)(DWORD)(iColors)))
-#define capGetUserData(hwnd)               (AVICapSM(hwnd, WM_CAP_GET_USER_DATA, 0, 0))
-#define capEditCopy(hwnd)                          ((BOOL)AVICapSM(hwnd, WM_CAP_EDIT_COPY, 0, 0L))
-#define capSetAudioFormat(hwnd, s, wSize)          ((BOOL)AVICapSM(hwnd, WM_CAP_SET_AUDIOFORMAT, (WPARAM)(wSize), (LPARAM)(LPVOID)(LPWAVEFORMATEX)(s)))
-#define capGetAudioFormat(hwnd, s, wSize)          ((DWORD)AVICapSM(hwnd, WM_CAP_GET_AUDIOFORMAT, (WPARAM)(wSize), (LPARAM)(LPVOID)(LPWAVEFORMATEX)(s)))
-#define capGetAudioFormatSize(hwnd)                ((DWORD)AVICapSM(hwnd, WM_CAP_GET_AUDIOFORMAT, (WPARAM)0, (LPARAM)0L))
-#define capGetVideoFormatSize(hwnd)            ((DWORD)AVICapSM(hwnd, WM_CAP_GET_VIDEOFORMAT, 0, 0L))
-#define capPreview(hwnd, f)                        ((BOOL)AVICapSM(hwnd, WM_CAP_SET_PREVIEW, (WPARAM)(BOOL)(f), 0L))
-#define capPreviewRate(hwnd, wMS)                  ((BOOL)AVICapSM(hwnd, WM_CAP_SET_PREVIEWRATE, (WPARAM)(wMS), 0))
-#define capOverlay(hwnd, f)                        ((BOOL)AVICapSM(hwnd, WM_CAP_SET_OVERLAY, (WPARAM)(BOOL)(f), 0L))
-#define capPreviewScale(hwnd, f)                   ((BOOL)AVICapSM(hwnd, WM_CAP_SET_SCALE, (WPARAM)(BOOL)f, 0L))
-#define capGrabFrame(hwnd)                         ((BOOL)AVICapSM(hwnd, WM_CAP_GRAB_FRAME, (WPARAM)0, (LPARAM)0L))
-#define capGrabFrameNoStop(hwnd)                   ((BOOL)AVICapSM(hwnd, WM_CAP_GRAB_FRAME_NOSTOP, (WPARAM)0, (LPARAM)0L))
-#define capSetMCIDeviceName(hwnd, szName)          ((BOOL)AVICapSM(hwnd, WM_CAP_SET_MCI_DEVICE, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
-#define capSetUserData(hwnd, lUser)        ((BOOL)AVICapSM(hwnd, WM_CAP_SET_USER_DATA, 0, (LPARAM)lUser))
+#if ((defined(__GNUC__) && (__GNUC__ < 4)) || (defined(__WATCOMC__) && (__WATCOMC__ < 1290)))
+#define WM_CAP_START WM_USER
+#define WM_CAP_ABORT (WM_CAP_START + 69)
+#define WM_CAP_SEQUENCE (WM_CAP_START + 62)
+#define WM_CAP_SEQUENCE_NOFILE (WM_CAP_START + 63)
+#define WM_CAP_STOP (WM_CAP_START + 68)
+#define WM_CAP_SINGLE_FRAME_OPEN (WM_CAP_START + 70)
+#define WM_CAP_SINGLE_FRAME_CLOSE (WM_CAP_START + 71)
+#define WM_CAP_SINGLE_FRAME (WM_CAP_START + 72)
+#define WM_CAP_DLG_VIDEOFORMAT (WM_CAP_START + 41)
+#define WM_CAP_DLG_VIDEOSOURCE (WM_CAP_START + 42)
+#define WM_CAP_DLG_VIDEODISPLAY (WM_CAP_START + 43)
+#define WM_CAP_GET_VIDEOFORMAT (WM_CAP_START + 44)
+#define WM_CAP_SET_VIDEOFORMAT (WM_CAP_START + 45)
+#define WM_CAP_DLG_VIDEOCOMPRESSION (WM_CAP_START + 46)
+#define WM_CAP_DRIVER_CONNECT (WM_CAP_START + 10)
+#define WM_CAP_DRIVER_DISCONNECT (WM_CAP_START + 11)
+#define WM_CAP_FILE_SET_CAPTURE_FILEA (WM_CAP_START + 20)
+#define WM_CAP_FILE_GET_CAPTURE_FILEA (WM_CAP_START + 21)
+#define WM_CAP_FILE_SAVEASA (WM_CAP_START + 23)
+#define WM_CAP_FILE_SAVEDIBA (WM_CAP_START + 25)
+#define WM_CAP_FILE_SET_CAPTURE_FILE WM_CAP_FILE_SET_CAPTURE_FILEA
+#define WM_CAP_FILE_GET_CAPTURE_FILE WM_CAP_FILE_GET_CAPTURE_FILEA
+#define WM_CAP_FILE_SAVEAS WM_CAP_FILE_SAVEASA
+#define WM_CAP_FILE_SAVEDIB WM_CAP_FILE_SAVEDIBA
+#define WM_CAP_FILE_ALLOCATE (WM_CAP_START + 22)
+#define WM_CAP_PAL_OPENA (WM_CAP_START + 80)
+#define WM_CAP_PAL_SAVEA (WM_CAP_START + 81)
+#define WM_CAP_PAL_OPENW (WM_CAP_UNICODE_START + 80)
+#define WM_CAP_PAL_SAVEW (WM_CAP_UNICODE_START + 81)
+#define WM_CAP_PAL_OPEN WM_CAP_PAL_OPENA
+#define WM_CAP_PAL_SAVE WM_CAP_PAL_SAVEA
+#define WM_CAP_PAL_PASTE (WM_CAP_START + 82)
+#define WM_CAP_PAL_AUTOCREATE (WM_CAP_START + 83)
+#define WM_CAP_PAL_MANUALCREATE (WM_CAP_START + 84)
+#define WM_CAP_GET_USER_DATA (WM_CAP_START + 8)
+#define WM_CAP_SET_USER_DATA (WM_CAP_START + 9)
+#define WM_CAP_EDIT_COPY (WM_CAP_START + 30)
+#define WM_CAP_SET_AUDIOFORMAT (WM_CAP_START + 35)
+#define WM_CAP_GET_AUDIOFORMAT (WM_CAP_START + 36)
+#define WM_CAP_GET_VIDEOFORMAT (WM_CAP_START + 44)
+#define WM_CAP_SET_VIDEOFORMAT (WM_CAP_START + 45)
+#define WM_CAP_SET_PREVIEW (WM_CAP_START + 50)
+#define WM_CAP_SET_OVERLAY (WM_CAP_START + 51)
+#define WM_CAP_SET_PREVIEWRATE (WM_CAP_START + 52)
+#define WM_CAP_SET_SCALE (WM_CAP_START + 53)
+#define WM_CAP_GRAB_FRAME (WM_CAP_START + 60)
+#define WM_CAP_GRAB_FRAME_NOSTOP (WM_CAP_START + 61)
+#define WM_CAP_SET_MCI_DEVICE (WM_CAP_START + 66)
+#define WM_CAP_SET_USER_DATA (WM_CAP_START + 9)
+#define AVICapSM(hwnd, m, w, l) ((IsWindow(hwnd)) ? SendMessage(hwnd, m, w, l) : 0)
+#define capCaptureAbort(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_ABORT, (WPARAM)0, (LPARAM)0L))
+#define capCaptureSequence(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_SEQUENCE, (WPARAM)0, (LPARAM)0L))
+#define capCaptureSequenceNoFile(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_SEQUENCE_NOFILE, (WPARAM)0, (LPARAM)0L))
+#define capCaptureStop(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_STOP, (WPARAM)0, (LPARAM)0L))
+#define capCaptureAbort(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_ABORT, (WPARAM)0, (LPARAM)0L))
+#define capCaptureSingleFrameOpen(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_SINGLE_FRAME_OPEN, (WPARAM)0, (LPARAM)0L))
+#define capCaptureSingleFrameClose(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_SINGLE_FRAME_CLOSE, (WPARAM)0, (LPARAM)0L))
+#define capCaptureSingleFrame(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_SINGLE_FRAME, (WPARAM)0, (LPARAM)0L))
+#define capDlgVideoFormat(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_DLG_VIDEOFORMAT, 0, 0L))
+#define capDlgVideoSource(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_DLG_VIDEOSOURCE, 0, 0L))
+#define capDlgVideoDisplay(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_DLG_VIDEODISPLAY, 0, 0L))
+#define capDlgVideoCompression(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_DLG_VIDEOCOMPRESSION, 0, 0L))
+#define capDriverConnect(hwnd, i) ((BOOL)AVICapSM(hwnd, WM_CAP_DRIVER_CONNECT, (WPARAM)(i), 0L))
+#define capDriverDisconnect(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_DRIVER_DISCONNECT, (WPARAM)0, 0L))
+#define capFileSetCaptureFile(hwnd, szName)                                                                            \
+  ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_SET_CAPTURE_FILE, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
+#define capFileGetCaptureFile(hwnd, szName, wSize)                                                                     \
+  ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_GET_CAPTURE_FILE, (WPARAM)(wSize), (LPARAM)(LPVOID)(LPTSTR)(szName)))
+#define capFileAlloc(hwnd, dwSize) ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_ALLOCATE, 0, (LPARAM)(DWORD)(dwSize)))
+#define capFileSaveAs(hwnd, szName) ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_SAVEAS, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
+#define capFileSetInfoChunk(hwnd, lpInfoChunk)                                                                         \
+  ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_SET_INFOCHUNK, (WPARAM)0, (LPARAM)(LPCAPINFOCHUNK)(lpInfoChunk)))
+#define capFileSaveDIB(hwnd, szName) ((BOOL)AVICapSM(hwnd, WM_CAP_FILE_SAVEDIB, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
+#define capPaletteOpen(hwnd, szName) ((BOOL)AVICapSM(hwnd, WM_CAP_PAL_OPEN, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
+#define capPaletteSave(hwnd, szName) ((BOOL)AVICapSM(hwnd, WM_CAP_PAL_SAVE, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
+#define capPalettePaste(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_PAL_PASTE, (WPARAM)0, (LPARAM)0L))
+#define capPaletteAuto(hwnd, iFrames, iColors)                                                                         \
+  ((BOOL)AVICapSM(hwnd, WM_CAP_PAL_AUTOCREATE, (WPARAM)(iFrames), (LPARAM)(DWORD)(iColors)))
+#define capPaletteManual(hwnd, fGrab, iColors)                                                                         \
+  ((BOOL)AVICapSM(hwnd, WM_CAP_PAL_MANUALCREATE, (WPARAM)(fGrab), (LPARAM)(DWORD)(iColors)))
+#define capGetUserData(hwnd) (AVICapSM(hwnd, WM_CAP_GET_USER_DATA, 0, 0))
+#define capEditCopy(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_EDIT_COPY, 0, 0L))
+#define capSetAudioFormat(hwnd, s, wSize)                                                                              \
+  ((BOOL)AVICapSM(hwnd, WM_CAP_SET_AUDIOFORMAT, (WPARAM)(wSize), (LPARAM)(LPVOID)(LPWAVEFORMATEX)(s)))
+#define capGetAudioFormat(hwnd, s, wSize)                                                                              \
+  ((DWORD)AVICapSM(hwnd, WM_CAP_GET_AUDIOFORMAT, (WPARAM)(wSize), (LPARAM)(LPVOID)(LPWAVEFORMATEX)(s)))
+#define capGetAudioFormatSize(hwnd) ((DWORD)AVICapSM(hwnd, WM_CAP_GET_AUDIOFORMAT, (WPARAM)0, (LPARAM)0L))
+#define capGetVideoFormatSize(hwnd) ((DWORD)AVICapSM(hwnd, WM_CAP_GET_VIDEOFORMAT, 0, 0L))
+#define capPreview(hwnd, f) ((BOOL)AVICapSM(hwnd, WM_CAP_SET_PREVIEW, (WPARAM)(BOOL)(f), 0L))
+#define capPreviewRate(hwnd, wMS) ((BOOL)AVICapSM(hwnd, WM_CAP_SET_PREVIEWRATE, (WPARAM)(wMS), 0))
+#define capOverlay(hwnd, f) ((BOOL)AVICapSM(hwnd, WM_CAP_SET_OVERLAY, (WPARAM)(BOOL)(f), 0L))
+#define capPreviewScale(hwnd, f) ((BOOL)AVICapSM(hwnd, WM_CAP_SET_SCALE, (WPARAM)(BOOL)f, 0L))
+#define capGrabFrame(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_GRAB_FRAME, (WPARAM)0, (LPARAM)0L))
+#define capGrabFrameNoStop(hwnd) ((BOOL)AVICapSM(hwnd, WM_CAP_GRAB_FRAME_NOSTOP, (WPARAM)0, (LPARAM)0L))
+#define capSetMCIDeviceName(hwnd, szName)                                                                              \
+  ((BOOL)AVICapSM(hwnd, WM_CAP_SET_MCI_DEVICE, 0, (LPARAM)(LPVOID)(LPTSTR)(szName)))
+#define capSetUserData(hwnd, lUser) ((BOOL)AVICapSM(hwnd, WM_CAP_SET_USER_DATA, 0, (LPARAM)lUser))
 #endif
 
 /* ======================================================================== */
@@ -123,14 +131,10 @@
                                        int nWidth, int nHeight,
                                        HWND hWnd,
                                        int nID ); */
-HB_FUNC( CAPCREATECAPTUREWINDOW )
+HB_FUNC(CAPCREATECAPTUREWINDOW)
 {
- hb_retnl( (LONG) capCreateCaptureWindow( (LPCSTR) hb_parc(1),
-                                          (DWORD) hb_parnl(2),
-                                          hb_parni(3), hb_parni(4),
-                                          hb_parni(5), hb_parni(6),
-                                          (HWND) hb_parnl(7),
-                                          hb_parni(8) ) );
+  hb_retnl((LONG)capCreateCaptureWindow((LPCSTR)hb_parc(1), (DWORD)hb_parnl(2), hb_parni(3), hb_parni(4), hb_parni(5),
+                                        hb_parni(6), (HWND)hb_parnl(7), hb_parni(8)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -185,9 +189,9 @@ HB_FUNC( CAPGETDRIVERDESCRIPTION )
 /* BOOL capCaptureAbort( hwnd ); */
 /* WM_CAP_ABORT */
 /* SendMessage( hwnd, WM_CAP_ABORT, 0, 0 ) */
-HB_FUNC( CAPCAPTUREABORT )
+HB_FUNC(CAPCAPTUREABORT)
 {
- hb_retl( capCaptureAbort( (HWND) hb_parnl(1) ) );
+  hb_retl(capCaptureAbort((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -202,9 +206,9 @@ HB_FUNC( CAPCAPTUREABORT )
 /* BOOL capCaptureSequence( hwnd ); */
 /* WM_CAP_SEQUENCE */
 /* SendMessage( hwnd, WM_CAP_SEQUENCE, 0, 0 ) */
-HB_FUNC( CAPCAPTURESEQUENCE )
+HB_FUNC(CAPCAPTURESEQUENCE)
 {
- hb_retl( capCaptureSequence( (HWND) hb_parnl(1) ) );
+  hb_retl(capCaptureSequence((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -212,9 +216,9 @@ HB_FUNC( CAPCAPTURESEQUENCE )
 /* BOOL capCaptureSequenceNoFile( hwnd ); */
 /* WM_CAP_SEQUENCE_NOFILE */
 /* SendMessage( hwnd, WM_CAP_SEQUENCE_NOFILE, 0, 0 ) */
-HB_FUNC( CAPCAPTURESEQUENCENOFILE )
+HB_FUNC(CAPCAPTURESEQUENCENOFILE)
 {
- hb_retl( capCaptureSequenceNoFile( (HWND) hb_parnl(1) ) );
+  hb_retl(capCaptureSequenceNoFile((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -229,9 +233,9 @@ HB_FUNC( CAPCAPTURESEQUENCENOFILE )
 /* BOOL capCaptureSingleFrame( hwnd ); */
 /* WM_CAP_SINGLE_FRAME */
 /* SendMessage( hwnd, WM_CAP_SINGLE_FRAME, 0, 0 ) */
-HB_FUNC( CAPCAPTURESINGLEFRAME )
+HB_FUNC(CAPCAPTURESINGLEFRAME)
 {
- hb_retl( capCaptureSingleFrame( (HWND) hb_parnl(1) ) );
+  hb_retl(capCaptureSingleFrame((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -239,9 +243,9 @@ HB_FUNC( CAPCAPTURESINGLEFRAME )
 /* BOOL capCaptureSingleFrameClose( hwnd ); */
 /* WM_CAP_SINGLE_FRAME_CLOSE */
 /* SendMessage( hwnd, WM_CAP_SINGLE_FRAME_CLOSE, 0, 0 ) */
-HB_FUNC( CAPCAPTURESINGLEFRAMECLOSE )
+HB_FUNC(CAPCAPTURESINGLEFRAMECLOSE)
 {
- hb_retl( capCaptureSingleFrameClose( (HWND) hb_parnl(1) ) );
+  hb_retl(capCaptureSingleFrameClose((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -249,9 +253,9 @@ HB_FUNC( CAPCAPTURESINGLEFRAMECLOSE )
 /* BOOL capCaptureSingleFrameOpen( hwnd ); */
 /* WM_CAP_SINGLE_FRAME_OPEN */
 /* SendMessage( hwnd, WM_CAP_SINGLE_FRAME_OPEN, 0, 0 ) */
-HB_FUNC( CAPCAPTURESINGLEFRAMEOPEN )
+HB_FUNC(CAPCAPTURESINGLEFRAMEOPEN)
 {
- hb_retl( capCaptureSingleFrameOpen( (HWND) hb_parnl(1) ) );
+  hb_retl(capCaptureSingleFrameOpen((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -259,9 +263,9 @@ HB_FUNC( CAPCAPTURESINGLEFRAMEOPEN )
 /* BOOL capCaptureStop( hwnd ); */
 /* WM_CAP_STOP */
 /* SendMessage( hwnd, WM_CAP_STOP, 0, 0 ) */
-HB_FUNC( CAPCAPTURESTOP )
+HB_FUNC(CAPCAPTURESTOP)
 {
- hb_retl( capCaptureStop( (HWND) hb_parnl(1) ) );
+  hb_retl(capCaptureStop((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -269,9 +273,9 @@ HB_FUNC( CAPCAPTURESTOP )
 /* BOOL capDlgVideoCompression( hwnd ); */
 /* WM_CAP_DLG_VIDEOCOMPRESSION */
 /* SendMessage( hwnd, WM_CAP_DLG_VIDEOCOMPRESSION, 0, 0 ) */
-HB_FUNC( CAPDLGVIDEOCOMPRESSION )
+HB_FUNC(CAPDLGVIDEOCOMPRESSION)
 {
- hb_retl( capDlgVideoCompression( (HWND) hb_parnl(1) ) );
+  hb_retl(capDlgVideoCompression((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -279,9 +283,9 @@ HB_FUNC( CAPDLGVIDEOCOMPRESSION )
 /* BOOL capDlgVideoDisplay( hwnd ); */
 /* WM_CAP_DLG_VIDEODISPLAY */
 /* SendMessage( hwnd, WM_CAP_DLG_VIDEODISPLAY, 0, 0 ) */
-HB_FUNC( CAPDLGVIDEODISPLAY )
+HB_FUNC(CAPDLGVIDEODISPLAY)
 {
- hb_retl( capDlgVideoDisplay( (HWND) hb_parnl(1) ) );
+  hb_retl(capDlgVideoDisplay((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -289,9 +293,9 @@ HB_FUNC( CAPDLGVIDEODISPLAY )
 /* BOOL capDlgVideoFormat( hwnd ); */
 /* WM_CAP_DLG_VIDEOFORMAT */
 /* SendMessage( hwnd, WM_CAP_DLG_VIDEOFORMAT, 0, 0 ) */
-HB_FUNC( CAPDLGVIDEOFORMAT )
+HB_FUNC(CAPDLGVIDEOFORMAT)
 {
- hb_retl( capDlgVideoFormat( (HWND) hb_parnl(1) ) );
+  hb_retl(capDlgVideoFormat((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -299,9 +303,9 @@ HB_FUNC( CAPDLGVIDEOFORMAT )
 /* BOOL capDlgVideoSource( hwnd ); */
 /* WM_CAP_DLG_VIDEOSOURCE */
 /* SendMessage( hwnd, WM_CAP_DLG_VIDEOSOURCE, 0, 0 ) */
-HB_FUNC( CAPDLGVIDEOSOURCE )
+HB_FUNC(CAPDLGVIDEOSOURCE)
 {
- hb_retl( capDlgVideoSource( (HWND) hb_parnl(1) ) );
+  hb_retl(capDlgVideoSource((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -309,9 +313,9 @@ HB_FUNC( CAPDLGVIDEOSOURCE )
 /* BOOL capDriverConnect( hwnd, iIndex ); */
 /* WM_CAP_DRIVER_CONNECT */
 /* SendMessage( hwnd, WM_CAP_DRIVER_CONNECT, 0, 0 ) */
-HB_FUNC( CAPDRIVERCONNECT )
+HB_FUNC(CAPDRIVERCONNECT)
 {
- hb_retl( capDriverConnect( (HWND) hb_parnl(1), hb_parni(2) ) );
+  hb_retl(capDriverConnect((HWND)hb_parnl(1), hb_parni(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -319,9 +323,9 @@ HB_FUNC( CAPDRIVERCONNECT )
 /* BOOL capDriverDisconnect( hwnd ); */
 /* WM_CAP_DRIVER_DISCONNECT */
 /* SendMessage( hwnd, WM_CAP_DRIVER_DISCONNECT, 0, 0 ) */
-HB_FUNC( CAPDRIVERDISCONNECT )
+HB_FUNC(CAPDRIVERDISCONNECT)
 {
- hb_retl( capDriverDisconnect( (HWND) hb_parnl(1) ) );
+  hb_retl(capDriverDisconnect((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -372,9 +376,9 @@ HB_FUNC( CAPDRIVERGETVERSION )
 /* BOOL capEditCopy( hwnd ); */
 /* WM_CAP_EDIT_COPY */
 /* SendMessage( hwnd, WM_CAP_EDIT_COPY, 0, 0 ) */
-HB_FUNC( CAPEDITCOPY )
+HB_FUNC(CAPEDITCOPY)
 {
- hb_retl( capEditCopy( (HWND) hb_parnl(1) ) );
+  hb_retl(capEditCopy((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -382,9 +386,9 @@ HB_FUNC( CAPEDITCOPY )
 /* BOOL capFileAlloc( hwnd, dwSize ); */
 /* WM_CAP_FILE_ALLOCATE */
 /* SendMessage( hwnd, WM_CAP_FILE_ALLOCATE, 0, 0 ) */
-HB_FUNC( CAPFILEALLOC )
+HB_FUNC(CAPFILEALLOC)
 {
- hb_retl( capFileAlloc( (HWND) hb_parnl(1), (DWORD) hb_parnl(2) ) );
+  hb_retl(capFileAlloc((HWND)hb_parnl(1), (DWORD)hb_parnl(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -410,9 +414,9 @@ HB_FUNC( CAPFILEGETCAPTUREFILE )
 /* BOOL capFileSaveAs( hwnd, szName ); */
 /* WM_CAP_FILE_SAVEAS */
 /* SendMessage( hwnd, WM_CAP_FILE_SAVEAS, 0, 0 ) */
-HB_FUNC( CAPFILESAVEAS )
+HB_FUNC(CAPFILESAVEAS)
 {
- hb_retl( capFileSaveAs( (HWND) hb_parnl(1), hb_parc(2) ) );
+  hb_retl(capFileSaveAs((HWND)hb_parnl(1), hb_parc(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -420,9 +424,9 @@ HB_FUNC( CAPFILESAVEAS )
 /* BOOL capFileSaveDIB( hwnd, szName ); */
 /* WM_CAP_FILE_SAVEDIB */
 /* SendMessage( hwnd, WM_CAP_FILE_SAVEDIB, 0, 0 ) */
-HB_FUNC( CAPFILESAVEDIB )
+HB_FUNC(CAPFILESAVEDIB)
 {
- hb_retl( capFileSaveDIB( (HWND) hb_parnl(1), hb_parc(2) ) );
+  hb_retl(capFileSaveDIB((HWND)hb_parnl(1), hb_parc(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -430,9 +434,9 @@ HB_FUNC( CAPFILESAVEDIB )
 /* BOOL capFileSetCaptureFile( hwnd, szName ); */
 /* WM_CAP_FILE_SET_CAPTURE_FILE */
 /* SendMessage( hwnd, WM_CAP_FILE_SET_CAPTURE_FILE, 0, 0 ) */
-HB_FUNC( CAPFILESETCAPTUREFILE )
+HB_FUNC(CAPFILESETCAPTUREFILE)
 {
- hb_retl( capFileSetCaptureFile( (HWND) hb_parnl(1), hb_parc(2) ) );
+  hb_retl(capFileSetCaptureFile((HWND)hb_parnl(1), hb_parc(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -454,9 +458,9 @@ HB_FUNC( CAPFILESETCAPTUREFILE )
 /* DWORD capGetAudioFormatSize( hwnd ); */
 /* WM_CAP_GET_AUDIOFORMAT */
 /* SendMessage( hwnd, WM_CAP_GET_AUDIOFORMAT, 0, 0 ) */
-HB_FUNC( CAPGETAUDIOFORMATSIZE )
+HB_FUNC(CAPGETAUDIOFORMATSIZE)
 {
- hb_retnl( capGetAudioFormatSize( (HWND) hb_parnl(1) ) );
+  hb_retnl(capGetAudioFormatSize((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -490,9 +494,9 @@ HB_FUNC( CAPGETMCIDEVICENAME )
 /* WM_CAP_GET_USER_DATA */
 /* SendMessage( hwnd, WM_CAP_GET_USER_DATA, 0, 0 ) */
 /* To check: the return must be a LONG */
-HB_FUNC( CAPGETUSERDATA )
+HB_FUNC(CAPGETUSERDATA)
 {
- hb_retl( capGetUserData( (HWND) hb_parnl(1) ) );
+  hb_retl(capGetUserData((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -507,9 +511,9 @@ HB_FUNC( CAPGETUSERDATA )
 /* DWORD capGetVideoFormatSize( hwnd ); */
 /* WM_CAP_GET_VIDEOFORMAT */
 /* SendMessage( hwnd, WM_CAP_GET_VIDEOFORMAT, 0, 0 ) */
-HB_FUNC( CAPGETVIDEOFORMATSIZE )
+HB_FUNC(CAPGETVIDEOFORMATSIZE)
 {
- hb_retnl( capGetVideoFormatSize( (HWND) hb_parnl(1) ) );
+  hb_retnl(capGetVideoFormatSize((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -517,9 +521,9 @@ HB_FUNC( CAPGETVIDEOFORMATSIZE )
 /* BOOL capGrabFrame( hwnd ); */
 /* WM_CAP_GRAB_FRAME */
 /* SendMessage( hwnd, WM_CAP_GRAB_FRAME, 0, 0 ) */
-HB_FUNC( CAPGRABFRAME )
+HB_FUNC(CAPGRABFRAME)
 {
- hb_retl( capGrabFrame( (HWND) hb_parnl(1) ) );
+  hb_retl(capGrabFrame((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -527,9 +531,9 @@ HB_FUNC( CAPGRABFRAME )
 /* BOOL capGrabFrameNoStop( hwnd ); */
 /* WM_CAP_GRAB_FRAME_NOSTOP */
 /* SendMessage( hwnd, WM_CAP_GRAB_FRAME_NOSTOP, 0, 0 ) */
-HB_FUNC( CAPGRABFRAMENOSTOP )
+HB_FUNC(CAPGRABFRAMENOSTOP)
 {
- hb_retl( capGrabFrameNoStop( (HWND) hb_parnl(1) ) );
+  hb_retl(capGrabFrameNoStop((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -537,9 +541,9 @@ HB_FUNC( CAPGRABFRAMENOSTOP )
 /* BOOL capOverlay( hwnd, f ); */
 /* WM_CAP_SET_OVERLAY */
 /* SendMessage( hwnd, WM_CAP_SET_OVERLAY, 0, 0 ) */
-HB_FUNC( CAPOVERLAY )
+HB_FUNC(CAPOVERLAY)
 {
- hb_retl( capOverlay( (HWND) hb_parnl(1), hb_parl(2) ) );
+  hb_retl(capOverlay((HWND)hb_parnl(1), hb_parl(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -547,9 +551,9 @@ HB_FUNC( CAPOVERLAY )
 /* BOOL capPaletteAuto( hwnd, iFrames, iColors ); */
 /* WM_CAP_PAL_AUTOCREATE */
 /* SendMessage( hwnd, WM_CAP_PAL_AUTOCREATE, 0, 0 ) */
-HB_FUNC( CAPPALETTEAUTO )
+HB_FUNC(CAPPALETTEAUTO)
 {
- hb_retl( capPaletteAuto( (HWND) hb_parnl(1), hb_parni(2), hb_parni(3) ) );
+  hb_retl(capPaletteAuto((HWND)hb_parnl(1), hb_parni(2), hb_parni(3)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -557,9 +561,9 @@ HB_FUNC( CAPPALETTEAUTO )
 /* BOOL capPaletteManual( hwnd, fGrab, iColors ); */
 /* WM_CAP_PAL_MANUALCREATE */
 /* SendMessage( hwnd, WM_CAP_PAL_MANUALCREATE, 0, 0 ) */
-HB_FUNC( CAPPALETTEMANUAL )
+HB_FUNC(CAPPALETTEMANUAL)
 {
- hb_retl( capPaletteManual( (HWND) hb_parnl(1), hb_parl(2), hb_parni(3) ) );
+  hb_retl(capPaletteManual((HWND)hb_parnl(1), hb_parl(2), hb_parni(3)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -567,9 +571,9 @@ HB_FUNC( CAPPALETTEMANUAL )
 /* BOOL capPaletteOpen( hwnd, szName ); */
 /* WM_CAP_PAL_OPEN */
 /* SendMessage( hwnd, WM_CAP_PAL_OPEN, 0, 0 ) */
-HB_FUNC( CAPPALETTEOPEN )
+HB_FUNC(CAPPALETTEOPEN)
 {
- hb_retl( capPaletteOpen( (HWND) hb_parnl(1), hb_parc(2) ) );
+  hb_retl(capPaletteOpen((HWND)hb_parnl(1), hb_parc(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -577,9 +581,9 @@ HB_FUNC( CAPPALETTEOPEN )
 /* BOOL capPalettePaste( hwnd ); */
 /* WM_CAP_PAL_PASTE */
 /* SendMessage( hwnd, WM_CAP_PAL_PASTE, 0, 0 ) */
-HB_FUNC( CAPPALETTEPASTE )
+HB_FUNC(CAPPALETTEPASTE)
 {
- hb_retl( capPalettePaste( (HWND) hb_parnl(1) ) );
+  hb_retl(capPalettePaste((HWND)hb_parnl(1)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -587,9 +591,9 @@ HB_FUNC( CAPPALETTEPASTE )
 /* BOOL capPaletteSave( hwnd, szName ); */
 /* WM_CAP_PAL_SAVE */
 /* SendMessage( hwnd, WM_CAP_PAL_SAVE, 0, 0 ) */
-HB_FUNC( CAPPALETTESAVE )
+HB_FUNC(CAPPALETTESAVE)
 {
- hb_retl( capPaletteSave( (HWND) hb_parnl(1), hb_parc(2) ) );
+  hb_retl(capPaletteSave((HWND)hb_parnl(1), hb_parc(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -597,9 +601,9 @@ HB_FUNC( CAPPALETTESAVE )
 /* BOOL capPreview( hwnd, f ); */
 /* WM_CAP_SET_PREVIEW */
 /* SendMessage( hwnd, WM_CAP_SET_PREVIEW, 0, 0 ) */
-HB_FUNC( CAPPREVIEW )
+HB_FUNC(CAPPREVIEW)
 {
- hb_retl( capPreview( (HWND) hb_parnl(1), hb_parl(2) ) );
+  hb_retl(capPreview((HWND)hb_parnl(1), hb_parl(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -607,9 +611,9 @@ HB_FUNC( CAPPREVIEW )
 /* BOOL capPreviewRate( hwnd, wMS ); */
 /* WM_CAP_SET_PREVIEWRATE */
 /* SendMessage( hwnd, WM_CAP_SET_PREVIEWRATE, 0, 0 ) */
-HB_FUNC( CAPPREVIEWRATE )
+HB_FUNC(CAPPREVIEWRATE)
 {
- hb_retl( capPreviewRate( (HWND) hb_parnl(1), (WORD) hb_parnl(2) ) );
+  hb_retl(capPreviewRate((HWND)hb_parnl(1), (WORD)hb_parnl(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -617,9 +621,9 @@ HB_FUNC( CAPPREVIEWRATE )
 /* BOOL capPreviewScale( hwnd, f ); */
 /* WM_CAP_SET_SCALE */
 /* SendMessage( hwnd, WM_CAP_SET_SCALE, 0, 0 ) */
-HB_FUNC( CAPPREVIEWSCALE )
+HB_FUNC(CAPPREVIEWSCALE)
 {
- hb_retl( capPreviewScale( (HWND) hb_parnl(1), hb_parl(2) ) );
+  hb_retl(capPreviewScale((HWND)hb_parnl(1), hb_parl(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -683,9 +687,9 @@ HB_FUNC( CAPPREVIEWSCALE )
 /* BOOL capSetMCIDeviceName( hwnd, szName ); */
 /* WM_CAP_SET_MCI_DEVICE */
 /* SendMessage( hwnd, WM_CAP_SET_MCI_DEVICE, 0, 0 ) */
-HB_FUNC( CAPSETMCIDEVICENAME )
+HB_FUNC(CAPSETMCIDEVICENAME)
 {
- hb_retl( capSetMCIDeviceName( (HWND) hb_parnl(1), hb_parc(2) ) );
+  hb_retl(capSetMCIDeviceName((HWND)hb_parnl(1), hb_parc(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -700,9 +704,9 @@ HB_FUNC( CAPSETMCIDEVICENAME )
 /* BOOL capSetUserData( hwnd, lUser ); */
 /* WM_CAP_SET_USER_DATA */
 /* SendMessage( hwnd, WM_CAP_SET_USER_DATA, 0, 0 ) */
-HB_FUNC( CAPSETUSERDATA )
+HB_FUNC(CAPSETUSERDATA)
 {
- hb_retl( capSetUserData( (HWND) hb_parnl(1), hb_parnl(2) ) );
+  hb_retl(capSetUserData((HWND)hb_parnl(1), hb_parnl(2)));
 }
 
 /* ------------------------------------------------------------------------ */
@@ -713,4 +717,3 @@ HB_FUNC( CAPSETUSERDATA )
 /* To Do */
 
 /* ======================================================================== */
-

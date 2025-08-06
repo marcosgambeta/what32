@@ -4,8 +4,8 @@
    Last change:  WN   27 May 2002   10:37 am
  */
 
-#define _WIN32_WINNT   0x0400
-#define _WIN32_IE      0x0500
+#define _WIN32_WINNT 0x0400
+#define _WIN32_IE 0x0500
 
 #include <windows.h>
 #include <shlobj.h>
@@ -18,34 +18,35 @@
 #include "hbapiitm.h"
 #include "item.api"
 
-extern PHB_ITEM Rect2Array( RECT *rc  );
+extern PHB_ITEM Rect2Array(RECT *rc);
 
 /* add parens to avoid warning */
-#if defined(__BORLANDC__) && (__BORLANDC__<=0x620)
-   #undef  MAKEWORD
-   #undef  MAKELONG
-   #define MAKEWORD(a, b)      ((WORD)(((BYTE)(((DWORD_PTR)(a)) & 0xff)) | (((WORD)((BYTE)(((DWORD_PTR)(b)) & 0xff))) << 8)))
-   #define MAKELONG(a, b)      ((LONG)(((WORD)(((DWORD_PTR)(a)) & 0xffff)) | (((DWORD)((WORD)(((DWORD_PTR)(b)) & 0xffff))) << 16)))
+#if defined(__BORLANDC__) && (__BORLANDC__ <= 0x620)
+#undef MAKEWORD
+#undef MAKELONG
+#define MAKEWORD(a, b) ((WORD)(((BYTE)(((DWORD_PTR)(a)) & 0xff)) | (((WORD)((BYTE)(((DWORD_PTR)(b)) & 0xff))) << 8)))
+#define MAKELONG(a, b)                                                                                                 \
+  ((LONG)(((WORD)(((DWORD_PTR)(a)) & 0xffff)) | (((DWORD)((WORD)(((DWORD_PTR)(b)) & 0xffff))) << 16)))
 #endif
 
 #ifdef __DMC__
-//typedef struct tagINITCOMMONCONTROLSEX {
+// typedef struct tagINITCOMMONCONTROLSEX {
 //	DWORD dwSize;
 //	DWORD dwICC;
-//}	INITCOMMONCONTROLSEX, *LPINITCOMMONCONTROLSEX;
-//WINCOMMCTRLAPI BOOL WINAPI InitCommonControlsEx(LPINITCOMMONCONTROLSEX);
+// }	INITCOMMONCONTROLSEX, *LPINITCOMMONCONTROLSEX;
+// WINCOMMCTRLAPI BOOL WINAPI InitCommonControlsEx(LPINITCOMMONCONTROLSEX);
 #define LVM_SETEXTENDEDLISTVIEWSTYLE (LVM_FIRST + 54)
-#define LVS_EX_GRIDLINES             0x00000001
-#define LVS_EX_FULLROWSELECT         0x00000020
-#define LVS_EX_HEADERDRAGDROP        0x00000010
-#define ICC_DATE_CLASSES             0x00000100
+#define LVS_EX_GRIDLINES 0x00000001
+#define LVS_EX_FULLROWSELECT 0x00000020
+#define LVS_EX_HEADERDRAGDROP 0x00000010
+#define ICC_DATE_CLASSES 0x00000100
 #endif
 
 //-----------------------------------------------------------------------------
 
-HB_FUNC( INITCOMMONCONTROLS )
+HB_FUNC(INITCOMMONCONTROLS)
 {
-  InitCommonControls() ;
+  InitCommonControls();
 }
 
 //-----------------------------------------------------------------------------
@@ -54,77 +55,62 @@ HB_FUNC( INITCOMMONCONTROLS )
 // SYNTAX
 // InitCommnonControlsEx(nFlags)
 
-HB_FUNC( INITCOMMONCONTROLSEX )
+HB_FUNC(INITCOMMONCONTROLSEX)
 {
-  INITCOMMONCONTROLSEX icc ;
+  INITCOMMONCONTROLSEX icc;
   icc.dwSize = sizeof(INITCOMMONCONTROLSEX);
-  icc.dwICC = hb_parnl( 1 );
+  icc.dwICC = hb_parnl(1);
 
-  hb_retl( InitCommonControlsEx( &icc ) );
+  hb_retl(InitCommonControlsEx(&icc));
 }
 
 //----------------------------------------------------------------------------//
-HB_FUNC( CREATESTATUSWINDOW )
+HB_FUNC(CREATESTATUSWINDOW)
 {
-  hb_retnl( (ULONG) CreateStatusWindow (
-                                         hb_parnl(1),
-                                         (LPCSTR) hb_parcx(2) ,
-                                         (HWND) hb_parnl(3) ,
-                                         (UINT) hb_parni(4)
-                                       )
-                                   ) ;
-}
-
-
-//----------------------------------------------------------------------------//
-
-HB_FUNC( DRAWSTATUSTEXT )
-{
-    RECT rc ;
-
-    rc.left   = hb_parnl( 2, 1 ) ;
-    rc.top    = hb_parnl( 2, 2 ) ;
-    rc.right  = hb_parnl( 2, 3 ) ;
-    rc.bottom = hb_parnl( 2, 4 ) ;
-
-    DrawStatusText(
-                     (HDC) hb_parnl(1)  ,
-                     (LPRECT) &rc       ,
-                     (LPCTSTR) hb_parcx(3),
-                     (UINT) hb_parni(4)
-                  );
-
+  hb_retnl((ULONG)CreateStatusWindow(hb_parnl(1), (LPCSTR)hb_parcx(2), (HWND)hb_parnl(3), (UINT)hb_parni(4)));
 }
 
 //----------------------------------------------------------------------------//
 
-HB_FUNC( WRITESTATUSWINDOW )
-{
-   SendMessage( (HWND) hb_parnl( 1 ), SB_SETTEXT, hb_parni( 2 ), (LPARAM) hb_parcx( 3 ) );
-}
-
-
-HB_FUNC( STATUSBARGETRECT )
+HB_FUNC(DRAWSTATUSTEXT)
 {
   RECT rc;
-  PHB_ITEM aRect ;
-  HWND hWnd = (HWND) hb_parnl(1);
-  SendMessage ( hWnd, SB_GETRECT, hb_parnl(2), (LPARAM) &rc);
-  aRect = Rect2Array( &rc  );
-  _itemReturn( aRect );
-  _itemRelease( aRect );
+
+  rc.left = hb_parnl(2, 1);
+  rc.top = hb_parnl(2, 2);
+  rc.right = hb_parnl(2, 3);
+  rc.bottom = hb_parnl(2, 4);
+
+  DrawStatusText((HDC)hb_parnl(1), (LPRECT)&rc, (LPCTSTR)hb_parcx(3), (UINT)hb_parni(4));
 }
 
+//----------------------------------------------------------------------------//
 
-HB_FUNC( STATUSBARGETPARTS )
+HB_FUNC(WRITESTATUSWINDOW)
+{
+  SendMessage((HWND)hb_parnl(1), SB_SETTEXT, hb_parni(2), (LPARAM)hb_parcx(3));
+}
+
+HB_FUNC(STATUSBARGETRECT)
+{
+  RECT rc;
+  PHB_ITEM aRect;
+  HWND hWnd = (HWND)hb_parnl(1);
+  SendMessage(hWnd, SB_GETRECT, hb_parnl(2), (LPARAM)&rc);
+  aRect = Rect2Array(&rc);
+  _itemReturn(aRect);
+  _itemRelease(aRect);
+}
+
+HB_FUNC(STATUSBARGETPARTS)
 {
   RECT rc;
   PHB_ITEM aParts;
-  HWND hWnd = (HWND) hb_parnl(1);
-  SendMessage ( hWnd, SB_GETPARTS, hb_parni(2), (LPARAM) &rc);
-  aParts = Rect2Array( &rc  );
-  _itemReturn( aParts );
-  _itemRelease( aParts );
+  HWND hWnd = (HWND)hb_parnl(1);
+  SendMessage(hWnd, SB_GETPARTS, hb_parni(2), (LPARAM)&rc);
+  aParts = Rect2Array(&rc);
+  _itemReturn(aParts);
+  _itemRelease(aParts);
 }
 
 //----------------------------------------------------------------------------//
@@ -163,74 +149,68 @@ to load the appropriate Help string.
 /*
    CreateProgressBar( hParentWindow, nRange, x ,y, nWidth,nHeight,bBorder )
 */
-HB_FUNC( CREATEPROGRESSBAR )
+HB_FUNC(CREATEPROGRESSBAR)
 {
-   HWND hPBar, hParentWindow = (HWND) hb_parnl(1);
-   RECT rcClient;
-   LONG ProgressBarStyle;
-   BOOL bBorder = ISNIL(7) ? FALSE : hb_parl(7);
-   int cyVScroll = ISNIL(6) ? GetSystemMetrics( SM_CYVSCROLL ): hb_parni(6) ;
-   LONG nStyle = ISNIL(8) ? 0 : hb_parnl(8) ;
+  HWND hPBar, hParentWindow = (HWND)hb_parnl(1);
+  RECT rcClient;
+  LONG ProgressBarStyle;
+  BOOL bBorder = ISNIL(7) ? FALSE : hb_parl(7);
+  int cyVScroll = ISNIL(6) ? GetSystemMetrics(SM_CYVSCROLL) : hb_parni(6);
+  LONG nStyle = ISNIL(8) ? 0 : hb_parnl(8);
 
-   int x1, y1, nwidth, nheight;
-   if( hb_pcount() > 2 )
-   {
-      x1 = hb_parni( 3 );
-      y1 = hb_parni( 4 );
-      nwidth = hb_parni( 5 );
-      nheight = cyVScroll;
-   }
-   else
-   {
-      GetClientRect( hParentWindow, &rcClient );
-      x1 = rcClient.left;
-      y1 = rcClient.bottom - cyVScroll;
-      nwidth = rcClient.right;
-      nheight = cyVScroll;
-   }
+  int x1, y1, nwidth, nheight;
+  if (hb_pcount() > 2)
+  {
+    x1 = hb_parni(3);
+    y1 = hb_parni(4);
+    nwidth = hb_parni(5);
+    nheight = cyVScroll;
+  }
+  else
+  {
+    GetClientRect(hParentWindow, &rcClient);
+    x1 = rcClient.left;
+    y1 = rcClient.bottom - cyVScroll;
+    nwidth = rcClient.right;
+    nheight = cyVScroll;
+  }
 
-   hPBar = CreateWindowEx( 0, PROGRESS_CLASS, (LPSTR) NULL,
-              WS_CHILD | WS_VISIBLE | nStyle,    /* style  */
-              x1,                       /* x */
-              y1,                       /* y */
-              nwidth, nheight,          /* nWidth, nHeight */
-              hParentWindow,            /* parent window    */
-              (HMENU) NULL,
-              GetModuleHandle( NULL ), NULL );
+  hPBar = CreateWindowEx(0, PROGRESS_CLASS, (LPSTR)NULL, WS_CHILD | WS_VISIBLE | nStyle, /* style  */
+                         x1,                                                             /* x */
+                         y1,                                                             /* y */
+                         nwidth, nheight,                                                /* nWidth, nHeight */
+                         hParentWindow,                                                  /* parent window    */
+                         (HMENU)NULL, GetModuleHandle(NULL), NULL);
 
-   SendMessage( hPBar, PBM_SETRANGE, 0, MAKELPARAM( 0, hb_parni( 2 ) ) );
-   SendMessage(hPBar, PBM_SETSTEP, (WPARAM) 1, 0);
+  SendMessage(hPBar, PBM_SETRANGE, 0, MAKELPARAM(0, hb_parni(2)));
+  SendMessage(hPBar, PBM_SETSTEP, (WPARAM)1, 0);
 
-
-  if( bBorder )
-    {
+  if (bBorder)
+  {
     ProgressBarStyle = GetWindowLong(hPBar, GWL_EXSTYLE);
     ProgressBarStyle = ProgressBarStyle - WS_EX_STATICEDGE;
     SetWindowLong(hPBar, GWL_EXSTYLE, ProgressBarStyle);
-    }
+  }
 
-   hb_retnl( (LONG) hPBar );
+  hb_retnl((LONG)hPBar);
 }
-
 
 //----------------------------------------------------------------------------//
 
 /*
    UpdateProgressBar( hPBar )
 */
-HB_FUNC( UPDATEPROGRESSBAR )
+HB_FUNC(UPDATEPROGRESSBAR)
 {
-   SendMessage( (HWND) hb_parnl(1), PBM_STEPIT, 0, 0 );
+  SendMessage((HWND)hb_parnl(1), PBM_STEPIT, 0, 0);
 }
 
 //----------------------------------------------------------------------------//
 
-HB_FUNC( SETPROGRESSBAR )
+HB_FUNC(SETPROGRESSBAR)
 {
-   SendMessage( (HWND) hb_parnl(1), PBM_SETPOS, (WPARAM) hb_parni(2), 0 );
+  SendMessage((HWND)hb_parnl(1), PBM_SETPOS, (WPARAM)hb_parni(2), 0);
 }
-
-
 
 /*
 
@@ -252,142 +232,125 @@ HB_FUNC( SETPROGRESSBAR )
 
 */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //----------------------------------------------------------------------------
 
-
-HB_FUNC( INITLISTVIEW )
+HB_FUNC(INITLISTVIEW)
 {
-   HWND hwnd;
-   HWND hbutton;
+  HWND hwnd;
+  HWND hbutton;
 
-   INITCOMMONCONTROLSEX  i;
+  INITCOMMONCONTROLSEX i;
 
-   i.dwSize = sizeof(INITCOMMONCONTROLSEX);
-   i.dwICC = ICC_DATE_CLASSES;
-   InitCommonControlsEx(&i);
+  i.dwSize = sizeof(INITCOMMONCONTROLSEX);
+  i.dwICC = ICC_DATE_CLASSES;
+  InitCommonControlsEx(&i);
 
-   hwnd = (HWND) hb_parnl (1);
+  hwnd = (HWND)hb_parnl(1);
 
-   hbutton = CreateWindowEx(WS_EX_CLIENTEDGE,"SysListView32","",
-   LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_CHILD | WS_TABSTOP | WS_VISIBLE | WS_BORDER | LVS_REPORT,
-   hb_parni(3), hb_parni(4) , hb_parni(5), hb_parni(6) ,
-   hwnd,(HMENU)hb_parni(2) , GetModuleHandle(NULL) , NULL ) ;
+  hbutton = CreateWindowEx(
+      WS_EX_CLIENTEDGE, "SysListView32", "",
+      LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_CHILD | WS_TABSTOP | WS_VISIBLE | WS_BORDER | LVS_REPORT, hb_parni(3),
+      hb_parni(4), hb_parni(5), hb_parni(6), hwnd, (HMENU)hb_parni(2), GetModuleHandle(NULL), NULL);
 
-   SendMessage(hbutton,LVM_SETEXTENDEDLISTVIEWSTYLE, 0,LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT | LVS_EX_HEADERDRAGDROP );
+  SendMessage(hbutton, LVM_SETEXTENDEDLISTVIEWSTYLE, 0,
+              LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT | LVS_EX_HEADERDRAGDROP);
 
-   if ( hb_parni(8) != 0)
-   {
-      //SendMessage(hbutton,(UINT)WM_SETFONT,(WPARAM) PrepareFont ( hb_parcx(7) , (LPARAM) hb_parni(8)) , 1 ) ;
-   }
+  if (hb_parni(8) != 0)
+  {
+    // SendMessage(hbutton,(UINT)WM_SETFONT,(WPARAM) PrepareFont ( hb_parcx(7) , (LPARAM) hb_parni(8)) , 1 ) ;
+  }
 
-   hb_retnl ( (LONG) hbutton );
+  hb_retnl((LONG)hbutton);
 }
 //------------------------------------------------------------------------------------------
-HB_FUNC( INITLISTVIEWCOLUMNS )
+HB_FUNC(INITLISTVIEWCOLUMNS)
 {
-   PHB_ITEM wArray;
-   PHB_ITEM hArray;
-   char *caption;
-   HWND hc;
-   LV_COLUMN COL;
-   int l9;
-   int s;
-   int vi;
+  PHB_ITEM wArray;
+  PHB_ITEM hArray;
+  char *caption;
+  HWND hc;
+  LV_COLUMN COL;
+  int l9;
+  int s;
+  int vi;
 
-   hc = (HWND) hb_parnl( 1 ) ;
+  hc = (HWND)hb_parnl(1);
 
-   l9 = hb_parinfa( 2, 0 ) - 1 ;
-   hArray = hb_param( 2, HB_IT_ARRAY );
-   wArray = hb_param( 3, HB_IT_ARRAY );
+  l9 = hb_parinfa(2, 0) - 1;
+  hArray = hb_param(2, HB_IT_ARRAY);
+  wArray = hb_param(3, HB_IT_ARRAY);
 
-   COL.mask=LVCF_FMT | LVCF_WIDTH | LVCF_TEXT |LVCF_SUBITEM;
-   COL.fmt=LVCFMT_LEFT;
+  COL.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
+  COL.fmt = LVCFMT_LEFT;
 
-   for (s = 0 ; s<=l9 ; s=s+1 )
-      {
+  for (s = 0; s <= l9; s = s + 1)
+  {
 
-      caption  = hb_itemGetCPtr ( hArray->item.asArray.value->pItems + s );
-      vi = hb_itemGetNI   ( wArray->item.asArray.value->pItems + s );
+    caption = hb_itemGetCPtr(hArray->item.asArray.value->pItems + s);
+    vi = hb_itemGetNI(wArray->item.asArray.value->pItems + s);
 
-      COL.cx=vi;
-      COL.pszText=caption;
-      COL.iSubItem=s;
-      ListView_InsertColumn(hc,s,&COL);
-
-      }
-
+    COL.cx = vi;
+    COL.pszText = caption;
+    COL.iSubItem = s;
+    ListView_InsertColumn(hc, s, &COL);
+  }
 }
 //------------------------------------------------------------------------------------------
-HB_FUNC( ADDLISTVIEWITEMS )
+HB_FUNC(ADDLISTVIEWITEMS)
 {
-   PHB_ITEM hArray;
-   char *caption;
-   LV_ITEM LI;
-   HWND h;
-   int l;
-   int s;
-   int c;
+  PHB_ITEM hArray;
+  char *caption;
+  LV_ITEM LI;
+  HWND h;
+  int l;
+  int s;
+  int c;
 
-   h = (HWND) hb_parnl( 1 ) ;
-   l = hb_parinfa( 2, 0 ) - 1 ;
-   hArray = hb_param( 2, HB_IT_ARRAY );
-   c = ListView_GetItemCount (h);
-   caption  = hb_itemGetCPtr ( hArray->item.asArray.value->pItems );
+  h = (HWND)hb_parnl(1);
+  l = hb_parinfa(2, 0) - 1;
+  hArray = hb_param(2, HB_IT_ARRAY);
+  c = ListView_GetItemCount(h);
+  caption = hb_itemGetCPtr(hArray->item.asArray.value->pItems);
 
-   LI.mask=LVIF_TEXT ;
-   LI.state=0;
-   LI.stateMask=0;
-        LI.iImage=0;
-        LI.iSubItem=0;
-   LI.iItem=c;
-   LI.pszText=caption;
-   ListView_InsertItem(h,&LI);
+  LI.mask = LVIF_TEXT;
+  LI.state = 0;
+  LI.stateMask = 0;
+  LI.iImage = 0;
+  LI.iSubItem = 0;
+  LI.iItem = c;
+  LI.pszText = caption;
+  ListView_InsertItem(h, &LI);
 
-   for (s = 1 ; s<=l ; s=s+1 )
-   {
-      caption  = hb_itemGetCPtr ( hArray->item.asArray.value->pItems + s );
-      ListView_SetItemText(h,c,s,caption);
-   }
+  for (s = 1; s <= l; s = s + 1)
+  {
+    caption = hb_itemGetCPtr(hArray->item.asArray.value->pItems + s);
+    ListView_SetItemText(h, c, s, caption);
+  }
 }
 //------------------------------------------------------------------------------------------
-HB_FUNC( LISTVIEW_SETCURSEL )
+HB_FUNC(LISTVIEW_SETCURSEL)
 {
-   ListView_SetItemState((HWND) hb_parnl (1), (WPARAM) hb_parni(2)-1 ,LVIS_FOCUSED | LVIS_SELECTED , LVIS_FOCUSED | LVIS_SELECTED );
+  ListView_SetItemState((HWND)hb_parnl(1), (WPARAM)hb_parni(2) - 1, LVIS_FOCUSED | LVIS_SELECTED,
+                        LVIS_FOCUSED | LVIS_SELECTED);
 }
 //------------------------------------------------------------------------------------------
-HB_FUNC( C_SETFOCUS )
+HB_FUNC(C_SETFOCUS)
 {
-   hb_retnl( (LONG) SetFocus( (HWND) hb_parnl( 1 ) ) );
+  hb_retnl((LONG)SetFocus((HWND)hb_parnl(1)));
 }
 //------------------------------------------------------------------------------------------
-HB_FUNC( LISTVIEWDELETESTRING )
+HB_FUNC(LISTVIEWDELETESTRING)
 {
-   SendMessage( (HWND) hb_parnl( 1 ),LVM_DELETEITEM , (WPARAM) hb_parni(2)-1, 0);
+  SendMessage((HWND)hb_parnl(1), LVM_DELETEITEM, (WPARAM)hb_parni(2) - 1, 0);
 }
 //------------------------------------------------------------------------------------------
-HB_FUNC( LISTVIEWRESET )
+HB_FUNC(LISTVIEWRESET)
 {
-   SendMessage( (HWND) hb_parnl( 1 ), LVM_DELETEALLITEMS , 0, 0 );
+  SendMessage((HWND)hb_parnl(1), LVM_DELETEALLITEMS, 0, 0);
 }
 //------------------------------------------------------------------------------------------
-HB_FUNC( LISTVIEW_GETFIRSTITEM )
+HB_FUNC(LISTVIEW_GETFIRSTITEM)
 {
-   hb_retni ( ListView_GetNextItem( (HWND) hb_parnl( 1 )  , -1 ,LVNI_ALL | LVNI_SELECTED) + 1);
+  hb_retni(ListView_GetNextItem((HWND)hb_parnl(1), -1, LVNI_ALL | LVNI_SELECTED) + 1);
 }
 //------------------------------------------------------------------------------------------
-

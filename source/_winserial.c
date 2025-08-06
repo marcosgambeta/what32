@@ -9,7 +9,7 @@
 //-------------------------------------------------------------------//
 //-------------------------------------------------------------------//
 
-#define _WIN32_WINNT   0x0400
+#define _WIN32_WINNT 0x0400
 
 //-------------------------------------------------------------------//
 
@@ -34,13 +34,13 @@ local dcbInfo   := dcb:value
 BuildComm( cComParam, @dcbInfo )
 dcb:buffer( dcbInfo )
 */
-HB_FUNC( BUILDCOMMDCB )
+HB_FUNC(BUILDCOMMDCB)
 {
-   DCB dcb ;
+  DCB dcb;
 
-   hb_retl( BuildCommDCB( ( LPCTSTR ) hb_parcx( 1 ), &dcb ) );
+  hb_retl(BuildCommDCB((LPCTSTR)hb_parcx(1), &dcb));
 
-   hb_storclen( ( char * ) &dcb, sizeof( DCB ), 2 ) ;
+  hb_storclen((char *)&dcb, sizeof(DCB), 2);
 }
 
 //-------------------------------------------------------------------//
@@ -59,13 +59,13 @@ BuildComDCBAndTimeouts( cCommParam, @dcbInfo, CommTimeOuts:value )
 dcb:buffer( dcbInfo )
 */
 //
-HB_FUNC( BUILDCOMMDCBANDTIMEOUTS )
+HB_FUNC(BUILDCOMMDCBANDTIMEOUTS)
 {
-   DCB dcb ;
-   LPCOMMTIMEOUTS lptimeouts = ( LPCOMMTIMEOUTS ) hb_parcx( 3 );
-   hb_retl( BuildCommDCBAndTimeouts( ( LPCTSTR ) hb_parcx( 1 ), &dcb, lptimeouts ) ) ;
+  DCB dcb;
+  LPCOMMTIMEOUTS lptimeouts = (LPCOMMTIMEOUTS)hb_parcx(3);
+  hb_retl(BuildCommDCBAndTimeouts((LPCTSTR)hb_parcx(1), &dcb, lptimeouts));
 
-   hb_storclen( ( char * ) &dcb, sizeof( DCB ), 2 ) ;
+  hb_storclen((char *)&dcb, sizeof(DCB), 2);
 }
 
 //-------------------------------------------------------------------//
@@ -79,9 +79,9 @@ if ClearCommBreak( hFile )
    // Your code goes here
 endif
 */
-HB_FUNC( CLEARCOMMBREAK )
+HB_FUNC(CLEARCOMMBREAK)
 {
-   hb_retl( ClearCommBreak( ( HANDLE ) hb_parnl( 1 ) ) );
+  hb_retl(ClearCommBreak((HANDLE)hb_parnl(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -95,15 +95,15 @@ if ClearCommError( hFile, @nError, @cComStat )
    // Proceed with fresh i/o
 endif
 */
-HB_FUNC( CLEARCOMMERROR )
+HB_FUNC(CLEARCOMMERROR)
 {
-   DWORD   err = 0 ;
-   COMSTAT Stat ;
+  DWORD err = 0;
+  COMSTAT Stat;
 
-   hb_retl( ClearCommError( ( HANDLE ) hb_parnl( 1 ), &err, &Stat ) );
+  hb_retl(ClearCommError((HANDLE)hb_parnl(1), &err, &Stat));
 
-   hb_stornl( err, 2 );
-   hb_storclen( ( char * ) &Stat, sizeof( COMSTAT ), 3 ) ;
+  hb_stornl(err, 2);
+  hb_storclen((char *)&Stat, sizeof(COMSTAT), 3);
 }
 
 //-------------------------------------------------------------------//
@@ -123,15 +123,15 @@ if CommConfigDialog( cDeviceName, hWnd, @cCommConfig )
    CommConfig:buffer( cCommConfig )
 endif
 */
-HB_FUNC( COMMCONFIGDIALOG )
+HB_FUNC(COMMCONFIGDIALOG)
 {
-   LPCTSTR      lpszName = ( LPCTSTR ) hb_parcx( 1 );
-   HWND         hwnd     = ISNIL( 2 ) ? NULL : ( HWND ) hb_parnl( 2 );
-   LPCOMMCONFIG lpCC     = ( LPCOMMCONFIG ) hb_parcx( 3 ) ;
+  LPCTSTR lpszName = (LPCTSTR)hb_parcx(1);
+  HWND hwnd = ISNIL(2) ? NULL : (HWND)hb_parnl(2);
+  LPCOMMCONFIG lpCC = (LPCOMMCONFIG)hb_parcx(3);
 
-   hb_retl( CommConfigDialog( lpszName, hwnd, lpCC ) );
+  hb_retl(CommConfigDialog(lpszName, hwnd, lpCC));
 
-   hb_storclen( ( char * ) lpCC, sizeof( COMMCONFIG ), 3 ) ;
+  hb_storclen((char *)lpCC, sizeof(COMMCONFIG), 3);
 }
 
 //-------------------------------------------------------------------//
@@ -146,9 +146,9 @@ if EscapeCommFunction( hFile, nFunc )
    // ok
 endif
 */
-HB_FUNC( ESCAPECOMMFUNCTION )
+HB_FUNC(ESCAPECOMMFUNCTION)
 {
-   hb_retl( EscapeCommFunction( ( HANDLE ) hb_parnl( 1 ), hb_parnl( 2 ) ) );
+  hb_retl(EscapeCommFunction((HANDLE)hb_parnl(1), hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -162,14 +162,14 @@ if GetCommConfig( hFile, @cCommConfig )
    CommConfig:buffer( cCommConfig )
 endif
 */
-HB_FUNC( GETCOMMCONFIG )
+HB_FUNC(GETCOMMCONFIG)
 {
-   COMMCONFIG lpCC ; // = ( LPCOMMCONFIG ) hb_parcx( 2 );
-   DWORD        size = sizeof( COMMCONFIG );
+  COMMCONFIG lpCC; // = ( LPCOMMCONFIG ) hb_parcx( 2 );
+  DWORD size = sizeof(COMMCONFIG);
 
-   hb_retl( GetCommConfig( ( HANDLE ) hb_parnl( 1 ), &lpCC, &size ) ) ;
+  hb_retl(GetCommConfig((HANDLE)hb_parnl(1), &lpCC, &size));
 
-   hb_storclen( ( char * ) &lpCC, size, 2 ) ;
+  hb_storclen((char *)&lpCC, size, 2);
 }
 
 //-------------------------------------------------------------------//
@@ -183,11 +183,11 @@ if GetCommMask( hFile, @nMask )
    endif
 endif
 */
-HB_FUNC( GETCOMMMASK )
+HB_FUNC(GETCOMMMASK)
 {
-   DWORD mask;
-   hb_retl( GetCommMask( ( HANDLE ) hb_parnl( 1 ), &mask ) ) ;
-   hb_stornl( ( ULONG ) mask, 2 ) ;
+  DWORD mask;
+  hb_retl(GetCommMask((HANDLE)hb_parnl(1), &mask));
+  hb_stornl((ULONG)mask, 2);
 }
 
 //-------------------------------------------------------------------//
@@ -201,11 +201,11 @@ if GetCommModemStatus( hFile, @nStat )
    endif
 endif
 */
-HB_FUNC( GETCOMMMODEMSTATUS )
+HB_FUNC(GETCOMMMODEMSTATUS)
 {
-   DWORD modemStat ;
-   hb_retl( GetCommModemStatus( ( HANDLE ) hb_parnl( 1 ), &modemStat ) ) ;
-   hb_stornl( ( ULONG ) modemStat, 2 ) ;
+  DWORD modemStat;
+  hb_retl(GetCommModemStatus((HANDLE)hb_parnl(1), &modemStat));
+  hb_stornl((ULONG)modemStat, 2);
 }
 
 //-------------------------------------------------------------------//
@@ -219,14 +219,14 @@ local cCommProp := CommProp:value
 GetCommProperties( hFile, @cCommProp )
 CommProp:buffer( cCommProp )
 */
-HB_FUNC( GETCOMMPROPERTIES )
+HB_FUNC(GETCOMMPROPERTIES)
 {
-   COMMPROP CommProp ;
-   CommProp.wPacketLength = sizeof( COMMPROP );
+  COMMPROP CommProp;
+  CommProp.wPacketLength = sizeof(COMMPROP);
 
-   hb_retl( GetCommProperties( ( HANDLE ) hb_parnl( 1 ), &CommProp ) );
+  hb_retl(GetCommProperties((HANDLE)hb_parnl(1), &CommProp));
 
-   hb_storclen( ( char * ) &CommProp, sizeof( COMMPROP ), 2 ) ;
+  hb_storclen((char *)&CommProp, sizeof(COMMPROP), 2);
 }
 
 //-------------------------------------------------------------------//
@@ -238,14 +238,14 @@ BOOL GetCommState(
 GetCommState( hFile, @cDcb )
 dcb:buffer( cDcb )
 */
-HB_FUNC( GETCOMMSTATE )
+HB_FUNC(GETCOMMSTATE)
 {
-   DCB dcb ;
-   dcb.DCBlength = sizeof( DCB ) ;
+  DCB dcb;
+  dcb.DCBlength = sizeof(DCB);
 
-   hb_retl( GetCommState( ( HANDLE ) hb_parnl( 1 ), &dcb ) );
+  hb_retl(GetCommState((HANDLE)hb_parnl(1), &dcb));
 
-   hb_storclen( ( char * ) &dcb, sizeof( DCB ), 2 ) ;
+  hb_storclen((char *)&dcb, sizeof(DCB), 2);
 }
 
 //-------------------------------------------------------------------//
@@ -257,13 +257,13 @@ BOOL GetCommTimeouts(
 GetCommTimeouts( cFile, @cCommTimeouts )
 CommTimeouts:buffer( cCommTimeouts )
 */
-HB_FUNC( GETCOMMTIMEOUTS )
+HB_FUNC(GETCOMMTIMEOUTS)
 {
-   COMMTIMEOUTS Timeouts ;
+  COMMTIMEOUTS Timeouts;
 
-   hb_retl( GetCommTimeouts( ( HANDLE ) hb_parnl( 1 ), &Timeouts ) );
+  hb_retl(GetCommTimeouts((HANDLE)hb_parnl(1), &Timeouts));
 
-   hb_storclen( ( char * ) &Timeouts, sizeof( COMMTIMEOUTS ), 2 ) ;
+  hb_storclen((char *)&Timeouts, sizeof(COMMTIMEOUTS), 2);
 }
 
 //-------------------------------------------------------------------//
@@ -276,25 +276,25 @@ BOOL GetDefaultCommConfig(
 GetDefaultCommConfig( 'Standard Modem over IR link #4', @cCommConfig )
 CommConfig:buffer( cCommConfig )
 */
-HB_FUNC( GETDEFAULTCOMMCONFIG )
+HB_FUNC(GETDEFAULTCOMMCONFIG)
 {
-   char * Buffer = (char *) hb_xgrab( sizeof( COMMCONFIG ) );
-   DWORD size = sizeof( COMMCONFIG );
+  char *Buffer = (char *)hb_xgrab(sizeof(COMMCONFIG));
+  DWORD size = sizeof(COMMCONFIG);
 
-   if ( GetDefaultCommConfig( ( LPCTSTR ) hb_parcx( 1 ), ( COMMCONFIG * ) Buffer, &size ) == 0 )
-   {
-      hb_xfree( Buffer ) ;
-      Buffer = (char *) hb_xgrab( size ) ;
-      if ( GetDefaultCommConfig( ( LPCTSTR ) hb_parcx( 1 ), ( COMMCONFIG * ) Buffer, &size ) == 0 )
-      {
-         hb_xfree( Buffer ) ;
-         hb_retl( FALSE ) ;
-         return ;
-      }
-   }
-   hb_retl( TRUE );
-   hb_storclen( ( char * ) Buffer, size, 2 ) ;
-   hb_xfree( Buffer );
+  if (GetDefaultCommConfig((LPCTSTR)hb_parcx(1), (COMMCONFIG *)Buffer, &size) == 0)
+  {
+    hb_xfree(Buffer);
+    Buffer = (char *)hb_xgrab(size);
+    if (GetDefaultCommConfig((LPCTSTR)hb_parcx(1), (COMMCONFIG *)Buffer, &size) == 0)
+    {
+      hb_xfree(Buffer);
+      hb_retl(FALSE);
+      return;
+    }
+  }
+  hb_retl(TRUE);
+  hb_storclen((char *)Buffer, size, 2);
+  hb_xfree(Buffer);
 }
 //-------------------------------------------------------------------//
 /*
@@ -306,9 +306,9 @@ local nActions := PURGE_TXABORT + PURGE_RXABORT // + ... ANY COMBINATION
 if PurgeComm( hFile, nActions )
 endif
 */
-HB_FUNC( PURGECOMM )
+HB_FUNC(PURGECOMM)
 {
-   hb_retl( PurgeComm( ( HANDLE ) hb_parnl( 1 ), hb_parnl( 2 ) ) ) ;
+  hb_retl(PurgeComm((HANDLE)hb_parnl(1), hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -317,9 +317,9 @@ BOOL SetCommBreak(
   HANDLE hFile   // handle to communications device                  IN
 );
 */
-HB_FUNC( SETCOMMBREAK )
+HB_FUNC(SETCOMMBREAK)
 {
-   hb_retl( SetCommBreak( ( HANDLE ) hb_parnl( 1 ) ) );
+  hb_retl(SetCommBreak((HANDLE)hb_parnl(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -331,12 +331,12 @@ BOOL SetCommConfig(
 );
 SetCommConfig( hFile, CommConfig:Value, nSize )
 */
-HB_FUNC( SETCOMMCONFIG )
+HB_FUNC(SETCOMMCONFIG)
 {
-   LPCOMMCONFIG lpCC = ( LPCOMMCONFIG ) hb_parcx( 2 );
-   DWORD        size = ISNIL( 3 ) ? sizeof( COMMCONFIG ) : hb_parnl( 3 );
+  LPCOMMCONFIG lpCC = (LPCOMMCONFIG)hb_parcx(2);
+  DWORD size = ISNIL(3) ? sizeof(COMMCONFIG) : hb_parnl(3);
 
-   hb_retl( SetCommConfig( ( HANDLE ) hb_parnl( 1 ), lpCC, size ) );
+  hb_retl(SetCommConfig((HANDLE)hb_parnl(1), lpCC, size));
 }
 
 //-------------------------------------------------------------------//
@@ -348,9 +348,9 @@ BOOL SetCommMask(
 if SetCommMask( hFile, nEvtMask )
 endif
 */
-HB_FUNC( SETCOMMMASK )
+HB_FUNC(SETCOMMMASK)
 {
-   hb_retl( SetCommMask( ( HANDLE ) hb_parnl( 1 ), hb_parnl( 2 ) ) );
+  hb_retl(SetCommMask((HANDLE)hb_parnl(1), hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -360,11 +360,11 @@ BOOL SetCommState(
   LPDCB lpDCB    // device-control block                             IN
 );
 */
-HB_FUNC( SETCOMMSTATE )
+HB_FUNC(SETCOMMSTATE)
 {
-   LPDCB lpDCB = ( LPDCB ) hb_parcx( 2 );
+  LPDCB lpDCB = (LPDCB)hb_parcx(2);
 
-   hb_retl( SetCommState( ( HANDLE ) hb_parnl( 1 ), lpDCB ) ) ;
+  hb_retl(SetCommState((HANDLE)hb_parnl(1), lpDCB));
 }
 
 //-------------------------------------------------------------------//
@@ -374,11 +374,11 @@ BOOL SetCommTimeouts(
   LPCOMMTIMEOUTS lpCommTimeouts  // time-out values                  IN
 );
 */
-HB_FUNC( SETCOMMTIMEOUTS )
+HB_FUNC(SETCOMMTIMEOUTS)
 {
-   LPCOMMTIMEOUTS lptimeouts = ( LPCOMMTIMEOUTS ) hb_parcx( 2 ) ;
+  LPCOMMTIMEOUTS lptimeouts = (LPCOMMTIMEOUTS)hb_parcx(2);
 
-   hb_retl( SetCommTimeouts( ( HANDLE ) hb_parnl( 1 ), lptimeouts ) );
+  hb_retl(SetCommTimeouts((HANDLE)hb_parnl(1), lptimeouts));
 }
 
 //-------------------------------------------------------------------//
@@ -389,12 +389,12 @@ BOOL SetDefaultCommConfig(
   DWORD        dwSize    // size of structure                        IN
 );
 */
-HB_FUNC( SETDEFAULTCOMMCONFIG )
+HB_FUNC(SETDEFAULTCOMMCONFIG)
 {
-   LPCOMMCONFIG lpCC = ( LPCOMMCONFIG ) hb_parcx( 2 );
-   DWORD        size = sizeof( COMMCONFIG ) ;
+  LPCOMMCONFIG lpCC = (LPCOMMCONFIG)hb_parcx(2);
+  DWORD size = sizeof(COMMCONFIG);
 
-   hb_retl( SetDefaultCommConfig( ( LPCTSTR ) hb_parcx( 1 ), lpCC, size ) );
+  hb_retl(SetDefaultCommConfig((LPCTSTR)hb_parcx(1), lpCC, size));
 }
 
 //-------------------------------------------------------------------//
@@ -405,9 +405,9 @@ BOOL SetupComm(
   DWORD  dwOutQueue  // size of output buffer                        IN
 );
 */
-HB_FUNC( SETUPCOMM )
+HB_FUNC(SETUPCOMM)
 {
-   hb_retl( SetupComm( ( HANDLE ) hb_parnl( 1 ), hb_parnl( 2 ), hb_parnl( 3 ) ) );
+  hb_retl(SetupComm((HANDLE)hb_parnl(1), hb_parnl(2), hb_parnl(3)));
 }
 
 //-------------------------------------------------------------------//
@@ -417,9 +417,9 @@ BOOL TransmitCommChar(
   char   cChar   // character to transmit                            IN
 );
 */
-HB_FUNC( TRANSMITCOMMCHAR )
+HB_FUNC(TRANSMITCOMMCHAR)
 {
-   hb_retl( TransmitCommChar( ( HANDLE ) hb_parnl( 1 ), ( char ) hb_parni( 2 ) ) );
+  hb_retl(TransmitCommChar((HANDLE)hb_parnl(1), (char)hb_parni(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -435,17 +435,14 @@ if WaitCommEvent( hFile, @nEvent )
    endif
 endif
 */
-HB_FUNC( WAITCOMMEVENT )
+HB_FUNC(WAITCOMMEVENT)
 {
-   DWORD evMask ;
+  DWORD evMask;
 
-   hb_retl( WaitCommEvent( ( HANDLE ) hb_parnl( 1 ), &evMask, NULL ) );
-   hb_stornl( ( ULONG ) evMask, 2 ) ;
+  hb_retl(WaitCommEvent((HANDLE)hb_parnl(1), &evMask, NULL));
+  hb_stornl((ULONG)evMask, 2);
 }
 
 //-------------------------------------------------------------------//
 //-------------------------------------------------------------------//
 //-------------------------------------------------------------------//
-
-
-

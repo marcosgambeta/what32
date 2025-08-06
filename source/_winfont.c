@@ -2,92 +2,87 @@
 // What32
 // Font functions
 
-
-
-
 #define HB_OS_WIN_USED
-#define _WIN32_WINNT   0x0400
+#define _WIN32_WINNT 0x0400
 
 #include <windows.h>
 #include "item.api"
 #include "hbapi.h"
 #include "hbvm.h"
 #include "hbstack.h"
-//#include "hbapiitm.h"
+// #include "hbapiitm.h"
 
-extern PHB_ITEM Rect2Array( RECT *rc  );
-extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc );
-extern PHB_ITEM Point2Array( POINT *pt  );
-extern BOOL Array2Point(PHB_ITEM aPoint, POINT *pt );
+extern PHB_ITEM Rect2Array(RECT *rc);
+extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
+extern PHB_ITEM Point2Array(POINT *pt);
+extern BOOL Array2Point(PHB_ITEM aPoint, POINT *pt);
 
-int CALLBACK GenericCallbackProc( LONG param1, LONG param2, int wParam, LPARAM lParam );
-int CALLBACK GenericCallblockProc( LONG param1, LONG param2, int wParam, LPARAM lParam );
+int CALLBACK GenericCallbackProc(LONG param1, LONG param2, int wParam, LPARAM lParam);
+int CALLBACK GenericCallblockProc(LONG param1, LONG param2, int wParam, LPARAM lParam);
 
 //-----------------------------------------------------------------------------
-// WINGDIAPI HFONT WINAPI CreateFontA( IN int, IN int, IN int, IN int, IN int, IN DWORD, IN DWORD, IN DWORD, IN DWORD, IN DWORD, IN DWORD, IN DWORD, IN DWORD, IN LPCSTR);
+// WINGDIAPI HFONT WINAPI CreateFontA( IN int, IN int, IN int, IN int, IN int, IN DWORD, IN DWORD, IN DWORD, IN DWORD,
+// IN DWORD, IN DWORD, IN DWORD, IN DWORD, IN LPCSTR);
 
 // provide default 0 to first 5 parameters
 
-HB_FUNC( CREATEFONT )
+HB_FUNC(CREATEFONT)
 {
 
-   if ( ISARRAY(1))
-   {
-      hb_retnl( (LONG) CreateFont( hb_parni( 1, 1 )         ,  // nHeight
-                                    hb_parni( 1, 2 )         ,  // nWidth
-                                    hb_parni( 1, 3 )         ,  // nEscapement
-                                    hb_parni( 1, 4 )         ,  // nOrientation
-                                    hb_parni( 1, 5 )         ,  // fnWeight
-                                    (DWORD) hb_parnl( 1, 6 ) ,  // fdwItalic
-                                    (DWORD) hb_parnl( 1, 7 ) ,  // fdwUnderline
-                                    (DWORD) hb_parnl( 1, 8 ) ,  // fdwStrikeOut
-                                    (DWORD) hb_parnl( 1, 9 ) ,  // fdwCharSet
-                                    (DWORD) hb_parnl( 1, 10 ),  // fdwOutputPrecision
-                                    (DWORD) hb_parnl( 1, 11 ),  // fdwClipPrecision
-                                    (DWORD) hb_parnl( 1, 12 ),  // fdwQuality
-                                    (DWORD) hb_parnl( 1, 13 ),  // fdwPitchAndFamily
-                                    (LPCSTR) hb_parcx( 1, 14 )   // lpszFace
-                                   ) ) ;
-
-   }
-   else
-   {
-      hb_retnl( (LONG) CreateFont( ISNIL(1) ? 0 : hb_parni( 1 )         ,  // nHeight
-                                    ISNIL(2) ? 0 : hb_parni( 2 )         ,  // nWidth
-                                    ISNIL(3) ? 0 : hb_parni( 3 )         ,  // nEscapement
-                                    ISNIL(4) ? 0 : hb_parni( 4 )         ,  // nOrientation
-                                    ISNIL(5) ? 0 : hb_parni( 5 )         ,  // fnWeight
-                                    (DWORD) hb_parnl( 6 ) ,  // fdwItalic
-                                    (DWORD) hb_parnl( 7 ) ,  // fdwUnderline
-                                    (DWORD) hb_parnl( 8 ) ,  // fdwStrikeOut
-                                    (DWORD) hb_parnl( 9 ) ,  // fdwCharSet
-                                    (DWORD) hb_parnl( 10 ),  // fdwOutputPrecision
-                                    (DWORD) hb_parnl( 11 ),  // fdwClipPrecision
-                                    (DWORD) hb_parnl( 12 ),  // fdwQuality
-                                    (DWORD) hb_parnl( 13 ),  // fdwPitchAndFamily
-                                    (LPCSTR) hb_parcx( 14 )   // lpszFace
-                                   ) ) ;
-
-   }
-
+  if (ISARRAY(1))
+  {
+    hb_retnl((LONG)CreateFont(hb_parni(1, 1),         // nHeight
+                              hb_parni(1, 2),         // nWidth
+                              hb_parni(1, 3),         // nEscapement
+                              hb_parni(1, 4),         // nOrientation
+                              hb_parni(1, 5),         // fnWeight
+                              (DWORD)hb_parnl(1, 6),  // fdwItalic
+                              (DWORD)hb_parnl(1, 7),  // fdwUnderline
+                              (DWORD)hb_parnl(1, 8),  // fdwStrikeOut
+                              (DWORD)hb_parnl(1, 9),  // fdwCharSet
+                              (DWORD)hb_parnl(1, 10), // fdwOutputPrecision
+                              (DWORD)hb_parnl(1, 11), // fdwClipPrecision
+                              (DWORD)hb_parnl(1, 12), // fdwQuality
+                              (DWORD)hb_parnl(1, 13), // fdwPitchAndFamily
+                              (LPCSTR)hb_parcx(1, 14) // lpszFace
+                              ));
+  }
+  else
+  {
+    hb_retnl((LONG)CreateFont(ISNIL(1) ? 0 : hb_parni(1), // nHeight
+                              ISNIL(2) ? 0 : hb_parni(2), // nWidth
+                              ISNIL(3) ? 0 : hb_parni(3), // nEscapement
+                              ISNIL(4) ? 0 : hb_parni(4), // nOrientation
+                              ISNIL(5) ? 0 : hb_parni(5), // fnWeight
+                              (DWORD)hb_parnl(6),         // fdwItalic
+                              (DWORD)hb_parnl(7),         // fdwUnderline
+                              (DWORD)hb_parnl(8),         // fdwStrikeOut
+                              (DWORD)hb_parnl(9),         // fdwCharSet
+                              (DWORD)hb_parnl(10),        // fdwOutputPrecision
+                              (DWORD)hb_parnl(11),        // fdwClipPrecision
+                              (DWORD)hb_parnl(12),        // fdwQuality
+                              (DWORD)hb_parnl(13),        // fdwPitchAndFamily
+                              (LPCSTR)hb_parcx(14)        // lpszFace
+                              ));
+  }
 }
 
 //-----------------------------------------------------------------------------
 // WINGDIAPI int WINAPI AddFontResourceA(IN LPCSTR);
 
-HB_FUNC( ADDFONTRESOURCE )
+HB_FUNC(ADDFONTRESOURCE)
 {
-   hb_retni( AddFontResource( (LPCSTR) hb_parcx( 1 ) ) ) ;
+  hb_retni(AddFontResource((LPCSTR)hb_parcx(1)));
 }
 
 //-----------------------------------------------------------------------------
 // WINGDIAPI HFONT WINAPI CreateFontIndirectA( IN CONST LOGFONTA *);
 
-HB_FUNC( CREATEFONTINDIRECT )
+HB_FUNC(CREATEFONTINDIRECT)
 {
-   LOGFONT *lf = (LOGFONT * ) hb_param( 1, HB_IT_STRING )->item.asString.value;
+  LOGFONT *lf = (LOGFONT *)hb_param(1, HB_IT_STRING)->item.asString.value;
 
-   hb_retnl( (LONG) CreateFontIndirect( lf ) ) ;
+  hb_retnl((LONG)CreateFontIndirect(lf));
 }
 
 //-----------------------------------------------------------------------------
@@ -111,14 +106,10 @@ HB_FUNC( CREATEFONTINDIRECTEX )
 //-----------------------------------------------------------------------------
 // WINGDIAPI BOOL WINAPI CreateScalableFontResourceA( IN DWORD, IN LPCSTR, IN LPCSTR, IN LPCSTR);
 
-
-HB_FUNC( CREATESCALABLEFONTRESOURCE )
+HB_FUNC(CREATESCALABLEFONTRESOURCE)
 {
-   hb_retl( CreateScalableFontResource( (DWORD) hb_parnl( 1 ),
-                                         (LPCSTR) hb_parcx( 2 ),
-                                         (LPCSTR) hb_parcx( 3 ),
-                                         (LPCSTR) hb_parcx( 4 )
-                                         ) ) ;
+  hb_retl(
+      CreateScalableFontResource((DWORD)hb_parnl(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -127,29 +118,19 @@ HB_FUNC( CREATESCALABLEFONTRESOURCE )
 // syntax
 // EnumFontFamilies(hDC,cTypeFace,codeBlock) -> HBFuncLastReturnValue or NIL if problem
 
-
-HB_FUNC( ENUMFONTFAMILIES )
+HB_FUNC(ENUMFONTFAMILIES)
 {
-   LPARAM        lParam        ;
+  LPARAM lParam;
 
-   if ( ISBLOCK( 3 ) )
-   {
-     lParam = (LPARAM) (PHB_ITEM ) hb_param( 3, HB_IT_BLOCK ) ;
+  if (ISBLOCK(3))
+  {
+    lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
-
-     hb_retni( EnumFontFamilies( (HDC) hb_parnl( 1 )  ,
-                                (LPCSTR) hb_parcx( 2 ),
-                                (FONTENUMPROC) GenericCallblockProc  ,
-                                lParam
-                                ) ) ;
-   }
-   else
-     OutputDebugString("EnumFontFamilies(): No codeblock");
-
-
+    hb_retni(EnumFontFamilies((HDC)hb_parnl(1), (LPCSTR)hb_parcx(2), (FONTENUMPROC)GenericCallblockProc, lParam));
+  }
+  else
+    OutputDebugString("EnumFontFamilies(): No codeblock");
 }
-
-
 
 //-----------------------------------------------------------------------------
 // WINGDIAPI int WINAPI EnumFontFamiliesExA( IN HDC, IN LPLOGFONTA, IN FONTENUMPROCA, IN LPARAM, IN DWORD);
@@ -157,33 +138,20 @@ HB_FUNC( ENUMFONTFAMILIES )
 // syntax
 // EnumFontFamiliesEx(hDC,LogFontStruct,codeBlock) -> HBFuncLastReturnValue or NIL if problem
 
-HB_FUNC( ENUMFONTFAMILIESEX )
+HB_FUNC(ENUMFONTFAMILIESEX)
 {
-   LOGFONT *LogFont = (LOGFONT * ) hb_param( 2, HB_IT_STRING )->item.asString.value ;
-   LPARAM  lParam  ;
+  LOGFONT *LogFont = (LOGFONT *)hb_param(2, HB_IT_STRING)->item.asString.value;
+  LPARAM lParam;
 
-   if ( ISBLOCK( 3 ) )
-   {
-     lParam = (LPARAM) (PHB_ITEM ) hb_param( 3, HB_IT_BLOCK ) ;
+  if (ISBLOCK(3))
+  {
+    lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
-
-
-   hb_retni( EnumFontFamiliesEx( (HDC) hb_parnl( 1 )  ,
-                                  LogFont            ,
-                                  (FONTENUMPROC) GenericCallblockProc  ,
-                                  lParam               ,
-                                  0
-                                  ) ) ;
-
+    hb_retni(EnumFontFamiliesEx((HDC)hb_parnl(1), LogFont, (FONTENUMPROC)GenericCallblockProc, lParam, 0));
   }
-   else
-     OutputDebugString("EnumFontFamiliesEx(): No codeblock");
-
+  else
+    OutputDebugString("EnumFontFamiliesEx(): No codeblock");
 }
-
-
-
-
 
 //-----------------------------------------------------------------------------
 // WINGDIAPI int WINAPI EnumFontsA( IN HDC, IN LPCSTR, IN FONTENUMPROCA, IN LPARAM);
@@ -191,25 +159,19 @@ HB_FUNC( ENUMFONTFAMILIESEX )
 // syntax
 // EnumFonts(hDC,cTypeFace,codeBlock) -> HBFuncLastReturnValue or NIL if problem
 
-HB_FUNC( ENUMFONTS )
+HB_FUNC(ENUMFONTS)
 {
-   LPARAM lParam ;
+  LPARAM lParam;
 
-   if ( ISBLOCK( 3 ) )
-   {
-     lParam = (LPARAM) (PHB_ITEM ) hb_param( 3, HB_IT_BLOCK ) ;
+  if (ISBLOCK(3))
+  {
+    lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
-     hb_retni( EnumFonts( (HDC) hb_parnl( 1 )  ,
-                         (LPCSTR) hb_parcx( 2 ),
-                         (FONTENUMPROC) GenericCallblockProc  ,
-                         lParam
-                         ) ) ;
-   }
-   else
-     OutputDebugString("EnumFonts(): No codeblock");
-
+    hb_retni(EnumFonts((HDC)hb_parnl(1), (LPCSTR)hb_parcx(2), (FONTENUMPROC)GenericCallblockProc, lParam));
+  }
+  else
+    OutputDebugString("EnumFonts(): No codeblock");
 }
-
 
 /*
 
@@ -244,42 +206,41 @@ int CALLBACK GenericCallbackProc( LONG param1, LONG param2, int wParam, LPARAM l
 }
 */
 
-
 //-----------------------------------------------------------------------------
 
 // using a codeblock
-int CALLBACK GenericCallblockProc( LONG param1, LONG param2, int wParam, LPARAM lParam )
+int CALLBACK GenericCallblockProc(LONG param1, LONG param2, int wParam, LPARAM lParam)
 {
-   PHB_ITEM pItem ;
-   long int res   ;
-   static PHB_DYNS s_pEval = NULL;
+  PHB_ITEM pItem;
+  long int res;
+  static PHB_DYNS s_pEval = NULL;
 
-   if( s_pEval == NULL )
-   {
-      s_pEval = hb_dynsymFind( "__EVAL" );
-   }
+  if (s_pEval == NULL)
+  {
+    s_pEval = hb_dynsymFind("__EVAL");
+  }
 
-   pItem = (PHB_ITEM ) lParam ;
+  pItem = (PHB_ITEM)lParam;
 
-   if ( pItem )
-   {
-      hb_vmPushSymbol( s_pEval->pSymbol );
-      hb_vmPush(pItem);
+  if (pItem)
+  {
+    hb_vmPushSymbol(s_pEval->pSymbol);
+    hb_vmPush(pItem);
 
-      hb_vmPushLong( (LONG ) param1 );
-      hb_vmPushLong( (LONG ) param2 );
-      hb_vmPushLong( (LONG ) wParam );
-      hb_vmPushLong( (LONG ) lParam );
+    hb_vmPushLong((LONG)param1);
+    hb_vmPushLong((LONG)param2);
+    hb_vmPushLong((LONG)wParam);
+    hb_vmPushLong((LONG)lParam);
 
-      hb_vmSend( 4 );
-      res = hb_itemGetNL( (PHB_ITEM) hb_param( -1, HB_IT_ANY ) );
+    hb_vmSend(4);
+    res = hb_itemGetNL((PHB_ITEM)hb_param(-1, HB_IT_ANY));
 
-      return res;
-   }
-   else // shouldn't happen
-   {
-      return( 0 );
-   }
+    return res;
+  }
+  else // shouldn't happen
+  {
+    return (0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -289,39 +250,31 @@ int CALLBACK GenericCallblockProc( LONG param1, LONG param2, int wParam, LPARAM 
 // syntax
 // GetFontData(hDC, nTable, dwOffset,[@cBuffer]
 
-
-HB_FUNC( GETFONTDATA )
+HB_FUNC(GETFONTDATA)
 {
-   char *cBuffer = NULL;
-   DWORD dwRet ;
-   if ( ! ISNIL( 5 ) && ( hb_parnl( 5 ) > 0 ) )
-      cBuffer = (char *) hb_xgrab( hb_parnl(5));
+  char *cBuffer = NULL;
+  DWORD dwRet;
+  if (!ISNIL(5) && (hb_parnl(5) > 0))
+    cBuffer = (char *)hb_xgrab(hb_parnl(5));
 
-   dwRet = GetFontData( (HDC) hb_parnl( 1 )  ,
-                                 (DWORD) hb_parnl( 2 ),
-                                 (DWORD) hb_parnl( 3 ),
-                                 ( ISNIL( 5 ) || ( hb_parnl( 5 ) <= 0 ) ) ? NULL :cBuffer  ,
-                                 (DWORD) ISNIL( 5 ) ? 0 : hb_parnl( 5 )
-                      ) ;
+  dwRet = GetFontData((HDC)hb_parnl(1), (DWORD)hb_parnl(2), (DWORD)hb_parnl(3),
+                      (ISNIL(5) || (hb_parnl(5) <= 0)) ? NULL : cBuffer, (DWORD)ISNIL(5) ? 0 : hb_parnl(5));
 
-   hb_retnl( (LONG) dwRet ) ;
+  hb_retnl((LONG)dwRet);
 
-   if ( ! ISNIL( 5 ) && ( hb_parnl( 5 ) > 0 ) )
-   {
-      hb_storclen(cBuffer, dwRet, 4 ) ;
-      hb_xfree( cBuffer ) ;
-   }
-
+  if (!ISNIL(5) && (hb_parnl(5) > 0))
+  {
+    hb_storclen(cBuffer, dwRet, 4);
+    hb_xfree(cBuffer);
+  }
 }
-
 
 //-----------------------------------------------------------------------------
 // WINGDIAPI DWORD WINAPI GetFontLanguageInfo( IN HDC );
 
-
-HB_FUNC( GETFONTLANGUAGEINFO )
+HB_FUNC(GETFONTLANGUAGEINFO)
 {
-   hb_retnl( (LONG) GetFontLanguageInfo( (HDC) hb_parnl( 1 ) ) ) ;
+  hb_retnl((LONG)GetFontLanguageInfo((HDC)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -341,7 +294,6 @@ HB_FUNC( GETFONTUNICODERANGES )
 }
 
 */
-
 
 //-----------------------------------------------------------------------------
 // WINGDIAPI HANDLE WINAPI AddFontMemResourceEx( IN PVOID, IN DWORD, IN PVOID , IN DWORD*);
@@ -403,13 +355,10 @@ HB_FUNC( REMOVEFONTMEMRESOURCEEX )
 //-----------------------------------------------------------------------------
 // WINGDIAPI BOOL WINAPI RemoveFontResourceA(IN LPCSTR);
 
-
-HB_FUNC( REMOVEFONTRESOURCE )
+HB_FUNC(REMOVEFONTRESOURCE)
 {
-   hb_retl( RemoveFontResource( (LPCSTR) hb_parcx( 1 ) ) ) ;
+  hb_retl(RemoveFontResource((LPCSTR)hb_parcx(1)));
 }
-
-
 
 //-----------------------------------------------------------------------------
 // WINGDIAPI BOOL WINAPI RemoveFontResourceExA( IN LPCSTR, IN DWORD, IN PVOID);
@@ -431,4 +380,3 @@ HB_FUNC( REMOVEFONTRESOURCEEXA )
 }
 
 */
-

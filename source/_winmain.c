@@ -51,9 +51,9 @@
  */
 
 /* Pacify MSVS2005 and above */
-#if defined(_MSC_VER) && (_MSC_VER>=1400)
-   #define _CRT_SECURE_NO_WARNINGS
-   #define _CRT_SECURE_NO_DEPRECATE
+#if defined(_MSC_VER) && (_MSC_VER >= 1400)
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_DEPRECATE
 #endif
 
 #define HB_OS_WIN_USED
@@ -64,89 +64,88 @@
 #if defined(HB_OS_WIN)
 
 int argc = 0;
-char * argv[ 20 ];
+char *argv[20];
 
 HANDLE hb_hInstance = 0;
 HANDLE hb_hPrevInstance = 0;
-int    hb_iCmdShow = 0;
+int hb_iCmdShow = 0;
 
-int WINAPI WinMain( HINSTANCE hInstance,      /* handle to current instance */
-                    HINSTANCE hPrevInstance,  /* handle to previous instance */
-                    LPSTR lpCmdLine,          /* pointer to command line */
-                    int iCmdShow )            /* show state of window */
+int WINAPI WinMain(HINSTANCE hInstance,     /* handle to current instance */
+                   HINSTANCE hPrevInstance, /* handle to previous instance */
+                   LPSTR lpCmdLine,         /* pointer to command line */
+                   int iCmdShow)            /* show state of window */
 {
-   LPSTR pArgs = ( LPSTR ) LocalAlloc( LMEM_FIXED, strlen( lpCmdLine ) + 1 ), pArg = pArgs;
-   char szAppName[ 250 ];
+  LPSTR pArgs = (LPSTR)LocalAlloc(LMEM_FIXED, strlen(lpCmdLine) + 1), pArg = pArgs;
+  char szAppName[250];
 
-   hb_hInstance = hInstance;
-   hb_hPrevInstance = hPrevInstance;
-   hb_iCmdShow = iCmdShow;
+  hb_hInstance = hInstance;
+  hb_hPrevInstance = hPrevInstance;
+  hb_iCmdShow = iCmdShow;
 
-   strcpy( pArgs, lpCmdLine );
+  strcpy(pArgs, lpCmdLine);
 
-   HB_TRACE(HB_TR_DEBUG, ("WinMain(%p, %p, %s, %d)", hInstance, hPrevInstance, lpCmdLine, iCmdShow));
+  HB_TRACE(HB_TR_DEBUG, ("WinMain(%p, %p, %s, %d)", hInstance, hPrevInstance, lpCmdLine, iCmdShow));
 
-   HB_SYMBOL_UNUSED( hPrevInstance );
-   HB_SYMBOL_UNUSED( iCmdShow );
+  HB_SYMBOL_UNUSED(hPrevInstance);
+  HB_SYMBOL_UNUSED(iCmdShow);
 
-   hb_hInstance = hInstance;
-   hb_hPrevInstance = hPrevInstance;
-   hb_iCmdShow = iCmdShow;
+  hb_hInstance = hInstance;
+  hb_hPrevInstance = hPrevInstance;
+  hb_iCmdShow = iCmdShow;
 
-   GetModuleFileName( hInstance, szAppName, 249 );
-   argv[ 0 ] = szAppName;
+  GetModuleFileName(hInstance, szAppName, 249);
+  argv[0] = szAppName;
 
-   if( * pArgs != 0 )
-      argv[ ++argc ] = pArgs;
+  if (*pArgs != 0)
+    argv[++argc] = pArgs;
 
-   while( *pArg != 0 )
-   {
-      if( *pArg == ' ' )
-      {
-         *pArg++ = 0;
-         argc++;
+  while (*pArg != 0)
+  {
+    if (*pArg == ' ')
+    {
+      *pArg++ = 0;
+      argc++;
 
-         while( *pArg == ' ' )
-            pArg++;
+      while (*pArg == ' ')
+        pArg++;
 
-         if( *pArg != 0 )
-            argv[ argc ] = pArg++;
-         else
-            argc--;
-      }
+      if (*pArg != 0)
+        argv[argc] = pArg++;
       else
-         pArg++;
-   }
-   argc++;
+        argc--;
+    }
+    else
+      pArg++;
+  }
+  argc++;
 
-   hb_cmdargInit( argc, argv );
-   hb_vmInit( TRUE );
-   hb_vmQuit();
+  hb_cmdargInit(argc, argv);
+  hb_vmInit(TRUE);
+  hb_vmQuit();
 
-   LocalFree( pArgs );  /* QUESTION: It seems we never reach here,
-                                     so how may we free it ? */
+  LocalFree(pArgs); /* QUESTION: It seems we never reach here,
+                                 so how may we free it ? */
 
-   /* NOTE: The exit value is set by exit() */
-   /* NOTE: This point is never reached */
+  /* NOTE: The exit value is set by exit() */
+  /* NOTE: This point is never reached */
 
-   return 0;
+  return 0;
 }
 
 // don not use GetInstance(), because it is an API, which means something else
-HB_FUNC( HINSTANCE )
+HB_FUNC(HINSTANCE)
 {
-  hb_retnl( (LONG) hb_hInstance );
+  hb_retnl((LONG)hb_hInstance);
 }
 
-HB_FUNC( HPREVINSTANCE )
+HB_FUNC(HPREVINSTANCE)
 {
-  hb_retnl( (LONG) hb_hPrevInstance );
+  hb_retnl((LONG)hb_hPrevInstance);
 }
 
-HB_FUNC( NCMDSHOW )
+HB_FUNC(NCMDSHOW)
 {
-  hb_retni( hb_iCmdShow );
+  hb_retni(hb_iCmdShow);
 }
-
 
 #endif
