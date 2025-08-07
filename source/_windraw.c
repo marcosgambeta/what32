@@ -12,6 +12,7 @@
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 #define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -92,7 +93,7 @@ HB_FUNC(SETPIXELFORMAT)
 {
   PIXELFORMATDESCRIPTOR *pfd = (PIXELFORMATDESCRIPTOR *)hb_param(3, HB_IT_STRING)->item.asString.value;
 
-  hb_retl(SetPixelFormat(w32_par_HDC(1), hb_parni(2), pfd));
+  w32_ret_BOOL(SetPixelFormat(w32_par_HDC(1), hb_parni(2), pfd));
 }
 
 //-----------------------------------------------------------------------------
@@ -137,7 +138,7 @@ HB_FUNC(GETPIXEL)
 HB_FUNC(SETPIXELV)
 {
 
-  hb_retl(SetPixelV(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4)));
+  w32_ret_BOOL(SetPixelV(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4)));
 }
 
 //////////////////////////
@@ -149,7 +150,7 @@ HB_FUNC(SETPIXELV)
 
 HB_FUNC(LINETO)
 {
-  hb_retl(LineTo(w32_par_HDC(1), hb_parni(2), hb_parni(3)));
+  w32_ret_BOOL(LineTo(w32_par_HDC(1), hb_parni(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -198,7 +199,7 @@ HB_FUNC(SETARCDIRECTION)
 
 HB_FUNC(ARC)
 {
-  hb_retl(Arc(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
+  w32_ret_BOOL(Arc(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
               hb_parni(8), hb_parni(9)));
 }
 
@@ -265,7 +266,7 @@ HB_FUNC(POLYLINE)
       }
     }
 
-    hb_retl(Polyline(w32_par_HDC(1), Point, iCount));
+    w32_ret_BOOL(Polyline(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
   }
   else
@@ -368,7 +369,7 @@ HB_FUNC(POLYPOLYLINE)
       }
     }
 
-    hb_retl(PolyPolyline(w32_par_HDC(1), Point, PolyPoints, iPolyCount));
+    w32_ret_BOOL(PolyPolyline(w32_par_HDC(1), Point, PolyPoints, iPolyCount));
     hb_xfree(PolyPoints);
     hb_xfree(Point);
   }
@@ -482,7 +483,7 @@ HB_FUNC(POLYBEZIER)
       }
     }
 
-    hb_retl(PolyBezier(w32_par_HDC(1), Point, iCount));
+    w32_ret_BOOL(PolyBezier(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
   }
   else
@@ -529,7 +530,7 @@ HB_FUNC(POLYBEZIERTO)
       }
     }
 
-    hb_retl(PolyBezierTo(w32_par_HDC(1), Point, iCount));
+    w32_ret_BOOL(PolyBezierTo(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
   }
   else
@@ -545,7 +546,7 @@ HB_FUNC(POLYBEZIERTO)
 
 HB_FUNC(RECTANGLE)
 {
-  hb_retl(Rectangle(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
+  w32_ret_BOOL(Rectangle(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -553,7 +554,7 @@ HB_FUNC(RECTANGLE)
 
 HB_FUNC(ROUNDRECT)
 {
-  hb_retl(RoundRect(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7)));
+  w32_ret_BOOL(RoundRect(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7)));
 }
 
 //-----------------------------------------------------------------------------
@@ -561,7 +562,7 @@ HB_FUNC(ROUNDRECT)
 
 HB_FUNC(CHORD)
 {
-  hb_retl(Chord(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
+  w32_ret_BOOL(Chord(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
                 hb_parni(8), hb_parni(9)));
 }
 
@@ -570,7 +571,7 @@ HB_FUNC(CHORD)
 
 HB_FUNC(PIE)
 {
-  hb_retl(Pie(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
+  w32_ret_BOOL(Pie(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
               hb_parni(8), hb_parni(9)));
 }
 
@@ -579,7 +580,7 @@ HB_FUNC(PIE)
 
 HB_FUNC(ELLIPSE)
 {
-  hb_retl(Ellipse(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
+  w32_ret_BOOL(Ellipse(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -621,7 +622,7 @@ HB_FUNC(POLYGON)
       }
     }
 
-    hb_retl(Polygon(w32_par_HDC(1), Point, iCount));
+    w32_ret_BOOL(Polygon(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
   }
   else
@@ -678,7 +679,7 @@ HB_FUNC(POLYPOLYGON)
       }
     }
 
-    hb_retl(PolyPolygon(w32_par_HDC(1), Point, PolyPoints, iPolyCount));
+    w32_ret_BOOL(PolyPolygon(w32_par_HDC(1), Point, PolyPoints, iPolyCount));
     hb_xfree(PolyPoints);
     hb_xfree(Point);
   }
@@ -752,7 +753,7 @@ HB_FUNC(SETPOLYFILLMODE)
 HB_FUNC(EXTFLOODFILL)
 {
 
-  hb_retl(ExtFloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4), (UINT)hb_parni(5)));
+  w32_ret_BOOL(ExtFloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4), (UINT)hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -760,7 +761,7 @@ HB_FUNC(EXTFLOODFILL)
 
 HB_FUNC(FILLPATH)
 {
-  hb_retl(FillPath(w32_par_HDC(1)));
+  w32_ret_BOOL(FillPath(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -768,7 +769,7 @@ HB_FUNC(FILLPATH)
 
 HB_FUNC(FLATTENPATH)
 {
-  hb_retl(FlattenPath(w32_par_HDC(1)));
+  w32_ret_BOOL(FlattenPath(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -777,7 +778,7 @@ HB_FUNC(FLATTENPATH)
 HB_FUNC(FLOODFILL)
 {
 
-  hb_retl(FloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4)));
+  w32_ret_BOOL(FloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4)));
 }
 
 //-----------------------------------------------------------------------------

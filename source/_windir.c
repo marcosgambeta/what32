@@ -13,6 +13,8 @@
 #include <windows.h>
 #include "hbapi.h"
 
+#define w32_ret_BOOL(x) hb_retl(x)
+
 #if defined(__DMC__)
 WINBASEAPI
 DWORD
@@ -111,7 +113,7 @@ HB_FUNC( GETSYSTEMWINDOWSDIRECTORY )
 HB_FUNC(SETCURRENTDIRECTORY)
 {
 
-  hb_retl(SetCurrentDirectory((LPCSTR)hb_parcx(1)));
+  w32_ret_BOOL(SetCurrentDirectory((LPCSTR)hb_parcx(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -129,7 +131,7 @@ HB_FUNC(GETCURRENTDIRECTORY)
 
 HB_FUNC(SETFILEATTRIBUTES)
 {
-  hb_retl(SetFileAttributes((LPCSTR)hb_parcx(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(SetFileAttributes((LPCSTR)hb_parcx(1), (DWORD)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -145,7 +147,7 @@ HB_FUNC(GETFILEATTRIBUTES)
 
 HB_FUNC(DELETEFILE)
 {
-  hb_retl(DeleteFile((LPCSTR)hb_parcx(1)));
+  w32_ret_BOOL(DeleteFile((LPCSTR)hb_parcx(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -153,7 +155,7 @@ HB_FUNC(DELETEFILE)
 
 HB_FUNC(SETVOLUMELABEL)
 {
-  hb_retl(SetVolumeLabel((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2)));
+  w32_ret_BOOL(SetVolumeLabel((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -166,7 +168,7 @@ HB_FUNC(CREATEDIRECTORY)
   if (ISCHAR(2))
     sa = (SECURITY_ATTRIBUTES *)hb_param(2, HB_IT_STRING)->item.asString.value;
 
-  hb_retl(CreateDirectoryA((LPCSTR)hb_parcx(1), sa));
+  w32_ret_BOOL(CreateDirectoryA((LPCSTR)hb_parcx(1), sa));
 }
 
 //-----------------------------------------------------------------------------
@@ -194,7 +196,7 @@ HB_FUNC( CREATEDIRECTORYEX )
 
 HB_FUNC(REMOVEDIRECTORY)
 {
-  hb_retl(RemoveDirectory((LPCSTR)hb_parcx(1)));
+  w32_ret_BOOL(RemoveDirectory((LPCSTR)hb_parcx(1)));
 }
 
 //-----------------------------------------------------------------------------

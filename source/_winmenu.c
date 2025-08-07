@@ -14,6 +14,7 @@
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 //-----------------------------------------------------------------------------
 
@@ -198,7 +199,7 @@ HB_FUNC(LOADMENUINDIRECT)
 
 HB_FUNC(CHANGEMENU)
 {
-  hb_retl(ChangeMenu((HMENU)hb_parnl(1), (UINT)hb_parni(2), (LPCSTR)hb_parcx(3), (UINT)hb_parni(4), (UINT)hb_parni(5)));
+  w32_ret_BOOL(ChangeMenu((HMENU)hb_parnl(1), (UINT)hb_parni(2), (LPCSTR)hb_parcx(3), (UINT)hb_parni(4), (UINT)hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -206,7 +207,7 @@ HB_FUNC(CHANGEMENU)
 
 HB_FUNC(REMOVEMENU)
 {
-  hb_retl(RemoveMenu((HMENU)hb_parnl(1), (UINT)hb_parni(2), (UINT)hb_parni(3)));
+  w32_ret_BOOL(RemoveMenu((HMENU)hb_parnl(1), (UINT)hb_parni(2), (UINT)hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -272,7 +273,7 @@ HB_FUNC( SETMENUINFO )
 #if (WINVER >= 0x0500)
 HB_FUNC(ENDMENU)
 {
-  hb_retl(EndMenu());
+  w32_ret_BOOL(EndMenu());
 }
 #endif
 //-----------------------------------------------------------------------------
@@ -282,7 +283,7 @@ HB_FUNC(INSERTMENUITEM)
 {
   LPCMENUITEMINFOA lpcmenuitemInfoa = (LPCMENUITEMINFOA)hb_param(4, HB_IT_STRING)->item.asString.value;
 
-  hb_retl(InsertMenuItem((HMENU)hb_parnl(1), (UINT)hb_parni(2), hb_parl(3), lpcmenuitemInfoa));
+  w32_ret_BOOL(InsertMenuItem((HMENU)hb_parnl(1), (UINT)hb_parni(2), hb_parl(3), lpcmenuitemInfoa));
 }
 
 //-----------------------------------------------------------------------------
@@ -291,7 +292,7 @@ HB_FUNC(INSERTMENUITEM)
 HB_FUNC(GETMENUITEMINFO)
 {
   LPCMENUITEMINFOA lpcmenuitemInfoa = (LPCMENUITEMINFOA)hb_param(4, HB_IT_STRING)->item.asString.value;
-  hb_retl(
+  w32_ret_BOOL(
       GetMenuItemInfo((HMENU)hb_parnl(1), (UINT)hb_parni(2), hb_parl(3), (struct tagMENUITEMINFOA *)lpcmenuitemInfoa));
 }
 
@@ -301,7 +302,7 @@ HB_FUNC(GETMENUITEMINFO)
 HB_FUNC(SETMENUITEMINFO)
 {
   LPCMENUITEMINFOA lpcmenuitemInfoa = (LPCMENUITEMINFOA)hb_param(4, HB_IT_STRING)->item.asString.value;
-  hb_retl(SetMenuItemInfo((HMENU)hb_parnl(1), (UINT)hb_parni(2), hb_parl(3), lpcmenuitemInfoa));
+  w32_ret_BOOL(SetMenuItemInfo((HMENU)hb_parnl(1), (UINT)hb_parni(2), hb_parl(3), lpcmenuitemInfoa));
 }
 
 //-----------------------------------------------------------------------------

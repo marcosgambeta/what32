@@ -42,6 +42,7 @@
 #endif
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 #if defined(__DMC__)
 #if 0
@@ -190,7 +191,7 @@ HB_FUNC( FILEENCRYPTIONSTATUSA )
 //
 HB_FUNC(ISPROCESSORFEATUREPRESENT)
 {
-  hb_retl(IsProcessorFeaturePresent((DWORD)hb_parnl(1)));
+  w32_ret_BOOL(IsProcessorFeaturePresent((DWORD)hb_parnl(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -245,7 +246,7 @@ HB_FUNC(SYSTEMPARAMETERSINFO)
 //
 HB_FUNC(FREERESOURCE)
 {
-  hb_retl(FreeResource((HGLOBAL)hb_parnl(6)));
+  w32_ret_BOOL(FreeResource((HGLOBAL)hb_parnl(6)));
 }
 
 //-------------------------------------------------------------------//
@@ -343,7 +344,7 @@ HB_FUNC(SETTIMER)
 //
 HB_FUNC(KILLTIMER)
 {
-  hb_retl(KillTimer(w32_par_HWND(1), (UINT)hb_parni(2)));
+  w32_ret_BOOL(KillTimer(w32_par_HWND(1), (UINT)hb_parni(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -359,7 +360,7 @@ HB_FUNC(GETSYSCOLOR)
 //
 HB_FUNC(EXITWINDOWSEX)
 {
-  hb_retl(ExitWindowsEx((UINT)hb_parni(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(ExitWindowsEx((UINT)hb_parni(1), (DWORD)hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -611,7 +612,7 @@ HB_FUNC( LOADMODULE )
 //
 HB_FUNC(TONE)
 {
-  hb_retl(Beep((DWORD)hb_parnl(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(Beep((DWORD)hb_parnl(1), (DWORD)hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -737,7 +738,7 @@ HB_FUNC(GETCOMPUTERNAME)
   char cText[MAX_COMPUTERNAME_LENGTH + 1];
   DWORD nSize = MAX_COMPUTERNAME_LENGTH + 1;
 
-  hb_retl(GetComputerNameA((LPSTR)&cText, &nSize));
+  w32_ret_BOOL(GetComputerNameA((LPSTR)&cText, &nSize));
 
   hb_storc(cText, 1);
   hb_stornl(nSize, 2);
@@ -749,7 +750,7 @@ HB_FUNC(GETCOMPUTERNAME)
 //
 HB_FUNC(SETCOMPUTERNAME)
 {
-  hb_retl(SetComputerNameA((LPCSTR)hb_parcx(1)));
+  w32_ret_BOOL(SetComputerNameA((LPCSTR)hb_parcx(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -789,7 +790,7 @@ HB_FUNC(GETUSERNAME)
   DWORD nSize;
   char *szUser = (char *)hb_parcx(1);
 
-  hb_retl(GetUserNameA(szUser, &nSize));
+  w32_ret_BOOL(GetUserNameA(szUser, &nSize));
   hb_storc(szUser, 1);
   hb_stornl((LONG)nSize, 2);
 }
@@ -891,7 +892,7 @@ HB_FUNC( CASCADEWINDOWS )
 //
 HB_FUNC(WINHELP)
 {
-  hb_retl(WinHelp(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (UINT)hb_parni(3), (ULONG)hb_parnl(4)));
+  w32_ret_BOOL(WinHelp(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (UINT)hb_parni(3), (ULONG)hb_parnl(4)));
 }
 
 //-------------------------------------------------------------------//

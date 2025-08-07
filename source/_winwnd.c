@@ -8,6 +8,7 @@
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_HRGN(n) (HRGN)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -62,7 +63,7 @@ HB_FUNC(ISZOOMED)
 
 HB_FUNC(ISWINDOWUNICODE)
 {
-  hb_retl(IsWindowUnicode(w32_par_HWND(1)));
+  w32_ret_BOOL(IsWindowUnicode(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -128,7 +129,7 @@ HB_FUNC(ENABLEWINDOW)
 
 HB_FUNC(ISWINDOWENABLED)
 {
-  hb_retl(IsWindowEnabled(w32_par_HWND(1)));
+  w32_ret_BOOL(IsWindowEnabled(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -206,7 +207,7 @@ HB_FUNC(INVALIDATERECT)
 
   bRectOk = (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc));
 
-  hb_retl(InvalidateRect(ISNIL(1) ? NULL : w32_par_HWND(1), // handle of window with changed update region
+  w32_ret_BOOL(InvalidateRect(ISNIL(1) ? NULL : w32_par_HWND(1), // handle of window with changed update region
                          bRectOk ? &rc : NULL,                // address of rectangle coordinates
                          ISLOG(3) ? hb_parl(3) : TRUE         // erase-background flag
                          ));
@@ -222,7 +223,7 @@ HB_FUNC(REDRAWWINDOW)
 
   bRectOk = (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc));
 
-  hb_retl(RedrawWindow(w32_par_HWND(1),                   // handle of window
+  w32_ret_BOOL(RedrawWindow(w32_par_HWND(1),                   // handle of window
                        bRectOk ? &rc : NULL,                // address of structure with update rectangle
                        ISNIL(3) ? NULL : w32_par_HRGN(3), // handle of update region
                        hb_parni(4)                          // array of redraw flags
@@ -268,7 +269,7 @@ HB_FUNC(GETWINDOWRECT)
 
 HB_FUNC(SHOWOWNEDPOPUPS)
 {
-  hb_retl(ShowOwnedPopups(w32_par_HWND(1), hb_parl(2)));
+  w32_ret_BOOL(ShowOwnedPopups(w32_par_HWND(1), hb_parl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -276,7 +277,7 @@ HB_FUNC(SHOWOWNEDPOPUPS)
 
 HB_FUNC(OPENICON)
 {
-  hb_retl(OpenIcon(w32_par_HWND(1)));
+  w32_ret_BOOL(OpenIcon(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -302,7 +303,7 @@ HB_FUNC(DEFERWINDOWPOS)
 
 HB_FUNC(ENDDEFERWINDOWPOS)
 {
-  hb_retl(EndDeferWindowPos((HDWP)hb_parnl(1)));
+  w32_ret_BOOL(EndDeferWindowPos((HDWP)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -311,7 +312,7 @@ HB_FUNC(ENDDEFERWINDOWPOS)
 
 HB_FUNC(SETWINDOWPOS)
 {
-  hb_retl(SetWindowPos(w32_par_HWND(1), w32_par_HWND(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6),
+  w32_ret_BOOL(SetWindowPos(w32_par_HWND(1), w32_par_HWND(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6),
                        (UINT)hb_parni(7)));
 }
 
@@ -363,7 +364,7 @@ HB_FUNC(GETFOCUS)
 
 HB_FUNC(SETFOREGROUNDWINDOW)
 {
-  hb_retl(SetForegroundWindow(w32_par_HWND(1)));
+  w32_ret_BOOL(SetForegroundWindow(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -371,7 +372,7 @@ HB_FUNC(SETFOREGROUNDWINDOW)
 
 HB_FUNC(ANYPOPUP)
 {
-  hb_retl(AnyPopup());
+  w32_ret_BOOL(AnyPopup());
 }
 
 //-----------------------------------------------------------------------------
@@ -379,7 +380,7 @@ HB_FUNC(ANYPOPUP)
 
 HB_FUNC(BRINGWINDOWTOTOP)
 {
-  hb_retl(BringWindowToTop(w32_par_HWND(1)));
+  w32_ret_BOOL(BringWindowToTop(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -415,7 +416,7 @@ HB_FUNC(SCROLLWINDOW)
   Array2Rect(hb_param(4, HB_IT_ARRAY), &lpRect);
   Array2Rect(hb_param(5, HB_IT_ARRAY), &lpClipRect);
 
-  hb_retl(ScrollWindow(w32_par_HWND(1), hb_parni(2), hb_parni(3), &lpRect, &lpClipRect));
+  w32_ret_BOOL(ScrollWindow(w32_par_HWND(1), hb_parni(2), hb_parni(3), &lpRect, &lpClipRect));
 }
 
 //-----------------------------------------------------------------------------
@@ -423,7 +424,7 @@ HB_FUNC(SCROLLWINDOW)
 
 HB_FUNC(SETWINDOWTEXT)
 {
-  hb_retl(SetWindowText(w32_par_HWND(1), (LPSTR)hb_parcx(2)));
+  w32_ret_BOOL(SetWindowText(w32_par_HWND(1), (LPSTR)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -454,7 +455,7 @@ HB_FUNC(GETWINDOWTEXTLENGTH)
 
 HB_FUNC(SETWINDOWCONTEXTHELPID)
 {
-  hb_retl(SetWindowContextHelpId(w32_par_HWND(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(SetWindowContextHelpId(w32_par_HWND(1), (DWORD)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -470,7 +471,7 @@ HB_FUNC(GETWINDOWCONTEXTHELPID)
 
 HB_FUNC(SETMENUCONTEXTHELPID)
 {
-  hb_retl(SetMenuContextHelpId((HMENU)hb_parnl(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(SetMenuContextHelpId((HMENU)hb_parnl(1), (DWORD)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -687,7 +688,7 @@ HB_FUNC(GETANCESTOR)
 
 HB_FUNC(SHOWWINDOWASYNC)
 {
-  hb_retl(ShowWindowAsync(w32_par_HWND(1), hb_parni(2)));
+  w32_ret_BOOL(ShowWindowAsync(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -717,7 +718,7 @@ HB_FUNC(FLASHWINDOW)
 #if (WINVER >= 0x0500)
 HB_FUNC(ANIMATEWINDOW)
 {
-  hb_retl(AnimateWindow(w32_par_HWND(1), (DWORD)hb_parnl(2), (DWORD)hb_parnl(3)));
+  w32_ret_BOOL(AnimateWindow(w32_par_HWND(1), (DWORD)hb_parnl(2), (DWORD)hb_parnl(3)));
 }
 #endif
 //-----------------------------------------------------------------------------
@@ -740,7 +741,7 @@ HB_FUNC(SETWINDOWPLACEMENT)
 {
   WINDOWPLACEMENT *lpwndpl = (WINDOWPLACEMENT *)hb_param(2, HB_IT_STRING)->item.asString.value;
 
-  hb_retl(SetWindowPlacement(w32_par_HWND(1), lpwndpl));
+  w32_ret_BOOL(SetWindowPlacement(w32_par_HWND(1), lpwndpl));
 }
 
 #endif
@@ -765,7 +766,7 @@ HB_FUNC(GETWINDOWRGN)
 
 HB_FUNC(SETPROP)
 {
-  hb_retl(SetProp(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (HANDLE)hb_parnl(3)));
+  w32_ret_BOOL(SetProp(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (HANDLE)hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------

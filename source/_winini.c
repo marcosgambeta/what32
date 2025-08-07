@@ -61,6 +61,8 @@
 // #include "hbstack.h"
 // #include "hbapiitm.h"
 
+#define w32_ret_BOOL(x) hb_retl(x)
+
 //-----------------------------------------------------------------------------
 HB_FUNC(GETPROFILESTRING)
 {
@@ -187,7 +189,7 @@ HB_FUNC( GETPROFILESECTION )
 
 HB_FUNC(WRITEPROFILESECTION)
 {
-  hb_retl(WriteProfileSectionA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2)));
+  w32_ret_BOOL(WriteProfileSectionA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2)));
 }
 
 /*
@@ -211,7 +213,7 @@ HB_FUNC( GETPRIVATEPROFILESECTION )
 
 HB_FUNC(WRITEPRIVATEPROFILESECTION)
 {
-  hb_retl(WritePrivateProfileSectionA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3)));
+  w32_ret_BOOL(WritePrivateProfileSectionA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3)));
 }
 
 /*

@@ -17,6 +17,7 @@
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HRGN(n) (HRGN)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -58,7 +59,7 @@ HB_FUNC(CLOSEMETAFILE)
 
 HB_FUNC(DELETEMETAFILE)
 {
-  hb_retl(DeleteMetaFile((HMETAFILE)hb_parnl(1)));
+  w32_ret_BOOL(DeleteMetaFile((HMETAFILE)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -74,7 +75,7 @@ HB_FUNC(GETMETAFILE)
 
 HB_FUNC(PLAYMETAFILE)
 {
-  hb_retl(PlayMetaFile(w32_par_HDC(1), (HMETAFILE)hb_parnl(2)));
+  w32_ret_BOOL(PlayMetaFile(w32_par_HDC(1), (HMETAFILE)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -185,7 +186,7 @@ HB_FUNC(CLOSEENHMETAFILE)
 
 HB_FUNC(DELETEENHMETAFILE)
 {
-  hb_retl(DeleteEnhMetaFile((HENHMETAFILE)hb_parnl(1)));
+  w32_ret_BOOL(DeleteEnhMetaFile((HENHMETAFILE)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -196,7 +197,7 @@ HB_FUNC(PLAYENHMETAFILE)
   RECT rc;
 
   if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
-    hb_retl(PlayEnhMetaFile(w32_par_HDC(1), (HENHMETAFILE)hb_parnl(2), &rc));
+    w32_ret_BOOL(PlayEnhMetaFile(w32_par_HDC(1), (HENHMETAFILE)hb_parnl(2), &rc));
 }
 
 //-----------------------------------------------------------------------------

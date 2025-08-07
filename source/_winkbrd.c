@@ -23,6 +23,7 @@ Modified functions:
 // #include "commctrl.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI DWORD WINAPI OemKeyScan( IN WORD wOemChar);
@@ -99,7 +100,7 @@ HB_FUNC(GETKEYBOARDSTATE)
 
 HB_FUNC(SETKEYBOARDSTATE)
 {
-  hb_retl(SetKeyboardState((LPBYTE)hb_parcx(1)));
+  w32_ret_BOOL(SetKeyboardState((LPBYTE)hb_parcx(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -146,7 +147,7 @@ HB_FUNC(MAPVIRTUALKEYEX)
 
 HB_FUNC(GETINPUTSTATE)
 {
-  hb_retl(GetInputState());
+  w32_ret_BOOL(GetInputState());
 }
 
 //-----------------------------------------------------------------------------
@@ -208,7 +209,7 @@ HB_FUNC(CREATEACCELERATORTABLE)
 
 HB_FUNC(DESTROYACCELERATORTABLE)
 {
-  hb_retl(DestroyAcceleratorTable((HACCEL)hb_parnl(1)));
+  w32_ret_BOOL(DestroyAcceleratorTable((HACCEL)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------

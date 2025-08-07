@@ -16,6 +16,7 @@
 // #include "hbstack.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -57,7 +58,7 @@ HB_FUNC(SETCAPTURE)
 
 HB_FUNC(RELEASECAPTURE)
 {
-  hb_retl(ReleaseCapture());
+  w32_ret_BOOL(ReleaseCapture());
 }
 
 //-----------------------------------------------------------------------------
@@ -73,7 +74,7 @@ HB_FUNC(GETDOUBLECLICKTIME)
 
 HB_FUNC(SETDOUBLECLICKTIME)
 {
-  hb_retl(SetDoubleClickTime((UINT)hb_parni(1)));
+  w32_ret_BOOL(SetDoubleClickTime((UINT)hb_parni(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -89,7 +90,7 @@ HB_FUNC(SHOWCURSOR)
 
 HB_FUNC(SETCURSORPOS)
 {
-  hb_retl(SetCursorPos(hb_parni(1), hb_parni(2)));
+  w32_ret_BOOL(SetCursorPos(hb_parni(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -140,7 +141,7 @@ HB_FUNC(CLIPCURSOR)
 
   bRectOk = (ISARRAY(2) && Array2Rect(hb_param(1, HB_IT_ARRAY), &rc));
 
-  hb_retl(ClipCursor(bRectOk ? &rc : NULL));
+  w32_ret_BOOL(ClipCursor(bRectOk ? &rc : NULL));
 }
 
 //-----------------------------------------------------------------------------
@@ -171,7 +172,7 @@ HB_FUNC(GETCURSOR)
 
 HB_FUNC(SWAPMOUSEBUTTON)
 {
-  hb_retl(SwapMouseButton(hb_parl(1)));
+  w32_ret_BOOL(SwapMouseButton(hb_parl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -197,7 +198,7 @@ HB_FUNC(CREATECURSOR)
 
 HB_FUNC(DESTROYCURSOR)
 {
-  hb_retl(DestroyCursor((HCURSOR)hb_parnl(1)));
+  w32_ret_BOOL(DestroyCursor((HCURSOR)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -213,7 +214,7 @@ HB_FUNC(COPYCURSOR)
 
 HB_FUNC(SETSYSTEMCURSOR)
 {
-  hb_retl(SetSystemCursor((HCURSOR)hb_parnl(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(SetSystemCursor((HCURSOR)hb_parnl(1), (DWORD)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------

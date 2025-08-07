@@ -19,6 +19,7 @@
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 #define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 //-----------------------------------------------------------------------------
 
@@ -116,7 +117,7 @@ HB_FUNC(FIXBRUSHORGEX)
 {
   POINT *Point = (POINT *)hb_param(4, HB_IT_STRING)->item.asString.value;
 
-  hb_retl(FixBrushOrgEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), Point));
+  w32_ret_BOOL(FixBrushOrgEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), Point));
 }
 
 //-----------------------------------------------------------------------------

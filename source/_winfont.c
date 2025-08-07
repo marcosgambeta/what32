@@ -13,6 +13,7 @@
 // #include "hbapiitm.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -110,7 +111,7 @@ HB_FUNC( CREATEFONTINDIRECTEX )
 
 HB_FUNC(CREATESCALABLEFONTRESOURCE)
 {
-  hb_retl(
+  w32_ret_BOOL(
       CreateScalableFontResource((DWORD)hb_parnl(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4)));
 }
 
@@ -359,7 +360,7 @@ HB_FUNC( REMOVEFONTMEMRESOURCEEX )
 
 HB_FUNC(REMOVEFONTRESOURCE)
 {
-  hb_retl(RemoveFontResource((LPCSTR)hb_parcx(1)));
+  w32_ret_BOOL(RemoveFontResource((LPCSTR)hb_parcx(1)));
 }
 
 //-----------------------------------------------------------------------------

@@ -22,6 +22,7 @@
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -109,7 +110,7 @@ HB_FUNC(SETBKCOLOR)
 
 HB_FUNC(UPDATECOLORS)
 {
-  hb_retl(UpdateColors(w32_par_HDC(1)));
+  w32_ret_BOOL(UpdateColors(w32_par_HDC(1)));
 }
 
 // OBJECT FUNCTIONS
@@ -137,7 +138,7 @@ HB_FUNC(SELECTOBJECT)
 
 HB_FUNC(DELETEOBJECT)
 {
-  hb_retl(DeleteObject((HGDIOBJ)hb_parnl(1)));
+  w32_ret_BOOL(DeleteObject((HGDIOBJ)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -145,7 +146,7 @@ HB_FUNC(DELETEOBJECT)
 
 HB_FUNC(UNREALIZEOBJECT)
 {
-  hb_retl(UnrealizeObject((HGDIOBJ)hb_parnl(1)));
+  w32_ret_BOOL(UnrealizeObject((HGDIOBJ)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -273,7 +274,7 @@ HB_FUNC(GETGRAPHICSMODE)
 HB_FUNC(GDICOMMENT)
 {
 
-  hb_retl(GdiComment(w32_par_HDC(1), (UINT)hb_parni(2), (const BYTE *)hb_parcx(3)));
+  w32_ret_BOOL(GdiComment(w32_par_HDC(1), (UINT)hb_parni(2), (const BYTE *)hb_parcx(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -292,7 +293,7 @@ HB_FUNC(GDISETBATCHLIMIT)
 
 HB_FUNC(SELECTCLIPPATH)
 {
-  hb_retl(SelectClipPath(w32_par_HDC(1), hb_parni(2)));
+  w32_ret_BOOL(SelectClipPath(w32_par_HDC(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -300,7 +301,7 @@ HB_FUNC(SELECTCLIPPATH)
 
 HB_FUNC(WIDENPATH)
 {
-  hb_retl(WidenPath(w32_par_HDC(1)));
+  w32_ret_BOOL(WidenPath(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -308,7 +309,7 @@ HB_FUNC(WIDENPATH)
 
 HB_FUNC(STROKEANDFILLPATH)
 {
-  hb_retl(StrokeAndFillPath(w32_par_HDC(1)));
+  w32_ret_BOOL(StrokeAndFillPath(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -316,7 +317,7 @@ HB_FUNC(STROKEANDFILLPATH)
 
 HB_FUNC(STROKEPATH)
 {
-  hb_retl(StrokePath(w32_par_HDC(1)));
+  w32_ret_BOOL(StrokePath(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -325,7 +326,7 @@ HB_FUNC(STROKEPATH)
 
 HB_FUNC(ENDPATH)
 {
-  hb_retl(EndPath(w32_par_HDC(1)));
+  w32_ret_BOOL(EndPath(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -333,7 +334,7 @@ HB_FUNC(ENDPATH)
 
 HB_FUNC(ABORTPATH)
 {
-  hb_retl(AbortPath(w32_par_HDC(1)));
+  w32_ret_BOOL(AbortPath(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -475,7 +476,7 @@ HB_FUNC(GETDEVICECAPS)
 
 HB_FUNC(PAINTDESKTOP)
 {
-  hb_retl(PaintDesktop(w32_par_HDC(1)));
+  w32_ret_BOOL(PaintDesktop(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -496,7 +497,7 @@ HB_FUNC(GETGUIRESOURCES)
 
 HB_FUNC(PTVISIBLE)
 {
-  hb_retl(PtVisible(w32_par_HDC(1), hb_parni(2), hb_parni(3)));
+  w32_ret_BOOL(PtVisible(w32_par_HDC(1), hb_parni(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -522,7 +523,7 @@ HB_FUNC( SETLAYOUT )
 
 HB_FUNC(SWAPBUFFERS)
 {
-  hb_retl(SwapBuffers(w32_par_HDC(1)));
+  w32_ret_BOOL(SwapBuffers(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -666,7 +667,7 @@ HB_FUNC(DRAGDETECT)
   {
     pArray = hb_param(2, HB_IT_ARRAY);
     Array2Point(pArray, &PoInt);
-    hb_retl(DragDetect(w32_par_HWND(1), PoInt));
+    w32_ret_BOOL(DragDetect(w32_par_HWND(1), PoInt));
   }
   else
     hb_retl(FALSE);

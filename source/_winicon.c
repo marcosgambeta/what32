@@ -14,6 +14,7 @@
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 #if defined(__DMC__)
 // SHSTDAPI_(HICON) DuplicateIcon(HINSTANCE hInst, HICON hIcon);
@@ -48,7 +49,7 @@ HB_FUNC(CREATEICON)
 
 HB_FUNC(DESTROYICON)
 {
-  hb_retl(DestroyIcon((HICON)hb_parnl(1)));
+  w32_ret_BOOL(DestroyIcon((HICON)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -114,7 +115,7 @@ HB_FUNC(COPYIMAGE)
 
 HB_FUNC(DRAWICON)
 {
-  hb_retl(DrawIcon(w32_par_HDC(1), hb_parni(2), hb_parni(3), (HICON)hb_parnl(4)));
+  w32_ret_BOOL(DrawIcon(w32_par_HDC(1), hb_parni(2), hb_parni(3), (HICON)hb_parnl(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -123,7 +124,7 @@ HB_FUNC(DRAWICON)
 
 HB_FUNC(DRAWICONEX)
 {
-  hb_retl(DrawIconEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), (HICON)hb_parnl(4), hb_parni(5), hb_parni(6),
+  w32_ret_BOOL(DrawIconEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), (HICON)hb_parnl(4), hb_parni(5), hb_parni(6),
                      (UINT)hb_parni(7), w32_par_HBRUSH(8), (UINT)hb_parni(9)));
 }
 
@@ -154,7 +155,7 @@ HB_FUNC(GETICONINFO)
 {
   ICONINFO ii;
 
-  hb_retl(GetIconInfo((HICON)hb_parnl(1), &ii));
+  w32_ret_BOOL(GetIconInfo((HICON)hb_parnl(1), &ii));
 
   // verify !!
   // assign into structure

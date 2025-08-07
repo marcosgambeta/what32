@@ -16,6 +16,7 @@
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_HRGN(n) (HRGN)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -40,7 +41,7 @@ HB_FUNC(GETDC)
 
 HB_FUNC(RESTOREDC)
 {
-  hb_retl(RestoreDC(w32_par_HDC(1), hb_parni(2)));
+  w32_ret_BOOL(RestoreDC(w32_par_HDC(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -72,7 +73,7 @@ HB_FUNC(RELEASEDC)
 
 HB_FUNC(DELETEDC)
 {
-  hb_retl(DeleteDC(w32_par_HDC(1)));
+  w32_ret_BOOL(DeleteDC(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -80,7 +81,7 @@ HB_FUNC(DELETEDC)
 
 HB_FUNC(CANCELDC)
 {
-  hb_retl(CancelDC(w32_par_HDC(1)));
+  w32_ret_BOOL(CancelDC(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------

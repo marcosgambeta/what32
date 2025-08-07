@@ -24,6 +24,7 @@
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 //----------------------------------------------------------------------------//
 
@@ -70,7 +71,7 @@ HB_FUNC(SETCLIPBOARDVIEWER)
 //
 HB_FUNC(CHANGECLIPBOARDCHAIN)
 {
-  hb_retl(ChangeClipboardChain(w32_par_HWND(1), w32_par_HWND(2)));
+  w32_ret_BOOL(ChangeClipboardChain(w32_par_HWND(1), w32_par_HWND(2)));
 }
 
 //----------------------------------------------------------------------------//

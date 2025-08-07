@@ -14,6 +14,7 @@
 #include "hbapiitm.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 //-----------------------------------------------------------------------------
 
@@ -27,7 +28,7 @@ HB_FUNC(_ISDIALOGMESSAGE)
 
 HB_FUNC(TRANSLATEMDISYSACCEL)
 {
-  hb_retl(TranslateMDISysAccel(w32_par_HWND(1), (MSG *)hb_parcx(2)));
+  w32_ret_BOOL(TranslateMDISysAccel(w32_par_HWND(1), (MSG *)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -195,7 +196,7 @@ HB_FUNC(REGISTERWINDOWMESSAGE)
 
 HB_FUNC(SETMESSAGEQUEUE)
 {
-  hb_retl(SetMessageQueue(hb_parni(1)));
+  w32_ret_BOOL(SetMessageQueue(hb_parni(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -259,7 +260,7 @@ HB_FUNC( SENDMESSAGETIMEOUT )
 
 HB_FUNC(SENDNOTIFYMESSAGE)
 {
-  hb_retl(SendNotifyMessage(w32_par_HWND(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
+  w32_ret_BOOL(SendNotifyMessage(w32_par_HWND(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -267,7 +268,7 @@ HB_FUNC(SENDNOTIFYMESSAGE)
 
 HB_FUNC(POSTTHREADMESSAGE)
 {
-  hb_retl(PostThreadMessage((DWORD)hb_parnl(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
+  w32_ret_BOOL(PostThreadMessage((DWORD)hb_parnl(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
 }
 
 //----------------------------------------------------------------------------
@@ -275,7 +276,7 @@ HB_FUNC(POSTTHREADMESSAGE)
 
 HB_FUNC(REPLYMESSAGE)
 {
-  hb_retl(ReplyMessage((LRESULT)hb_parnl(1)));
+  w32_ret_BOOL(ReplyMessage((LRESULT)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -283,7 +284,7 @@ HB_FUNC(REPLYMESSAGE)
 
 HB_FUNC(WAITMESSAGE)
 {
-  hb_retl(WaitMessage());
+  w32_ret_BOOL(WaitMessage());
 }
 
 //-----------------------------------------------------------------------------
@@ -299,7 +300,7 @@ HB_FUNC(WAITFORINPUTIDLE)
 
 HB_FUNC(INSENDMESSAGE)
 {
-  hb_retl(InSendMessage());
+  w32_ret_BOOL(InSendMessage());
 }
 
 //-----------------------------------------------------------------------------
@@ -428,7 +429,7 @@ HB_FUNC( REGISTERDEVICENOTIFICATION )
 
 HB_FUNC(UNREGISTERDEVICENOTIFICATION)
 {
-  hb_retl(UnregisterDeviceNotification((HDEVNOTIFY)hb_parnl(1)));
+  w32_ret_BOOL(UnregisterDeviceNotification((HDEVNOTIFY)hb_parnl(1)));
 }
 
 #endif
@@ -439,7 +440,7 @@ HB_FUNC(UNREGISTERDEVICENOTIFICATION)
 HB_FUNC(ATTACHTHREADINPUT)
 {
 
-  hb_retl(AttachThreadInput((DWORD)hb_parnl(1), (DWORD)hb_parnl(2), hb_parl(3)));
+  w32_ret_BOOL(AttachThreadInput((DWORD)hb_parnl(1), (DWORD)hb_parnl(2), hb_parl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -449,5 +450,5 @@ HB_FUNC(CALLMSGFILTER)
 {
   MSG *Msg = (MSG *)hb_param(1, HB_IT_STRING)->item.asString.value;
 
-  hb_retl(CallMsgFilter(Msg, hb_parni(2)));
+  w32_ret_BOOL(CallMsgFilter(Msg, hb_parni(2)));
 }

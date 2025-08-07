@@ -21,6 +21,7 @@
 #include "hbapiitm.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 //-----------------------------------------------------------------------------
 
@@ -76,7 +77,7 @@ HB_FUNC(GETDIALOGBASEUNITS)
 
 HB_FUNC(SETDLGITEMINT)
 {
-  hb_retl(SetDlgItemInt(w32_par_HWND(1), hb_parni(2), (UINT)hb_parni(3), hb_parl(4)));
+  w32_ret_BOOL(SetDlgItemInt(w32_par_HWND(1), hb_parni(2), (UINT)hb_parni(3), hb_parl(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -183,7 +184,7 @@ HB_FUNC(DLGDIRSELECTEX)
   USHORT iLen = ISNIL(3) ? MAX_PATH : (USHORT)hb_parni(3);
   char *cText = (char *)hb_xgrab(iLen + 1);
 
-  hb_retl(DlgDirSelectEx(w32_par_HWND(1), (LPSTR)cText, iLen, hb_parni(4)));
+  w32_ret_BOOL(DlgDirSelectEx(w32_par_HWND(1), (LPSTR)cText, iLen, hb_parni(4)));
 
   hb_storc(cText, 2);
   hb_xfree(cText);
@@ -212,7 +213,7 @@ HB_FUNC(DLGDIRSELECTCOMBOBOXEX)
   USHORT iLen = ISNIL(3) ? MAX_PATH : (USHORT)hb_parni(3);
   char *cText = (char *)hb_xgrab(iLen + 1);
 
-  hb_retl(DlgDirSelectComboBoxEx(w32_par_HWND(1), (LPSTR)cText, iLen, hb_parni(4)));
+  w32_ret_BOOL(DlgDirSelectComboBoxEx(w32_par_HWND(1), (LPSTR)cText, iLen, hb_parni(4)));
 
   hb_storc(cText, 2);
   hb_xfree(cText);
@@ -238,7 +239,7 @@ HB_FUNC(MAPDIALOGRECT)
     lpRect.right = hb_arrayGetNL(pArray, 3);
     lpRect.bottom = hb_arrayGetNL(pArray, 4);
 
-    hb_retl(MapDialogRect(w32_par_HWND(1), &lpRect));
+    w32_ret_BOOL(MapDialogRect(w32_par_HWND(1), &lpRect));
     hb_stornl(lpRect.left, 2, 1);
     hb_stornl(lpRect.top, 2, 2);
     hb_stornl(lpRect.right, 2, 3);

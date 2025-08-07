@@ -22,6 +22,7 @@ Modified and non-API functions:
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 #define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -155,7 +156,7 @@ HB_FUNC(SETSTRETCHBLTMODE)
 
 HB_FUNC(STRETCHBLT)
 {
-  hb_retl(StretchBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6),
+  w32_ret_BOOL(StretchBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6),
                      hb_parni(7), hb_parni(8), hb_parni(9), hb_parni(10), (DWORD)hb_parnl(11)));
 }
 
@@ -233,7 +234,7 @@ HB_FUNC(CREATEDISCARDABLEBITMAP)
 
 HB_FUNC(MASKBLT)
 {
-  hb_retl(MaskBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6), hb_parni(7),
+  w32_ret_BOOL(MaskBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6), hb_parni(7),
                   hb_parni(8), w32_par_HBITMAP(9), hb_parni(10), hb_parni(11), (DWORD)hb_parnl(12)));
 }
 
@@ -242,7 +243,7 @@ HB_FUNC(MASKBLT)
 
 HB_FUNC(BITBLT)
 {
-  hb_retl(BitBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6), hb_parni(7),
+  w32_ret_BOOL(BitBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6), hb_parni(7),
                  hb_parni(8), (DWORD)hb_parnl(9)));
 }
 
@@ -251,7 +252,7 @@ HB_FUNC(BITBLT)
 
 HB_FUNC(PATBLT)
 {
-  hb_retl(PatBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), (DWORD)hb_parnl(6)));
+  w32_ret_BOOL(PatBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), (DWORD)hb_parnl(6)));
 }
 
 //-----------------------------------------------------------------------------

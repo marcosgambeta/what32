@@ -17,6 +17,7 @@
 #include "hbapiitm.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 #ifndef LONG_PTR
 #define LONG_PTR LONG
@@ -411,7 +412,7 @@ HB_FUNC(GETENVIRONMENTVARIABLE)
 
 HB_FUNC(SETENVIRONMENTVARIABLE)
 {
-  hb_retl(SetEnvironmentVariableA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2)));
+  w32_ret_BOOL(SetEnvironmentVariableA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -509,7 +510,7 @@ HB_FUNC(RELEASEMUTEX)
 
 HB_FUNC(REGISTERHOTKEY)
 {
-  hb_retl(RegisterHotKey(w32_par_HWND(1), hb_parni(2), (UINT)hb_parni(3), (UINT)hb_parni(4)));
+  w32_ret_BOOL(RegisterHotKey(w32_par_HWND(1), hb_parni(2), (UINT)hb_parni(3), (UINT)hb_parni(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -517,7 +518,7 @@ HB_FUNC(REGISTERHOTKEY)
 
 HB_FUNC(UNREGISTERHOTKEY)
 {
-  hb_retl(UnregisterHotKey(w32_par_HWND(1), hb_parni(2)));
+  w32_ret_BOOL(UnregisterHotKey(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------

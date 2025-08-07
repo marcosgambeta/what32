@@ -14,6 +14,7 @@
 // #include "hbstack.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -35,7 +36,7 @@ extern void Size2ArrayEx(SIZE *siz, PHB_ITEM aSize);
 HB_FUNC(TEXTOUT)
 {
 
-  hb_retl(TextOut(w32_par_HDC(1),     // handle of device context
+  w32_ret_BOOL(TextOut(w32_par_HDC(1),     // handle of device context
                   hb_parni(2),          // x-coordinate of starting position
                   hb_parni(3),          // y-coordinate of starting position
                   (LPCTSTR)hb_parcx(4), // address of string
@@ -87,7 +88,7 @@ HB_FUNC(EXTTEXTOUT)
     }
   }
 
-  hb_retl(ExtTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), (UINT)hb_parni(4), rcOk ? &rc : NULL, (LPCSTR)cText,
+  w32_ret_BOOL(ExtTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), (UINT)hb_parni(4), rcOk ? &rc : NULL, (LPCSTR)cText,
                      (UINT)strlen(cText), ISARRAY(7) ? lpDx : NULL));
 
   if (ISARRAY(7))
@@ -306,7 +307,7 @@ HB_FUNC(SETTEXTALIGN)
 
 HB_FUNC(SETTEXTJUSTIFICATION)
 {
-  hb_retl(SetTextJustification(w32_par_HDC(1), hb_parni(2), hb_parni(3)));
+  w32_ret_BOOL(SetTextJustification(w32_par_HDC(1), hb_parni(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------

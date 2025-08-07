@@ -13,6 +13,8 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
+#define w32_ret_BOOL(x) hb_retl(x)
+
 #if defined(__DMC__)
 #define SIZE_T size_t
 #endif
@@ -71,7 +73,7 @@ HB_FUNC(GLOBALHANDLE)
 
 HB_FUNC(GLOBALUNLOCK)
 {
-  hb_retl(GlobalUnlock((HGLOBAL)hb_parnl(1)));
+  w32_ret_BOOL(GlobalUnlock((HGLOBAL)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -129,7 +131,7 @@ HB_FUNC(GLOBALWIRE)
 
 HB_FUNC(GLOBALUNWIRE)
 {
-  hb_retl(GlobalUnWire((HGLOBAL)hb_parnl(1)));
+  w32_ret_BOOL(GlobalUnWire((HGLOBAL)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -207,7 +209,7 @@ HB_FUNC(LOCALHANDLE)
 
 HB_FUNC(LOCALUNLOCK)
 {
-  hb_retl(LocalUnlock((HLOCAL)hb_parnl(1)));
+  w32_ret_BOOL(LocalUnlock((HLOCAL)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------

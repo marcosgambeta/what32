@@ -16,6 +16,7 @@
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_ret_BOOL(x) hb_retl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -40,7 +41,7 @@ HB_FUNC(DRAWFOCUSRECT)
   RECT lprc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprc))
-    hb_retl(DrawFocusRect(w32_par_HDC(1), &lprc));
+    w32_ret_BOOL(DrawFocusRect(w32_par_HDC(1), &lprc));
   else
     hb_retl(FALSE);
 }
@@ -368,7 +369,7 @@ HB_FUNC(ISRECTEMPTY)
 
   if (ISARRAY(1) && Array2Rect(pSrc1, &lprc))
   {
-    hb_retl(IsRectEmpty(&lprc));
+    w32_ret_BOOL(IsRectEmpty(&lprc));
   }
   else
     hb_retl(FALSE);
@@ -390,7 +391,7 @@ HB_FUNC(EQUALRECT)
 
   if (Array2Rect(pSrc1, &lprc1) && Array2Rect(pSrc2, &lprc2))
   {
-    hb_retl(EqualRect(&lprc1, &lprc2));
+    w32_ret_BOOL(EqualRect(&lprc1, &lprc2));
   }
   else
     hb_retl(FALSE);
@@ -413,7 +414,7 @@ HB_FUNC(PTINRECT)
 
   if (Array2Rect(pSrc1, &lprc) && Array2Point(pSrc2, &pt))
   {
-    hb_retl((BOOL)PtInRect(&lprc, pt));
+    w32_ret_BOOL((BOOL)PtInRect(&lprc, pt));
   }
   else
     hb_retl(FALSE);
@@ -435,7 +436,7 @@ HB_FUNC(RECTVISIBLE)
   RECT rc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
-    hb_retl(RectVisible(w32_par_HDC(1), &rc));
+    w32_ret_BOOL(RectVisible(w32_par_HDC(1), &rc));
   else
     hb_retl(0);
 }
@@ -464,7 +465,7 @@ HB_FUNC(VALIDATERECT)
   RECT rc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
-    hb_retl(ValidateRect(w32_par_HWND(1), &rc));
+    w32_ret_BOOL(ValidateRect(w32_par_HWND(1), &rc));
   else
-    hb_retl(ValidateRect(w32_par_HWND(1), NULL));
+    w32_ret_BOOL(ValidateRect(w32_par_HWND(1), NULL));
 }
