@@ -17,6 +17,7 @@
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 
 #if defined(__DMC__)
 // SHSTDAPI_(HICON) DuplicateIcon(HINSTANCE hInst, HICON hIcon);
@@ -109,7 +110,7 @@ HB_FUNC(LOADIMAGE)
 
 HB_FUNC(COPYIMAGE)
 {
-  hb_retnl((LONG)CopyImage((HANDLE)hb_parnl(1), (UINT)hb_parni(2), hb_parni(3), hb_parni(4), (UINT)hb_parni(5)));
+  hb_retnl((LONG)CopyImage(w32_par_HANDLE(1), (UINT)hb_parni(2), hb_parni(3), hb_parni(4), (UINT)hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------

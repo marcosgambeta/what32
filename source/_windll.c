@@ -24,6 +24,7 @@
 
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 
 //------------------------------------------------------------------
 #include <stdio.h>
@@ -46,7 +47,7 @@ HB_FUNC( LOADLIBRARY )
 
 HB_FUNC(LOADLIBRARYEX)
 {
-  hb_retnl((LONG)LoadLibraryExA((LPCSTR)hb_parcx(1), (HANDLE)hb_parnl(2), w32_par_DWORD(3)));
+  hb_retnl((LONG)LoadLibraryExA((LPCSTR)hb_parcx(1), w32_par_HANDLE(2), w32_par_DWORD(3)));
 }
 
 //-----------------------------------------------------------------------------

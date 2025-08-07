@@ -14,6 +14,7 @@
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 
 #if (defined(__GNUC__) || defined(__DMC__))
 DWORD WINAPI DoEnvironmentSubst(LPSTR szString, UINT cchString);
@@ -194,7 +195,7 @@ HB_FUNC(SHFILEOPERATION)
 
 HB_FUNC(SHFREENAMEMAPPINGS)
 {
-  SHFreeNameMappings((HANDLE)hb_parnl(1));
+  SHFreeNameMappings(w32_par_HANDLE(1));
 }
 
 //-----------------------------------------------------------------------------

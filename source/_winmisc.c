@@ -20,6 +20,7 @@
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 
 #ifndef LONG_PTR
 #define LONG_PTR LONG
@@ -504,7 +505,7 @@ HB_FUNC(OPENMUTEX)
 
 HB_FUNC(RELEASEMUTEX)
 {
-  hb_retl(ReleaseMutex((HANDLE)hb_parnl(1)));
+  hb_retl(ReleaseMutex(w32_par_HANDLE(1)));
 }
 
 //-----------------------------------------------------------------------------

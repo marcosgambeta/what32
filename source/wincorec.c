@@ -17,6 +17,7 @@
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 
 LRESULT CALLBACK __WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK __WndProc2(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -65,7 +66,7 @@ HB_FUNC(_REGISTERCLASS)
 
 HB_FUNC(_UNREGISTERCLASS)
 {
-  HANDLE hInst = (ISNIL(2) ? GetModuleHandle(NULL) : (HANDLE)hb_parnl(2));
+  HANDLE hInst = (ISNIL(2) ? GetModuleHandle(NULL) : w32_par_HANDLE(2));
 
   hb_retl(UnregisterClass(hb_parc(1), (HINSTANCE)hInst));
 }
@@ -87,7 +88,7 @@ HB_FUNC(_CREATEWINDOWEX)
   int nHeight = (ISNIL(8) ? CW_USEDEFAULT : hb_parni(8));
   HWND hWndParent = (ISNIL(9) ? (HWND)NULL : w32_par_HWND(9));
   HMENU hMenu = (ISNIL(10) ? (HMENU)NULL : (HMENU)hb_parni(10));
-  HANDLE hInstance = (ISNIL(11) ? GetModuleHandle(NULL) : (HANDLE)hb_parnl(11));
+  HANDLE hInstance = (ISNIL(11) ? GetModuleHandle(NULL) : w32_par_HANDLE(11));
   LPVOID lParam = (ISNIL(12) ? NULL : (LPVOID)hb_parnl(12));
 
   HWND hWnd = CreateWindowEx(dwExStyle, cClass, cTitle, nStyle, x, y, nWidth, nHeight, hWndParent, hMenu,
@@ -110,7 +111,7 @@ HB_FUNC(_CREATEMDIWINDOW)
   int nWidth = (ISNIL(6) ? CW_USEDEFAULT : hb_parni(6));
   int nHeight = (ISNIL(7) ? CW_USEDEFAULT : hb_parni(7));
   HWND hWndParent = (ISNIL(8) ? (HWND)NULL : w32_par_HWND(8));
-  HANDLE hInstance = (ISNIL(9) ? GetModuleHandle(NULL) : (HANDLE)hb_parnl(9));
+  HANDLE hInstance = (ISNIL(9) ? GetModuleHandle(NULL) : w32_par_HANDLE(9));
   LPARAM lParam = (ISNIL(10) ? 0 : (LPARAM)hb_parnl(10));
 
   HWND hWnd = CreateMDIWindow((char *)cClass, (char *)cTitle, nStyle, x, y, nWidth, nHeight, hWndParent,

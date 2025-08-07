@@ -25,6 +25,7 @@ Modified and non-API functions:
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -216,7 +217,7 @@ HB_FUNC(CREATEDIBSECTION)
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(2, HB_IT_STRING)->item.asString.value;
   VOID **ppBits = (VOID **)0;
 
-  hb_retnl((LONG)CreateDIBSection(w32_par_HDC(1), bmi, (UINT)hb_parni(3), ppBits, (HANDLE)hb_parnl(5),
+  hb_retnl((LONG)CreateDIBSection(w32_par_HDC(1), bmi, (UINT)hb_parni(3), ppBits, w32_par_HANDLE(5),
                                   w32_par_DWORD(6)));
 
   hb_stornl((LONG)*ppBits, 4);

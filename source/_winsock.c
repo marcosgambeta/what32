@@ -20,6 +20,7 @@
 #include <windows.h>
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 
 #ifndef DWORD_PTR
 #define DWORD_PTR DWORD
@@ -631,7 +632,7 @@ HB_FUNC(WSAASYNCGETHOSTBYADDR)
 
 HB_FUNC(WSACANCELASYNCREQUEST)
 {
-  hb_retni((int)WSACancelAsyncRequest((HANDLE)hb_parnl(1)));
+  hb_retni((int)WSACancelAsyncRequest(w32_par_HANDLE(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -1335,7 +1336,7 @@ HB_FUNC( WSALOOKUPSERVICENEXT )
 
 HB_FUNC(WSALOOKUPSERVICEEND)
 {
-  hb_retni((int)WSALookupServiceEnd((HANDLE)hb_parnl(1)));
+  hb_retni((int)WSALookupServiceEnd(w32_par_HANDLE(1)));
 }
 
 //-----------------------------------------------------------------------------

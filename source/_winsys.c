@@ -45,6 +45,7 @@
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 
 #if defined(__DMC__)
 #if 0
@@ -289,7 +290,7 @@ BOOL SetStdHandle(
 
 HB_FUNC(SETSTDHANDLE)
 {
-  hb_retl(SetStdHandle(w32_par_DWORD(1), (HANDLE)hb_parnl(2)));
+  hb_retl(SetStdHandle(w32_par_DWORD(1), w32_par_HANDLE(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -947,7 +948,7 @@ HB_FUNC(CREATEFILE)
 
   hb_retnl((LONG)CreateFile((LPCTSTR)hb_parcx(1), w32_par_DWORD(2), w32_par_DWORD(3),
                             ISCHAR(4) ? (SECURITY_ATTRIBUTES *)sa : NULL, w32_par_DWORD(5), w32_par_DWORD(6),
-                            ISNIL(7) ? NULL : (HANDLE)hb_parnl(7)));
+                            ISNIL(7) ? NULL : w32_par_HANDLE(7)));
 }
 
 //-------------------------------------------------------------------//
@@ -958,7 +959,7 @@ BOOL CloseHandle(
 */
 HB_FUNC(CLOSEHANDLE)
 {
-  hb_retl(CloseHandle((HANDLE)hb_parnl(1)));
+  hb_retl(CloseHandle(w32_par_HANDLE(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -981,7 +982,7 @@ HB_FUNC(READFILE)
   if (ISCHAR(5))
     Overlapped = (OVERLAPPED *)hb_param(5, HB_IT_STRING)->item.asString.value;
 
-  bRet = ReadFile((HANDLE)hb_parnl(1), Buffer, w32_par_DWORD(3), &nRead, ISCHAR(5) ? Overlapped : NULL);
+  bRet = ReadFile(w32_par_HANDLE(1), Buffer, w32_par_DWORD(3), &nRead, ISCHAR(5) ? Overlapped : NULL);
 
   if (bRet)
   {
@@ -1011,7 +1012,7 @@ HB_FUNC(WRITEFILE)
   if (ISCHAR(4))
     Overlapped = (OVERLAPPED *)hb_param(4, HB_IT_STRING)->item.asString.value;
 
-  hb_retl(WriteFile((HANDLE)hb_parnl(1), hb_parcx(2), hb_parclen(2), &nWritten, ISCHAR(4) ? Overlapped : NULL));
+  hb_retl(WriteFile(w32_par_HANDLE(1), hb_parcx(2), hb_parclen(2), &nWritten, ISCHAR(4) ? Overlapped : NULL));
 
   hb_stornl(nWritten, 3);
 }
@@ -1054,7 +1055,7 @@ HB_FUNC(GETPROCESSWORKINGSETSIZE)
   DWORD MinimumWorkingSetSize = 0;
   DWORD MaximumWorkingSetSize = 0;
 
-  hb_retl(GetProcessWorkingSetSize(ISNIL(1) ? GetCurrentProcess() : (HANDLE)hb_parnl(1), &MinimumWorkingSetSize,
+  hb_retl(GetProcessWorkingSetSize(ISNIL(1) ? GetCurrentProcess() : w32_par_HANDLE(1), &MinimumWorkingSetSize,
                                    &MaximumWorkingSetSize));
   hb_stornl(MinimumWorkingSetSize, 2);
   hb_stornl(MaximumWorkingSetSize, 3);
@@ -1069,7 +1070,7 @@ NOTE: This function is not supported and returns .F. under Windows 9x
 */
 HB_FUNC(SETPROCESSWORKINGSETSIZE)
 {
-  hb_retl(SetProcessWorkingSetSize(ISNIL(1) ? GetCurrentProcess() : (HANDLE)hb_parnl(1), hb_parnl(2), hb_parnl(3)));
+  hb_retl(SetProcessWorkingSetSize(ISNIL(1) ? GetCurrentProcess() : w32_par_HANDLE(1), hb_parnl(2), hb_parnl(3)));
 }
 
 //-------------------------------------------------------------------//

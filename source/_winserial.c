@@ -21,6 +21,7 @@
 #include "tchar.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 
 //-------------------------------------------------------------------//
 /*
@@ -83,7 +84,7 @@ endif
 */
 HB_FUNC(CLEARCOMMBREAK)
 {
-  hb_retl(ClearCommBreak((HANDLE)hb_parnl(1)));
+  hb_retl(ClearCommBreak(w32_par_HANDLE(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -102,7 +103,7 @@ HB_FUNC(CLEARCOMMERROR)
   DWORD err = 0;
   COMSTAT Stat;
 
-  hb_retl(ClearCommError((HANDLE)hb_parnl(1), &err, &Stat));
+  hb_retl(ClearCommError(w32_par_HANDLE(1), &err, &Stat));
 
   hb_stornl(err, 2);
   hb_storclen((char *)&Stat, sizeof(COMSTAT), 3);
@@ -150,7 +151,7 @@ endif
 */
 HB_FUNC(ESCAPECOMMFUNCTION)
 {
-  hb_retl(EscapeCommFunction((HANDLE)hb_parnl(1), hb_parnl(2)));
+  hb_retl(EscapeCommFunction(w32_par_HANDLE(1), hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -169,7 +170,7 @@ HB_FUNC(GETCOMMCONFIG)
   COMMCONFIG lpCC; // = ( LPCOMMCONFIG ) hb_parcx( 2 );
   DWORD size = sizeof(COMMCONFIG);
 
-  hb_retl(GetCommConfig((HANDLE)hb_parnl(1), &lpCC, &size));
+  hb_retl(GetCommConfig(w32_par_HANDLE(1), &lpCC, &size));
 
   hb_storclen((char *)&lpCC, size, 2);
 }
@@ -188,7 +189,7 @@ endif
 HB_FUNC(GETCOMMMASK)
 {
   DWORD mask;
-  hb_retl(GetCommMask((HANDLE)hb_parnl(1), &mask));
+  hb_retl(GetCommMask(w32_par_HANDLE(1), &mask));
   hb_stornl((ULONG)mask, 2);
 }
 
@@ -206,7 +207,7 @@ endif
 HB_FUNC(GETCOMMMODEMSTATUS)
 {
   DWORD modemStat;
-  hb_retl(GetCommModemStatus((HANDLE)hb_parnl(1), &modemStat));
+  hb_retl(GetCommModemStatus(w32_par_HANDLE(1), &modemStat));
   hb_stornl((ULONG)modemStat, 2);
 }
 
@@ -226,7 +227,7 @@ HB_FUNC(GETCOMMPROPERTIES)
   COMMPROP CommProp;
   CommProp.wPacketLength = sizeof(COMMPROP);
 
-  hb_retl(GetCommProperties((HANDLE)hb_parnl(1), &CommProp));
+  hb_retl(GetCommProperties(w32_par_HANDLE(1), &CommProp));
 
   hb_storclen((char *)&CommProp, sizeof(COMMPROP), 2);
 }
@@ -245,7 +246,7 @@ HB_FUNC(GETCOMMSTATE)
   DCB dcb;
   dcb.DCBlength = sizeof(DCB);
 
-  hb_retl(GetCommState((HANDLE)hb_parnl(1), &dcb));
+  hb_retl(GetCommState(w32_par_HANDLE(1), &dcb));
 
   hb_storclen((char *)&dcb, sizeof(DCB), 2);
 }
@@ -263,7 +264,7 @@ HB_FUNC(GETCOMMTIMEOUTS)
 {
   COMMTIMEOUTS Timeouts;
 
-  hb_retl(GetCommTimeouts((HANDLE)hb_parnl(1), &Timeouts));
+  hb_retl(GetCommTimeouts(w32_par_HANDLE(1), &Timeouts));
 
   hb_storclen((char *)&Timeouts, sizeof(COMMTIMEOUTS), 2);
 }
@@ -310,7 +311,7 @@ endif
 */
 HB_FUNC(PURGECOMM)
 {
-  hb_retl(PurgeComm((HANDLE)hb_parnl(1), hb_parnl(2)));
+  hb_retl(PurgeComm(w32_par_HANDLE(1), hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -321,7 +322,7 @@ BOOL SetCommBreak(
 */
 HB_FUNC(SETCOMMBREAK)
 {
-  hb_retl(SetCommBreak((HANDLE)hb_parnl(1)));
+  hb_retl(SetCommBreak(w32_par_HANDLE(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -338,7 +339,7 @@ HB_FUNC(SETCOMMCONFIG)
   LPCOMMCONFIG lpCC = (LPCOMMCONFIG)hb_parcx(2);
   DWORD size = ISNIL(3) ? sizeof(COMMCONFIG) : hb_parnl(3);
 
-  hb_retl(SetCommConfig((HANDLE)hb_parnl(1), lpCC, size));
+  hb_retl(SetCommConfig(w32_par_HANDLE(1), lpCC, size));
 }
 
 //-------------------------------------------------------------------//
@@ -352,7 +353,7 @@ endif
 */
 HB_FUNC(SETCOMMMASK)
 {
-  hb_retl(SetCommMask((HANDLE)hb_parnl(1), hb_parnl(2)));
+  hb_retl(SetCommMask(w32_par_HANDLE(1), hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -366,7 +367,7 @@ HB_FUNC(SETCOMMSTATE)
 {
   LPDCB lpDCB = (LPDCB)hb_parcx(2);
 
-  hb_retl(SetCommState((HANDLE)hb_parnl(1), lpDCB));
+  hb_retl(SetCommState(w32_par_HANDLE(1), lpDCB));
 }
 
 //-------------------------------------------------------------------//
@@ -380,7 +381,7 @@ HB_FUNC(SETCOMMTIMEOUTS)
 {
   LPCOMMTIMEOUTS lptimeouts = (LPCOMMTIMEOUTS)hb_parcx(2);
 
-  hb_retl(SetCommTimeouts((HANDLE)hb_parnl(1), lptimeouts));
+  hb_retl(SetCommTimeouts(w32_par_HANDLE(1), lptimeouts));
 }
 
 //-------------------------------------------------------------------//
@@ -409,7 +410,7 @@ BOOL SetupComm(
 */
 HB_FUNC(SETUPCOMM)
 {
-  hb_retl(SetupComm((HANDLE)hb_parnl(1), hb_parnl(2), hb_parnl(3)));
+  hb_retl(SetupComm(w32_par_HANDLE(1), hb_parnl(2), hb_parnl(3)));
 }
 
 //-------------------------------------------------------------------//
@@ -421,7 +422,7 @@ BOOL TransmitCommChar(
 */
 HB_FUNC(TRANSMITCOMMCHAR)
 {
-  hb_retl(TransmitCommChar((HANDLE)hb_parnl(1), (char)hb_parni(2)));
+  hb_retl(TransmitCommChar(w32_par_HANDLE(1), (char)hb_parni(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -441,7 +442,7 @@ HB_FUNC(WAITCOMMEVENT)
 {
   DWORD evMask;
 
-  hb_retl(WaitCommEvent((HANDLE)hb_parnl(1), &evMask, NULL));
+  hb_retl(WaitCommEvent(w32_par_HANDLE(1), &evMask, NULL));
   hb_stornl((ULONG)evMask, 2);
 }
 

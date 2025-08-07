@@ -24,6 +24,7 @@
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -488,7 +489,7 @@ HB_FUNC(PAINTDESKTOP)
 
 HB_FUNC(GETGUIRESOURCES)
 {
-  hb_retnl((LONG)GetGuiResources((HANDLE)hb_parnl(1), w32_par_DWORD(2)));
+  hb_retnl((LONG)GetGuiResources(w32_par_HANDLE(1), w32_par_DWORD(2)));
 }
 
 #endif
