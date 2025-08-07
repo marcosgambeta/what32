@@ -25,6 +25,7 @@
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_par_HGDIOBJ(n) (HGDIOBJ)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -131,7 +132,7 @@ HB_FUNC(GETSTOCKOBJECT)
 
 HB_FUNC(SELECTOBJECT)
 {
-  hb_retnl((LONG)SelectObject(w32_par_HDC(1), (HGDIOBJ)hb_parnl(2)));
+  hb_retnl((LONG)SelectObject(w32_par_HDC(1), w32_par_HGDIOBJ(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -140,7 +141,7 @@ HB_FUNC(SELECTOBJECT)
 
 HB_FUNC(DELETEOBJECT)
 {
-  w32_ret_BOOL(DeleteObject((HGDIOBJ)hb_parnl(1)));
+  w32_ret_BOOL(DeleteObject(w32_par_HGDIOBJ(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -148,7 +149,7 @@ HB_FUNC(DELETEOBJECT)
 
 HB_FUNC(UNREALIZEOBJECT)
 {
-  w32_ret_BOOL(UnrealizeObject((HGDIOBJ)hb_parnl(1)));
+  w32_ret_BOOL(UnrealizeObject(w32_par_HGDIOBJ(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -156,7 +157,7 @@ HB_FUNC(UNREALIZEOBJECT)
 
 HB_FUNC(GETOBJECTTYPE)
 {
-  hb_retnl((LONG)GetObjectType((HGDIOBJ)hb_parnl(1)));
+  hb_retnl((LONG)GetObjectType(w32_par_HGDIOBJ(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -176,10 +177,10 @@ HB_FUNC(GETCURRENTOBJECT)
 HB_FUNC(GETOBJECT)
 {
 
-  int nBytes = GetObject((HGDIOBJ)hb_parnl(1), 0, NULL);
+  int nBytes = GetObject(w32_par_HGDIOBJ(1), 0, NULL);
   LPVOID lpObj = (VOID *)hb_xgrab(nBytes);
 
-  nBytes = GetObject((HGDIOBJ)hb_parnl(1), nBytes, lpObj);
+  nBytes = GetObject(w32_par_HGDIOBJ(1), nBytes, lpObj);
 
   hb_retclen((char *)lpObj, nBytes);
   hb_xfree(lpObj);
