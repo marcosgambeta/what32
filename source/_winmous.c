@@ -19,6 +19,7 @@
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_HCURSOR(n) (HCURSOR)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -104,7 +105,7 @@ HB_FUNC(SETCURSORPOS)
 
 HB_FUNC(WINSETCURSOR)
 {
-  hb_retnl((LONG)SetCursor((HCURSOR)hb_parnl(1)));
+  hb_retnl((LONG)SetCursor(w32_par_HCURSOR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -200,7 +201,7 @@ HB_FUNC(CREATECURSOR)
 
 HB_FUNC(DESTROYCURSOR)
 {
-  w32_ret_BOOL(DestroyCursor((HCURSOR)hb_parnl(1)));
+  w32_ret_BOOL(DestroyCursor(w32_par_HCURSOR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -208,7 +209,7 @@ HB_FUNC(DESTROYCURSOR)
 
 HB_FUNC(COPYCURSOR)
 {
-  hb_retnl((LONG)CopyCursor((HCURSOR)hb_parnl(1)));
+  hb_retnl((LONG)CopyCursor(w32_par_HCURSOR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -216,7 +217,7 @@ HB_FUNC(COPYCURSOR)
 
 HB_FUNC(SETSYSTEMCURSOR)
 {
-  w32_ret_BOOL(SetSystemCursor((HCURSOR)hb_parnl(1), w32_par_DWORD(2)));
+  w32_ret_BOOL(SetSystemCursor(w32_par_HCURSOR(1), w32_par_DWORD(2)));
 }
 
 //-----------------------------------------------------------------------------
