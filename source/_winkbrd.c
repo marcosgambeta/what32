@@ -24,6 +24,7 @@ Modified functions:
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI DWORD WINAPI OemKeyScan( IN WORD wOemChar);
@@ -163,7 +164,7 @@ HB_FUNC(GETQUEUESTATUS)
 
 HB_FUNC(LOADACCELERATORS)
 {
-  hb_retnl((LONG)LoadAccelerators((HINSTANCE)hb_parnl(1), (LPCSTR)hb_parcx(2)));
+  hb_retnl((LONG)LoadAccelerators(w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------

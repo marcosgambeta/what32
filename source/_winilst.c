@@ -15,6 +15,7 @@
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 #define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 
 extern BOOL Array2Point(PHB_ITEM aPoint, POINT *pt);
 
@@ -197,7 +198,7 @@ HB_FUNC(IMAGELIST_GETICON)
 
 HB_FUNC(IMAGELIST_LOADIMAGE)
 {
-  hb_retnl((LONG)ImageList_LoadImageA((HINSTANCE)hb_parnl(1),
+  hb_retnl((LONG)ImageList_LoadImageA(w32_par_HINSTANCE(1),
                                       ISCHAR(2) ? (LPCSTR)hb_parcx(2) : MAKEINTRESOURCE(hb_parni(2)), hb_parni(3),
                                       hb_parni(4), w32_par_COLORREF(5), (UINT)hb_parni(6), (UINT)hb_parni(7)));
 }

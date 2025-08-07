@@ -20,6 +20,7 @@
 #include "hbapiitm.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 
 // extern __DlgProc ;
 
@@ -64,7 +65,7 @@ HB_FUNC(_FINDTEXT)
   fr.lStructSize = sizeof(fr);
 
   fr.hwndOwner = w32_par_HWND(1);
-  fr.hInstance = (HINSTANCE)hb_parnl(2);
+  fr.hInstance = w32_par_HINSTANCE(2);
   fr.Flags = (DWORD)hb_parnl(3);
   fr.lpstrFindWhat = (LPTSTR)hb_parcx(4);
   fr.lpstrReplaceWith = NULL;
@@ -88,7 +89,7 @@ HB_FUNC(_REPLACETEXT)
   fr.lStructSize = sizeof(fr);
 
   fr.hwndOwner = w32_par_HWND(1);
-  fr.hInstance = (HINSTANCE)hb_parnl(2);
+  fr.hInstance = w32_par_HINSTANCE(2);
   fr.Flags = (DWORD)hb_parnl(3);
   fr.lpstrFindWhat = (LPTSTR)hb_parcx(4);
   fr.lpstrReplaceWith = (LPTSTR)hb_parcx(5);

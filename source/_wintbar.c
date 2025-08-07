@@ -15,6 +15,7 @@
 // #include "hbstack.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -34,7 +35,7 @@ HB_FUNC(CREATEMAPPEDBITMAP)
 {
   COLORMAP *cm = (COLORMAP *)hb_param(4, HB_IT_STRING)->item.asString.value;
 
-  hb_retnl((LONG)CreateMappedBitmap((HINSTANCE)hb_parnl(1), (int)hb_parni(2), (UINT)hb_parni(3),
+  hb_retnl((LONG)CreateMappedBitmap(w32_par_HINSTANCE(1), (int)hb_parni(2), (UINT)hb_parni(3),
                                     ISNIL(4) ? NULL : (COLORMAP *)cm, (int)hb_parni(5)));
 }
 
@@ -50,7 +51,7 @@ HB_FUNC(CREATETOOLBAREX)
                                  (DWORD)hb_parnl(2),                       // style
                                  (UINT)hb_parni(3),                        // id,
                                  (int)hb_parni(4),                         // number of btn images in bmp
-                                 ISNIL(5) ? NULL : (HINSTANCE)hb_parnl(5), // hInst of bmp
+                                 ISNIL(5) ? NULL : w32_par_HINSTANCE(5), // hInst of bmp
                                  (UINT)hb_parnl(6),                        // resource id, or hBmp handle
                                  (LPCTBBUTTON)hb_parcx(7),                 // array of button structures
                                  (int)hb_parni(8),                         // number of buttons to add

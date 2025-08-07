@@ -17,6 +17,7 @@
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -33,7 +34,7 @@ extern void Size2ArrayEx(SIZE *siz, PHB_ITEM aSize);
 
 HB_FUNC(LOADCURSOR)
 {
-  hb_retnl((LONG)LoadCursor(ISNIL(1) ? NULL : (HINSTANCE)hb_parnl(1),
+  hb_retnl((LONG)LoadCursor(ISNIL(1) ? NULL : w32_par_HINSTANCE(1),
                             hb_parinfo(2) == HB_IT_STRING ? hb_parcx(2) : MAKEINTRESOURCE(hb_parnl(2))));
 }
 
@@ -189,7 +190,7 @@ HB_FUNC(LOADCURSORFROMFILE)
 
 HB_FUNC(CREATECURSOR)
 {
-  hb_retnl((LONG)CreateCursor((HINSTANCE)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parcx(6),
+  hb_retnl((LONG)CreateCursor(w32_par_HINSTANCE(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parcx(6),
                               hb_parcx(7)));
 }
 

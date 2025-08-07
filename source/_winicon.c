@@ -15,6 +15,7 @@
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 
 #if defined(__DMC__)
 // SHSTDAPI_(HICON) DuplicateIcon(HINSTANCE hInst, HICON hIcon);
@@ -27,7 +28,7 @@ WINSHELLAPI HICON DuplicateIcon(HINSTANCE hInst, HICON hIcon);
 
 HB_FUNC(LOADICON)
 {
-  hb_retnl((LONG)LoadIcon((ISNIL(1) ? NULL : (HINSTANCE)hb_parnl(1)),
+  hb_retnl((LONG)LoadIcon((ISNIL(1) ? NULL : w32_par_HINSTANCE(1)),
                           (hb_parinfo(2) == HB_IT_STRING ? hb_parcx(2) : MAKEINTRESOURCE((WORD)hb_parni(2)))));
 }
 
@@ -39,7 +40,7 @@ HB_FUNC(LOADICON)
 HB_FUNC(CREATEICON)
 {
 
-  hb_retnl((LONG)CreateIcon(ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1), hb_parni(2), hb_parni(3),
+  hb_retnl((LONG)CreateIcon(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), hb_parni(2), hb_parni(3),
                             (BYTE)hb_parni(4), (BYTE)hb_parni(5), (BYTE *)hb_parcx(5), (BYTE *)hb_parcx(6)));
 }
 
@@ -98,7 +99,7 @@ HB_FUNC(CREATEICONFROMRESOURCEEX)
 
 HB_FUNC(LOADIMAGE)
 {
-  hb_retnl((LONG)LoadImage(ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1), (LPCSTR)hb_parcx(2),
+  hb_retnl((LONG)LoadImage(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2),
                            (UINT)hb_parni(3), hb_parni(4), hb_parni(5), (UINT)hb_parni(6)));
 }
 
@@ -169,7 +170,7 @@ HB_FUNC(GETICONINFO)
 #ifndef __WATCOMC__
 HB_FUNC(DUPLICATEICON)
 {
-  hb_retnl((LONG)DuplicateIcon(ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1), (HICON)hb_parnl(2)));
+  hb_retnl((LONG)DuplicateIcon(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), (HICON)hb_parnl(2)));
 }
 #endif
 //-----------------------------------------------------------------------------
@@ -183,7 +184,7 @@ HB_FUNC(EXTRACTASSOCIATEDICON)
   lpiIcon = (WORD)hb_parni(2);
 
   hiRet =
-      ExtractAssociatedIcon((ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1)), (LPSTR)hb_parcx(2), &lpiIcon);
+      ExtractAssociatedIcon((ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1)), (LPSTR)hb_parcx(2), &lpiIcon);
 
   if (hiRet)
     hb_storni(lpiIcon, 2);
@@ -196,6 +197,6 @@ HB_FUNC(EXTRACTASSOCIATEDICON)
 
 HB_FUNC(EXTRACTICON)
 {
-  hb_retnl((LONG)ExtractIcon(ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1), (LPCSTR)hb_parcx(2),
+  hb_retnl((LONG)ExtractIcon(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2),
                              (UINT)hb_parni(3)));
 }

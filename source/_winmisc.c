@@ -18,6 +18,7 @@
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 
 #ifndef LONG_PTR
 #define LONG_PTR LONG
@@ -531,7 +532,7 @@ HB_FUNC(GETCLASSINFO)
 {
   WNDCLASS WndClass;
 
-  if (GetClassInfo(ISNIL(1) ? NULL : (HINSTANCE)hb_parnl(1), (LPCSTR)hb_parcx(2), &WndClass))
+  if (GetClassInfo(ISNIL(1) ? NULL : w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2), &WndClass))
 
     hb_retclen((char *)&WndClass, sizeof(WNDCLASS));
 
@@ -549,7 +550,7 @@ HB_FUNC(GETCLASSINFOEX)
 {
   WNDCLASSEX WndClassEx;
 
-  if (GetClassInfoEx(ISNIL(1) ? NULL : (HINSTANCE)hb_parnl(1), (LPCSTR)hb_parcx(2), &WndClassEx))
+  if (GetClassInfoEx(ISNIL(1) ? NULL : w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2), &WndClassEx))
 
     hb_retclen((char *)&WndClassEx, sizeof(WNDCLASSEX));
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) &WndClassEx, sizeof( WNDCLASSEX ) );

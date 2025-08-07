@@ -43,6 +43,7 @@
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 
 #if defined(__DMC__)
 #if 0
@@ -568,7 +569,7 @@ HB_FUNC(LOADSTRING)
   LPTSTR cText = (char *)hb_xgrab(iLen + 1);
 
   iLen =
-      LoadString((ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1)), (UINT)hb_parni(2), (LPTSTR)cText, iLen);
+      LoadString((ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1)), (UINT)hb_parni(2), (LPTSTR)cText, iLen);
 
   hb_retclen(cText, iLen);
   hb_xfree(cText);

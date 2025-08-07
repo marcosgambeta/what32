@@ -16,6 +16,7 @@
 #include "hbapiitm.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 
 LRESULT CALLBACK __WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK __WndProc2(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -490,7 +491,7 @@ BOOL CALLBACK __DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 HB_FUNC(_DIALOGBOX)
 {
 
-  hb_retni(DialogBox((ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1)),
+  hb_retni(DialogBox((ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1)),
                      (hb_parinfo(2) == HB_IT_STRING ? hb_parc(2) : MAKEINTRESOURCE((WORD)hb_parni(2))),
                      (ISNIL(3) ? NULL : w32_par_HWND(3)), (DLGPROC)hb_parnl(4)));
 }
@@ -500,7 +501,7 @@ HB_FUNC(_DIALOGBOX)
 HB_FUNC(_DIALOGBOXINDIRECT)
 {
 
-  hb_retni(DialogBoxIndirect((ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1)), (LPDLGTEMPLATE)hb_parc(2),
+  hb_retni(DialogBoxIndirect((ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1)), (LPDLGTEMPLATE)hb_parc(2),
                              (ISNIL(3) ? NULL : w32_par_HWND(3)), (DLGPROC)hb_parnl(4)));
 }
 
@@ -509,7 +510,7 @@ HB_FUNC(_DIALOGBOXINDIRECT)
 HB_FUNC(_CREATEDIALOG)
 {
 
-  hb_retnl((ULONG)CreateDialog((ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1)),
+  hb_retnl((ULONG)CreateDialog((ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1)),
                                (hb_parinfo(2) == HB_IT_STRING ? hb_parc(2) : MAKEINTRESOURCE((WORD)hb_parni(2))),
                                (ISNIL(3) ? NULL : w32_par_HWND(3)), (DLGPROC)hb_parnl(4)));
 }
@@ -518,7 +519,7 @@ HB_FUNC(_CREATEDIALOG)
 
 HB_FUNC(_CREATEDIALOGINDIRECT)
 {
-  hb_retnl((ULONG)CreateDialogIndirect((ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1)),
+  hb_retnl((ULONG)CreateDialogIndirect((ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1)),
                                        (LPDLGTEMPLATE)hb_parc(2), (ISNIL(3) ? NULL : w32_par_HWND(3)),
                                        (DLGPROC)hb_parnl(4)));
 }

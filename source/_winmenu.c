@@ -15,6 +15,7 @@
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 
 //-----------------------------------------------------------------------------
 
@@ -179,7 +180,7 @@ HB_FUNC(GETSYSTEMMENU)
 
 HB_FUNC(LOADMENU)
 {
-  hb_retnl((LONG)LoadMenu((HINSTANCE)hb_parnl(1), (LPCSTR)hb_parcx(2)));
+  hb_retnl((LONG)LoadMenu(w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------

@@ -23,6 +23,7 @@ Modified and non-API functions:
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 #define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -39,7 +40,7 @@ extern void Size2ArrayEx(SIZE *siz, PHB_ITEM aSize);
 
 HB_FUNC(LOADBITMAP)
 {
-  hb_retnl((LONG)LoadBitmap(ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1),
+  hb_retnl((LONG)LoadBitmap(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1),
                             hb_parinfo(2) == HB_IT_STRING ? (LPCTSTR)hb_parcx(2) : MAKEINTRESOURCE((WORD)hb_parni(2))));
 }
 

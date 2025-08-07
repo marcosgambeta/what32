@@ -22,6 +22,8 @@
 #include "stdlib.h"
 #include <time.h>
 
+#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
+
 //------------------------------------------------------------------
 #include <stdio.h>
 // #include <stdlib.h>
@@ -238,7 +240,7 @@ HB_FUNC(CALLDLL)
   int Flags;
   double DblParms[15];
   DYNAPARM Parm[15];
-  HINSTANCE hInst = (HINSTANCE)hb_parnl(1);
+  HINSTANCE hInst = w32_par_HINSTANCE(1);
   DWORD lpFunction = (DWORD)hb_parnl(2);
   RESULT rc;
 
