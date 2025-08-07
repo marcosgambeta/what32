@@ -49,7 +49,8 @@ linking the VMGUI library code into it.
 #include "stdlib.h"
 #include <time.h>
 
-#ifndef __MINGW32__
+//#ifndef __MINGW32__
+#if defined(__BORLANDC__) // TODO: for now, compile only with BCC
 
 //------------------------------------------------------------------
 #include <stdio.h>
