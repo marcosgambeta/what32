@@ -7,6 +7,7 @@
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HRGN(n) (HRGN)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -223,7 +224,7 @@ HB_FUNC(REDRAWWINDOW)
 
   hb_retl(RedrawWindow(w32_par_HWND(1),                   // handle of window
                        bRectOk ? &rc : NULL,                // address of structure with update rectangle
-                       ISNIL(3) ? NULL : (HRGN)hb_parnl(3), // handle of update region
+                       ISNIL(3) ? NULL : w32_par_HRGN(3), // handle of update region
                        hb_parni(4)                          // array of redraw flags
                        ));
 }
@@ -748,7 +749,7 @@ HB_FUNC(SETWINDOWPLACEMENT)
 
 HB_FUNC(SETWINDOWRGN)
 {
-  hb_retni(SetWindowRgn(w32_par_HWND(1), (HRGN)hb_parnl(2), hb_parl(3)));
+  hb_retni(SetWindowRgn(w32_par_HWND(1), w32_par_HRGN(2), hb_parl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -756,7 +757,7 @@ HB_FUNC(SETWINDOWRGN)
 
 HB_FUNC(GETWINDOWRGN)
 {
-  hb_retni(GetWindowRgn(w32_par_HWND(1), (HRGN)hb_parnl(2)));
+  hb_retni(GetWindowRgn(w32_par_HWND(1), w32_par_HRGN(2)));
 }
 
 //-----------------------------------------------------------------------------

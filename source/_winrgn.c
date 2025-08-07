@@ -11,6 +11,7 @@
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HRGN(n) (HRGN)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -49,7 +50,7 @@ HB_FUNC(CREATEELLIPTICRGNINDIRECT)
 
 HB_FUNC(FILLRGN)
 {
-  hb_retl(FillRgn(w32_par_HDC(1), (HRGN)hb_parnl(2), (HBRUSH)hb_parnl(3)));
+  hb_retl(FillRgn(w32_par_HDC(1), w32_par_HRGN(2), (HBRUSH)hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -192,7 +193,7 @@ HB_FUNC(CREATEROUNDRECTRGN)
 
 HB_FUNC(COMBINERGN)
 {
-  hb_retni(CombineRgn((HRGN)hb_parnl(1), (HRGN)hb_parnl(2), (HRGN)hb_parnl(3), hb_parni(4)));
+  hb_retni(CombineRgn(w32_par_HRGN(1), w32_par_HRGN(2), w32_par_HRGN(3), hb_parni(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -205,13 +206,13 @@ HB_FUNC(COMBINERGN)
 HB_FUNC(GETREGIONDATA)
 {
   RGNDATA *RgnData;
-  DWORD nBytes = GetRegionData((HRGN)hb_parnl(1), 0, NULL);
+  DWORD nBytes = GetRegionData(w32_par_HRGN(1), 0, NULL);
   DWORD nRet;
 
   if (nBytes)
   {
     RgnData = (RGNDATA *)hb_xgrab(nBytes);
-    nRet = GetRegionData((HRGN)hb_parnl(1), nBytes, RgnData);
+    nRet = GetRegionData(w32_par_HRGN(1), nBytes, RgnData);
     if (nRet == 1)
       hb_retclen((char *)RgnData, nBytes);
 
@@ -224,7 +225,7 @@ HB_FUNC(GETREGIONDATA)
 
 HB_FUNC(EXTSELECTCLIPRGN)
 {
-  hb_retni(ExtSelectClipRgn(w32_par_HDC(1), (HRGN)hb_parnl(2), hb_parni(3)));
+  hb_retni(ExtSelectClipRgn(w32_par_HDC(1), w32_par_HRGN(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -238,7 +239,7 @@ HB_FUNC(RECTINREGION)
   RECT rc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
-    hb_retl(RectInRegion((HRGN)hb_parnl(1), &rc));
+    hb_retl(RectInRegion(w32_par_HRGN(1), &rc));
 }
 
 //-----------------------------------------------------------------------------
@@ -246,7 +247,7 @@ HB_FUNC(RECTINREGION)
 
 HB_FUNC(GETRANDOMRGN)
 {
-  hb_retni(GetRandomRgn(w32_par_HDC(1), (HRGN)hb_parnl(2), hb_parni(3)));
+  hb_retni(GetRandomRgn(w32_par_HDC(1), w32_par_HRGN(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -254,7 +255,7 @@ HB_FUNC(GETRANDOMRGN)
 
 HB_FUNC(GETCLIPRGN)
 {
-  hb_retni(GetClipRgn(w32_par_HDC(1), (HRGN)hb_parnl(2)));
+  hb_retni(GetClipRgn(w32_par_HDC(1), w32_par_HRGN(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -262,7 +263,7 @@ HB_FUNC(GETCLIPRGN)
 
 HB_FUNC(FRAMERGN)
 {
-  hb_retl(FrameRgn(w32_par_HDC(1), (HRGN)hb_parnl(2), (HBRUSH)hb_parnl(3), hb_parni(4), hb_parni(5)));
+  hb_retl(FrameRgn(w32_par_HDC(1), w32_par_HRGN(2), (HBRUSH)hb_parnl(3), hb_parni(4), hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -270,7 +271,7 @@ HB_FUNC(FRAMERGN)
 
 HB_FUNC(EQUALRGN)
 {
-  hb_retl(EqualRgn((HRGN)hb_parnl(1), (HRGN)hb_parnl(2)));
+  hb_retl(EqualRgn(w32_par_HRGN(1), w32_par_HRGN(2)));
 }
 
 /*
@@ -297,7 +298,7 @@ HB_FUNC( VALIDATERECT )
 
 HB_FUNC(INVALIDATERGN)
 {
-  hb_retl(InvalidateRgn(w32_par_HWND(1), (HRGN)hb_parnl(2), hb_parl(3)));
+  hb_retl(InvalidateRgn(w32_par_HWND(1), w32_par_HRGN(2), hb_parl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -305,7 +306,7 @@ HB_FUNC(INVALIDATERGN)
 
 HB_FUNC(VALIDATERGN)
 {
-  hb_retl(ValidateRgn(w32_par_HWND(1), (HRGN)hb_parnl(2)));
+  hb_retl(ValidateRgn(w32_par_HWND(1), w32_par_HRGN(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -313,7 +314,7 @@ HB_FUNC(VALIDATERGN)
 
 HB_FUNC(INVERTRGN)
 {
-  hb_retl(InvertRgn(w32_par_HDC(1), (HRGN)hb_parnl(2)));
+  hb_retl(InvertRgn(w32_par_HDC(1), w32_par_HRGN(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -329,7 +330,7 @@ HB_FUNC(OFFSETCLIPRGN)
 
 HB_FUNC(OFFSETRGN)
 {
-  hb_retni(OffsetRgn((HRGN)hb_parnl(1), hb_parni(2), hb_parni(3)));
+  hb_retni(OffsetRgn(w32_par_HRGN(1), hb_parni(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -337,7 +338,7 @@ HB_FUNC(OFFSETRGN)
 
 HB_FUNC(PAINTRGN)
 {
-  hb_retl(PaintRgn(w32_par_HDC(1), (HRGN)hb_parnl(2)));
+  hb_retl(PaintRgn(w32_par_HDC(1), w32_par_HRGN(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -353,7 +354,7 @@ HB_FUNC(PATHTOREGION)
 
 HB_FUNC(PTINREGION)
 {
-  hb_retl(PtInRegion((HRGN)hb_parnl(1), hb_parni(2), hb_parni(3)));
+  hb_retl(PtInRegion(w32_par_HRGN(1), hb_parni(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -361,7 +362,7 @@ HB_FUNC(PTINREGION)
 
 HB_FUNC(SELECTCLIPRGN)
 {
-  hb_retni(SelectClipRgn(w32_par_HDC(1), (HRGN)hb_parnl(2)));
+  hb_retni(SelectClipRgn(w32_par_HDC(1), w32_par_HRGN(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -369,7 +370,7 @@ HB_FUNC(SELECTCLIPRGN)
 
 HB_FUNC(SETRECTRGN)
 {
-  hb_retl(SetRectRgn((HRGN)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
+  hb_retl(SetRectRgn(w32_par_HRGN(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -377,7 +378,7 @@ HB_FUNC(SETRECTRGN)
 
 HB_FUNC(GETUPDATERGN)
 {
-  hb_retni(GetUpdateRgn(w32_par_HWND(1), (HRGN)hb_parnl(2), hb_parl(3)));
+  hb_retni(GetUpdateRgn(w32_par_HWND(1), w32_par_HRGN(2), hb_parl(3)));
 }
 
 //-----------------------------------------------------------------------------

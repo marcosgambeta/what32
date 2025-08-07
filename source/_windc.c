@@ -15,6 +15,7 @@
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HRGN(n) (HRGN)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -56,7 +57,7 @@ HB_FUNC(SAVEDC)
 
 HB_FUNC(GETDCEX)
 {
-  hb_retnl((LONG)GetDCEx(w32_par_HWND(1), (HRGN)hb_parnl(2), (DWORD)hb_parnl(3)));
+  hb_retnl((LONG)GetDCEx(w32_par_HWND(1), w32_par_HRGN(2), (DWORD)hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -178,7 +179,7 @@ HB_FUNC(SCROLLDC)
 
   if (Array2Rect(hb_param(4, HB_IT_ARRAY), &lprcScroll) && Array2Rect(hb_param(5, HB_IT_ARRAY), &lprcClip))
   {
-    if (ScrollDC(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lprcScroll, &lprcClip, (HRGN)hb_parnl(6), &lprcUpdate))
+    if (ScrollDC(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lprcScroll, &lprcClip, w32_par_HRGN(6), &lprcUpdate))
     {
       Rect2ArrayEx(&lprcUpdate, pArray);
       hb_retl(TRUE);

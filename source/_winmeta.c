@@ -16,6 +16,7 @@
 #include "hbstack.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_HRGN(n) (HRGN)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -161,7 +162,7 @@ HB_FUNC(GETENHMETAFILE)
 
 HB_FUNC(GETMETARGN)
 {
-  hb_retni(GetMetaRgn(w32_par_HDC(1), (HRGN)hb_parnl(2)));
+  hb_retni(GetMetaRgn(w32_par_HDC(1), w32_par_HRGN(2)));
 }
 
 //-----------------------------------------------------------------------------
