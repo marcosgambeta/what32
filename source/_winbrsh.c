@@ -17,12 +17,13 @@
 #include "hbapi.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(CREATESOLIDBRUSH)
 {
-  hb_retnl((LONG)CreateSolidBrush((COLORREF)hb_parnl(1))); // brush color
+  hb_retnl((LONG)CreateSolidBrush(w32_par_COLORREF(1))); // brush color
 }
 
 //-----------------------------------------------------------------------------
@@ -61,7 +62,7 @@ HB_FUNC(CREATEBRUSHINDIRECT)
 HB_FUNC(CREATEHATCHBRUSH)
 {
 
-  hb_retnl((LONG)CreateHatchBrush(hb_parni(1), (COLORREF)hb_parnl(2)));
+  hb_retnl((LONG)CreateHatchBrush(hb_parni(1), w32_par_COLORREF(2)));
 }
 
 //-----------------------------------------------------------------------------

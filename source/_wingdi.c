@@ -21,6 +21,7 @@
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -73,7 +74,7 @@ HB_FUNC(GETRVALUE)
 HB_FUNC(SETTEXTCOLOR)
 {
 
-  hb_retnl((ULONG)SetTextColor(w32_par_HDC(1), (COLORREF)hb_parnl(2)));
+  hb_retnl((ULONG)SetTextColor(w32_par_HDC(1), w32_par_COLORREF(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -100,7 +101,7 @@ HB_FUNC(GETBKCOLOR)
 HB_FUNC(SETBKCOLOR)
 {
 
-  hb_retnl((ULONG)SetBkColor(w32_par_HDC(1), (COLORREF)hb_parnl(2)));
+  hb_retnl((ULONG)SetBkColor(w32_par_HDC(1), w32_par_COLORREF(2)));
 }
 
 //-----------------------------------------------------------------------------

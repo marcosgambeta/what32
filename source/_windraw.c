@@ -10,6 +10,7 @@
 #include "hbapi.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -118,7 +119,7 @@ HB_FUNC(DESCRIBEPIXELFORMAT)
 HB_FUNC(SETPIXEL)
 {
 
-  hb_retnl((ULONG)SetPixel(w32_par_HDC(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4)));
+  hb_retnl((ULONG)SetPixel(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -135,7 +136,7 @@ HB_FUNC(GETPIXEL)
 HB_FUNC(SETPIXELV)
 {
 
-  hb_retl(SetPixelV(w32_par_HDC(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4)));
+  hb_retl(SetPixelV(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4)));
 }
 
 //////////////////////////
@@ -750,7 +751,7 @@ HB_FUNC(SETPOLYFILLMODE)
 HB_FUNC(EXTFLOODFILL)
 {
 
-  hb_retl(ExtFloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4), (UINT)hb_parni(5)));
+  hb_retl(ExtFloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4), (UINT)hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -775,7 +776,7 @@ HB_FUNC(FLATTENPATH)
 HB_FUNC(FLOODFILL)
 {
 
-  hb_retl(FloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4)));
+  hb_retl(FloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4)));
 }
 
 //-----------------------------------------------------------------------------

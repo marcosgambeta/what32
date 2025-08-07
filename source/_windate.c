@@ -22,6 +22,7 @@
 #include "tchar.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 
 #ifdef __DMC__
 #define GDT_VALID 0
@@ -337,7 +338,7 @@ HB_FUNC(DATETIME_SETMONTHCALCOLOR)
   hb_retnl((LONG)DateTime_SetMonthCalColor(
       w32_par_HWND(1), // Handle to a DTP control
       hb_parni(2),       // Value of type int specifying which month calendar color to set.
-      (COLORREF)hb_parnl(
+      w32_par_COLORREF(
           3) // COLORREF value that represents the color that will be set for the specified area of the month calendar.
       ));
 }

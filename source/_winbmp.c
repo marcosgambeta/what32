@@ -20,6 +20,7 @@ Modified and non-API functions:
 #include "hbapi.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -405,7 +406,7 @@ DrawGlyph(HDC hDC, int x , int y , int dx , int dy , HBITMAP hBmp , COLORREF rgb
 
 HB_FUNC(DRAWGLYPH)
 {
-  Pic((HDC)hb_parni(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), (HBITMAP)hb_parni(6), (COLORREF)hb_parnl(7),
+  Pic((HDC)hb_parni(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), (HBITMAP)hb_parni(6), w32_par_COLORREF(7),
       hb_parl(8));
   return;
 }
