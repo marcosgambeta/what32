@@ -21,6 +21,7 @@ Modified and non-API functions:
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
+#define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -50,7 +51,7 @@ HB_FUNC(DRAWBITMAP)
   HDC hDC = w32_par_HDC(1);
   HDC hDCmem = CreateCompatibleDC(hDC);
   DWORD dwraster = (ISNIL(3)) ? SRCCOPY : hb_parnl(3);
-  HBITMAP hBitmap = (HBITMAP)hb_parnl(2);
+  HBITMAP hBitmap = w32_par_HBITMAP(2);
   BITMAP bitmap;
   int nWidthDest = (hb_pcount() >= 5 && !ISNIL(6)) ? hb_parni(6) : 0;
   int nHeightDest = (hb_pcount() >= 6 && !ISNIL(7)) ? hb_parni(7) : 0;
@@ -75,7 +76,7 @@ HB_FUNC(GETBITMAPSIZE)
   PHB_ITEM aArray = _itemArrayNew(2);
   PHB_ITEM tmp;
   BITMAP bm;
-  HBITMAP hBmp = (HBITMAP)hb_parnl(1);
+  HBITMAP hBmp = w32_par_HBITMAP(1);
 
   GetObject(hBmp, sizeof(bm), &bm);
 
@@ -102,7 +103,7 @@ HB_FUNC(GETBITMAPDIMENSIONEX)
   SIZE Size;
   PHB_ITEM aSize;
 
-  if (GetBitmapDimensionEx((HBITMAP)hb_parnl(1), &Size))
+  if (GetBitmapDimensionEx(w32_par_HBITMAP(1), &Size))
   {
     aSize = Size2Array(&Size);
     _itemReturn(aSize);
@@ -122,7 +123,7 @@ HB_FUNC(SETBITMAPDIMENSIONEX)
   PHB_ITEM aSize;
   PHB_ITEM temp;
 
-  if (SetBitmapDimensionEx((HBITMAP)hb_parnl(1), hb_parni(2), hb_parni(3), &Size))
+  if (SetBitmapDimensionEx(w32_par_HBITMAP(1), hb_parni(2), hb_parni(3), &Size))
   {
 
     aSize = hb_itemArrayNew(2);
@@ -233,7 +234,7 @@ HB_FUNC(CREATEDISCARDABLEBITMAP)
 HB_FUNC(MASKBLT)
 {
   hb_retl(MaskBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6), hb_parni(7),
-                  hb_parni(8), (HBITMAP)hb_parnl(9), hb_parni(10), hb_parni(11), (DWORD)hb_parnl(12)));
+                  hb_parni(8), w32_par_HBITMAP(9), hb_parni(10), hb_parni(11), (DWORD)hb_parnl(12)));
 }
 
 //-----------------------------------------------------------------------------
@@ -270,7 +271,7 @@ HB_FUNC(SETROP2)
 HB_FUNC(SETBITMAPBITS)
 {
 
-  hb_retnl((LONG)SetBitmapBits((HBITMAP)hb_parnl(1), (DWORD)hb_parclen(2), (VOID *)hb_parcx(2)));
+  hb_retnl((LONG)SetBitmapBits(w32_par_HBITMAP(1), (DWORD)hb_parclen(2), (VOID *)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -284,7 +285,7 @@ HB_FUNC(SETDIBITS)
 
   // Your code goes here
 
-  hb_retni(SetDIBits(w32_par_HDC(1), (HBITMAP)hb_parnl(2), (UINT)hb_parni(3), (UINT)hb_parni(4), (VOID *)hb_parcx(5),
+  hb_retni(SetDIBits(w32_par_HDC(1), w32_par_HBITMAP(2), (UINT)hb_parni(3), (UINT)hb_parni(4), (VOID *)hb_parcx(5),
                      bmi, (UINT)hb_parni(7)));
 }
 

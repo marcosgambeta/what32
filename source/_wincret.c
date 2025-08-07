@@ -17,6 +17,7 @@
 #include "item.api"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -96,7 +97,7 @@ HB_FUNC(HIDECARET)
 
 HB_FUNC(CREATECARET)
 {
-  hb_retl(CreateCaret(w32_par_HWND(1), (HBITMAP)hb_parnl(2), (int)hb_parni(3), (int)hb_parni(4)));
+  hb_retl(CreateCaret(w32_par_HWND(1), w32_par_HBITMAP(2), (int)hb_parni(3), (int)hb_parni(4)));
 }
 
 //-----------------------------------------------------------------------------

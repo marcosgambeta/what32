@@ -13,6 +13,7 @@
 #include "hbapiitm.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 
 //-----------------------------------------------------------------------------
 
@@ -124,7 +125,7 @@ HB_FUNC(INSERTMENU)
 
 HB_FUNC(SETMENUITEMBITMAPS)
 {
-  hb_retl(SetMenuItemBitmaps((HMENU)hb_parnl(1), hb_parni(2), hb_parni(3), (HBITMAP)hb_parnl(4), (HBITMAP)hb_parnl(5)));
+  hb_retl(SetMenuItemBitmaps((HMENU)hb_parnl(1), hb_parni(2), hb_parni(3), w32_par_HBITMAP(4), w32_par_HBITMAP(5)));
 }
 
 //-----------------------------------------------------------------------------

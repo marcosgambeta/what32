@@ -13,6 +13,7 @@
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
+#define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 
 extern BOOL Array2Point(PHB_ITEM aPoint, POINT *pt);
 
@@ -98,7 +99,7 @@ HB_FUNC(IMAGELIST_SETIMAGECOUNT)
 
 HB_FUNC(IMAGELIST_ADD)
 {
-  hb_retni(ImageList_Add((HIMAGELIST)hb_parnl(1), (HBITMAP)hb_parnl(2), (HBITMAP)hb_parnl(3)));
+  hb_retni(ImageList_Add((HIMAGELIST)hb_parnl(1), w32_par_HBITMAP(2), w32_par_HBITMAP(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -140,7 +141,7 @@ HB_FUNC(IMAGELIST_DRAW)
 
 HB_FUNC(IMAGELIST_REPLACE)
 {
-  hb_retl(ImageList_Replace((HIMAGELIST)hb_parnl(1), hb_parni(2), (HBITMAP)hb_parnl(3), (HBITMAP)hb_parnl(4)));
+  hb_retl(ImageList_Replace((HIMAGELIST)hb_parnl(1), hb_parni(2), w32_par_HBITMAP(3), w32_par_HBITMAP(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -148,7 +149,7 @@ HB_FUNC(IMAGELIST_REPLACE)
 
 HB_FUNC(IMAGELIST_ADDMASKED)
 {
-  hb_retni(ImageList_AddMasked((HIMAGELIST)hb_parnl(1), (HBITMAP)hb_parnl(2), w32_par_COLORREF(3)));
+  hb_retni(ImageList_AddMasked((HIMAGELIST)hb_parnl(1), w32_par_HBITMAP(2), w32_par_COLORREF(3)));
 }
 
 //-----------------------------------------------------------------------------

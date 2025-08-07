@@ -18,6 +18,7 @@
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
+#define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 
 //-----------------------------------------------------------------------------
 
@@ -30,7 +31,7 @@ HB_FUNC(CREATESOLIDBRUSH)
 
 HB_FUNC(CREATEPATTERNBRUSH)
 {
-  hb_retnl((LONG)CreatePatternBrush((HBITMAP)hb_parnl(1))); // bitmap handle
+  hb_retnl((LONG)CreatePatternBrush(w32_par_HBITMAP(1))); // bitmap handle
 }
 
 //-----------------------------------------------------------------------------

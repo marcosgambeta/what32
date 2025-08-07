@@ -23,6 +23,7 @@
 #include "hbapiitm.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 
 //----------------------------------------------------------------------------//
 
@@ -268,7 +269,7 @@ HB_FUNC(SETCLIPBOARDDATA)
 
   case CF_BITMAP:
     if (IsClipboardFormatAvailable(CF_BITMAP))
-      hb_retl((BOOL)SetClipboardData(CF_BITMAP, DuplicateBitmap((HBITMAP)hb_parnl(2))));
+      hb_retl((BOOL)SetClipboardData(CF_BITMAP, DuplicateBitmap(w32_par_HBITMAP(2))));
     else
       hb_retnl(0);
     break;
