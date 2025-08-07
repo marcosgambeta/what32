@@ -14,6 +14,7 @@
 #include "hbapi.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -29,7 +30,7 @@ extern void Size2ArrayEx(SIZE *siz, PHB_ITEM aSize);
 
 HB_FUNC(GETDC)
 {
-  hb_retnl((ULONG)GetDC((HWND)hb_parnl(1)));
+  hb_retnl((ULONG)GetDC(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -55,14 +56,14 @@ HB_FUNC(SAVEDC)
 
 HB_FUNC(GETDCEX)
 {
-  hb_retnl((LONG)GetDCEx((HWND)hb_parnl(1), (HRGN)hb_parnl(2), (DWORD)hb_parnl(3)));
+  hb_retnl((LONG)GetDCEx(w32_par_HWND(1), (HRGN)hb_parnl(2), (DWORD)hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(RELEASEDC)
 {
-  hb_retni(ReleaseDC((HWND)hb_parnl(1), w32_par_HDC(2)));
+  hb_retni(ReleaseDC(w32_par_HWND(1), w32_par_HDC(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -102,7 +103,7 @@ HB_FUNC(WINDOWFROMDC)
 
 HB_FUNC(GETWINDOWDC)
 {
-  hb_retnl((LONG)GetWindowDC((HWND)hb_parnl(1)));
+  hb_retnl((LONG)GetWindowDC(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------

@@ -16,6 +16,8 @@
 #include "hbapiitm.h"
 #include "item.api"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
 extern PHB_ITEM Point2Array(POINT *pt);
@@ -80,21 +82,21 @@ HB_FUNC(SETCARETPOS)
 
 HB_FUNC(SHOWCARET)
 {
-  hb_retl(ShowCaret((HWND)hb_parnl(1)));
+  hb_retl(ShowCaret(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(HIDECARET)
 {
-  hb_retl(HideCaret((HWND)hb_parnl(1)));
+  hb_retl(HideCaret(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(CREATECARET)
 {
-  hb_retl(CreateCaret((HWND)hb_parnl(1), (HBITMAP)hb_parnl(2), (int)hb_parni(3), (int)hb_parni(4)));
+  hb_retl(CreateCaret(w32_par_HWND(1), (HBITMAP)hb_parnl(2), (int)hb_parni(3), (int)hb_parni(4)));
 }
 
 //-----------------------------------------------------------------------------

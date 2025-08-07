@@ -19,6 +19,8 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 // extern __DlgProc ;
 
 /*
@@ -61,7 +63,7 @@ HB_FUNC(_FINDTEXT)
 
   fr.lStructSize = sizeof(fr);
 
-  fr.hwndOwner = (HWND)hb_parnl(1);
+  fr.hwndOwner = w32_par_HWND(1);
   fr.hInstance = (HINSTANCE)hb_parnl(2);
   fr.Flags = (DWORD)hb_parnl(3);
   fr.lpstrFindWhat = (LPTSTR)hb_parcx(4);
@@ -85,7 +87,7 @@ HB_FUNC(_REPLACETEXT)
 
   fr.lStructSize = sizeof(fr);
 
-  fr.hwndOwner = (HWND)hb_parnl(1);
+  fr.hwndOwner = w32_par_HWND(1);
   fr.hInstance = (HINSTANCE)hb_parnl(2);
   fr.Flags = (DWORD)hb_parnl(3);
   fr.lpstrFindWhat = (LPTSTR)hb_parcx(4);
@@ -171,7 +173,7 @@ HB_FUNC(CHOOSECOLOR)
     crCustClr[i] = (ISARRAY(3) ? hb_parnl(3, i + 1) : RGB(0, 0, 0)); // GetSysColor(COLOR_BTNFACE)) ;
 
   cc.lStructSize = sizeof(CHOOSECOLOR);
-  cc.hwndOwner = ISNIL(1) ? GetActiveWindow() : (HWND)hb_parnl(1);
+  cc.hwndOwner = ISNIL(1) ? GetActiveWindow() : w32_par_HWND(1);
   cc.rgbResult = (COLORREF)ISNIL(2) ? 0 : hb_parnl(2);
   cc.lpCustColors = crCustClr;
   cc.Flags = (WORD)(ISNIL(4) ? CC_ANYCOLOR | CC_FULLOPEN | CC_RGBINIT : hb_parnl(4));
@@ -193,7 +195,7 @@ HB_FUNC(_GETOPENFILENAME)
   ZeroMemory(&ofn, sizeof(ofn));
   ofn.hInstance = GetModuleHandle(NULL);
   ofn.lStructSize = sizeof(ofn);
-  ofn.hwndOwner = (ISNIL(1) ? GetActiveWindow() : (HWND)hb_parnl(1));
+  ofn.hwndOwner = (ISNIL(1) ? GetActiveWindow() : w32_par_HWND(1));
   ofn.lpstrTitle = hb_parc(3);
   ofn.lpstrFilter = hb_parc(4);
   ofn.Flags = (ISNIL(5) ? OFN_EXPLORER : hb_parnl(5));
@@ -228,7 +230,7 @@ HB_FUNC(_GETSAVEFILENAME)
   ZeroMemory(&ofn, sizeof(ofn));
   ofn.hInstance = GetModuleHandle(NULL);
   ofn.lStructSize = sizeof(ofn);
-  ofn.hwndOwner = ISNIL(1) ? GetActiveWindow() : (HWND)hb_parnl(1);
+  ofn.hwndOwner = ISNIL(1) ? GetActiveWindow() : w32_par_HWND(1);
   ofn.lpstrTitle = hb_parc(3);
   ofn.lpstrFilter = hb_parc(4);
   ofn.Flags = (ISNIL(5) ? OFN_FILEMUSTEXIST | OFN_EXPLORER : hb_parnl(4));
@@ -254,7 +256,7 @@ HB_FUNC(_GETSAVEFILENAME)
 
 HB_FUNC(SHBROWSEFORFOLDER)
 {
-  HWND hwnd = ISNIL(1) ? GetActiveWindow() : (HWND)hb_parnl(1);
+  HWND hwnd = ISNIL(1) ? GetActiveWindow() : w32_par_HWND(1);
   BROWSEINFO BrowseInfo;
   char *lpBuffer = (char *)hb_xgrab(MAX_PATH + 1);
   LPITEMIDLIST pidlBrowse;

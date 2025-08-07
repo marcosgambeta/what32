@@ -14,6 +14,8 @@
 // #include "hbvm.h"
 // #include "hbstack.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
 extern PHB_ITEM Point2Array(POINT *pt);
@@ -44,7 +46,7 @@ HB_FUNC(CREATEMAPPEDBITMAP)
 HB_FUNC(CREATETOOLBAREX)
 {
 
-  hb_retnl((LONG)CreateToolbarEx((HWND)hb_parnl(1),                        // parent
+  hb_retnl((LONG)CreateToolbarEx(w32_par_HWND(1),                        // parent
                                  (DWORD)hb_parnl(2),                       // style
                                  (UINT)hb_parni(3),                        // id,
                                  (int)hb_parni(4),                         // number of btn images in bmp
@@ -65,7 +67,7 @@ HB_FUNC(GETTOOLBARITEMRECT)
 {
   RECT rc = {0, 0, 0, 0};
   PHB_ITEM aRect;
-  SendMessage((HWND)hb_parnl(1), TB_GETITEMRECT, hb_parni(2), (LPARAM)&rc);
+  SendMessage(w32_par_HWND(1), TB_GETITEMRECT, hb_parni(2), (LPARAM)&rc);
   //   MapWindowPoints((HWND) hb_parnl(1), HWND_DESKTOP, (POINT*)&rc, 2);
   aRect = Rect2Array(&rc);
   _itemReturn(aRect);

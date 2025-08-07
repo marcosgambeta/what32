@@ -15,6 +15,8 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 LRESULT CALLBACK __WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK __WndProc2(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK __WndProc3(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -82,7 +84,7 @@ HB_FUNC(_CREATEWINDOWEX)
   int y = (ISNIL(6) ? CW_USEDEFAULT : hb_parni(6));
   int nWidth = (ISNIL(7) ? CW_USEDEFAULT : hb_parni(7));
   int nHeight = (ISNIL(8) ? CW_USEDEFAULT : hb_parni(8));
-  HWND hWndParent = (ISNIL(9) ? (HWND)NULL : (HWND)hb_parnl(9));
+  HWND hWndParent = (ISNIL(9) ? (HWND)NULL : w32_par_HWND(9));
   HMENU hMenu = (ISNIL(10) ? (HMENU)NULL : (HMENU)hb_parni(10));
   HANDLE hInstance = (ISNIL(11) ? GetModuleHandle(NULL) : (HANDLE)hb_parnl(11));
   LPVOID lParam = (ISNIL(12) ? NULL : (LPVOID)hb_parnl(12));
@@ -106,7 +108,7 @@ HB_FUNC(_CREATEMDIWINDOW)
   int y = (ISNIL(5) ? CW_USEDEFAULT : hb_parni(5));
   int nWidth = (ISNIL(6) ? CW_USEDEFAULT : hb_parni(6));
   int nHeight = (ISNIL(7) ? CW_USEDEFAULT : hb_parni(7));
-  HWND hWndParent = (ISNIL(8) ? (HWND)NULL : (HWND)hb_parnl(8));
+  HWND hWndParent = (ISNIL(8) ? (HWND)NULL : w32_par_HWND(8));
   HANDLE hInstance = (ISNIL(9) ? GetModuleHandle(NULL) : (HANDLE)hb_parnl(9));
   LPARAM lParam = (ISNIL(10) ? 0 : (LPARAM)hb_parnl(10));
 
@@ -490,7 +492,7 @@ HB_FUNC(_DIALOGBOX)
 
   hb_retni(DialogBox((ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1)),
                      (hb_parinfo(2) == HB_IT_STRING ? hb_parc(2) : MAKEINTRESOURCE((WORD)hb_parni(2))),
-                     (ISNIL(3) ? NULL : (HWND)hb_parnl(3)), (DLGPROC)hb_parnl(4)));
+                     (ISNIL(3) ? NULL : w32_par_HWND(3)), (DLGPROC)hb_parnl(4)));
 }
 
 //----------------------------------------------------------------------------
@@ -499,7 +501,7 @@ HB_FUNC(_DIALOGBOXINDIRECT)
 {
 
   hb_retni(DialogBoxIndirect((ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1)), (LPDLGTEMPLATE)hb_parc(2),
-                             (ISNIL(3) ? NULL : (HWND)hb_parnl(3)), (DLGPROC)hb_parnl(4)));
+                             (ISNIL(3) ? NULL : w32_par_HWND(3)), (DLGPROC)hb_parnl(4)));
 }
 
 //----------------------------------------------------------------------------
@@ -509,7 +511,7 @@ HB_FUNC(_CREATEDIALOG)
 
   hb_retnl((ULONG)CreateDialog((ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1)),
                                (hb_parinfo(2) == HB_IT_STRING ? hb_parc(2) : MAKEINTRESOURCE((WORD)hb_parni(2))),
-                               (ISNIL(3) ? NULL : (HWND)hb_parnl(3)), (DLGPROC)hb_parnl(4)));
+                               (ISNIL(3) ? NULL : w32_par_HWND(3)), (DLGPROC)hb_parnl(4)));
 }
 
 //----------------------------------------------------------------------------
@@ -517,7 +519,7 @@ HB_FUNC(_CREATEDIALOG)
 HB_FUNC(_CREATEDIALOGINDIRECT)
 {
   hb_retnl((ULONG)CreateDialogIndirect((ISNIL(1) ? GetModuleHandle(NULL) : (HINSTANCE)hb_parnl(1)),
-                                       (LPDLGTEMPLATE)hb_parc(2), (ISNIL(3) ? NULL : (HWND)hb_parnl(3)),
+                                       (LPDLGTEMPLATE)hb_parc(2), (ISNIL(3) ? NULL : w32_par_HWND(3)),
                                        (DLGPROC)hb_parnl(4)));
 }
 

@@ -31,6 +31,8 @@
 #include "hbapiitm.h"
 #include "winreg.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 #ifndef DWORD_PTR
 #define DWORD_PTR DWORD
 #endif
@@ -69,7 +71,7 @@ BOOL WINAPI InternetGetConnectedState(OUT LPDWORD lpdwFlags, IN DWORD dwReserved
 //
 HB_FUNC(INTERNETDIAL)
 {
-  HWND hWnd = ISNIL(1) ? 0 : (HWND)hb_parnl(1);
+  HWND hWnd = ISNIL(1) ? 0 : w32_par_HWND(1);
   LPTSTR lpszId = ISNIL(2) ? NULL : (LPTSTR)hb_parcx(2);
   DWORD nFlags = INTERNET_AUTODIAL_FORCE_ONLINE;
   DWORD nRet = 0;

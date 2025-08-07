@@ -19,6 +19,8 @@
 #include <winsock2.h>
 #include <windows.h>
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 #ifndef DWORD_PTR
 #define DWORD_PTR DWORD
 #endif
@@ -499,7 +501,7 @@ HB_FUNC(WSAASYNCGETSERVBYNAME)
   char *buf = (char *)hb_xgrab(MAXGETHOSTSTRUCT);
   HANDLE hRet;
 
-  if ((hRet = WSAAsyncGetServByName((HWND)hb_parnl(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3),
+  if ((hRet = WSAAsyncGetServByName(w32_par_HWND(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3),
                                     ISNIL(4) ? NULL : (char *)hb_parcx(4), (char *)buf, (int)MAXGETHOSTSTRUCT)) != 0)
 
     hb_storclen(buf, sizeof(SERVENT), 5);
@@ -522,7 +524,7 @@ HB_FUNC(WSAASYNCGETSERVBYPORT)
   char *buf = (char *)hb_xgrab(MAXGETHOSTSTRUCT);
   HANDLE hRet;
 
-  if ((hRet = WSAAsyncGetServByPort((HWND)hb_parnl(1), (unsigned int)hb_parni(2), hb_parni(3),
+  if ((hRet = WSAAsyncGetServByPort(w32_par_HWND(1), (unsigned int)hb_parni(2), hb_parni(3),
                                     ISNIL(4) ? NULL : (char *)hb_parcx(4), (char *)buf, (int)MAXGETHOSTSTRUCT)) != 0)
 
     hb_storclen(buf, sizeof(SERVENT), 5);
@@ -545,7 +547,7 @@ HB_FUNC(WSAASYNCGETPROTOBYNAME)
   char *buf = (char *)hb_xgrab(MAXGETHOSTSTRUCT);
   HANDLE hRet;
 
-  if ((hRet = WSAAsyncGetProtoByName((HWND)hb_parnl(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3), (char *)buf,
+  if ((hRet = WSAAsyncGetProtoByName(w32_par_HWND(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3), (char *)buf,
                                      (int)MAXGETHOSTSTRUCT)) != 0)
 
     hb_storclen(buf, sizeof(PROTOENT), 4);
@@ -568,7 +570,7 @@ HB_FUNC(WSAASYNCGETPROTOBYNUMBER)
   char *buf = (char *)hb_xgrab(MAXGETHOSTSTRUCT);
   HANDLE hRet;
 
-  if ((hRet = WSAAsyncGetProtoByNumber((HWND)hb_parnl(1), (unsigned int)hb_parni(2), (int)hb_parni(3), (char *)buf,
+  if ((hRet = WSAAsyncGetProtoByNumber(w32_par_HWND(1), (unsigned int)hb_parni(2), (int)hb_parni(3), (char *)buf,
                                        (int)MAXGETHOSTSTRUCT)) != 0)
 
     hb_storclen(buf, sizeof(PROTOENT), 4);
@@ -591,7 +593,7 @@ HB_FUNC(WSAASYNCGETHOSTBYNAME)
   char *buf = (char *)hb_xgrab(MAXGETHOSTSTRUCT);
   HANDLE hRet;
 
-  if ((hRet = WSAAsyncGetHostByName((HWND)hb_parnl(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3), (char *)buf,
+  if ((hRet = WSAAsyncGetHostByName(w32_par_HWND(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3), (char *)buf,
                                     (int)MAXGETHOSTSTRUCT)) != 0)
 
     hb_storclen(buf, sizeof(HOSTENT), 4);
@@ -615,7 +617,7 @@ HB_FUNC(WSAASYNCGETHOSTBYADDR)
   char *buf = (char *)hb_xgrab(MAXGETHOSTSTRUCT);
   HANDLE hRet;
 
-  if ((hRet = WSAAsyncGetHostByAddr((HWND)hb_parnl(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3),
+  if ((hRet = WSAAsyncGetHostByAddr(w32_par_HWND(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3),
                                     (int)hb_parclen(3), (int)hb_parni(4), (char *)buf, (int)MAXGETHOSTSTRUCT)) != 0)
 
     hb_storclen(buf, sizeof(HOSTENT), 5);
@@ -637,7 +639,7 @@ HB_FUNC(WSACANCELASYNCREQUEST)
 
 HB_FUNC(WSAASYNCSELECT)
 {
-  hb_retni((int)WSAAsyncSelect((SOCKET)hb_parnl(1), (HWND)hb_parnl(2), (UINT)hb_parni(3), hb_parnl(4)));
+  hb_retni((int)WSAAsyncSelect((SOCKET)hb_parnl(1), w32_par_HWND(2), (UINT)hb_parni(3), hb_parnl(4)));
 }
 
 //-----------------------------------------------------------------------------

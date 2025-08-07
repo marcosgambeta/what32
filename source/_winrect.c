@@ -15,6 +15,7 @@
 // #include "hbstack.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -463,7 +464,7 @@ HB_FUNC(VALIDATERECT)
   RECT rc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
-    hb_retl(ValidateRect((HWND)hb_parnl(1), &rc));
+    hb_retl(ValidateRect(w32_par_HWND(1), &rc));
   else
-    hb_retl(ValidateRect((HWND)hb_parnl(1), NULL));
+    hb_retl(ValidateRect(w32_par_HWND(1), NULL));
 }

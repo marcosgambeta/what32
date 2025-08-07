@@ -19,6 +19,7 @@
 #include "item.api"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 
@@ -69,7 +70,7 @@ HB_FUNC(INITCOMMONCONTROLSEX)
 //----------------------------------------------------------------------------//
 HB_FUNC(CREATESTATUSWINDOW)
 {
-  hb_retnl((ULONG)CreateStatusWindow(hb_parnl(1), (LPCSTR)hb_parcx(2), (HWND)hb_parnl(3), (UINT)hb_parni(4)));
+  hb_retnl((ULONG)CreateStatusWindow(hb_parnl(1), (LPCSTR)hb_parcx(2), w32_par_HWND(3), (UINT)hb_parni(4)));
 }
 
 //----------------------------------------------------------------------------//
@@ -90,14 +91,14 @@ HB_FUNC(DRAWSTATUSTEXT)
 
 HB_FUNC(WRITESTATUSWINDOW)
 {
-  SendMessage((HWND)hb_parnl(1), SB_SETTEXT, hb_parni(2), (LPARAM)hb_parcx(3));
+  SendMessage(w32_par_HWND(1), SB_SETTEXT, hb_parni(2), (LPARAM)hb_parcx(3));
 }
 
 HB_FUNC(STATUSBARGETRECT)
 {
   RECT rc;
   PHB_ITEM aRect;
-  HWND hWnd = (HWND)hb_parnl(1);
+  HWND hWnd = w32_par_HWND(1);
   SendMessage(hWnd, SB_GETRECT, hb_parnl(2), (LPARAM)&rc);
   aRect = Rect2Array(&rc);
   _itemReturn(aRect);
@@ -108,7 +109,7 @@ HB_FUNC(STATUSBARGETPARTS)
 {
   RECT rc;
   PHB_ITEM aParts;
-  HWND hWnd = (HWND)hb_parnl(1);
+  HWND hWnd = w32_par_HWND(1);
   SendMessage(hWnd, SB_GETPARTS, hb_parni(2), (LPARAM)&rc);
   aParts = Rect2Array(&rc);
   _itemReturn(aParts);
@@ -153,7 +154,7 @@ to load the appropriate Help string.
 */
 HB_FUNC(CREATEPROGRESSBAR)
 {
-  HWND hPBar, hParentWindow = (HWND)hb_parnl(1);
+  HWND hPBar, hParentWindow = w32_par_HWND(1);
   RECT rcClient;
   LONG ProgressBarStyle;
   BOOL bBorder = ISNIL(7) ? FALSE : hb_parl(7);
@@ -204,14 +205,14 @@ HB_FUNC(CREATEPROGRESSBAR)
 */
 HB_FUNC(UPDATEPROGRESSBAR)
 {
-  SendMessage((HWND)hb_parnl(1), PBM_STEPIT, 0, 0);
+  SendMessage(w32_par_HWND(1), PBM_STEPIT, 0, 0);
 }
 
 //----------------------------------------------------------------------------//
 
 HB_FUNC(SETPROGRESSBAR)
 {
-  SendMessage((HWND)hb_parnl(1), PBM_SETPOS, (WPARAM)hb_parni(2), 0);
+  SendMessage(w32_par_HWND(1), PBM_SETPOS, (WPARAM)hb_parni(2), 0);
 }
 
 /*
@@ -247,7 +248,7 @@ HB_FUNC(INITLISTVIEW)
   i.dwICC = ICC_DATE_CLASSES;
   InitCommonControlsEx(&i);
 
-  hwnd = (HWND)hb_parnl(1);
+  hwnd = w32_par_HWND(1);
 
   hbutton = CreateWindowEx(
       WS_EX_CLIENTEDGE, "SysListView32", "",
@@ -276,7 +277,7 @@ HB_FUNC(INITLISTVIEWCOLUMNS)
   int s;
   int vi;
 
-  hc = (HWND)hb_parnl(1);
+  hc = w32_par_HWND(1);
 
   l9 = hb_parinfa(2, 0) - 1;
   hArray = hb_param(2, HB_IT_ARRAY);
@@ -308,7 +309,7 @@ HB_FUNC(ADDLISTVIEWITEMS)
   int s;
   int c;
 
-  h = (HWND)hb_parnl(1);
+  h = w32_par_HWND(1);
   l = hb_parinfa(2, 0) - 1;
   hArray = hb_param(2, HB_IT_ARRAY);
   c = ListView_GetItemCount(h);
@@ -332,27 +333,27 @@ HB_FUNC(ADDLISTVIEWITEMS)
 //------------------------------------------------------------------------------------------
 HB_FUNC(LISTVIEW_SETCURSEL)
 {
-  ListView_SetItemState((HWND)hb_parnl(1), (WPARAM)hb_parni(2) - 1, LVIS_FOCUSED | LVIS_SELECTED,
+  ListView_SetItemState(w32_par_HWND(1), (WPARAM)hb_parni(2) - 1, LVIS_FOCUSED | LVIS_SELECTED,
                         LVIS_FOCUSED | LVIS_SELECTED);
 }
 //------------------------------------------------------------------------------------------
 HB_FUNC(C_SETFOCUS)
 {
-  hb_retnl((LONG)SetFocus((HWND)hb_parnl(1)));
+  hb_retnl((LONG)SetFocus(w32_par_HWND(1)));
 }
 //------------------------------------------------------------------------------------------
 HB_FUNC(LISTVIEWDELETESTRING)
 {
-  SendMessage((HWND)hb_parnl(1), LVM_DELETEITEM, (WPARAM)hb_parni(2) - 1, 0);
+  SendMessage(w32_par_HWND(1), LVM_DELETEITEM, (WPARAM)hb_parni(2) - 1, 0);
 }
 //------------------------------------------------------------------------------------------
 HB_FUNC(LISTVIEWRESET)
 {
-  SendMessage((HWND)hb_parnl(1), LVM_DELETEALLITEMS, 0, 0);
+  SendMessage(w32_par_HWND(1), LVM_DELETEALLITEMS, 0, 0);
 }
 //------------------------------------------------------------------------------------------
 HB_FUNC(LISTVIEW_GETFIRSTITEM)
 {
-  hb_retni(ListView_GetNextItem((HWND)hb_parnl(1), -1, LVNI_ALL | LVNI_SELECTED) + 1);
+  hb_retni(ListView_GetNextItem(w32_par_HWND(1), -1, LVNI_ALL | LVNI_SELECTED) + 1);
 }
 //------------------------------------------------------------------------------------------

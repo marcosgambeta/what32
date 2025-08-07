@@ -7,6 +7,8 @@
 
 #include "hbapi.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 //-------------------------------------------------------------------------//
 
 HB_FUNC(TVINSERTITEM)
@@ -28,27 +30,27 @@ HB_FUNC(TVINSERTITEM)
   is.item.iSelectedImage = hb_parnl(4);
 #endif
 
-  hb_retnl(SendMessage((HWND)hb_parnl(1), TVM_INSERTITEM, 0, (LPARAM)(LPTV_INSERTSTRUCT)(&is)));
+  hb_retnl(SendMessage(w32_par_HWND(1), TVM_INSERTITEM, 0, (LPARAM)(LPTV_INSERTSTRUCT)(&is)));
 }
 
 //-------------------------------------------------------------------------//
 HB_FUNC(TVDELETEITEM)
 {
-  TreeView_DeleteItem((HWND)hb_parnl(1), (HTREEITEM)hb_parnl(2));
+  TreeView_DeleteItem(w32_par_HWND(1), (HTREEITEM)hb_parnl(2));
 }
 
 //-------------------------------------------------------------------------//
 
 HB_FUNC(TVSETIMAGELIST) // ( hWnd, hImageList, nType )
 {
-  hb_retnl((LONG)TreeView_SetImageList((HWND)hb_parnl(1), (HIMAGELIST)hb_parnl(2), hb_parnl(3)));
+  hb_retnl((LONG)TreeView_SetImageList(w32_par_HWND(1), (HIMAGELIST)hb_parnl(2), hb_parnl(3)));
 }
 
 //-------------------------------------------------------------------------//
 
 HB_FUNC(TVGETSELTEXT) // ( hWnd ) --> cText
 {
-  HWND hWnd = (HWND)hb_parnl(1);
+  HWND hWnd = w32_par_HWND(1);
   HTREEITEM hItem = TreeView_GetSelection(hWnd);
   TV_ITEM tvi;
   BYTE buffer[100];
@@ -69,7 +71,7 @@ HB_FUNC(TVGETSELTEXT) // ( hWnd ) --> cText
 
 HB_FUNC(TVGETSELECTED) // ( hWnd ) --> hItem
 {
-  hb_retnl((LONG)TreeView_GetSelection((HWND)hb_parnl(1)));
+  hb_retnl((LONG)TreeView_GetSelection(w32_par_HWND(1)));
 }
 
 //-------------------------------------------------------------------------//

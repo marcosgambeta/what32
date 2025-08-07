@@ -12,6 +12,8 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 #if (defined(__GNUC__) || defined(__DMC__))
 DWORD WINAPI DoEnvironmentSubst(LPSTR szString, UINT cchString);
 #endif
@@ -69,7 +71,7 @@ HB_FUNC(DRAGFINISH)
 
 HB_FUNC(DRAGACCEPTFILES)
 {
-  DragAcceptFiles((HWND)hb_parnl(1), hb_parl(2));
+  DragAcceptFiles(w32_par_HWND(1), hb_parl(2));
 }
 
 //-----------------------------------------------------------------------------
@@ -78,7 +80,7 @@ HB_FUNC(DRAGACCEPTFILES)
 
 HB_FUNC(SHELLEXECUTE)
 {
-  hb_retnl((LONG)ShellExecute((HWND)hb_parnl(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3),
+  hb_retnl((LONG)ShellExecute(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3),
                               ISNIL(4) ? NULL : (LPCSTR)hb_parcx(4), (LPCSTR)hb_parcx(5), hb_parni(6)));
 }
 
@@ -125,7 +127,7 @@ HB_FUNC( COMMANDLINETOARGVW )
 HB_FUNC(SHELLABOUT)
 {
   hb_retni(
-      ShellAbout((HWND)hb_parnl(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3), (ISNIL(4) ? NULL : (HICON)hb_parnl(4))));
+      ShellAbout(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3), (ISNIL(4) ? NULL : (HICON)hb_parnl(4))));
 }
 
 //-----------------------------------------------------------------------------
@@ -266,7 +268,7 @@ HB_FUNC( SHQUERYRECYCLEBIN )
 
 HB_FUNC(SHEMPTYRECYCLEBIN)
 {
-  hb_retnl(SHEmptyRecycleBin((HWND)hb_parnl(1), (LPCSTR)hb_parcx(2), (DWORD)hb_parnl(3)));
+  hb_retnl(SHEmptyRecycleBin(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (DWORD)hb_parnl(3)));
 }
 
 #endif
@@ -350,7 +352,7 @@ HB_FUNC( SHGETNEWLINKINFO )
 
 HB_FUNC(SHINVOKEPRINTERCOMMAND)
 {
-  hb_retl(SHInvokePrinterCommand((HWND)hb_parnl(1), (UINT)hb_parni(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4),
+  hb_retl(SHInvokePrinterCommand(w32_par_HWND(1), (UINT)hb_parni(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4),
                                  hb_parl(5)));
 }
 

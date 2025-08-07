@@ -41,6 +41,8 @@
 #endif
 #endif
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 #if defined(__DMC__)
 #if 0
 typedef struct _OSVERSIONINFOEX {
@@ -332,7 +334,7 @@ HB_FUNC(GETSYSTEMMETRICS)
 //
 HB_FUNC(SETTIMER)
 {
-  hb_retni(SetTimer((HWND)hb_parnl(1), (UINT)hb_parni(2), (UINT)hb_parni(3), ISNIL(4) ? NULL : (TIMERPROC)hb_parnl(4)));
+  hb_retni(SetTimer(w32_par_HWND(1), (UINT)hb_parni(2), (UINT)hb_parni(3), ISNIL(4) ? NULL : (TIMERPROC)hb_parnl(4)));
 }
 
 //-------------------------------------------------------------------//
@@ -341,7 +343,7 @@ HB_FUNC(SETTIMER)
 //
 HB_FUNC(KILLTIMER)
 {
-  hb_retl(KillTimer((HWND)hb_parnl(1), (UINT)hb_parni(2)));
+  hb_retl(KillTimer(w32_par_HWND(1), (UINT)hb_parni(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -835,7 +837,7 @@ HB_FUNC( VERIFYVERSIONINFO )
 //
 HB_FUNC(ARRANGEICONICWINDOWS)
 {
-  hb_retni(ArrangeIconicWindows((HWND)hb_parnl(1)));
+  hb_retni(ArrangeIconicWindows(w32_par_HWND(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -889,7 +891,7 @@ HB_FUNC( CASCADEWINDOWS )
 //
 HB_FUNC(WINHELP)
 {
-  hb_retl(WinHelp((HWND)hb_parnl(1), (LPCSTR)hb_parcx(2), (UINT)hb_parni(3), (ULONG)hb_parnl(4)));
+  hb_retl(WinHelp(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (UINT)hb_parni(3), (ULONG)hb_parnl(4)));
 }
 
 //-------------------------------------------------------------------//

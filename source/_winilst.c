@@ -11,6 +11,7 @@
 #include "hbapi.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
 
 extern BOOL Array2Point(PHB_ITEM aPoint, POINT *pt);
 
@@ -232,7 +233,7 @@ HB_FUNC(IMAGELIST_ENDDRAG)
 
 HB_FUNC(IMAGELIST_DRAGENTER)
 {
-  hb_retl(ImageList_DragEnter((HWND)hb_parnl(1), hb_parni(2), hb_parni(3)));
+  hb_retl(ImageList_DragEnter(w32_par_HWND(1), hb_parni(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -240,7 +241,7 @@ HB_FUNC(IMAGELIST_DRAGENTER)
 
 HB_FUNC(IMAGELIST_DRAGLEAVE)
 {
-  hb_retl(ImageList_DragLeave((HWND)hb_parnl(1)));
+  hb_retl(ImageList_DragLeave(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------

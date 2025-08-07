@@ -13,6 +13,8 @@
 #include "item.api"
 #include "hbapi.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 /* add parens to avoid warning */
 #if defined(__BORLANDC__) && (__BORLANDC__ <= 0x620)
 #undef MAKEWORD
@@ -104,7 +106,7 @@ HB_FUNC(HEADER_CREATE)
 {
 
   hb_retnl((LONG)CreateWindow("SysHeader32", "", (DWORD)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5),
-                              (HWND)hb_parnl(6), (HMENU)hb_parni(7), GetModuleHandle(NULL), NULL));
+                              w32_par_HWND(6), (HMENU)hb_parni(7), GetModuleHandle(NULL), NULL));
 }
 
 //-----------------------------------------------------------------------------
@@ -112,7 +114,7 @@ HB_FUNC(HEADER_CREATE)
 
 HB_FUNC(HEADER_GETITEMCOUNT)
 {
-  hb_retni(Header_GetItemCount((HWND)hb_parnl(1)));
+  hb_retni(Header_GetItemCount(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -122,7 +124,7 @@ HB_FUNC(HEADER_GETITEMCOUNT)
 HB_FUNC(HEADER_INSERTITEM)
 {
   HDITEM *hdi = (HDITEM *)hb_param(3, HB_IT_STRING)->item.asString.value;
-  hb_retni(Header_InsertItem((HWND)hb_parnl(1), hb_parni(2), hdi));
+  hb_retni(Header_InsertItem(w32_par_HWND(1), hb_parni(2), hdi));
 }
 
 //-----------------------------------------------------------------------------
@@ -130,7 +132,7 @@ HB_FUNC(HEADER_INSERTITEM)
 
 HB_FUNC(HEADER_DELETEITEM)
 {
-  hb_retl(Header_DeleteItem((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retl(Header_DeleteItem(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -142,7 +144,7 @@ HB_FUNC(HEADER_DELETEITEM)
 HB_FUNC(HEADER_GETITEM)
 {
   HDITEM hdi;
-  BOOL lRet = Header_GetItem((HWND)hb_parnl(1), hb_parni(2), &hdi);
+  BOOL lRet = Header_GetItem(w32_par_HWND(1), hb_parni(2), &hdi);
   if (lRet)
     hb_retclen((char *)&hdi, sizeof(HDITEM));
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) hdi, sizeof( HDITEM ) );
@@ -155,7 +157,7 @@ HB_FUNC(HEADER_GETITEM)
 HB_FUNC(HEADER_SETITEM)
 {
   HDITEM *hdi = (HDITEM *)hb_param(3, HB_IT_STRING)->item.asString.value;
-  hb_retl(Header_SetItem((HWND)hb_parnl(1), hb_parni(2), hdi));
+  hb_retl(Header_SetItem(w32_par_HWND(1), hb_parni(2), hdi));
 }
 
 //-----------------------------------------------------------------------------
@@ -164,7 +166,7 @@ HB_FUNC(HEADER_SETITEM)
 HB_FUNC(HEADER_CREATEDRAGIMAGE)
 {
 
-  hb_retnl((ULONG)Header_CreateDragImage((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retnl((ULONG)Header_CreateDragImage(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -176,11 +178,11 @@ HB_FUNC(HEADER_CREATEDRAGIMAGE)
 HB_FUNC(HEADER_GETORDERARRAY)
 {
 
-  UINT iCount = Header_GetItemCount((HWND)hb_parnl(1));
+  UINT iCount = Header_GetItemCount(w32_par_HWND(1));
   PHB_ITEM aInt;
   PHB_ITEM temp;
   INT *lpi = (INT *)hb_xgrab(iCount * sizeof(INT));
-  BOOL lRet = Header_GetOrderArray((HWND)hb_parnl(1), iCount, lpi);
+  BOOL lRet = Header_GetOrderArray(w32_par_HWND(1), iCount, lpi);
   UINT i;
 
   if (lRet)
@@ -227,7 +229,7 @@ HB_FUNC(HEADER_SETORDERARRAY)
       lpi[i] = hb_parni(2, i + 1);
     }
 
-    hb_retl(Header_SetOrderArray((HWND)hb_parnl(1), iCount, lpi));
+    hb_retl(Header_SetOrderArray(w32_par_HWND(1), iCount, lpi));
   }
   else
     hb_retl(0);
@@ -243,7 +245,7 @@ HB_FUNC(HEADER_GETITEMRECT)
   RECT rc;
   PHB_ITEM aRc;
 
-  if (Header_GetItemRect((HWND)hb_parnl(1), (WPARAM)hb_parni(2), &rc))
+  if (Header_GetItemRect(w32_par_HWND(1), (WPARAM)hb_parni(2), &rc))
   {
     aRc = Rect2Array(&rc);
     _itemReturn(aRc);
@@ -256,7 +258,7 @@ HB_FUNC(HEADER_GETITEMRECT)
 
 HB_FUNC(HEADER_GETIMAGELIST)
 {
-  hb_retnl((ULONG)Header_GetImageList((HWND)hb_parnl(1)));
+  hb_retnl((ULONG)Header_GetImageList(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -264,7 +266,7 @@ HB_FUNC(HEADER_GETIMAGELIST)
 
 HB_FUNC(HEADER_SETIMAGELIST)
 {
-  hb_retnl((ULONG)Header_SetImageList((HWND)hb_parnl(1), (LPARAM)hb_parnl(2)));
+  hb_retnl((ULONG)Header_SetImageList(w32_par_HWND(1), (LPARAM)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -272,7 +274,7 @@ HB_FUNC(HEADER_SETIMAGELIST)
 
 HB_FUNC(HEADER_ORDERTOINDEX)
 {
-  hb_retni(Header_OrderToIndex((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retni(Header_OrderToIndex(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -284,7 +286,7 @@ HB_FUNC(HEADER_ORDERTOINDEX)
 
 HB_FUNC(HEADER_SETHOTDIVIDER)
 {
-  hb_retni(Header_SetHotDivider((HWND)hb_parnl(1), hb_parl(2), (LPARAM)hb_parnl(3)));
+  hb_retni(Header_SetHotDivider(w32_par_HWND(1), hb_parl(2), (LPARAM)hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -292,7 +294,7 @@ HB_FUNC(HEADER_SETHOTDIVIDER)
 
 HB_FUNC(HEADER_SETBITMAPMARGIN)
 {
-  hb_retni(Header_SetBitmapMargin((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retni(Header_SetBitmapMargin(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -301,9 +303,9 @@ HB_FUNC(HEADER_SETBITMAPMARGIN)
 HB_FUNC(HEADER_GETBITMAPMARGIN)
 {
 #if defined(__WATCOMC__)
-  hb_retni(Header_GetBitmapMargin((HWND)hb_parnl(1), NULL));
+  hb_retni(Header_GetBitmapMargin(w32_par_HWND(1), NULL));
 #else
-  hb_retni(Header_GetBitmapMargin((HWND)hb_parnl(1)));
+  hb_retni(Header_GetBitmapMargin(w32_par_HWND(1)));
 #endif
 }
 
@@ -312,7 +314,7 @@ HB_FUNC(HEADER_GETBITMAPMARGIN)
 
 HB_FUNC(HEADER_SETUNICODEFORMAT)
 {
-  hb_retl(Header_SetUnicodeFormat((HWND)hb_parnl(1), hb_parl(2)));
+  hb_retl(Header_SetUnicodeFormat(w32_par_HWND(1), hb_parl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -320,7 +322,7 @@ HB_FUNC(HEADER_SETUNICODEFORMAT)
 
 HB_FUNC(HEADER_GETUNICODEFORMAT)
 {
-  hb_retl(Header_GetUnicodeFormat((HWND)hb_parnl(1)));
+  hb_retl(Header_GetUnicodeFormat(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -328,7 +330,7 @@ HB_FUNC(HEADER_GETUNICODEFORMAT)
 
 HB_FUNC(HEADER_SETFILTERCHANGETIMEOUT)
 {
-  hb_retni(Header_SetFilterChangeTimeout((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retni(Header_SetFilterChangeTimeout(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -337,7 +339,7 @@ HB_FUNC(HEADER_SETFILTERCHANGETIMEOUT)
 
 HB_FUNC(HEADER_EDITFILTER)
 {
-  hb_retni(Header_EditFilter((HWND)hb_parnl(1), hb_parni(2), hb_parl(3)));
+  hb_retni(Header_EditFilter(w32_par_HWND(1), hb_parni(2), hb_parl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -345,7 +347,7 @@ HB_FUNC(HEADER_EDITFILTER)
 
 HB_FUNC(HEADER_CLEARALLFILTERS)
 {
-  hb_retni(Header_ClearAllFilters((HWND)hb_parnl(1)));
+  hb_retni(Header_ClearAllFilters(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -356,7 +358,7 @@ HB_FUNC(HEADER_CLEARALLFILTERS)
 
 HB_FUNC(HEADER_CLEARFILTER)
 {
-  hb_retni(Header_ClearFilter((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retni(Header_ClearFilter(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -365,7 +367,7 @@ HB_FUNC(HEADER_CLEARFILTER)
 HB_FUNC(HEADER_LAYOUT)
 {
   HD_LAYOUT *hdLayout = (HD_LAYOUT *)hb_param(2, HB_IT_STRING)->item.asString.value;
-  hb_retl(Header_Layout((HWND)hb_parnl(1), hdLayout));
+  hb_retl(Header_Layout(w32_par_HWND(1), hdLayout));
 }
 
 //--------- eof.

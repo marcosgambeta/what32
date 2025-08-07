@@ -6,6 +6,7 @@
 #include "hbapi.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -38,21 +39,21 @@ extern void Size2ArrayEx(SIZE *siz, PHB_ITEM aSize);
 
 HB_FUNC(ISICONIC)
 {
-  hb_retl(IsIconic((HWND)hb_parnl(1)));
+  hb_retl(IsIconic(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(ISWINDOWVISIBLE)
 {
-  hb_retl(IsWindowVisible((HWND)hb_parnl(1)));
+  hb_retl(IsWindowVisible(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(ISZOOMED)
 {
-  hb_retl(IsZoomed((HWND)hb_parnl(1)));
+  hb_retl(IsZoomed(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -60,14 +61,14 @@ HB_FUNC(ISZOOMED)
 
 HB_FUNC(ISWINDOWUNICODE)
 {
-  hb_retl(IsWindowUnicode((HWND)hb_parnl(1)));
+  hb_retl(IsWindowUnicode(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(CLOSEWINDOW)
 {
-  hb_retl(CloseWindow((HWND)hb_parnl(1)));
+  hb_retl(CloseWindow(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -83,42 +84,42 @@ HB_FUNC(FINDWINDOW)
 
 HB_FUNC(FINDWINDOWEX)
 {
-  hb_retnl((LONG)FindWindowEx((HWND)hb_parnl(1), (HWND)hb_parnl(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4)));
+  hb_retnl((LONG)FindWindowEx(w32_par_HWND(1), w32_par_HWND(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(ISCHILD)
 {
-  hb_retl((BOOL)IsChild((HWND)hb_parnl(1), (HWND)hb_parnl(2)));
+  hb_retl((BOOL)IsChild(w32_par_HWND(1), w32_par_HWND(2)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(UPDATEWINDOW)
 {
-  hb_retl(UpdateWindow((HWND)hb_parnl(1)));
+  hb_retl(UpdateWindow(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(GETWINDOWLONG)
 {
-  hb_retnl(GetWindowLong((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retnl(GetWindowLong(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(SETWINDOWLONG)
 {
-  hb_retnl(SetWindowLong((HWND)hb_parnl(1), hb_parni(2), hb_parnl(3)));
+  hb_retnl(SetWindowLong(w32_par_HWND(1), hb_parni(2), hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(ENABLEWINDOW)
 {
-  EnableWindow((HWND)hb_parnl(1), hb_parl(2));
+  EnableWindow(w32_par_HWND(1), hb_parl(2));
 }
 
 //-----------------------------------------------------------------------------
@@ -126,34 +127,34 @@ HB_FUNC(ENABLEWINDOW)
 
 HB_FUNC(ISWINDOWENABLED)
 {
-  hb_retl(IsWindowEnabled((HWND)hb_parnl(1)));
+  hb_retl(IsWindowEnabled(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(DESTROYWINDOW)
 {
-  hb_retl(DestroyWindow((HWND)hb_parnl(1)));
+  hb_retl(DestroyWindow(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(ISWINDOW)
 {
-  hb_retl(IsWindow((HWND)hb_parnl(1)));
+  hb_retl(IsWindow(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(SHOWWINDOW)
 {
-  hb_retl(ShowWindow((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retl(ShowWindow(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
 HB_FUNC(MOVEWINDOW)
 {
-  hb_retl(MoveWindow((HWND)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5),
+  hb_retl(MoveWindow(w32_par_HWND(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5),
                      (ISNIL(6) ? TRUE : hb_parl(6))));
 }
 
@@ -161,35 +162,35 @@ HB_FUNC(MOVEWINDOW)
 
 HB_FUNC(DEFWINDOWPROC)
 {
-  hb_retnl(DefWindowProc((HWND)hb_parnl(1), hb_parnl(2), hb_parnl(3), hb_parnl(4)));
+  hb_retnl(DefWindowProc(w32_par_HWND(1), hb_parnl(2), hb_parnl(3), hb_parnl(4)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(DEFDLGPROC)
 {
-  hb_retnl(DefDlgProc((HWND)hb_parnl(1), hb_parnl(2), hb_parnl(3), hb_parnl(4)));
+  hb_retnl(DefDlgProc(w32_par_HWND(1), hb_parnl(2), hb_parnl(3), hb_parnl(4)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(DEFMDICHILDPROC)
 {
-  hb_retnl(DefMDIChildProc((HWND)hb_parnl(1), hb_parnl(2), hb_parnl(3), hb_parnl(4)));
+  hb_retnl(DefMDIChildProc(w32_par_HWND(1), hb_parnl(2), hb_parnl(3), hb_parnl(4)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(DEFFRAMEPROC)
 {
-  hb_retnl(DefFrameProc((HWND)hb_parnl(1), (HWND)hb_parnl(2), hb_parnl(3), hb_parnl(4), hb_parnl(5)));
+  hb_retnl(DefFrameProc(w32_par_HWND(1), w32_par_HWND(2), hb_parnl(3), hb_parnl(4), hb_parnl(5)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(CALLWINDOWPROC)
 {
-  hb_retnl(CallWindowProc((WNDPROC)hb_parnl(1), (HWND)hb_parnl(2), hb_parni(3), hb_parnl(4), hb_parnl(5)));
+  hb_retnl(CallWindowProc((WNDPROC)hb_parnl(1), w32_par_HWND(2), hb_parni(3), hb_parnl(4), hb_parnl(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -204,7 +205,7 @@ HB_FUNC(INVALIDATERECT)
 
   bRectOk = (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc));
 
-  hb_retl(InvalidateRect(ISNIL(1) ? NULL : (HWND)hb_parnl(1), // handle of window with changed update region
+  hb_retl(InvalidateRect(ISNIL(1) ? NULL : w32_par_HWND(1), // handle of window with changed update region
                          bRectOk ? &rc : NULL,                // address of rectangle coordinates
                          ISLOG(3) ? hb_parl(3) : TRUE         // erase-background flag
                          ));
@@ -220,7 +221,7 @@ HB_FUNC(REDRAWWINDOW)
 
   bRectOk = (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc));
 
-  hb_retl(RedrawWindow((HWND)hb_parnl(1),                   // handle of window
+  hb_retl(RedrawWindow(w32_par_HWND(1),                   // handle of window
                        bRectOk ? &rc : NULL,                // address of structure with update rectangle
                        ISNIL(3) ? NULL : (HRGN)hb_parnl(3), // handle of update region
                        hb_parni(4)                          // array of redraw flags
@@ -236,7 +237,7 @@ HB_FUNC(GETCLIENTRECT)
   RECT rc;
 
   PHB_ITEM aMetr;
-  GetClientRect((HWND)hb_parnl(1), &rc);
+  GetClientRect(w32_par_HWND(1), &rc);
 
   aMetr = Rect2Array(&rc);
 
@@ -254,7 +255,7 @@ HB_FUNC(GETWINDOWRECT)
   RECT rc;
   PHB_ITEM aMetr;
 
-  GetWindowRect((HWND)hb_parnl(1), &rc);
+  GetWindowRect(w32_par_HWND(1), &rc);
   aMetr = Rect2Array(&rc);
 
   _itemReturn(aMetr);
@@ -266,7 +267,7 @@ HB_FUNC(GETWINDOWRECT)
 
 HB_FUNC(SHOWOWNEDPOPUPS)
 {
-  hb_retl(ShowOwnedPopups((HWND)hb_parnl(1), hb_parl(2)));
+  hb_retl(ShowOwnedPopups(w32_par_HWND(1), hb_parl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -274,7 +275,7 @@ HB_FUNC(SHOWOWNEDPOPUPS)
 
 HB_FUNC(OPENICON)
 {
-  hb_retl(OpenIcon((HWND)hb_parnl(1)));
+  hb_retl(OpenIcon(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -291,7 +292,7 @@ HB_FUNC(BEGINDEFERWINDOWPOS)
 
 HB_FUNC(DEFERWINDOWPOS)
 {
-  hb_retnl((LONG)DeferWindowPos((HDWP)hb_parnl(1), (HWND)hb_parnl(2), (HWND)hb_parnl(3), hb_parni(4), hb_parni(5),
+  hb_retnl((LONG)DeferWindowPos((HDWP)hb_parnl(1), w32_par_HWND(2), w32_par_HWND(3), hb_parni(4), hb_parni(5),
                                 hb_parni(6), hb_parni(7), (UINT)hb_parni(8)));
 }
 
@@ -309,7 +310,7 @@ HB_FUNC(ENDDEFERWINDOWPOS)
 
 HB_FUNC(SETWINDOWPOS)
 {
-  hb_retl(SetWindowPos((HWND)hb_parnl(1), (HWND)hb_parnl(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6),
+  hb_retl(SetWindowPos(w32_par_HWND(1), w32_par_HWND(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6),
                        (UINT)hb_parni(7)));
 }
 
@@ -318,7 +319,7 @@ HB_FUNC(SETWINDOWPOS)
 
 HB_FUNC(SETFOCUS)
 {
-  hb_retnl((LONG)SetFocus((HWND)hb_parnl(1)));
+  hb_retnl((LONG)SetFocus(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -335,7 +336,7 @@ HB_FUNC(GETACTIVEWINDOW)
 
 HB_FUNC(SETACTIVEWINDOW)
 {
-  hb_retnl((LONG)SetActiveWindow((HWND)hb_parnl(1)));
+  hb_retnl((LONG)SetActiveWindow(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -361,7 +362,7 @@ HB_FUNC(GETFOCUS)
 
 HB_FUNC(SETFOREGROUNDWINDOW)
 {
-  hb_retl(SetForegroundWindow((HWND)hb_parnl(1)));
+  hb_retl(SetForegroundWindow(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -377,7 +378,7 @@ HB_FUNC(ANYPOPUP)
 
 HB_FUNC(BRINGWINDOWTOTOP)
 {
-  hb_retl(BringWindowToTop((HWND)hb_parnl(1)));
+  hb_retl(BringWindowToTop(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -387,7 +388,7 @@ HB_FUNC(GETCLASSNAME)
 {
   char *cText = (char *)hb_xgrab(MAX_PATH + 1);
 
-  GetClassName((HWND)hb_parnl(1), (LPSTR)cText, MAX_PATH);
+  GetClassName(w32_par_HWND(1), (LPSTR)cText, MAX_PATH);
 
   hb_retc(cText);
   hb_xfree(cText);
@@ -398,7 +399,7 @@ HB_FUNC(GETCLASSNAME)
 
 HB_FUNC(GETTOPWINDOW)
 {
-  hb_retnl((LONG)GetTopWindow((HWND)hb_parnl(1)));
+  hb_retnl((LONG)GetTopWindow(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -413,7 +414,7 @@ HB_FUNC(SCROLLWINDOW)
   Array2Rect(hb_param(4, HB_IT_ARRAY), &lpRect);
   Array2Rect(hb_param(5, HB_IT_ARRAY), &lpClipRect);
 
-  hb_retl(ScrollWindow((HWND)hb_parnl(1), hb_parni(2), hb_parni(3), &lpRect, &lpClipRect));
+  hb_retl(ScrollWindow(w32_par_HWND(1), hb_parni(2), hb_parni(3), &lpRect, &lpClipRect));
 }
 
 //-----------------------------------------------------------------------------
@@ -421,7 +422,7 @@ HB_FUNC(SCROLLWINDOW)
 
 HB_FUNC(SETWINDOWTEXT)
 {
-  hb_retl(SetWindowText((HWND)hb_parnl(1), (LPSTR)hb_parcx(2)));
+  hb_retl(SetWindowText(w32_par_HWND(1), (LPSTR)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -431,9 +432,9 @@ HB_FUNC(SETWINDOWTEXT)
 
 HB_FUNC(GETWINDOWTEXT)
 {
-  int iLen = GetWindowTextLength((HWND)hb_parnl(1));
+  int iLen = GetWindowTextLength(w32_par_HWND(1));
   char *cText = (char *)hb_xgrab(iLen + 1);
-  int iRet = GetWindowText((HWND)hb_parnl(1), (LPSTR)cText, iLen + 1);
+  int iRet = GetWindowText(w32_par_HWND(1), (LPSTR)cText, iLen + 1);
 
   hb_retclen(cText, iRet);
   hb_xfree(cText);
@@ -444,7 +445,7 @@ HB_FUNC(GETWINDOWTEXT)
 
 HB_FUNC(GETWINDOWTEXTLENGTH)
 {
-  hb_retni(GetWindowTextLength((HWND)hb_parnl(1)));
+  hb_retni(GetWindowTextLength(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -452,7 +453,7 @@ HB_FUNC(GETWINDOWTEXTLENGTH)
 
 HB_FUNC(SETWINDOWCONTEXTHELPID)
 {
-  hb_retl(SetWindowContextHelpId((HWND)hb_parnl(1), (DWORD)hb_parnl(2)));
+  hb_retl(SetWindowContextHelpId(w32_par_HWND(1), (DWORD)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -460,7 +461,7 @@ HB_FUNC(SETWINDOWCONTEXTHELPID)
 
 HB_FUNC(GETWINDOWCONTEXTHELPID)
 {
-  hb_retnl((LONG)GetWindowContextHelpId((HWND)hb_parnl(1)));
+  hb_retnl((LONG)GetWindowContextHelpId(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -484,7 +485,7 @@ HB_FUNC(GETMENUCONTEXTHELPID)
 
 HB_FUNC(GETWINDOW)
 {
-  hb_retnl((LONG)GetWindow((HWND)hb_parnl(1), (UINT)hb_parni(2)));
+  hb_retnl((LONG)GetWindow(w32_par_HWND(1), (UINT)hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -503,7 +504,7 @@ HB_FUNC(CLIENTTOSCREEN)
   pArray = hb_param(2, HB_IT_ARRAY);
   if (Array2Point(pArray, &Point))
   {
-    if (ClientToScreen((HWND)hb_parnl(1), &Point))
+    if (ClientToScreen(w32_par_HWND(1), &Point))
     {
       Point2ArrayEx(&Point, pArray);
       hb_retl(TRUE);
@@ -531,7 +532,7 @@ HB_FUNC(SCREENTOCLIENT)
 
   if (Array2Point(pArray, &Point))
   {
-    if (ScreenToClient((HWND)hb_parnl(1), &Point) > 0)
+    if (ScreenToClient(w32_par_HWND(1), &Point) > 0)
     {
       Point2ArrayEx(&Point, pArray);
       hb_retl(TRUE);
@@ -553,7 +554,7 @@ HB_FUNC(MAPWINDOWPOINTS)
   PHB_ITEM pArray = hb_param(3, HB_IT_ARRAY);
   Array2Point(pArray, &lpPoints);
 
-  hb_retni(MapWindowPoints((HWND)hb_parnl(1), (HWND)hb_parnl(2), &lpPoints, (UINT)hb_parni(4)));
+  hb_retni(MapWindowPoints(w32_par_HWND(1), w32_par_HWND(2), &lpPoints, (UINT)hb_parni(4)));
   Point2ArrayEx(&lpPoints, pArray);
 }
 
@@ -579,7 +580,7 @@ HB_FUNC(CHILDWINDOWFROMPOINT)
 
   Array2Point(hb_param(2, HB_IT_ARRAY), &Point);
 
-  hb_retnl((LONG)ChildWindowFromPoint((HWND)hb_parnl(1), Point));
+  hb_retnl((LONG)ChildWindowFromPoint(w32_par_HWND(1), Point));
 }
 
 //-----------------------------------------------------------------------------
@@ -592,7 +593,7 @@ HB_FUNC(CHILDWINDOWFROMPOINTEX)
 
   Array2Point(hb_param(2, HB_IT_ARRAY), &PoInt);
 
-  hb_retnl((LONG)ChildWindowFromPointEx((HWND)hb_parnl(1), PoInt, (UINT)hb_parni(3)));
+  hb_retnl((LONG)ChildWindowFromPointEx(w32_par_HWND(1), PoInt, (UINT)hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -600,7 +601,7 @@ HB_FUNC(CHILDWINDOWFROMPOINTEX)
 
 HB_FUNC(GETWINDOWWORD)
 {
-  hb_retni(GetWindowWord((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retni(GetWindowWord(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -609,7 +610,7 @@ HB_FUNC(GETWINDOWWORD)
 HB_FUNC(SETWINDOWWORD)
 {
 
-  hb_retni(SetWindowWord((HWND)hb_parnl(1), hb_parni(2), (WORD)hb_parni(3)));
+  hb_retni(SetWindowWord(w32_par_HWND(1), hb_parni(2), (WORD)hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -625,7 +626,7 @@ HB_FUNC(GETDESKTOPWINDOW)
 
 HB_FUNC(GETPARENT)
 {
-  hb_retnl((LONG)GetParent((HWND)hb_parnl(1)));
+  hb_retnl((LONG)GetParent(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -633,7 +634,7 @@ HB_FUNC(GETPARENT)
 
 HB_FUNC(SETPARENT)
 {
-  hb_retnl((LONG)SetParent((HWND)hb_parnl(1), (HWND)hb_parnl(2)));
+  hb_retnl((LONG)SetParent(w32_par_HWND(1), w32_par_HWND(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -641,7 +642,7 @@ HB_FUNC(SETPARENT)
 
 HB_FUNC(GETCLASSWORD)
 {
-  hb_retni(GetClassWord((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retni(GetClassWord(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -650,7 +651,7 @@ HB_FUNC(GETCLASSWORD)
 HB_FUNC(SETCLASSWORD)
 {
 
-  hb_retni(SetClassWord((HWND)hb_parnl(1), hb_parni(2), (WORD)hb_parni(3)));
+  hb_retni(SetClassWord(w32_par_HWND(1), hb_parni(2), (WORD)hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -658,7 +659,7 @@ HB_FUNC(SETCLASSWORD)
 
 HB_FUNC(GETCLASSLONG)
 {
-  hb_retnl((LONG)GetClassLong((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retnl((LONG)GetClassLong(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -666,7 +667,7 @@ HB_FUNC(GETCLASSLONG)
 
 HB_FUNC(SETCLASSLONG)
 {
-  hb_retnl((LONG)SetClassLong((HWND)hb_parnl(1), hb_parni(2), hb_parnl(3)));
+  hb_retnl((LONG)SetClassLong(w32_par_HWND(1), hb_parni(2), hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -675,7 +676,7 @@ HB_FUNC(SETCLASSLONG)
 
 HB_FUNC(GETANCESTOR)
 {
-  hb_retnl((LONG)GetAncestor((HWND)hb_parnl(1), (UINT)hb_parni(2)));
+  hb_retnl((LONG)GetAncestor(w32_par_HWND(1), (UINT)hb_parni(2)));
 }
 
 #endif
@@ -685,7 +686,7 @@ HB_FUNC(GETANCESTOR)
 
 HB_FUNC(SHOWWINDOWASYNC)
 {
-  hb_retl(ShowWindowAsync((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retl(ShowWindowAsync(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -707,7 +708,7 @@ RETURN(nil)
 
 HB_FUNC(FLASHWINDOW)
 {
-  hb_retl(FlashWindow((HWND)hb_parnl(1), hb_parl(2)));
+  hb_retl(FlashWindow(w32_par_HWND(1), hb_parl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -715,7 +716,7 @@ HB_FUNC(FLASHWINDOW)
 #if (WINVER >= 0x0500)
 HB_FUNC(ANIMATEWINDOW)
 {
-  hb_retl(AnimateWindow((HWND)hb_parnl(1), (DWORD)hb_parnl(2), (DWORD)hb_parnl(3)));
+  hb_retl(AnimateWindow(w32_par_HWND(1), (DWORD)hb_parnl(2), (DWORD)hb_parnl(3)));
 }
 #endif
 //-----------------------------------------------------------------------------
@@ -725,7 +726,7 @@ HB_FUNC(GETWINDOWPLACEMENT)
 {
   WINDOWPLACEMENT wndpl;
   wndpl.length = sizeof(WINDOWPLACEMENT);
-  if (GetWindowPlacement((HWND)hb_parnl(1), &wndpl))
+  if (GetWindowPlacement(w32_par_HWND(1), &wndpl))
     hb_retclen((char *)&wndpl, sizeof(WINDOWPLACEMENT));
 }
 
@@ -738,7 +739,7 @@ HB_FUNC(SETWINDOWPLACEMENT)
 {
   WINDOWPLACEMENT *lpwndpl = (WINDOWPLACEMENT *)hb_param(2, HB_IT_STRING)->item.asString.value;
 
-  hb_retl(SetWindowPlacement((HWND)hb_parnl(1), lpwndpl));
+  hb_retl(SetWindowPlacement(w32_par_HWND(1), lpwndpl));
 }
 
 #endif
@@ -747,7 +748,7 @@ HB_FUNC(SETWINDOWPLACEMENT)
 
 HB_FUNC(SETWINDOWRGN)
 {
-  hb_retni(SetWindowRgn((HWND)hb_parnl(1), (HRGN)hb_parnl(2), hb_parl(3)));
+  hb_retni(SetWindowRgn(w32_par_HWND(1), (HRGN)hb_parnl(2), hb_parl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -755,7 +756,7 @@ HB_FUNC(SETWINDOWRGN)
 
 HB_FUNC(GETWINDOWRGN)
 {
-  hb_retni(GetWindowRgn((HWND)hb_parnl(1), (HRGN)hb_parnl(2)));
+  hb_retni(GetWindowRgn(w32_par_HWND(1), (HRGN)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -763,7 +764,7 @@ HB_FUNC(GETWINDOWRGN)
 
 HB_FUNC(SETPROP)
 {
-  hb_retl(SetProp((HWND)hb_parnl(1), (LPCSTR)hb_parcx(2), (HANDLE)hb_parnl(3)));
+  hb_retl(SetProp(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (HANDLE)hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -771,7 +772,7 @@ HB_FUNC(SETPROP)
 
 HB_FUNC(GETPROP)
 {
-  hb_retnl((LONG)GetProp((HWND)hb_parnl(1), (LPCSTR)hb_parcx(2)));
+  hb_retnl((LONG)GetProp(w32_par_HWND(1), (LPCSTR)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -779,7 +780,7 @@ HB_FUNC(GETPROP)
 
 HB_FUNC(REMOVEPROP)
 {
-  hb_retnl((LONG)RemoveProp((HWND)hb_parnl(1), (LPCSTR)hb_parcx(2)));
+  hb_retnl((LONG)RemoveProp(w32_par_HWND(1), (LPCSTR)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -880,7 +881,7 @@ HB_FUNC(ADJUSTWINDOWRECTEX)
 
 HB_FUNC(GETWINDOWLONGPTR)
 {
-  hb_retnl((LONG)GetWindowLongPtr((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retnl((LONG)GetWindowLongPtr(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -888,7 +889,7 @@ HB_FUNC(GETWINDOWLONGPTR)
 
 HB_FUNC(SETWINDOWLONGPTR)
 {
-  hb_retnl((LONG)SetWindowLongPtr((HWND)hb_parnl(1), hb_parni(2), (LONG_PTR)hb_parnl(3)));
+  hb_retnl((LONG)SetWindowLongPtr(w32_par_HWND(1), hb_parni(2), (LONG_PTR)hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -896,7 +897,7 @@ HB_FUNC(SETWINDOWLONGPTR)
 #ifndef __WATCOMC__
 HB_FUNC(GETCLASSLONGPTR)
 {
-  hb_retnl((ULONG_PTR)GetClassLongPtr((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retnl((ULONG_PTR)GetClassLongPtr(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -904,7 +905,7 @@ HB_FUNC(GETCLASSLONGPTR)
 
 HB_FUNC(SETCLASSLONGPTR)
 {
-  hb_retnl((ULONG_PTR)SetClassLongPtr((HWND)hb_parnl(1), hb_parni(2), (LONG_PTR)hb_parnl(3)));
+  hb_retnl((ULONG_PTR)SetClassLongPtr(w32_par_HWND(1), hb_parni(2), (LONG_PTR)hb_parnl(3)));
 }
 #endif
 
@@ -917,7 +918,7 @@ HB_FUNC(GETWINDOWINFO)
 {
   WINDOWINFO pwi;
 
-  if (GetWindowInfo((HWND)hb_parnl(1), &pwi))
+  if (GetWindowInfo(w32_par_HWND(1), &pwi))
 
     hb_retclen((char *)&pwi, sizeof(WINDOWINFO));
 }
@@ -933,7 +934,7 @@ HB_FUNC(GETTITLEBARINFO)
 {
   TITLEBARINFO pti;
 
-  if (GetTitleBarInfo((HWND)hb_parnl(1), &pti))
+  if (GetTitleBarInfo(w32_par_HWND(1), &pti))
 
     hb_retclen((char *)&pti, sizeof(TITLEBARINFO));
 }
@@ -1002,7 +1003,7 @@ HB_FUNC(REALCHILDWINDOWFROMPOINT)
   POINT ptParentClientCoords;
   Array2Point(hb_param(2, HB_IT_ARRAY), &ptParentClientCoords);
 
-  hb_retnl((LONG)RealChildWindowFromPoint((HWND)hb_parnl(1), ptParentClientCoords));
+  hb_retnl((LONG)RealChildWindowFromPoint(w32_par_HWND(1), ptParentClientCoords));
 }
 
 #endif
@@ -1060,7 +1061,7 @@ HB_FUNC(SETWINDOWORGEX)
 HB_FUNC(CREATEMDICLIENT)
 {
   HWND hwndClient;
-  HWND hFrame = (HWND)hb_parnl(1);
+  HWND hFrame = w32_par_HWND(1);
   CLIENTCREATESTRUCT clientCreate;
   clientCreate.hWindowMenu = (HMENU)hb_parnl(2);
   clientCreate.idFirstChild = (INT)hb_parni(3);
@@ -1170,5 +1171,5 @@ HB_FUNC( LOCKSETFOREGROUNDWINDOW )
 */
 HB_FUNC(LOCKWINDOWUPDATE)
 {
-  hb_retl(LockWindowUpdate((HWND)hb_parnl(1)));
+  hb_retl(LockWindowUpdate(w32_par_HWND(1)));
 }

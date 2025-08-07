@@ -20,18 +20,20 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 //-----------------------------------------------------------------------------
 
 HB_FUNC(ENDDIALOG)
 {
-  EndDialog((HWND)hb_parnl(1), hb_parni(2));
+  EndDialog(w32_par_HWND(1), hb_parni(2));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(GETDLGITEM)
 {
-  HWND hWnd = GetDlgItem((HWND)hb_parnl(1), // handle of dialog box
+  HWND hWnd = GetDlgItem(w32_par_HWND(1), // handle of dialog box
                          hb_parni(2)        // identifier of control
   );
   hb_retnl((LONG)hWnd);
@@ -42,7 +44,7 @@ HB_FUNC(GETDLGITEM)
 
 HB_FUNC(GETNEXTDLGGROUPITEM)
 {
-  hb_retnl((LONG)GetNextDlgGroupItem((HWND)hb_parnl(1), (HWND)hb_parnl(2), hb_parl(3)));
+  hb_retnl((LONG)GetNextDlgGroupItem(w32_par_HWND(1), w32_par_HWND(2), hb_parl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -50,7 +52,7 @@ HB_FUNC(GETNEXTDLGGROUPITEM)
 
 HB_FUNC(GETNEXTDLGTABITEM)
 {
-  hb_retnl((LONG)GetNextDlgTabItem((HWND)hb_parnl(1), (HWND)hb_parnl(2), hb_parl(3)));
+  hb_retnl((LONG)GetNextDlgTabItem(w32_par_HWND(1), w32_par_HWND(2), hb_parl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -58,7 +60,7 @@ HB_FUNC(GETNEXTDLGTABITEM)
 
 HB_FUNC(GETDLGCTRLID)
 {
-  hb_retni(GetDlgCtrlID((HWND)hb_parnl(1)));
+  hb_retni(GetDlgCtrlID(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -74,14 +76,14 @@ HB_FUNC(GETDIALOGBASEUNITS)
 
 HB_FUNC(SETDLGITEMINT)
 {
-  hb_retl(SetDlgItemInt((HWND)hb_parnl(1), hb_parni(2), (UINT)hb_parni(3), hb_parl(4)));
+  hb_retl(SetDlgItemInt(w32_par_HWND(1), hb_parni(2), (UINT)hb_parni(3), hb_parl(4)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(SETDLGITEMTEXT)
 {
-  SetDlgItemText((HWND)hb_parnl(1),   // handle of dialog box
+  SetDlgItemText(w32_par_HWND(1),   // handle of dialog box
                  hb_parni(2),         // identifier of control
                  (LPCTSTR)hb_parcx(3) // text to set
   );
@@ -94,10 +96,10 @@ HB_FUNC(SETDLGITEMTEXT)
 HB_FUNC(GETDLGITEMTEXT) // GETDLGITMTEXT
 {
 
-  USHORT iLen = (USHORT)SendMessage(GetDlgItem((HWND)hb_parnl(1), hb_parni(2)), WM_GETTEXTLENGTH, 0, 0) + 1;
+  USHORT iLen = (USHORT)SendMessage(GetDlgItem(w32_par_HWND(1), hb_parni(2)), WM_GETTEXTLENGTH, 0, 0) + 1;
   char *cText = (char *)hb_xgrab(iLen);
 
-  GetDlgItemText((HWND)hb_parnl(1), // handle of dialog box
+  GetDlgItemText(w32_par_HWND(1), // handle of dialog box
                  hb_parni(2),       // identifier of control
                  (LPTSTR)cText,     // address of buffer for text
                  iLen               // maximum size of string
@@ -117,7 +119,7 @@ HB_FUNC(GETLBITEMTEXT) // GETDLGITMTEXT
   USHORT iLen = ISNIL(3) ? 255 : (USHORT)hb_parni(3);
   char *cText = (char *)hb_xgrab(iLen + 1);
 
-  SendMessage((HWND)hb_parnl(1), // handle of dialog box
+  SendMessage(w32_par_HWND(1), // handle of dialog box
               LB_GETTEXT,
               (WPARAM)hb_parni(2),  // item number
               (LPARAM)(LPCSTR)cText // address of buffer for text
@@ -131,7 +133,7 @@ HB_FUNC(GETLBITEMTEXT) // GETDLGITMTEXT
 
 HB_FUNC(CHECKDLGBUTTON)
 {
-  hb_retl(CheckDlgButton((HWND)hb_parnl(1), // handle of dialog box
+  hb_retl(CheckDlgButton(w32_par_HWND(1), // handle of dialog box
                          hb_parni(2),       // identifier of control
                          ISNUM(3) ? hb_parni(3) : (UINT)hb_parl(3)));
 }
@@ -140,7 +142,7 @@ HB_FUNC(CHECKDLGBUTTON)
 
 HB_FUNC(CHECKRADIOBUTTON)
 {
-  hb_retl(CheckRadioButton((HWND)hb_parnl(1), // handle of dialog box
+  hb_retl(CheckRadioButton(w32_par_HWND(1), // handle of dialog box
                            hb_parni(2),       // identifier of first radio button in group
                            hb_parni(3),       // identifier of last radio button in group
                            hb_parni(4)        // identifier of radio button to select
@@ -151,7 +153,7 @@ HB_FUNC(CHECKRADIOBUTTON)
 
 HB_FUNC(ISDLGBUTTONCHECKED)
 {
-  hb_retni(IsDlgButtonChecked((HWND)hb_parnl(1), // handle of dialog box
+  hb_retni(IsDlgButtonChecked(w32_par_HWND(1), // handle of dialog box
                               hb_parni(2)        // button identifier
                               ));
 }
@@ -166,7 +168,7 @@ HB_FUNC(DLGDIRLIST)
   char *cText = (char *)hb_xgrab(MAX_PATH + 1);
   // cText = hb_parcx(2);
 
-  hb_retni(DlgDirList((HWND)hb_parnl(1), (LPSTR)cText, hb_parni(3), hb_parni(4), (UINT)hb_parni(5)));
+  hb_retni(DlgDirList(w32_par_HWND(1), (LPSTR)cText, hb_parni(3), hb_parni(4), (UINT)hb_parni(5)));
 
   hb_storc(cText, 2);
   hb_xfree(cText);
@@ -181,7 +183,7 @@ HB_FUNC(DLGDIRSELECTEX)
   USHORT iLen = ISNIL(3) ? MAX_PATH : (USHORT)hb_parni(3);
   char *cText = (char *)hb_xgrab(iLen + 1);
 
-  hb_retl(DlgDirSelectEx((HWND)hb_parnl(1), (LPSTR)cText, iLen, hb_parni(4)));
+  hb_retl(DlgDirSelectEx(w32_par_HWND(1), (LPSTR)cText, iLen, hb_parni(4)));
 
   hb_storc(cText, 2);
   hb_xfree(cText);
@@ -196,7 +198,7 @@ HB_FUNC(DLGDIRLISTCOMBOBOX)
   char *cText = (char *)hb_xgrab(MAX_PATH + 1);
   // cText = hb_parcx(2) ;
 
-  hb_retni(DlgDirListComboBox((HWND)hb_parnl(1), (LPSTR)cText, hb_parni(3), hb_parni(4), (UINT)hb_parni(5)));
+  hb_retni(DlgDirListComboBox(w32_par_HWND(1), (LPSTR)cText, hb_parni(3), hb_parni(4), (UINT)hb_parni(5)));
   hb_storc(cText, 2);
   hb_xfree(cText);
 }
@@ -210,7 +212,7 @@ HB_FUNC(DLGDIRSELECTCOMBOBOXEX)
   USHORT iLen = ISNIL(3) ? MAX_PATH : (USHORT)hb_parni(3);
   char *cText = (char *)hb_xgrab(iLen + 1);
 
-  hb_retl(DlgDirSelectComboBoxEx((HWND)hb_parnl(1), (LPSTR)cText, iLen, hb_parni(4)));
+  hb_retl(DlgDirSelectComboBoxEx(w32_par_HWND(1), (LPSTR)cText, iLen, hb_parni(4)));
 
   hb_storc(cText, 2);
   hb_xfree(cText);
@@ -236,7 +238,7 @@ HB_FUNC(MAPDIALOGRECT)
     lpRect.right = hb_arrayGetNL(pArray, 3);
     lpRect.bottom = hb_arrayGetNL(pArray, 4);
 
-    hb_retl(MapDialogRect((HWND)hb_parnl(1), &lpRect));
+    hb_retl(MapDialogRect(w32_par_HWND(1), &lpRect));
     hb_stornl(lpRect.left, 2, 1);
     hb_stornl(lpRect.top, 2, 2);
     hb_stornl(lpRect.right, 2, 3);
@@ -296,7 +298,7 @@ HB_FUNC(GETLISTBOXINFO)
 {
   HINSTANCE h = LoadLibraryEx("user32.dll", NULL, 0);
   DWORD dwGLIRet = 0;
-  HWND hWnd = (HWND)hb_parnl(1);
+  HWND hWnd = w32_par_HWND(1);
 
   if (h)
   {

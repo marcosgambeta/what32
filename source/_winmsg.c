@@ -13,11 +13,13 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 //-----------------------------------------------------------------------------
 
 HB_FUNC(_ISDIALOGMESSAGE)
 {
-  hb_retl(IsDialogMessage((HWND)hb_parnl(1), (MSG *)hb_parcx(2)));
+  hb_retl(IsDialogMessage(w32_par_HWND(1), (MSG *)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -25,7 +27,7 @@ HB_FUNC(_ISDIALOGMESSAGE)
 
 HB_FUNC(TRANSLATEMDISYSACCEL)
 {
-  hb_retl(TranslateMDISysAccel((HWND)hb_parnl(1), (MSG *)hb_parcx(2)));
+  hb_retl(TranslateMDISysAccel(w32_par_HWND(1), (MSG *)hb_parcx(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -63,7 +65,7 @@ HB_FUNC(POSTMESSAGE)
   }
 
   hb_retnl((LONG)PostMessage(
-      (HWND)hb_parnl(1), (UINT)hb_parni(2), (ISNIL(3) ? 0 : (WPARAM)hb_parnl(3)),
+      w32_par_HWND(1), (UINT)hb_parni(2), (ISNIL(3) ? 0 : (WPARAM)hb_parnl(3)),
       (ISNIL(4)
            ? 0
            : (ISBYREF(4) ? (LPARAM)(LPSTR)cText : (ISCHAR(4) ? (LPARAM)(LPSTR)hb_parcx(4) : (LPARAM)hb_parnl(4))))));
@@ -89,7 +91,7 @@ HB_FUNC(SENDMESSAGE)
   }
 
   hb_retnl((ULONG)SendMessage(
-      (HWND)hb_parnl(1), (UINT)hb_parni(2), (ISNIL(3) ? 0 : (WPARAM)hb_parnl(3)),
+      w32_par_HWND(1), (UINT)hb_parni(2), (ISNIL(3) ? 0 : (WPARAM)hb_parnl(3)),
       (ISNIL(4)
            ? 0
            : (ISBYREF(4) ? (LPARAM)(LPSTR)cText : (ISCHAR(4) ? (LPARAM)(LPSTR)hb_parcx(4) : (LPARAM)hb_parnl(4))))));
@@ -118,7 +120,7 @@ HB_FUNC(SENDDLGITEMMESSAGE)
     cText = NULL;
   }
 
-  hb_retnl((LONG)SendDlgItemMessage((HWND)hb_parnl(1), (int)hb_parni(2), (UINT)hb_parni(3),
+  hb_retnl((LONG)SendDlgItemMessage(w32_par_HWND(1), (int)hb_parni(2), (UINT)hb_parni(3),
                                     (ISNIL(4) ? 0 : (WPARAM)hb_parnl(4)),
                                     (cText ? (LPARAM)cText : (LPARAM)hb_parnl(5))));
 
@@ -155,7 +157,7 @@ HB_FUNC(GETMESSAGE)
 {
   MSG Msg;
 
-  if (GetMessage(&Msg, ISNIL(2) ? NULL : (HWND)hb_parnl(2), ISNIL(3) ? 0 : hb_parnl(3), ISNIL(4) ? 0 : hb_parnl(4)))
+  if (GetMessage(&Msg, ISNIL(2) ? NULL : w32_par_HWND(2), ISNIL(3) ? 0 : hb_parnl(3), ISNIL(4) ? 0 : hb_parnl(4)))
   {
     hb_storclen((LPSTR)&Msg, sizeof(MSG), 1);
     hb_retl(1);
@@ -170,7 +172,7 @@ HB_FUNC(PEEKMESSAGE)
 {
   MSG Msg;
 
-  if (PeekMessage((MSG *)&Msg, ISNIL(2) ? NULL : (HWND)hb_parnl(2), ISNIL(3) ? 0 : hb_parnl(3),
+  if (PeekMessage((MSG *)&Msg, ISNIL(2) ? NULL : w32_par_HWND(2), ISNIL(3) ? 0 : hb_parnl(3),
                   ISNIL(4) ? 0 : hb_parnl(4), ISNIL(5) ? PM_NOREMOVE : hb_parnl(5)))
   {
     hb_storclen((LPSTR)&Msg, sizeof(MSG), 1);
@@ -257,7 +259,7 @@ HB_FUNC( SENDMESSAGETIMEOUT )
 
 HB_FUNC(SENDNOTIFYMESSAGE)
 {
-  hb_retl(SendNotifyMessage((HWND)hb_parnl(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
+  hb_retl(SendNotifyMessage(w32_par_HWND(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
 }
 
 //-----------------------------------------------------------------------------

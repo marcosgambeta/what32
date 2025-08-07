@@ -20,6 +20,7 @@
 // #include "hbstack.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -240,7 +241,7 @@ HB_FUNC(SETMAPPERFLAGS)
 HB_FUNC(BEGINPAINT)
 {
   PAINTSTRUCT pps;
-  hb_retnl((LONG)BeginPaint((HWND)hb_parnl(1), &pps));
+  hb_retnl((LONG)BeginPaint(w32_par_HWND(1), &pps));
   hb_storclen((char *)&pps, sizeof(PAINTSTRUCT), 2);
 }
 
@@ -252,7 +253,7 @@ HB_FUNC(BEGINPAINT)
 
 HB_FUNC(ENDPAINT)
 {
-  hb_retl(EndPaint((HWND)hb_parnl(1), (PAINTSTRUCT *)hb_parcx(2)));
+  hb_retl(EndPaint(w32_par_HWND(1), (PAINTSTRUCT *)hb_parcx(2)));
 }
 
 //------------------------------------------------------------------------------
@@ -619,7 +620,7 @@ HB_FUNC(GETUPDATERECT)
   RECT Rect;
   PHB_ITEM aRect;
 
-  if (GetUpdateRect((HWND)hb_parnl(1), &Rect, hb_parl(2)))
+  if (GetUpdateRect(w32_par_HWND(1), &Rect, hb_parl(2)))
   {
     aRect = Rect2Array(&Rect);
     _itemReturn(aRect);
@@ -664,7 +665,7 @@ HB_FUNC(DRAGDETECT)
   {
     pArray = hb_param(2, HB_IT_ARRAY);
     Array2Point(pArray, &PoInt);
-    hb_retl(DragDetect((HWND)hb_parnl(1), PoInt));
+    hb_retl(DragDetect(w32_par_HWND(1), PoInt));
   }
   else
     hb_retl(FALSE);
@@ -767,7 +768,7 @@ HB_FUNC(DRAWANIMATEDRECTS)
   // Your code goes here
   if (Array2Rect(hb_param(3, HB_IT_ARRAY), &lprcFrom) && Array2Rect(hb_param(4, HB_IT_ARRAY), &lprcFrom))
   {
-    if (DrawAnimatedRects((HWND)hb_parnl(1), hb_parni(2), &lprcFrom, &lprcTo))
+    if (DrawAnimatedRects(w32_par_HWND(1), hb_parni(2), &lprcFrom, &lprcTo))
       hb_retl(TRUE);
     else
       hb_retl(FALSE);

@@ -22,6 +22,8 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 //----------------------------------------------------------------------------//
 
 HBITMAP DuplicateBitmap(HBITMAP hbmpSrc);
@@ -58,7 +60,7 @@ HB_FUNC(ENUMCLIPBOARDFORMATS)
 
 HB_FUNC(SETCLIPBOARDVIEWER)
 {
-  hb_retnl((ULONG)SetClipboardViewer((HWND)hb_parnl(1)));
+  hb_retnl((ULONG)SetClipboardViewer(w32_par_HWND(1)));
 }
 
 //----------------------------------------------------------------------------//
@@ -67,7 +69,7 @@ HB_FUNC(SETCLIPBOARDVIEWER)
 //
 HB_FUNC(CHANGECLIPBOARDCHAIN)
 {
-  hb_retl(ChangeClipboardChain((HWND)hb_parnl(1), (HWND)hb_parnl(2)));
+  hb_retl(ChangeClipboardChain(w32_par_HWND(1), w32_par_HWND(2)));
 }
 
 //----------------------------------------------------------------------------//
@@ -134,7 +136,7 @@ HB_FUNC(ISCLIPBOARDFORMATAVAILABLE)
 
 HB_FUNC(OPENCLIPBOARD)
 {
-  hb_retl(OpenClipboard((HWND)hb_parnl(1)));
+  hb_retl(OpenClipboard(w32_par_HWND(1)));
 }
 
 //----------------------------------------------------------------------------//

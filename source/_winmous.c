@@ -15,6 +15,8 @@
 // #include "hbvm.h"
 // #include "hbstack.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
 extern PHB_ITEM Point2Array(POINT *pt);
@@ -47,7 +49,7 @@ HB_FUNC(GETCAPTURE)
 
 HB_FUNC(SETCAPTURE)
 {
-  hb_retnl((LONG)SetCapture((HWND)hb_parnl(1)));
+  hb_retnl((LONG)SetCapture(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------

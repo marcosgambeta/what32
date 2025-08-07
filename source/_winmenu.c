@@ -12,6 +12,8 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 //-----------------------------------------------------------------------------
 
 HB_FUNC(APPENDMENU)
@@ -60,7 +62,7 @@ HB_FUNC(DESTROYMENU)
 HB_FUNC(GETMENU)
 
 {
-  hb_retnl((LONG)GetMenu((HWND)hb_parnl(1)));
+  hb_retnl((LONG)GetMenu(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -76,7 +78,7 @@ HB_FUNC(GETMENUITEMID)
 
 HB_FUNC(DRAWMENUBAR)
 {
-  hb_retl(DrawMenuBar((HWND)hb_parnl(1)));
+  hb_retl(DrawMenuBar(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -108,7 +110,7 @@ HB_FUNC(GETMENUSTRING)
 
 HB_FUNC(HILITEMENUITEM)
 {
-  hb_retl(HiliteMenuItem((HWND)hb_parnl(1), (HMENU)hb_parnl(2), hb_parni(3), hb_parni(4)));
+  hb_retl(HiliteMenuItem(w32_par_HWND(1), (HMENU)hb_parnl(2), hb_parni(3), hb_parni(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -136,7 +138,7 @@ HB_FUNC(GETMENUITEMCOUNT)
 
 HB_FUNC(SETMENU)
 {
-  hb_retl(SetMenu((HWND)hb_parnl(1), (HMENU)hb_parnl(2)));
+  hb_retl(SetMenu(w32_par_HWND(1), (HMENU)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -159,7 +161,7 @@ HB_FUNC(TRACKPOPUPMENU)
     rc.right = hb_parni(7, 3);
     rc.bottom = hb_parni(7, 4);
   }
-  hb_retnl(TrackPopupMenu((HMENU)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), (HWND)hb_parnl(6),
+  hb_retnl(TrackPopupMenu((HMENU)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HWND(6),
                           (ISNIL(7) ? NULL : &rc)));
 }
 
@@ -167,7 +169,7 @@ HB_FUNC(TRACKPOPUPMENU)
 
 HB_FUNC(GETSYSTEMMENU)
 {
-  hb_retnl((LONG)GetSystemMenu((HWND)hb_parnl(1), hb_parl(2)));
+  hb_retnl((LONG)GetSystemMenu(w32_par_HWND(1), hb_parl(2)));
 }
 
 //-----------------------------------------------------------------------------

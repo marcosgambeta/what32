@@ -21,6 +21,8 @@
 #include "winreg.h"
 #include "tchar.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 #ifdef __DMC__
 #define GDT_VALID 0
 #define DTM_FIRST 0x1000
@@ -62,7 +64,7 @@ HB_FUNC(DATETIME_CREATE)
                                 hb_parni(4),                             // y
                                 hb_parni(5),                             // nWidth
                                 hb_parni(6),                             // nHeight
-                                (HWND)hb_parnl(7),                       // hParent
+                                w32_par_HWND(7),                       // hParent
                                 (HMENU)hb_parni(8),                      // hMenu
                                 GetModuleHandle(NULL),                   // hInstance
                                 ISNIL(9) ? NULL : (void *)hb_parnl(9))); // lpParam
@@ -81,7 +83,7 @@ HB_FUNC(DATETIME_CREATE)
 HB_FUNC(DATETIME_GETMONTHCAL)
 {
 
-  hb_retnl((LONG)DateTime_GetMonthCal((HWND)hb_parnl(1) // Handle to a DTP control
+  hb_retnl((LONG)DateTime_GetMonthCal(w32_par_HWND(1) // Handle to a DTP control
                                       ));
 }
 
@@ -99,7 +101,7 @@ HB_FUNC(DATETIME_GETMONTHCALCOLOR)
 {
 
   hb_retnl((LONG)DateTime_GetMonthCalColor(
-      (HWND)hb_parnl(1), // Handle to a DTP control
+      w32_par_HWND(1), // Handle to a DTP control
       hb_parni(2)        // Value of type int specifying which month calendar color to retrieve.
 
       ));
@@ -118,7 +120,7 @@ HB_FUNC(DATETIME_GETMONTHCALCOLOR)
 HB_FUNC(DATETIME_GETMONTHCALFONT)
 {
 
-  hb_retnl((LONG)DateTime_GetMonthCalFont((HWND)hb_parnl(1) // Handle to a DTP control
+  hb_retnl((LONG)DateTime_GetMonthCalFont(w32_par_HWND(1) // Handle to a DTP control
                                           ));
 }
 
@@ -141,7 +143,7 @@ HB_FUNC(DATETIME_GETRANGE)
   PHB_ITEM temp;
   DWORD dwRet;
 
-  dwRet = DateTime_GetRange((HWND)hb_parnl(1), (SYSTEMTIME *)lpSysTimeArray);
+  dwRet = DateTime_GetRange(w32_par_HWND(1), (SYSTEMTIME *)lpSysTimeArray);
 
   if (ISBYREF(2))
     hb_stornl(dwRet, 2);
@@ -246,7 +248,7 @@ HB_FUNC(DATETIME_GETSYSTEMTIME)
   PHB_ITEM temp;
   long nRet;
 
-  nRet = DateTime_GetSystemtime((HWND)hb_parnl(1), // Handle to a DTP control
+  nRet = DateTime_GetSystemtime(w32_par_HWND(1), // Handle to a DTP control
                                 &SysTime           // Pointer to a SYSTEMTIME structure. If DTM_GETSYSTEMTIME returns
                                                    // GDT_VALID, this structure will contain the system time.
                                                    // Otherwise, it will not contain valid information.
@@ -310,7 +312,7 @@ HB_FUNC(DATETIME_GETSYSTEMTIME)
 HB_FUNC(DATETIME_SETFORMAT)
 {
   hb_retl(
-      DateTime_SetFormat((HWND)hb_parnl(1),   // Handle to a DTP control
+      DateTime_SetFormat(w32_par_HWND(1),   // Handle to a DTP control
                          (LPCTSTR)hb_parcx(2) // Pointer to a zero-terminated format string that defines
                                               // the desired display. Setting this parameter to NULL will
                                               // reset the control to the default format string for the current style.
@@ -333,7 +335,7 @@ HB_FUNC(DATETIME_SETFORMAT)
 HB_FUNC(DATETIME_SETMONTHCALCOLOR)
 {
   hb_retnl((LONG)DateTime_SetMonthCalColor(
-      (HWND)hb_parnl(1), // Handle to a DTP control
+      w32_par_HWND(1), // Handle to a DTP control
       hb_parni(2),       // Value of type int specifying which month calendar color to set.
       (COLORREF)hb_parnl(
           3) // COLORREF value that represents the color that will be set for the specified area of the month calendar.
@@ -355,7 +357,7 @@ HB_FUNC(DATETIME_SETMONTHCALCOLOR)
 HB_FUNC(DATETIME_SETMONTHCALFONT)
 {
 
-  DateTime_SetMonthCalFont((HWND)hb_parnl(1),  // Handle to a DTP control
+  DateTime_SetMonthCalFont(w32_par_HWND(1),  // Handle to a DTP control
                            (HFONT)hb_parnl(2), // Handle to the font that will be set.
                            (BOOL)hb_parl(3)    // Specifies whether the control should be redrawn
                                                // immediately upon setting the font. Setting this
@@ -406,7 +408,7 @@ HB_FUNC(DATETIME_SETSYSTEMTIME)
     }
   }
 
-  hb_retl(DateTime_SetSystemtime((HWND)hb_parnl(1),  // Handle to a DTP control
+  hb_retl(DateTime_SetSystemtime(w32_par_HWND(1),  // Handle to a DTP control
                                  (DWORD)hb_parnl(2), // Value that specifies the action that should be performed.
                                  lpSysTime           // Pointer to SYSTEMTIME structures
                                  ));

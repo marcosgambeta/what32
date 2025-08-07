@@ -20,6 +20,8 @@
 #include "hbapiitm.h"
 #include "tchar.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 //-------------------------------------------------------------------//
 /*
 BOOL BuildCommDCB(
@@ -126,7 +128,7 @@ endif
 HB_FUNC(COMMCONFIGDIALOG)
 {
   LPCTSTR lpszName = (LPCTSTR)hb_parcx(1);
-  HWND hwnd = ISNIL(2) ? NULL : (HWND)hb_parnl(2);
+  HWND hwnd = ISNIL(2) ? NULL : w32_par_HWND(2);
   LPCOMMCONFIG lpCC = (LPCOMMCONFIG)hb_parcx(3);
 
   hb_retl(CommConfigDialog(lpszName, hwnd, lpCC));

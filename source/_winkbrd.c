@@ -22,6 +22,8 @@ Modified functions:
 #include "hbapi.h"
 // #include "commctrl.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 //-----------------------------------------------------------------------------
 // WINUSERAPI DWORD WINAPI OemKeyScan( IN WORD wOemChar);
 
@@ -262,7 +264,7 @@ HB_FUNC(COPYACCELERATORTABLE)
 HB_FUNC(TRANSLATEACCELERATOR)
 {
   LPMSG lpMsg = (MSG *)hb_param(3, HB_IT_STRING)->item.asString.value;
-  hb_retni(TranslateAccelerator((HWND)hb_parnl(1), (HACCEL)hb_parnl(2), lpMsg));
+  hb_retni(TranslateAccelerator(w32_par_HWND(1), (HACCEL)hb_parnl(2), lpMsg));
 }
 
 /*

@@ -16,6 +16,8 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
+#define w32_par_HWND(n) (HWND)hb_parnl(n)
+
 #ifndef LONG_PTR
 #define LONG_PTR LONG
 #endif
@@ -328,7 +330,7 @@ HB_FUNC(MESSAGEBOX)
 {
   // LPCSTR lpCaption =  hb_parcx(3) ;
 
-  hb_retnl(MessageBox(ISNIL(1) ? NULL : (HWND)hb_parnl(1), (LPCSTR)hb_parcx(2), ISNIL(3) ? NULL : (LPCSTR)hb_parcx(3),
+  hb_retnl(MessageBox(ISNIL(1) ? NULL : w32_par_HWND(1), (LPCSTR)hb_parcx(2), ISNIL(3) ? NULL : (LPCSTR)hb_parcx(3),
                       ISNIL(4) ? 0 : (UINT)hb_parnl(4)));
 }
 
@@ -507,7 +509,7 @@ HB_FUNC(RELEASEMUTEX)
 
 HB_FUNC(REGISTERHOTKEY)
 {
-  hb_retl(RegisterHotKey((HWND)hb_parnl(1), hb_parni(2), (UINT)hb_parni(3), (UINT)hb_parni(4)));
+  hb_retl(RegisterHotKey(w32_par_HWND(1), hb_parni(2), (UINT)hb_parni(3), (UINT)hb_parni(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -515,7 +517,7 @@ HB_FUNC(REGISTERHOTKEY)
 
 HB_FUNC(UNREGISTERHOTKEY)
 {
-  hb_retl(UnregisterHotKey((HWND)hb_parnl(1), hb_parni(2)));
+  hb_retl(UnregisterHotKey(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
