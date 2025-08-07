@@ -12,6 +12,8 @@
 #include "hbstack.h"
 // #include "hbapiitm.h"
 
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
 extern PHB_ITEM Point2Array(POINT *pt);
@@ -126,7 +128,7 @@ HB_FUNC(ENUMFONTFAMILIES)
   {
     lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
-    hb_retni(EnumFontFamilies((HDC)hb_parnl(1), (LPCSTR)hb_parcx(2), (FONTENUMPROC)GenericCallblockProc, lParam));
+    hb_retni(EnumFontFamilies(w32_par_HDC(1), (LPCSTR)hb_parcx(2), (FONTENUMPROC)GenericCallblockProc, lParam));
   }
   else
     OutputDebugString("EnumFontFamilies(): No codeblock");
@@ -147,7 +149,7 @@ HB_FUNC(ENUMFONTFAMILIESEX)
   {
     lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
-    hb_retni(EnumFontFamiliesEx((HDC)hb_parnl(1), LogFont, (FONTENUMPROC)GenericCallblockProc, lParam, 0));
+    hb_retni(EnumFontFamiliesEx(w32_par_HDC(1), LogFont, (FONTENUMPROC)GenericCallblockProc, lParam, 0));
   }
   else
     OutputDebugString("EnumFontFamiliesEx(): No codeblock");
@@ -167,7 +169,7 @@ HB_FUNC(ENUMFONTS)
   {
     lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
-    hb_retni(EnumFonts((HDC)hb_parnl(1), (LPCSTR)hb_parcx(2), (FONTENUMPROC)GenericCallblockProc, lParam));
+    hb_retni(EnumFonts(w32_par_HDC(1), (LPCSTR)hb_parcx(2), (FONTENUMPROC)GenericCallblockProc, lParam));
   }
   else
     OutputDebugString("EnumFonts(): No codeblock");
@@ -257,7 +259,7 @@ HB_FUNC(GETFONTDATA)
   if (!ISNIL(5) && (hb_parnl(5) > 0))
     cBuffer = (char *)hb_xgrab(hb_parnl(5));
 
-  dwRet = GetFontData((HDC)hb_parnl(1), (DWORD)hb_parnl(2), (DWORD)hb_parnl(3),
+  dwRet = GetFontData(w32_par_HDC(1), (DWORD)hb_parnl(2), (DWORD)hb_parnl(3),
                       (ISNIL(5) || (hb_parnl(5) <= 0)) ? NULL : cBuffer, (DWORD)ISNIL(5) ? 0 : hb_parnl(5));
 
   hb_retnl((LONG)dwRet);
@@ -274,7 +276,7 @@ HB_FUNC(GETFONTDATA)
 
 HB_FUNC(GETFONTLANGUAGEINFO)
 {
-  hb_retnl((LONG)GetFontLanguageInfo((HDC)hb_parnl(1)));
+  hb_retnl((LONG)GetFontLanguageInfo(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------

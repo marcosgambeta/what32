@@ -16,6 +16,8 @@
 #include "item.api"
 #include "hbapi.h"
 
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 //-----------------------------------------------------------------------------
 
 HB_FUNC(CREATESOLIDBRUSH)
@@ -112,7 +114,7 @@ HB_FUNC(FIXBRUSHORGEX)
 {
   POINT *Point = (POINT *)hb_param(4, HB_IT_STRING)->item.asString.value;
 
-  hb_retl(FixBrushOrgEx((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), Point));
+  hb_retl(FixBrushOrgEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), Point));
 }
 
 //-----------------------------------------------------------------------------
@@ -125,7 +127,7 @@ HB_FUNC(GETBRUSHORGEX)
   PHB_ITEM aPt;
   PHB_ITEM temp;
 
-  if (GetBrushOrgEx((HDC)hb_parnl(1), &Point))
+  if (GetBrushOrgEx(w32_par_HDC(1), &Point))
   {
     aPt = _itemArrayNew(2);
 
@@ -153,7 +155,7 @@ HB_FUNC(SETBRUSHORGEX)
   PHB_ITEM aPt;
   PHB_ITEM temp;
 
-  if (SetBrushOrgEx((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), &Point))
+  if (SetBrushOrgEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &Point))
   {
     aPt = _itemArrayNew(2);
 

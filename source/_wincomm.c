@@ -18,6 +18,8 @@
 #include "hbapiitm.h"
 #include "item.api"
 
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 
 /* add parens to avoid warning */
@@ -81,7 +83,7 @@ HB_FUNC(DRAWSTATUSTEXT)
   rc.right = hb_parnl(2, 3);
   rc.bottom = hb_parnl(2, 4);
 
-  DrawStatusText((HDC)hb_parnl(1), (LPRECT)&rc, (LPCTSTR)hb_parcx(3), (UINT)hb_parni(4));
+  DrawStatusText(w32_par_HDC(1), (LPRECT)&rc, (LPCTSTR)hb_parcx(3), (UINT)hb_parni(4));
 }
 
 //----------------------------------------------------------------------------//

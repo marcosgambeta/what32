@@ -10,6 +10,8 @@
 #include <commctrl.h>
 #include "hbapi.h"
 
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 extern BOOL Array2Point(PHB_ITEM aPoint, POINT *pt);
 
 #if defined(__DMC__)
@@ -127,7 +129,7 @@ HB_FUNC(IMAGELIST_SETOVERLAYIMAGE)
 
 HB_FUNC(IMAGELIST_DRAW)
 {
-  hb_retl(ImageList_Draw((HIMAGELIST)hb_parnl(1), hb_parni(2), (HDC)hb_parnl(3), hb_parni(4), hb_parni(5),
+  hb_retl(ImageList_Draw((HIMAGELIST)hb_parnl(1), hb_parni(2), w32_par_HDC(3), hb_parni(4), hb_parni(5),
                          (UINT)hb_parni(6)));
 }
 
@@ -153,7 +155,7 @@ HB_FUNC(IMAGELIST_ADDMASKED)
 
 HB_FUNC(IMAGELIST_DRAWEX)
 {
-  hb_retl(ImageList_DrawEx((HIMAGELIST)hb_parnl(1), hb_parni(2), (HDC)hb_parnl(3), hb_parni(4), hb_parni(5),
+  hb_retl(ImageList_DrawEx((HIMAGELIST)hb_parnl(1), hb_parni(2), w32_par_HDC(3), hb_parni(4), hb_parni(5),
                            hb_parni(6), hb_parni(7), (COLORREF)hb_parnl(8), (COLORREF)hb_parnl(9), (UINT)hb_parni(10)));
 }
 

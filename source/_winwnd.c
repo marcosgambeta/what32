@@ -5,6 +5,8 @@
 #include "item.api"
 #include "hbapi.h"
 
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
 extern PHB_ITEM Point2Array(POINT *pt);
@@ -1015,7 +1017,7 @@ HB_FUNC(SETWINDOWEXTEX)
   SIZE lpSize;
   PHB_ITEM pArray;
 
-  if (SetWindowExtEx((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), &lpSize) > 0)
+  if (SetWindowExtEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lpSize) > 0)
   {
 
     pArray = Size2Array(&lpSize);
@@ -1035,7 +1037,7 @@ HB_FUNC(SETWINDOWORGEX)
   POINT lpPoint;
   PHB_ITEM pArray;
 
-  if (SetWindowOrgEx((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), &lpPoint) > 0)
+  if (SetWindowOrgEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lpPoint) > 0)
 
   {
     pArray = Point2Array(&lpPoint);

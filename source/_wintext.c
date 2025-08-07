@@ -13,6 +13,8 @@
 // #include "hbvm.h"
 // #include "hbstack.h"
 
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
 extern PHB_ITEM Point2Array(POINT *pt);
@@ -33,7 +35,7 @@ extern void Size2ArrayEx(SIZE *siz, PHB_ITEM aSize);
 HB_FUNC(TEXTOUT)
 {
 
-  hb_retl(TextOut((HDC)hb_parnl(1),     // handle of device context
+  hb_retl(TextOut(w32_par_HDC(1),     // handle of device context
                   hb_parni(2),          // x-coordinate of starting position
                   hb_parni(3),          // y-coordinate of starting position
                   (LPCTSTR)hb_parcx(4), // address of string
@@ -85,7 +87,7 @@ HB_FUNC(EXTTEXTOUT)
     }
   }
 
-  hb_retl(ExtTextOut((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), (UINT)hb_parni(4), rcOk ? &rc : NULL, (LPCSTR)cText,
+  hb_retl(ExtTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), (UINT)hb_parni(4), rcOk ? &rc : NULL, (LPCSTR)cText,
                      (UINT)strlen(cText), ISARRAY(7) ? lpDx : NULL));
 
   if (ISARRAY(7))
@@ -104,7 +106,7 @@ HB_FUNC(DRAWTEXT)
   RECT rc;
 
   if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
-    hb_retni(DrawText((HDC)hb_parnl(1), // handle of device context
+    hb_retni(DrawText(w32_par_HDC(1), // handle of device context
                       (LPCTSTR)cText,   // address of string
                       strlen(cText),    // number of characters in string
                       &rc, ISNIL(4) ? DT_LEFT : hb_parni(4)));
@@ -128,7 +130,7 @@ HB_FUNC(DRAWTEXTEX)
     dtp = (DRAWTEXTPARAMS *)hb_param(5, HB_IT_STRING)->item.asString.value;
 
   if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
-    hb_retni(DrawTextEx((HDC)hb_parnl(1), // handle of device context
+    hb_retni(DrawTextEx(w32_par_HDC(1), // handle of device context
                         (LPTSTR)cText,    // address of string
                         strlen(cText),    // number of characters in string
                         (LPRECT)&rc, ISNIL(4) ? DT_LEFT : hb_parni(4), ISCHAR(5) ? (LPDRAWTEXTPARAMS)dtp : NULL));
@@ -159,7 +161,7 @@ HB_FUNC(TABBEDTEXTOUT)
       *(aiTabs + i) = hb_parni(5, i + 1);
     }
 
-    hb_retnl((LONG)TabbedTextOut((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), (LPCSTR)cText, strlen(cText), iCount,
+    hb_retnl((LONG)TabbedTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), (LPCSTR)cText, strlen(cText), iCount,
                                  aiTabs, hb_parni(6)));
     hb_xfree(aiTabs);
   }
@@ -178,7 +180,7 @@ HB_FUNC(GETTEXTFACE)
   char *cText = (char *)hb_xgrab(MAX_PATH);
   int iRet;
 
-  iRet = GetTextFace((HDC)hb_parnl(1), MAX_PATH, cText);
+  iRet = GetTextFace(w32_par_HDC(1), MAX_PATH, cText);
   if (iRet)
     hb_retclen(cText, iRet);
 
@@ -208,7 +210,7 @@ HB_FUNC(GETTABBEDTEXTEXTENT)
       *(aiTabs + i) = hb_parni(3, i + 1);
     }
     cText = hb_parcx(2);
-    hb_retnl((LONG)GetTabbedTextExtent((HDC)hb_parnl(1), (LPCTSTR)cText, strlen(cText), iCount, aiTabs));
+    hb_retnl((LONG)GetTabbedTextExtent(w32_par_HDC(1), (LPCTSTR)cText, strlen(cText), iCount, aiTabs));
 
     hb_xfree(aiTabs);
   }
@@ -226,7 +228,7 @@ HB_FUNC(GETTEXTMETRICS)
 {
   TEXTMETRIC tm;
 
-  if (GetTextMetrics((HDC)hb_parnl(1), &tm))
+  if (GetTextMetrics(w32_par_HDC(1), &tm))
     hb_retclen((char *)&tm, sizeof(TEXTMETRIC));
 }
 
@@ -259,7 +261,7 @@ HB_FUNC(GETTEXTEXTENTPOINT32)
   SIZE sz;
   PHB_ITEM aMetr;
 
-  if (GetTextExtentPoint32((HDC)hb_parnl(1), pstr, strlen(pstr), &sz))
+  if (GetTextExtentPoint32(w32_par_HDC(1), pstr, strlen(pstr), &sz))
   {
     aMetr = Size2Array(&sz);
     _itemReturn(aMetr);
@@ -272,7 +274,7 @@ HB_FUNC(GETTEXTEXTENTPOINT32)
 
 HB_FUNC(GETBKMODE)
 {
-  hb_retni(GetBkMode((HDC)hb_parnl(1)));
+  hb_retni(GetBkMode(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -280,7 +282,7 @@ HB_FUNC(GETBKMODE)
 
 HB_FUNC(SETBKMODE)
 {
-  hb_retni(SetBkMode((HDC)hb_parnl(1), hb_parni(2)));
+  hb_retni(SetBkMode(w32_par_HDC(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -288,7 +290,7 @@ HB_FUNC(SETBKMODE)
 
 HB_FUNC(GETTEXTALIGN)
 {
-  hb_retni(GetTextAlign((HDC)hb_parnl(1)));
+  hb_retni(GetTextAlign(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -296,7 +298,7 @@ HB_FUNC(GETTEXTALIGN)
 
 HB_FUNC(SETTEXTALIGN)
 {
-  hb_retni(SetTextAlign((HDC)hb_parnl(1), (UINT)hb_parni(2)));
+  hb_retni(SetTextAlign(w32_par_HDC(1), (UINT)hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -304,7 +306,7 @@ HB_FUNC(SETTEXTALIGN)
 
 HB_FUNC(SETTEXTJUSTIFICATION)
 {
-  hb_retl(SetTextJustification((HDC)hb_parnl(1), hb_parni(2), hb_parni(3)));
+  hb_retl(SetTextJustification(w32_par_HDC(1), hb_parni(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -312,7 +314,7 @@ HB_FUNC(SETTEXTJUSTIFICATION)
 
 HB_FUNC(GETTEXTCHARACTEREXTRA)
 {
-  hb_retni(GetTextCharacterExtra((HDC)hb_parnl(1)));
+  hb_retni(GetTextCharacterExtra(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -320,7 +322,7 @@ HB_FUNC(GETTEXTCHARACTEREXTRA)
 
 HB_FUNC(SETTEXTCHARACTEREXTRA)
 {
-  hb_retni(SetTextCharacterExtra((HDC)hb_parnl(1), hb_parni(2)));
+  hb_retni(SetTextCharacterExtra(w32_par_HDC(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -328,7 +330,7 @@ HB_FUNC(SETTEXTCHARACTEREXTRA)
 
 HB_FUNC(GETTEXTCHARSET)
 {
-  hb_retni(GetTextCharset((HDC)hb_parnl(1)));
+  hb_retni(GetTextCharset(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------

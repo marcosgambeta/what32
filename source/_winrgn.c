@@ -9,6 +9,8 @@
 #include "item.api"
 #include "hbapi.h"
 
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
 extern PHB_ITEM Point2Array(POINT *pt);
@@ -46,7 +48,7 @@ HB_FUNC(CREATEELLIPTICRGNINDIRECT)
 
 HB_FUNC(FILLRGN)
 {
-  hb_retl(FillRgn((HDC)hb_parnl(1), (HRGN)hb_parnl(2), (HBRUSH)hb_parnl(3)));
+  hb_retl(FillRgn(w32_par_HDC(1), (HRGN)hb_parnl(2), (HBRUSH)hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -221,7 +223,7 @@ HB_FUNC(GETREGIONDATA)
 
 HB_FUNC(EXTSELECTCLIPRGN)
 {
-  hb_retni(ExtSelectClipRgn((HDC)hb_parnl(1), (HRGN)hb_parnl(2), hb_parni(3)));
+  hb_retni(ExtSelectClipRgn(w32_par_HDC(1), (HRGN)hb_parnl(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -243,7 +245,7 @@ HB_FUNC(RECTINREGION)
 
 HB_FUNC(GETRANDOMRGN)
 {
-  hb_retni(GetRandomRgn((HDC)hb_parnl(1), (HRGN)hb_parnl(2), hb_parni(3)));
+  hb_retni(GetRandomRgn(w32_par_HDC(1), (HRGN)hb_parnl(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -251,7 +253,7 @@ HB_FUNC(GETRANDOMRGN)
 
 HB_FUNC(GETCLIPRGN)
 {
-  hb_retni(GetClipRgn((HDC)hb_parnl(1), (HRGN)hb_parnl(2)));
+  hb_retni(GetClipRgn(w32_par_HDC(1), (HRGN)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -259,7 +261,7 @@ HB_FUNC(GETCLIPRGN)
 
 HB_FUNC(FRAMERGN)
 {
-  hb_retl(FrameRgn((HDC)hb_parnl(1), (HRGN)hb_parnl(2), (HBRUSH)hb_parnl(3), hb_parni(4), hb_parni(5)));
+  hb_retl(FrameRgn(w32_par_HDC(1), (HRGN)hb_parnl(2), (HBRUSH)hb_parnl(3), hb_parni(4), hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -310,7 +312,7 @@ HB_FUNC(VALIDATERGN)
 
 HB_FUNC(INVERTRGN)
 {
-  hb_retl(InvertRgn((HDC)hb_parnl(1), (HRGN)hb_parnl(2)));
+  hb_retl(InvertRgn(w32_par_HDC(1), (HRGN)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -318,7 +320,7 @@ HB_FUNC(INVERTRGN)
 
 HB_FUNC(OFFSETCLIPRGN)
 {
-  hb_retni(OffsetClipRgn((HDC)hb_parnl(1), hb_parni(2), hb_parni(3)));
+  hb_retni(OffsetClipRgn(w32_par_HDC(1), hb_parni(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -334,7 +336,7 @@ HB_FUNC(OFFSETRGN)
 
 HB_FUNC(PAINTRGN)
 {
-  hb_retl(PaintRgn((HDC)hb_parnl(1), (HRGN)hb_parnl(2)));
+  hb_retl(PaintRgn(w32_par_HDC(1), (HRGN)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -342,7 +344,7 @@ HB_FUNC(PAINTRGN)
 
 HB_FUNC(PATHTOREGION)
 {
-  hb_retnl((LONG)PathToRegion((HDC)hb_parnl(1)));
+  hb_retnl((LONG)PathToRegion(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -358,7 +360,7 @@ HB_FUNC(PTINREGION)
 
 HB_FUNC(SELECTCLIPRGN)
 {
-  hb_retni(SelectClipRgn((HDC)hb_parnl(1), (HRGN)hb_parnl(2)));
+  hb_retni(SelectClipRgn(w32_par_HDC(1), (HRGN)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -382,7 +384,7 @@ HB_FUNC(GETUPDATERGN)
 
 HB_FUNC(EXCLUDEUPDATERGN)
 {
-  hb_retni(ExcludeUpdateRgn((HDC)hb_parnl(1), (HWND)hb_parnl(2)));
+  hb_retni(ExcludeUpdateRgn(w32_par_HDC(1), (HWND)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------

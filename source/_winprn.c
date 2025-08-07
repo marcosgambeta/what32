@@ -13,6 +13,8 @@
 #include "hbvm.h"
 #include "hbstack.h"
 
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 //-----------------------------------------------------------------------------
 // HDC StartDoc( hDC, cDocName, [ cFilename ], [ cDataType ], [DI_Flag] )
 
@@ -25,14 +27,14 @@ HB_FUNC(STARTDOC)
   di.lpszDatatype = (LPTSTR)(ISNIL(4) ? NULL : hb_parcx(4));
   di.fwType = (DWORD)(ISNIL(5) ? 0 : hb_parnl(5));
 
-  hb_retnl((LONG)StartDoc((HDC)hb_parnl(1), &di));
+  hb_retnl((LONG)StartDoc(w32_par_HDC(1), &di));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(ENDDOC)
 {
-  hb_retni(EndDoc((HDC)hb_parnl(1)));
+  hb_retni(EndDoc(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -40,21 +42,21 @@ HB_FUNC(ENDDOC)
 
 HB_FUNC(ABORTDOC)
 {
-  hb_retni(AbortDoc((HDC)hb_parnl(1)));
+  hb_retni(AbortDoc(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(STARTPAGE)
 {
-  hb_retnl((LONG)StartPage((HDC)hb_parnl(1)));
+  hb_retnl((LONG)StartPage(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(ENDPAGE)
 {
-  hb_retnl((LONG)EndPage((HDC)hb_parnl(1)));
+  hb_retnl((LONG)EndPage(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------

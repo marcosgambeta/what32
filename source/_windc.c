@@ -12,6 +12,9 @@
 #include <windows.h>
 #include "item.api"
 #include "hbapi.h"
+
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
 extern PHB_ITEM Point2Array(POINT *pt);
@@ -35,7 +38,7 @@ HB_FUNC(GETDC)
 
 HB_FUNC(RESTOREDC)
 {
-  hb_retl(RestoreDC((HDC)hb_parnl(1), hb_parni(2)));
+  hb_retl(RestoreDC(w32_par_HDC(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -44,7 +47,7 @@ HB_FUNC(RESTOREDC)
 
 HB_FUNC(SAVEDC)
 {
-  hb_retni(SaveDC((HDC)hb_parnl(1)));
+  hb_retni(SaveDC(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -59,7 +62,7 @@ HB_FUNC(GETDCEX)
 
 HB_FUNC(RELEASEDC)
 {
-  hb_retni(ReleaseDC((HWND)hb_parnl(1), (HDC)hb_parnl(2)));
+  hb_retni(ReleaseDC((HWND)hb_parnl(1), w32_par_HDC(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -67,7 +70,7 @@ HB_FUNC(RELEASEDC)
 
 HB_FUNC(DELETEDC)
 {
-  hb_retl(DeleteDC((HDC)hb_parnl(1)));
+  hb_retl(DeleteDC(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -75,7 +78,7 @@ HB_FUNC(DELETEDC)
 
 HB_FUNC(CANCELDC)
 {
-  hb_retl(CancelDC((HDC)hb_parnl(1)));
+  hb_retl(CancelDC(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -83,14 +86,14 @@ HB_FUNC(CANCELDC)
 
 HB_FUNC(CREATECOMPATIBLEDC)
 {
-  hb_retnl((LONG)CreateCompatibleDC((HDC)hb_parnl(1)));
+  hb_retnl((LONG)CreateCompatibleDC(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(WINDOWFROMDC)
 {
-  hb_retnl((LONG)WindowFromDC((HDC)hb_parnl(1)));
+  hb_retnl((LONG)WindowFromDC(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -132,7 +135,7 @@ HB_FUNC(RESETDC)
   if (!ISNIL(2))
     lpInitData = (DEVMODE *)hb_param(2, HB_IT_STRING)->item.asString.value;
 
-  hb_retnl((LONG)ResetDCA((HDC)hb_parnl(1), ISNIL(2) ? NULL : lpInitData));
+  hb_retnl((LONG)ResetDCA(w32_par_HDC(1), ISNIL(2) ? NULL : lpInitData));
 }
 
 //-----------------------------------------------------------------------------
@@ -146,7 +149,7 @@ HB_FUNC(GETDCORGEX)
   POINT Point;
   PHB_ITEM aPt;
 
-  if (GetDCOrgEx((HDC)hb_parnl(1), &Point))
+  if (GetDCOrgEx(w32_par_HDC(1), &Point))
   {
     aPt = Point2Array(&Point);
     _itemReturn(aPt);
@@ -174,7 +177,7 @@ HB_FUNC(SCROLLDC)
 
   if (Array2Rect(hb_param(4, HB_IT_ARRAY), &lprcScroll) && Array2Rect(hb_param(5, HB_IT_ARRAY), &lprcClip))
   {
-    if (ScrollDC((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), &lprcScroll, &lprcClip, (HRGN)hb_parnl(6), &lprcUpdate))
+    if (ScrollDC(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lprcScroll, &lprcClip, (HRGN)hb_parnl(6), &lprcUpdate))
     {
       Rect2ArrayEx(&lprcUpdate, pArray);
       hb_retl(TRUE);

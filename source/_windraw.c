@@ -9,6 +9,8 @@
 #include "item.api"
 #include "hbapi.h"
 
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
 extern PHB_ITEM Point2Array(POINT *pt);
@@ -22,7 +24,7 @@ extern BOOL Array2Point(PHB_ITEM aPoint, POINT *pt);
 HB_FUNC(MOVETO)
 {
 
-  hb_retl(MoveToEx((HDC)hb_parnl(1), // device context handle
+  hb_retl(MoveToEx(w32_par_HDC(1), // device context handle
                    hb_parni(2),      // x-coordinate of line's ending point
                    hb_parni(3),      // y-coordinate of line's ending point
                    NULL));
@@ -39,7 +41,7 @@ HB_FUNC(MOVETOEX)
   POINT Point;
   PHB_ITEM aPt;
 
-  if (MoveToEx((HDC)hb_parnl(1), // device context handle
+  if (MoveToEx(w32_par_HDC(1), // device context handle
                hb_parni(2),      // x-coordinate of line's ending point
                hb_parni(3),      // y-coordinate of line's ending point
                &Point))
@@ -63,7 +65,7 @@ HB_FUNC(GETCURRENTPOSITIONEX)
   POINT pt;
   PHB_ITEM aPt;
 
-  if (GetCurrentPositionEx((HDC)hb_parnl(1), &pt))
+  if (GetCurrentPositionEx(w32_par_HDC(1), &pt))
   {
     aPt = Point2Array(&pt);
     _itemReturn(aPt);
@@ -76,7 +78,7 @@ HB_FUNC(GETCURRENTPOSITIONEX)
 
 HB_FUNC(GETPIXELFORMAT)
 {
-  hb_retni(GetPixelFormat((HDC)hb_parnl(1)));
+  hb_retni(GetPixelFormat(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -88,7 +90,7 @@ HB_FUNC(SETPIXELFORMAT)
 {
   PIXELFORMATDESCRIPTOR *pfd = (PIXELFORMATDESCRIPTOR *)hb_param(3, HB_IT_STRING)->item.asString.value;
 
-  hb_retl(SetPixelFormat((HDC)hb_parnl(1), hb_parni(2), pfd));
+  hb_retl(SetPixelFormat(w32_par_HDC(1), hb_parni(2), pfd));
 }
 
 //-----------------------------------------------------------------------------
@@ -104,7 +106,7 @@ HB_FUNC(DESCRIBEPIXELFORMAT)
   PIXELFORMATDESCRIPTOR pfd;
   UINT nBytes = sizeof(pfd);
 
-  hb_retni(DescribePixelFormat((HDC)hb_parnl(1), hb_parni(2), nBytes, &pfd));
+  hb_retni(DescribePixelFormat(w32_par_HDC(1), hb_parni(2), nBytes, &pfd));
   if (ISBYREF(3))
     hb_storclen((char *)&pfd, sizeof(PIXELFORMATDESCRIPTOR), 3);
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) pfd , sizeof( PIXELFORMATDESCRIPTOR ) );
@@ -116,7 +118,7 @@ HB_FUNC(DESCRIBEPIXELFORMAT)
 HB_FUNC(SETPIXEL)
 {
 
-  hb_retnl((ULONG)SetPixel((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4)));
+  hb_retnl((ULONG)SetPixel(w32_par_HDC(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -124,7 +126,7 @@ HB_FUNC(SETPIXEL)
 
 HB_FUNC(GETPIXEL)
 {
-  hb_retnl((ULONG)GetPixel((HDC)hb_parnl(1), hb_parni(2), hb_parni(3)));
+  hb_retnl((ULONG)GetPixel(w32_par_HDC(1), hb_parni(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -133,7 +135,7 @@ HB_FUNC(GETPIXEL)
 HB_FUNC(SETPIXELV)
 {
 
-  hb_retl(SetPixelV((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4)));
+  hb_retl(SetPixelV(w32_par_HDC(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4)));
 }
 
 //////////////////////////
@@ -145,7 +147,7 @@ HB_FUNC(SETPIXELV)
 
 HB_FUNC(LINETO)
 {
-  hb_retl(LineTo((HDC)hb_parnl(1), hb_parni(2), hb_parni(3)));
+  hb_retl(LineTo(w32_par_HDC(1), hb_parni(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -178,7 +180,7 @@ HB_FUNC( LINEDDA )
 
 HB_FUNC(GETARCDIRECTION)
 {
-  hb_retni(GetArcDirection((HDC)hb_parnl(1)));
+  hb_retni(GetArcDirection(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -186,7 +188,7 @@ HB_FUNC(GETARCDIRECTION)
 
 HB_FUNC(SETARCDIRECTION)
 {
-  hb_retni(SetArcDirection((HDC)hb_parnl(1), hb_parni(2)));
+  hb_retni(SetArcDirection(w32_par_HDC(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -194,7 +196,7 @@ HB_FUNC(SETARCDIRECTION)
 
 HB_FUNC(ARC)
 {
-  hb_retl(Arc((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
+  hb_retl(Arc(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
               hb_parni(8), hb_parni(9)));
 }
 
@@ -261,7 +263,7 @@ HB_FUNC(POLYLINE)
       }
     }
 
-    hb_retl(Polyline((HDC)hb_parnl(1), Point, iCount));
+    hb_retl(Polyline(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
   }
   else
@@ -307,7 +309,7 @@ HB_FUNC(POLYLINETO)
       }
     }
 
-    hb_retl(PolylineTo((HDC)hb_parnl(1), Point, iCount));
+    hb_retl(PolylineTo(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
   }
   else
@@ -364,7 +366,7 @@ HB_FUNC(POLYPOLYLINE)
       }
     }
 
-    hb_retl(PolyPolyline((HDC)hb_parnl(1), Point, PolyPoints, iPolyCount));
+    hb_retl(PolyPolyline(w32_par_HDC(1), Point, PolyPoints, iPolyCount));
     hb_xfree(PolyPoints);
     hb_xfree(Point);
   }
@@ -478,7 +480,7 @@ HB_FUNC(POLYBEZIER)
       }
     }
 
-    hb_retl(PolyBezier((HDC)hb_parnl(1), Point, iCount));
+    hb_retl(PolyBezier(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
   }
   else
@@ -525,7 +527,7 @@ HB_FUNC(POLYBEZIERTO)
       }
     }
 
-    hb_retl(PolyBezierTo((HDC)hb_parnl(1), Point, iCount));
+    hb_retl(PolyBezierTo(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
   }
   else
@@ -541,7 +543,7 @@ HB_FUNC(POLYBEZIERTO)
 
 HB_FUNC(RECTANGLE)
 {
-  hb_retl(Rectangle((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
+  hb_retl(Rectangle(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -549,7 +551,7 @@ HB_FUNC(RECTANGLE)
 
 HB_FUNC(ROUNDRECT)
 {
-  hb_retl(RoundRect((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7)));
+  hb_retl(RoundRect(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7)));
 }
 
 //-----------------------------------------------------------------------------
@@ -557,7 +559,7 @@ HB_FUNC(ROUNDRECT)
 
 HB_FUNC(CHORD)
 {
-  hb_retl(Chord((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
+  hb_retl(Chord(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
                 hb_parni(8), hb_parni(9)));
 }
 
@@ -566,7 +568,7 @@ HB_FUNC(CHORD)
 
 HB_FUNC(PIE)
 {
-  hb_retl(Pie((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
+  hb_retl(Pie(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
               hb_parni(8), hb_parni(9)));
 }
 
@@ -575,7 +577,7 @@ HB_FUNC(PIE)
 
 HB_FUNC(ELLIPSE)
 {
-  hb_retl(Ellipse((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
+  hb_retl(Ellipse(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -617,7 +619,7 @@ HB_FUNC(POLYGON)
       }
     }
 
-    hb_retl(Polygon((HDC)hb_parnl(1), Point, iCount));
+    hb_retl(Polygon(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
   }
   else
@@ -674,7 +676,7 @@ HB_FUNC(POLYPOLYGON)
       }
     }
 
-    hb_retl(PolyPolygon((HDC)hb_parnl(1), Point, PolyPoints, iPolyCount));
+    hb_retl(PolyPolygon(w32_par_HDC(1), Point, PolyPoints, iPolyCount));
     hb_xfree(PolyPoints);
     hb_xfree(Point);
   }
@@ -693,7 +695,7 @@ HB_FUNC(FILLRECT)
   RECT rc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
-    hb_retni(FillRect((HDC)hb_parnl(1), &rc, (HBRUSH)hb_parnl(3)));
+    hb_retni(FillRect(w32_par_HDC(1), &rc, (HBRUSH)hb_parnl(3)));
   else
     hb_retni(0);
 }
@@ -709,7 +711,7 @@ HB_FUNC(FRAMERECT)
   RECT rc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
-    hb_retni(FrameRect((HDC)hb_parnl(1), &rc, (HBRUSH)hb_parnl(3)));
+    hb_retni(FrameRect(w32_par_HDC(1), &rc, (HBRUSH)hb_parnl(3)));
   else
     hb_retni(0);
 }
@@ -725,7 +727,7 @@ HB_FUNC(INVERTRECT)
   RECT rc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
-    hb_retni(InvertRect((HDC)hb_parnl(1), &rc));
+    hb_retni(InvertRect(w32_par_HDC(1), &rc));
   else
     hb_retni(0);
 }
@@ -739,7 +741,7 @@ HB_FUNC(INVERTRECT)
 
 HB_FUNC(SETPOLYFILLMODE)
 {
-  hb_retni(SetPolyFillMode((HDC)hb_parnl(1), hb_parni(2)));
+  hb_retni(SetPolyFillMode(w32_par_HDC(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -748,7 +750,7 @@ HB_FUNC(SETPOLYFILLMODE)
 HB_FUNC(EXTFLOODFILL)
 {
 
-  hb_retl(ExtFloodFill((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4), (UINT)hb_parni(5)));
+  hb_retl(ExtFloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4), (UINT)hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -756,7 +758,7 @@ HB_FUNC(EXTFLOODFILL)
 
 HB_FUNC(FILLPATH)
 {
-  hb_retl(FillPath((HDC)hb_parnl(1)));
+  hb_retl(FillPath(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -764,7 +766,7 @@ HB_FUNC(FILLPATH)
 
 HB_FUNC(FLATTENPATH)
 {
-  hb_retl(FlattenPath((HDC)hb_parnl(1)));
+  hb_retl(FlattenPath(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -773,7 +775,7 @@ HB_FUNC(FLATTENPATH)
 HB_FUNC(FLOODFILL)
 {
 
-  hb_retl(FloodFill((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4)));
+  hb_retl(FloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), (COLORREF)hb_parnl(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -781,7 +783,7 @@ HB_FUNC(FLOODFILL)
 
 HB_FUNC(GETPOLYFILLMODE)
 {
-  hb_retni(GetPolyFillMode((HDC)hb_parnl(1)));
+  hb_retni(GetPolyFillMode(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------

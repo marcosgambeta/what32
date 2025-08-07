@@ -15,6 +15,8 @@
 #include "hbvm.h"
 #include "hbstack.h"
 
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
 extern PHB_ITEM Point2Array(POINT *pt);
@@ -47,7 +49,7 @@ HB_FUNC(COPYMETAFILE)
 
 HB_FUNC(CLOSEMETAFILE)
 {
-  hb_retnl((LONG)CloseMetaFile((HDC)hb_parnl(1)));
+  hb_retnl((LONG)CloseMetaFile(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -71,7 +73,7 @@ HB_FUNC(GETMETAFILE)
 
 HB_FUNC(PLAYMETAFILE)
 {
-  hb_retl(PlayMetaFile((HDC)hb_parnl(1), (HMETAFILE)hb_parnl(2)));
+  hb_retl(PlayMetaFile(w32_par_HDC(1), (HMETAFILE)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -143,7 +145,7 @@ HB_FUNC(CREATEENHMETAFILE)
 
   if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
     hb_retnl(
-        (LONG)CreateEnhMetaFile((HDC)hb_parnl(1), (LPCSTR)hb_parcx(2), &rc, ISNIL(4) ? NULL : (LPCSTR)hb_parcx(4)));
+        (LONG)CreateEnhMetaFile(w32_par_HDC(1), (LPCSTR)hb_parcx(2), &rc, ISNIL(4) ? NULL : (LPCSTR)hb_parcx(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -159,7 +161,7 @@ HB_FUNC(GETENHMETAFILE)
 
 HB_FUNC(GETMETARGN)
 {
-  hb_retni(GetMetaRgn((HDC)hb_parnl(1), (HRGN)hb_parnl(2)));
+  hb_retni(GetMetaRgn(w32_par_HDC(1), (HRGN)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -167,14 +169,14 @@ HB_FUNC(GETMETARGN)
 
 HB_FUNC(SETMETARGN)
 {
-  hb_retni(SetMetaRgn((HDC)hb_parnl(1)));
+  hb_retni(SetMetaRgn(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
 
 HB_FUNC(CLOSEENHMETAFILE)
 {
-  hb_retnl((LONG)CloseEnhMetaFile((HDC)hb_parnl(1)));
+  hb_retnl((LONG)CloseEnhMetaFile(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -193,7 +195,7 @@ HB_FUNC(PLAYENHMETAFILE)
   RECT rc;
 
   if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
-    hb_retl(PlayEnhMetaFile((HDC)hb_parnl(1), (HENHMETAFILE)hb_parnl(2), &rc));
+    hb_retl(PlayEnhMetaFile(w32_par_HDC(1), (HENHMETAFILE)hb_parnl(2), &rc));
 }
 
 //-----------------------------------------------------------------------------
@@ -216,13 +218,13 @@ HB_FUNC(GETWINMETAFILEBITS)
 
   UINT nBytes;
 
-  nBytes = GetWinMetaFileBits((HENHMETAFILE)hb_parnl(1), 0, NULL, hb_parni(2), (HDC)hb_parnl(3));
+  nBytes = GetWinMetaFileBits((HENHMETAFILE)hb_parnl(1), 0, NULL, hb_parni(2), w32_par_HDC(3));
 
   if (nBytes)
   {
     Buffer = (BYTE *)hb_xgrab(nBytes);
 
-    if (GetWinMetaFileBits((HENHMETAFILE)hb_parnl(1), nBytes, Buffer, hb_parni(2), (HDC)hb_parnl(3)))
+    if (GetWinMetaFileBits((HENHMETAFILE)hb_parnl(1), nBytes, Buffer, hb_parni(2), w32_par_HDC(3)))
       hb_retclen((char *)Buffer, nBytes);
 
     hb_xfree(Buffer);

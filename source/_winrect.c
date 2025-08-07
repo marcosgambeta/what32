@@ -14,6 +14,8 @@
 // #include "hbvm.h"
 // #include "hbstack.h"
 
+#define w32_par_HDC(n) (HDC)hb_parnl(n)
+
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
 extern PHB_ITEM Point2Array(POINT *pt);
@@ -37,7 +39,7 @@ HB_FUNC(DRAWFOCUSRECT)
   RECT lprc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprc))
-    hb_retl(DrawFocusRect((HDC)hb_parnl(1), &lprc));
+    hb_retl(DrawFocusRect(w32_par_HDC(1), &lprc));
   else
     hb_retl(FALSE);
 }
@@ -47,7 +49,7 @@ HB_FUNC(DRAWFOCUSRECT)
 
 HB_FUNC(INTERSECTCLIPRECT)
 {
-  hb_retni(IntersectClipRect((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
+  hb_retni(IntersectClipRect(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -421,7 +423,7 @@ HB_FUNC(PTINRECT)
 
 HB_FUNC(EXCLUDECLIPRECT)
 {
-  hb_retni(ExcludeClipRect((HDC)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
+  hb_retni(ExcludeClipRect(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -432,7 +434,7 @@ HB_FUNC(RECTVISIBLE)
   RECT rc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
-    hb_retl(RectVisible((HDC)hb_parnl(1), &rc));
+    hb_retl(RectVisible(w32_par_HDC(1), &rc));
   else
     hb_retl(0);
 }
