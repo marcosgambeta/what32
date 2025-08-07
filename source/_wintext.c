@@ -15,6 +15,7 @@
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_ret_DWORD(x) hb_retnl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -211,7 +212,7 @@ HB_FUNC(GETTABBEDTEXTEXTENT)
       *(aiTabs + i) = hb_parni(3, i + 1);
     }
     cText = hb_parcx(2);
-    hb_retnl((LONG)GetTabbedTextExtent(w32_par_HDC(1), (LPCTSTR)cText, strlen(cText), iCount, aiTabs));
+    w32_ret_DWORD((LONG)GetTabbedTextExtent(w32_par_HDC(1), (LPCTSTR)cText, strlen(cText), iCount, aiTabs));
 
     hb_xfree(aiTabs);
   }

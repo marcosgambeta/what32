@@ -26,6 +26,7 @@
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 #define w32_par_HGDIOBJ(n) (HGDIOBJ)hb_parnl(n)
+#define w32_ret_DWORD(x) hb_retnl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -157,7 +158,7 @@ HB_FUNC(UNREALIZEOBJECT)
 
 HB_FUNC(GETOBJECTTYPE)
 {
-  hb_retnl((LONG)GetObjectType(w32_par_HGDIOBJ(1)));
+  w32_ret_DWORD((LONG)GetObjectType(w32_par_HGDIOBJ(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -230,7 +231,7 @@ HB_FUNC(SETMAPMODE)
 
 HB_FUNC(SETMAPPERFLAGS)
 {
-  hb_retnl((LONG)SetMapperFlags(w32_par_HDC(1), w32_par_DWORD(2)));
+  w32_ret_DWORD((LONG)SetMapperFlags(w32_par_HDC(1), w32_par_DWORD(2)));
 }
 
 // WM_PAINT functions
@@ -286,7 +287,7 @@ HB_FUNC(GDICOMMENT)
 
 HB_FUNC(GDISETBATCHLIMIT)
 {
-  hb_retnl((LONG)GdiSetBatchLimit(w32_par_DWORD(1)));
+  w32_ret_DWORD((LONG)GdiSetBatchLimit(w32_par_DWORD(1)));
 }
 
 // PATH functions
@@ -490,7 +491,7 @@ HB_FUNC(PAINTDESKTOP)
 
 HB_FUNC(GETGUIRESOURCES)
 {
-  hb_retnl((LONG)GetGuiResources(w32_par_HANDLE(1), w32_par_DWORD(2)));
+  w32_ret_DWORD((LONG)GetGuiResources(w32_par_HANDLE(1), w32_par_DWORD(2)));
 }
 
 #endif

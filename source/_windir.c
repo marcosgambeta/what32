@@ -15,6 +15,7 @@
 
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_ret_DWORD(x) hb_retnl(x)
 
 #if defined(__DMC__)
 WINBASEAPI
@@ -27,7 +28,7 @@ GetLongPathName(LPCSTR lpszLongPath, LPSTR lpszShortPath, DWORD cchBuffer);
 
 HB_FUNC(GETLOGICALDRIVES)
 {
-  hb_retnl((LONG)GetLogicalDrives());
+  w32_ret_DWORD((LONG)GetLogicalDrives());
 }
 
 //-----------------------------------------------------------------------------
@@ -140,7 +141,7 @@ HB_FUNC(SETFILEATTRIBUTES)
 
 HB_FUNC(GETFILEATTRIBUTES)
 {
-  hb_retnl((LONG)GetFileAttributes((LPCSTR)hb_parcx(1)));
+  w32_ret_DWORD((LONG)GetFileAttributes((LPCSTR)hb_parcx(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -214,7 +215,7 @@ HB_FUNC(GETFULLPATHNAME)
   // DWORD dwSize  = hb_parnl( 2 );
   DWORD dwReq;
   dwReq = GetFullPathName((LPCSTR)szIn, MAX_PATH, (LPSTR)buffer, &szBuffRet);
-  hb_retnl(dwReq);
+  w32_ret_DWORD(dwReq);
   hb_storc(szBuffRet, 4);
   hb_storc(buffer, 3);
 }
@@ -263,7 +264,7 @@ HB_FUNC(GETSHORTPATHNAME)
 
 HB_FUNC(GETLONGPATHNAME)
 {
-  hb_retnl((LONG)GetLongPathName((LPCSTR)hb_parcx(1), (LPSTR)hb_parcx(2), w32_par_DWORD(3)));
+  w32_ret_DWORD((LONG)GetLongPathName((LPCSTR)hb_parcx(1), (LPSTR)hb_parcx(2), w32_par_DWORD(3)));
 }
 
 //-----------------------------------------------------------------------------

@@ -17,6 +17,7 @@
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_ret_DWORD(x) hb_retnl(x)
 
 //-----------------------------------------------------------------------------
 
@@ -206,7 +207,7 @@ HB_FUNC(SETMESSAGEQUEUE)
 
 HB_FUNC(GETMESSAGEPOS)
 {
-  hb_retnl((LONG)GetMessagePos());
+  w32_ret_DWORD((LONG)GetMessagePos());
 }
 
 //-----------------------------------------------------------------------------
@@ -294,7 +295,7 @@ HB_FUNC(WAITMESSAGE)
 
 HB_FUNC(WAITFORINPUTIDLE)
 {
-  hb_retnl((LONG)WaitForInputIdle(w32_par_HANDLE(1), w32_par_DWORD(2)));
+  w32_ret_DWORD((LONG)WaitForInputIdle(w32_par_HANDLE(1), w32_par_DWORD(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -313,7 +314,7 @@ HB_FUNC(INSENDMESSAGE)
 HB_FUNC(INSENDMESSAGEEX)
 {
 
-  hb_retnl((LONG)InSendMessageEx(NULL)); // param reserved must be NULL
+  w32_ret_DWORD((LONG)InSendMessageEx(NULL)); // param reserved must be NULL
 }
 
 #endif
@@ -324,7 +325,7 @@ HB_FUNC(INSENDMESSAGEEX)
 
 HB_FUNC(MSGWAITFORMULTIPLEOBJECTS)
 {
-  hb_retnl((LONG)MsgWaitForMultipleObjects(w32_par_DWORD(1), (HANDLE *)hb_parnl(2), hb_parl(3), w32_par_DWORD(4),
+  w32_ret_DWORD((LONG)MsgWaitForMultipleObjects(w32_par_DWORD(1), (HANDLE *)hb_parnl(2), hb_parl(3), w32_par_DWORD(4),
                                            w32_par_DWORD(5)));
 }
 
@@ -334,7 +335,7 @@ HB_FUNC(MSGWAITFORMULTIPLEOBJECTS)
 
 HB_FUNC(MSGWAITFORMULTIPLEOBJECTSEX)
 {
-  hb_retnl((LONG)MsgWaitForMultipleObjectsEx(w32_par_DWORD(1), (HANDLE *)hb_parnl(2), w32_par_DWORD(3),
+  w32_ret_DWORD((LONG)MsgWaitForMultipleObjectsEx(w32_par_DWORD(1), (HANDLE *)hb_parnl(2), w32_par_DWORD(3),
                                              w32_par_DWORD(4), w32_par_DWORD(5)));
 }
 

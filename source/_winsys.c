@@ -46,6 +46,7 @@
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_ret_DWORD(x) hb_retnl(x)
 
 #if defined(__DMC__)
 #if 0
@@ -89,7 +90,7 @@ BOOL PASCAL enable_privilege(LPCTSTR privilege_name);
 //
 HB_FUNC(GETFREESPACE)
 {
-  hb_retnl((LONG)GetFreeSpace((UINT)hb_parni(1)));
+  w32_ret_DWORD((LONG)GetFreeSpace((UINT)hb_parni(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -525,7 +526,7 @@ HB_FUNC(ANSITOOEM)
 
 HB_FUNC(GETVERSION)
 {
-  hb_retnl((LONG)GetVersion());
+  w32_ret_DWORD((LONG)GetVersion());
 }
 
 //-------------------------------------------------------------------//
@@ -583,7 +584,7 @@ HB_FUNC(LOADSTRING)
 //
 HB_FUNC(SIZEOFRESOURCE)
 {
-  hb_retnl((LONG)SizeofResource((HMODULE)hb_parnl(1), (HRSRC)hb_parnl(2)));
+  w32_ret_DWORD((LONG)SizeofResource((HMODULE)hb_parnl(1), (HRSRC)hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -719,7 +720,7 @@ HB_FUNC( GETSYSTEMINFO )
 //
 HB_FUNC(GETTICKCOUNT)
 {
-  hb_retnl((LONG)GetTickCount());
+  w32_ret_DWORD((LONG)GetTickCount());
 }
 
 //-------------------------------------------------------------------//
@@ -728,7 +729,7 @@ HB_FUNC(GETTICKCOUNT)
 
 HB_FUNC(GETLOGICALDRIVESTRINGS)
 {
-  hb_retnl((LONG)GetLogicalDriveStrings(w32_par_DWORD(1), (LPSTR)hb_parcx(2)));
+  w32_ret_DWORD((LONG)GetLogicalDriveStrings(w32_par_DWORD(1), (LPSTR)hb_parcx(2)));
 }
 
 //-------------------------------------------------------------------//

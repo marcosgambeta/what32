@@ -15,6 +15,7 @@
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_ret_DWORD(x) hb_retnl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -264,7 +265,7 @@ HB_FUNC(GETFONTDATA)
   dwRet = GetFontData(w32_par_HDC(1), w32_par_DWORD(2), w32_par_DWORD(3),
                       (ISNIL(5) || (hb_parnl(5) <= 0)) ? NULL : cBuffer, (DWORD)ISNIL(5) ? 0 : hb_parnl(5));
 
-  hb_retnl((LONG)dwRet);
+  w32_ret_DWORD((LONG)dwRet);
 
   if (!ISNIL(5) && (hb_parnl(5) > 0))
   {
@@ -278,7 +279,7 @@ HB_FUNC(GETFONTDATA)
 
 HB_FUNC(GETFONTLANGUAGEINFO)
 {
-  hb_retnl((LONG)GetFontLanguageInfo(w32_par_HDC(1)));
+  w32_ret_DWORD((LONG)GetFontLanguageInfo(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------

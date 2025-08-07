@@ -11,6 +11,7 @@
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_ret_DWORD(x) hb_retnl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -465,7 +466,7 @@ HB_FUNC(SETWINDOWCONTEXTHELPID)
 
 HB_FUNC(GETWINDOWCONTEXTHELPID)
 {
-  hb_retnl((LONG)GetWindowContextHelpId(w32_par_HWND(1)));
+  w32_ret_DWORD((LONG)GetWindowContextHelpId(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -481,7 +482,7 @@ HB_FUNC(SETMENUCONTEXTHELPID)
 
 HB_FUNC(GETMENUCONTEXTHELPID)
 {
-  hb_retnl((LONG)GetMenuContextHelpId((HMENU)hb_parnl(1)));
+  w32_ret_DWORD((LONG)GetMenuContextHelpId((HMENU)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -663,7 +664,7 @@ HB_FUNC(SETCLASSWORD)
 
 HB_FUNC(GETCLASSLONG)
 {
-  hb_retnl((LONG)GetClassLong(w32_par_HWND(1), hb_parni(2)));
+  w32_ret_DWORD((LONG)GetClassLong(w32_par_HWND(1), hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -671,7 +672,7 @@ HB_FUNC(GETCLASSLONG)
 
 HB_FUNC(SETCLASSLONG)
 {
-  hb_retnl((LONG)SetClassLong(w32_par_HWND(1), hb_parni(2), hb_parnl(3)));
+  w32_ret_DWORD((LONG)SetClassLong(w32_par_HWND(1), hb_parni(2), hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------

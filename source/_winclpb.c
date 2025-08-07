@@ -25,6 +25,7 @@
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_ret_DWORD(x) hb_retnl(x)
 
 //----------------------------------------------------------------------------//
 
@@ -108,7 +109,7 @@ HB_FUNC(GETPRIORITYCLIPBOARDFORMAT)
 
 HB_FUNC(GETCLIPBOARDSEQUENCENUMBER)
 {
-  hb_retnl((LONG)GetClipboardSequenceNumber());
+  w32_ret_DWORD((LONG)GetClipboardSequenceNumber());
 }
 
 #endif

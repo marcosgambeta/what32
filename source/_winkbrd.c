@@ -25,13 +25,14 @@ Modified functions:
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
+#define w32_ret_DWORD(x) hb_retnl(x)
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI DWORD WINAPI OemKeyScan( IN WORD wOemChar);
 
 HB_FUNC(OEMKEYSCAN)
 {
-  hb_retnl(OemKeyScan((WORD)hb_parni(1)));
+  w32_ret_DWORD(OemKeyScan((WORD)hb_parni(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -156,7 +157,7 @@ HB_FUNC(GETINPUTSTATE)
 
 HB_FUNC(GETQUEUESTATUS)
 {
-  hb_retnl((LONG)GetQueueStatus((UINT)hb_parni(1)));
+  w32_ret_DWORD((LONG)GetQueueStatus((UINT)hb_parni(1)));
 }
 
 //-----------------------------------------------------------------------------
