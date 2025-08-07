@@ -17,6 +17,7 @@
 #include <vfw.h>
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 #if ((defined(__GNUC__) && (__GNUC__ < 4)) || (defined(__WATCOMC__) && (__WATCOMC__ < 1290)))
 #define WM_CAP_START WM_USER
@@ -135,7 +136,7 @@
                                        int nID ); */
 HB_FUNC(CAPCREATECAPTUREWINDOW)
 {
-  hb_retnl((LONG)capCreateCaptureWindow((LPCSTR)hb_parc(1), (DWORD)hb_parnl(2), hb_parni(3), hb_parni(4), hb_parni(5),
+  hb_retnl((LONG)capCreateCaptureWindow((LPCSTR)hb_parc(1), w32_par_DWORD(2), hb_parni(3), hb_parni(4), hb_parni(5),
                                         hb_parni(6), w32_par_HWND(7), hb_parni(8)));
 }
 
@@ -390,7 +391,7 @@ HB_FUNC(CAPEDITCOPY)
 /* SendMessage( hwnd, WM_CAP_FILE_ALLOCATE, 0, 0 ) */
 HB_FUNC(CAPFILEALLOC)
 {
-  hb_retl(capFileAlloc(w32_par_HWND(1), (DWORD)hb_parnl(2)));
+  hb_retl(capFileAlloc(w32_par_HWND(1), w32_par_DWORD(2)));
 }
 
 /* ------------------------------------------------------------------------ */

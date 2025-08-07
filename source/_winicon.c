@@ -16,6 +16,7 @@
 #define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 #if defined(__DMC__)
 // SHSTDAPI_(HICON) DuplicateIcon(HINSTANCE hInst, HICON hIcon);
@@ -80,7 +81,7 @@ HB_FUNC(LOOKUPICONIDFROMDIRECTORYEX)
 HB_FUNC(CREATEICONFROMRESOURCE)
 {
 
-  hb_retnl((LONG)CreateIconFromResource((PBYTE)hb_parcx(1), (DWORD)hb_parnl(2), hb_parl(3), (DWORD)hb_parnl(4)));
+  hb_retnl((LONG)CreateIconFromResource((PBYTE)hb_parcx(1), w32_par_DWORD(2), hb_parl(3), w32_par_DWORD(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -90,7 +91,7 @@ HB_FUNC(CREATEICONFROMRESOURCE)
 HB_FUNC(CREATEICONFROMRESOURCEEX)
 {
 
-  hb_retnl((LONG)CreateIconFromResourceEx((PBYTE)hb_parcx(1), (DWORD)hb_parnl(2), hb_parl(3), (DWORD)hb_parnl(4),
+  hb_retnl((LONG)CreateIconFromResourceEx((PBYTE)hb_parcx(1), w32_par_DWORD(2), hb_parl(3), w32_par_DWORD(4),
                                           hb_parni(5), hb_parni(6), (UINT)hb_parni(7)));
 }
 

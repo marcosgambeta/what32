@@ -14,6 +14,7 @@
 #include "hbapi.h"
 
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 #if defined(__DMC__)
 WINBASEAPI
@@ -131,7 +132,7 @@ HB_FUNC(GETCURRENTDIRECTORY)
 
 HB_FUNC(SETFILEATTRIBUTES)
 {
-  w32_ret_BOOL(SetFileAttributes((LPCSTR)hb_parcx(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(SetFileAttributes((LPCSTR)hb_parcx(1), w32_par_DWORD(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -262,7 +263,7 @@ HB_FUNC(GETSHORTPATHNAME)
 
 HB_FUNC(GETLONGPATHNAME)
 {
-  hb_retnl((LONG)GetLongPathName((LPCSTR)hb_parcx(1), (LPSTR)hb_parcx(2), (DWORD)hb_parnl(3)));
+  hb_retnl((LONG)GetLongPathName((LPCSTR)hb_parcx(1), (LPSTR)hb_parcx(2), w32_par_DWORD(3)));
 }
 
 //-----------------------------------------------------------------------------

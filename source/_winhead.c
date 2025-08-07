@@ -14,6 +14,7 @@
 #include "hbapi.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 /* add parens to avoid warning */
 #if defined(__BORLANDC__) && (__BORLANDC__ <= 0x620)
@@ -105,7 +106,7 @@ typedef struct _HD_ITEM
 HB_FUNC(HEADER_CREATE)
 {
 
-  hb_retnl((LONG)CreateWindow("SysHeader32", "", (DWORD)hb_parnl(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5),
+  hb_retnl((LONG)CreateWindow("SysHeader32", "", w32_par_DWORD(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5),
                               w32_par_HWND(6), (HMENU)hb_parni(7), GetModuleHandle(NULL), NULL));
 }
 

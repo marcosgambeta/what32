@@ -19,6 +19,7 @@
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 #ifndef LONG_PTR
 #define LONG_PTR LONG
@@ -64,7 +65,7 @@ HB_FUNC(POKEW)
 
 HB_FUNC(POKEL)
 {
-  *(LPLONG)hb_parnl(1) = (DWORD)hb_parnl(2);
+  *(LPLONG)hb_parnl(1) = w32_par_DWORD(2);
 }
 
 //-----------------------------------------------------------------------------
@@ -383,7 +384,7 @@ HB_FUNC(FREEENVIRONMENTSTRINGS)
 
 HB_FUNC(SLEEP)
 {
-  Sleep((DWORD)hb_parnl(1));
+  Sleep(w32_par_DWORD(1));
 }
 
 //-----------------------------------------------------------------------------

@@ -24,6 +24,7 @@ Modified and non-API functions:
 #define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -158,7 +159,7 @@ HB_FUNC(SETSTRETCHBLTMODE)
 HB_FUNC(STRETCHBLT)
 {
   w32_ret_BOOL(StretchBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6),
-                     hb_parni(7), hb_parni(8), hb_parni(9), hb_parni(10), (DWORD)hb_parnl(11)));
+                     hb_parni(7), hb_parni(8), hb_parni(9), hb_parni(10), w32_par_DWORD(11)));
 }
 
 //-----------------------------------------------------------------------------
@@ -201,7 +202,7 @@ HB_FUNC(CREATEDIBITMAP)
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(5, HB_IT_STRING)->item.asString.value;
 
   hb_retnl(
-      (LONG)CreateDIBitmap(w32_par_HDC(1), bmih, (DWORD)hb_parnl(3), (VOID *)hb_parcx(3), bmi, (UINT)hb_parni(6)));
+      (LONG)CreateDIBitmap(w32_par_HDC(1), bmih, w32_par_DWORD(3), (VOID *)hb_parcx(3), bmi, (UINT)hb_parni(6)));
 }
 
 //-----------------------------------------------------------------------------
@@ -216,7 +217,7 @@ HB_FUNC(CREATEDIBSECTION)
   VOID **ppBits = (VOID **)0;
 
   hb_retnl((LONG)CreateDIBSection(w32_par_HDC(1), bmi, (UINT)hb_parni(3), ppBits, (HANDLE)hb_parnl(5),
-                                  (DWORD)hb_parnl(6)));
+                                  w32_par_DWORD(6)));
 
   hb_stornl((LONG)*ppBits, 4);
 }
@@ -236,7 +237,7 @@ HB_FUNC(CREATEDISCARDABLEBITMAP)
 HB_FUNC(MASKBLT)
 {
   w32_ret_BOOL(MaskBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6), hb_parni(7),
-                  hb_parni(8), w32_par_HBITMAP(9), hb_parni(10), hb_parni(11), (DWORD)hb_parnl(12)));
+                  hb_parni(8), w32_par_HBITMAP(9), hb_parni(10), hb_parni(11), w32_par_DWORD(12)));
 }
 
 //-----------------------------------------------------------------------------
@@ -245,7 +246,7 @@ HB_FUNC(MASKBLT)
 HB_FUNC(BITBLT)
 {
   w32_ret_BOOL(BitBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6), hb_parni(7),
-                 hb_parni(8), (DWORD)hb_parnl(9)));
+                 hb_parni(8), w32_par_DWORD(9)));
 }
 
 //-----------------------------------------------------------------------------
@@ -253,7 +254,7 @@ HB_FUNC(BITBLT)
 
 HB_FUNC(PATBLT)
 {
-  w32_ret_BOOL(PatBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), (DWORD)hb_parnl(6)));
+  w32_ret_BOOL(PatBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_DWORD(6)));
 }
 
 //-----------------------------------------------------------------------------
@@ -318,7 +319,7 @@ HB_FUNC(SETDIBITSTODEVICE)
 
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(11, HB_IT_STRING)->item.asString.value;
 
-  hb_retni(SetDIBitsToDevice(w32_par_HDC(1), hb_parni(2), hb_parni(3), (DWORD)hb_parnl(4), (DWORD)hb_parnl(5),
+  hb_retni(SetDIBitsToDevice(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_DWORD(4), w32_par_DWORD(5),
                              hb_parni(6), hb_parni(7), (UINT)hb_parni(8), (UINT)hb_parni(9), (VOID *)hb_parcx(10), bmi,
                              (UINT)hb_parni(12)));
 }
@@ -335,7 +336,7 @@ HB_FUNC(STRETCHDIBITS)
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(11, HB_IT_STRING)->item.asString.value;
 
   hb_retni(StretchDIBits(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
-                         hb_parni(8), hb_parni(9), (VOID *)hb_parcx(10), bmi, (UINT)hb_parni(12), (DWORD)hb_parnl(13)));
+                         hb_parni(8), hb_parni(9), (VOID *)hb_parcx(10), bmi, (UINT)hb_parni(12), w32_par_DWORD(13)));
 }
 
 //-----------------------------------------------------------------------------

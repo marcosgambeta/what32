@@ -23,6 +23,7 @@
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 #ifdef __DMC__
 #define GDT_VALID 0
@@ -60,7 +61,7 @@ HB_FUNC(DATETIME_CREATE)
   hb_retnl((LONG)CreateWindowEx(ISNIL(1) ? 0 : hb_parnl(1),
                                 "SysDateTimePick32",                     // CLASSNAME
                                 0,                                       // Window Name   // ????????
-                                (DWORD)hb_parnl(2),                      // nStyle
+                                w32_par_DWORD(2),                      // nStyle
                                 hb_parni(3),                             // x
                                 hb_parni(4),                             // y
                                 hb_parni(5),                             // nWidth
@@ -410,7 +411,7 @@ HB_FUNC(DATETIME_SETSYSTEMTIME)
   }
 
   hb_retl(DateTime_SetSystemtime(w32_par_HWND(1),  // Handle to a DTP control
-                                 (DWORD)hb_parnl(2), // Value that specifies the action that should be performed.
+                                 w32_par_DWORD(2), // Value that specifies the action that should be performed.
                                  lpSysTime           // Pointer to SYSTEMTIME structures
                                  ));
 }

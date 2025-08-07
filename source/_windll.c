@@ -23,6 +23,7 @@
 #include <time.h>
 
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 //------------------------------------------------------------------
 #include <stdio.h>
@@ -45,7 +46,7 @@ HB_FUNC( LOADLIBRARY )
 
 HB_FUNC(LOADLIBRARYEX)
 {
-  hb_retnl((LONG)LoadLibraryExA((LPCSTR)hb_parcx(1), (HANDLE)hb_parnl(2), (DWORD)hb_parnl(3)));
+  hb_retnl((LONG)LoadLibraryExA((LPCSTR)hb_parcx(1), (HANDLE)hb_parnl(2), w32_par_DWORD(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -63,7 +64,7 @@ HB_FUNC( FREELIBRARY )
 
 HB_FUNC(FREELIBRARYANDEXITTHREAD)
 {
-  FreeLibraryAndExitThread((HMODULE)hb_parnl(1), (DWORD)hb_parnl(2));
+  FreeLibraryAndExitThread((HMODULE)hb_parnl(1), w32_par_DWORD(2));
 }
 
 //-----------------------------------------------------------------------------
@@ -241,7 +242,7 @@ HB_FUNC(CALLDLL)
   double DblParms[15];
   DYNAPARM Parm[15];
   HINSTANCE hInst = w32_par_HINSTANCE(1);
-  DWORD lpFunction = (DWORD)hb_parnl(2);
+  DWORD lpFunction = w32_par_DWORD(2);
   RESULT rc;
 
   if (hInst == NULL)
@@ -349,17 +350,17 @@ HB_FUNC(CALLDLL)
         if (ISNIL(i))
           Parm[iCnt].pArg = NULL;
         else
-          Parm[iCnt].dwArg = (DWORD)hb_parnl(i);
+          Parm[iCnt].dwArg = w32_par_DWORD(i);
         iCnt++;
         break;
       case CTYPE_FLOAT_PTR:
         Parm[iCnt].nWidth = sizeof(float *);
-        Parm[iCnt].dwArg = (DWORD)hb_parnl(i);
+        Parm[iCnt].dwArg = w32_par_DWORD(i);
         iCnt++;
         break;
       case CTYPE_DOUBLE_PTR:
         Parm[iCnt].nWidth = sizeof(double *);
-        Parm[iCnt].dwArg = (DWORD)hb_parnl(i);
+        Parm[iCnt].dwArg = w32_par_DWORD(i);
         iCnt++;
         break;
       case CTYPE_FLOAT:

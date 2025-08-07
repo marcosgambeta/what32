@@ -13,6 +13,7 @@
 #include "hbapiitm.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 #if (defined(__GNUC__) || defined(__DMC__))
 DWORD WINAPI DoEnvironmentSubst(LPSTR szString, UINT cchString);
@@ -268,7 +269,7 @@ HB_FUNC( SHQUERYRECYCLEBIN )
 
 HB_FUNC(SHEMPTYRECYCLEBIN)
 {
-  hb_retnl(SHEmptyRecycleBin(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (DWORD)hb_parnl(3)));
+  hb_retnl(SHEmptyRecycleBin(w32_par_HWND(1), (LPCSTR)hb_parcx(2), w32_par_DWORD(3)));
 }
 
 #endif
@@ -281,7 +282,7 @@ HB_FUNC(SHEMPTYRECYCLEBIN)
 HB_FUNC(SHELL_NOTIFYICON)
 {
   NOTIFYICONDATA *Data = (NOTIFYICONDATA *)hb_param(2, HB_IT_STRING)->item.asString.value;
-  hb_retl(Shell_NotifyIcon((DWORD)hb_parnl(1), Data));
+  hb_retl(Shell_NotifyIcon(w32_par_DWORD(1), Data));
 }
 
 //-----------------------------------------------------------------------------

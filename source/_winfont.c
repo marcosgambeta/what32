@@ -14,6 +14,7 @@
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -57,14 +58,14 @@ HB_FUNC(CREATEFONT)
                               ISNIL(3) ? 0 : hb_parni(3), // nEscapement
                               ISNIL(4) ? 0 : hb_parni(4), // nOrientation
                               ISNIL(5) ? 0 : hb_parni(5), // fnWeight
-                              (DWORD)hb_parnl(6),         // fdwItalic
-                              (DWORD)hb_parnl(7),         // fdwUnderline
-                              (DWORD)hb_parnl(8),         // fdwStrikeOut
-                              (DWORD)hb_parnl(9),         // fdwCharSet
-                              (DWORD)hb_parnl(10),        // fdwOutputPrecision
-                              (DWORD)hb_parnl(11),        // fdwClipPrecision
-                              (DWORD)hb_parnl(12),        // fdwQuality
-                              (DWORD)hb_parnl(13),        // fdwPitchAndFamily
+                              w32_par_DWORD(6),         // fdwItalic
+                              w32_par_DWORD(7),         // fdwUnderline
+                              w32_par_DWORD(8),         // fdwStrikeOut
+                              w32_par_DWORD(9),         // fdwCharSet
+                              w32_par_DWORD(10),        // fdwOutputPrecision
+                              w32_par_DWORD(11),        // fdwClipPrecision
+                              w32_par_DWORD(12),        // fdwQuality
+                              w32_par_DWORD(13),        // fdwPitchAndFamily
                               (LPCSTR)hb_parcx(14)        // lpszFace
                               ));
   }
@@ -112,7 +113,7 @@ HB_FUNC( CREATEFONTINDIRECTEX )
 HB_FUNC(CREATESCALABLEFONTRESOURCE)
 {
   w32_ret_BOOL(
-      CreateScalableFontResource((DWORD)hb_parnl(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4)));
+      CreateScalableFontResource(w32_par_DWORD(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -260,7 +261,7 @@ HB_FUNC(GETFONTDATA)
   if (!ISNIL(5) && (hb_parnl(5) > 0))
     cBuffer = (char *)hb_xgrab(hb_parnl(5));
 
-  dwRet = GetFontData(w32_par_HDC(1), (DWORD)hb_parnl(2), (DWORD)hb_parnl(3),
+  dwRet = GetFontData(w32_par_HDC(1), w32_par_DWORD(2), w32_par_DWORD(3),
                       (ISNIL(5) || (hb_parnl(5) <= 0)) ? NULL : cBuffer, (DWORD)ISNIL(5) ? 0 : hb_parnl(5));
 
   hb_retnl((LONG)dwRet);

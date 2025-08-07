@@ -9,6 +9,7 @@
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_HRGN(n) (HRGN)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -455,7 +456,7 @@ HB_FUNC(GETWINDOWTEXTLENGTH)
 
 HB_FUNC(SETWINDOWCONTEXTHELPID)
 {
-  w32_ret_BOOL(SetWindowContextHelpId(w32_par_HWND(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(SetWindowContextHelpId(w32_par_HWND(1), w32_par_DWORD(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -471,7 +472,7 @@ HB_FUNC(GETWINDOWCONTEXTHELPID)
 
 HB_FUNC(SETMENUCONTEXTHELPID)
 {
-  w32_ret_BOOL(SetMenuContextHelpId((HMENU)hb_parnl(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(SetMenuContextHelpId((HMENU)hb_parnl(1), w32_par_DWORD(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -718,7 +719,7 @@ HB_FUNC(FLASHWINDOW)
 #if (WINVER >= 0x0500)
 HB_FUNC(ANIMATEWINDOW)
 {
-  w32_ret_BOOL(AnimateWindow(w32_par_HWND(1), (DWORD)hb_parnl(2), (DWORD)hb_parnl(3)));
+  w32_ret_BOOL(AnimateWindow(w32_par_HWND(1), w32_par_DWORD(2), w32_par_DWORD(3)));
 }
 #endif
 //-----------------------------------------------------------------------------
@@ -840,7 +841,7 @@ HB_FUNC(ADJUSTWINDOWRECT)
 
   if (Array2Rect(pArray, &lpRect))
   {
-    if (AdjustWindowRect(&lpRect, (DWORD)hb_parnl(2), hb_parl(3)) > 0)
+    if (AdjustWindowRect(&lpRect, w32_par_DWORD(2), hb_parl(3)) > 0)
     {
       Rect2ArrayEx(&lpRect, pArray);
       hb_retl(TRUE);
@@ -871,7 +872,7 @@ HB_FUNC(ADJUSTWINDOWRECTEX)
 
   Array2Rect(pArray, &lpRect);
 
-  bAjust = AdjustWindowRectEx(&lpRect, (DWORD)hb_parnl(2), hb_parl(3), (DWORD)hb_parnl(4));
+  bAjust = AdjustWindowRectEx(&lpRect, w32_par_DWORD(2), hb_parl(3), w32_par_DWORD(4));
   if (bAjust)
     Rect2ArrayEx(&lpRect, pArray);
 
@@ -1138,7 +1139,7 @@ HB_FUNC(ALLOWSETFOREGROUNDWINDOW)
 
   HINSTANCE h = LoadLibraryEx("user32.dll", NULL, 0);
   BOOL bASFWRet = (BOOL)FALSE;
-  DWORD dwProcessId = ISNIL(1) ? ASFW_ANY : (DWORD)hb_parnl(1);
+  DWORD dwProcessId = ISNIL(1) ? ASFW_ANY : w32_par_DWORD(1);
 
   if (h)
   {

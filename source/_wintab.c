@@ -14,6 +14,7 @@
 #include "hbapiitm.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 /* add parens to avoid warning */
 #if defined(__BORLANDC__) && (__BORLANDC__ <= 0x620)
@@ -360,7 +361,7 @@ HB_FUNC(TABCTRL_HIGHLIGHTITEM)
 
 HB_FUNC(TABCTRL_SETEXTENDEDSTYLE)
 {
-  hb_retnl(TabCtrl_SetExtendedStyle(w32_par_HWND(1), (DWORD)hb_parnl(2)));
+  hb_retnl(TabCtrl_SetExtendedStyle(w32_par_HWND(1), w32_par_DWORD(2)));
 }
 
 //---------------------------------------------------------------------------//

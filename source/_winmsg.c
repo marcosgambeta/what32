@@ -15,6 +15,7 @@
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 //-----------------------------------------------------------------------------
 
@@ -268,7 +269,7 @@ HB_FUNC(SENDNOTIFYMESSAGE)
 
 HB_FUNC(POSTTHREADMESSAGE)
 {
-  w32_ret_BOOL(PostThreadMessage((DWORD)hb_parnl(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
+  w32_ret_BOOL(PostThreadMessage(w32_par_DWORD(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
 }
 
 //----------------------------------------------------------------------------
@@ -292,7 +293,7 @@ HB_FUNC(WAITMESSAGE)
 
 HB_FUNC(WAITFORINPUTIDLE)
 {
-  hb_retnl((LONG)WaitForInputIdle((HANDLE)hb_parnl(1), (DWORD)hb_parnl(2)));
+  hb_retnl((LONG)WaitForInputIdle((HANDLE)hb_parnl(1), w32_par_DWORD(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -322,8 +323,8 @@ HB_FUNC(INSENDMESSAGEEX)
 
 HB_FUNC(MSGWAITFORMULTIPLEOBJECTS)
 {
-  hb_retnl((LONG)MsgWaitForMultipleObjects((DWORD)hb_parnl(1), (HANDLE *)hb_parnl(2), hb_parl(3), (DWORD)hb_parnl(4),
-                                           (DWORD)hb_parnl(5)));
+  hb_retnl((LONG)MsgWaitForMultipleObjects(w32_par_DWORD(1), (HANDLE *)hb_parnl(2), hb_parl(3), w32_par_DWORD(4),
+                                           w32_par_DWORD(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -332,8 +333,8 @@ HB_FUNC(MSGWAITFORMULTIPLEOBJECTS)
 
 HB_FUNC(MSGWAITFORMULTIPLEOBJECTSEX)
 {
-  hb_retnl((LONG)MsgWaitForMultipleObjectsEx((DWORD)hb_parnl(1), (HANDLE *)hb_parnl(2), (DWORD)hb_parnl(3),
-                                             (DWORD)hb_parnl(4), (DWORD)hb_parnl(5)));
+  hb_retnl((LONG)MsgWaitForMultipleObjectsEx(w32_par_DWORD(1), (HANDLE *)hb_parnl(2), w32_par_DWORD(3),
+                                             w32_par_DWORD(4), w32_par_DWORD(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -440,7 +441,7 @@ HB_FUNC(UNREGISTERDEVICENOTIFICATION)
 HB_FUNC(ATTACHTHREADINPUT)
 {
 
-  w32_ret_BOOL(AttachThreadInput((DWORD)hb_parnl(1), (DWORD)hb_parnl(2), hb_parl(3)));
+  w32_ret_BOOL(AttachThreadInput(w32_par_DWORD(1), w32_par_DWORD(2), hb_parl(3)));
 }
 
 //-----------------------------------------------------------------------------

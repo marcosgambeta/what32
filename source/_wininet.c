@@ -32,6 +32,7 @@
 #include "winreg.h"
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 #ifndef DWORD_PTR
 #define DWORD_PTR DWORD
@@ -213,7 +214,7 @@ HB_FUNC(INTERNETWRITEFILE)
 {
   HINTERNET hFile = (HINTERNET)hb_parnl(1);
   LPCVOID lpBuffer = hb_parcx(2);
-  DWORD dwNumberOfBytesToWrite = (DWORD)hb_parnl(3);
+  DWORD dwNumberOfBytesToWrite = w32_par_DWORD(3);
   LPDWORD lpdwNumberOfBytesWritten = (LPDWORD)0;
 
   hb_retl(InternetWriteFile(hFile, lpBuffer, dwNumberOfBytesToWrite, lpdwNumberOfBytesWritten));
@@ -240,7 +241,7 @@ HB_FUNC(INTERNETREADFILE)
 {
   HINTERNET hFile = (HINTERNET)hb_parnl(1);
   LPCVOID lpBuffer = hb_parcx(2);
-  DWORD dwNumberOfBytesToRead = (DWORD)hb_parnl(3);
+  DWORD dwNumberOfBytesToRead = w32_par_DWORD(3);
   LPDWORD lpdwNumberOfBytesRead = (LPDWORD)0;
   BOOL bRet;
 

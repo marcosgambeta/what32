@@ -18,6 +18,7 @@
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -215,7 +216,7 @@ HB_FUNC(COPYCURSOR)
 
 HB_FUNC(SETSYSTEMCURSOR)
 {
-  w32_ret_BOOL(SetSystemCursor((HCURSOR)hb_parnl(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(SetSystemCursor((HCURSOR)hb_parnl(1), w32_par_DWORD(2)));
 }
 
 //-----------------------------------------------------------------------------

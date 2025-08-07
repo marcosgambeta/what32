@@ -44,6 +44,7 @@
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 
 #if defined(__DMC__)
 #if 0
@@ -192,7 +193,7 @@ HB_FUNC( FILEENCRYPTIONSTATUSA )
 //
 HB_FUNC(ISPROCESSORFEATUREPRESENT)
 {
-  w32_ret_BOOL(IsProcessorFeaturePresent((DWORD)hb_parnl(1)));
+  w32_ret_BOOL(IsProcessorFeaturePresent(w32_par_DWORD(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -256,7 +257,7 @@ HB_FUNC(FREERESOURCE)
 //
 HB_FUNC(SETDEBUGERRORLEVEL)
 {
-  SetDebugErrorLevel((DWORD)hb_parnl(1));
+  SetDebugErrorLevel(w32_par_DWORD(1));
 }
 
 //-------------------------------------------------------------------//
@@ -265,7 +266,7 @@ HB_FUNC(SETDEBUGERRORLEVEL)
 //
 HB_FUNC(SETLASTERROREX)
 {
-  SetLastErrorEx((DWORD)hb_parnl(1), (DWORD)hb_parnl(2));
+  SetLastErrorEx(w32_par_DWORD(1), w32_par_DWORD(2));
 }
 
 //-------------------------------------------------------------------//
@@ -275,7 +276,7 @@ HANDLE GetStdHandle(DWORD nStdHandle )  // input, output, or error device
 
 HB_FUNC(GETSTDHANDLE)
 {
-  hb_retnl((LONG)GetStdHandle((DWORD)hb_parnl(1)));
+  hb_retnl((LONG)GetStdHandle(w32_par_DWORD(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -288,7 +289,7 @@ BOOL SetStdHandle(
 
 HB_FUNC(SETSTDHANDLE)
 {
-  hb_retl(SetStdHandle((DWORD)hb_parnl(1), (HANDLE)hb_parnl(2)));
+  hb_retl(SetStdHandle(w32_par_DWORD(1), (HANDLE)hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -361,7 +362,7 @@ HB_FUNC(GETSYSCOLOR)
 //
 HB_FUNC(EXITWINDOWSEX)
 {
-  w32_ret_BOOL(ExitWindowsEx((UINT)hb_parni(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(ExitWindowsEx((UINT)hb_parni(1), w32_par_DWORD(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -613,7 +614,7 @@ HB_FUNC( LOADMODULE )
 //
 HB_FUNC(TONE)
 {
-  w32_ret_BOOL(Beep((DWORD)hb_parnl(1), (DWORD)hb_parnl(2)));
+  w32_ret_BOOL(Beep(w32_par_DWORD(1), w32_par_DWORD(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -726,7 +727,7 @@ HB_FUNC(GETTICKCOUNT)
 
 HB_FUNC(GETLOGICALDRIVESTRINGS)
 {
-  hb_retnl((LONG)GetLogicalDriveStrings((DWORD)hb_parnl(1), (LPSTR)hb_parcx(2)));
+  hb_retnl((LONG)GetLogicalDriveStrings(w32_par_DWORD(1), (LPSTR)hb_parcx(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -944,8 +945,8 @@ HB_FUNC(CREATEFILE)
   if (ISCHAR(4))
     sa = (SECURITY_ATTRIBUTES *)hb_param(4, HB_IT_STRING)->item.asString.value;
 
-  hb_retnl((LONG)CreateFile((LPCTSTR)hb_parcx(1), (DWORD)hb_parnl(2), (DWORD)hb_parnl(3),
-                            ISCHAR(4) ? (SECURITY_ATTRIBUTES *)sa : NULL, (DWORD)hb_parnl(5), (DWORD)hb_parnl(6),
+  hb_retnl((LONG)CreateFile((LPCTSTR)hb_parcx(1), w32_par_DWORD(2), w32_par_DWORD(3),
+                            ISCHAR(4) ? (SECURITY_ATTRIBUTES *)sa : NULL, w32_par_DWORD(5), w32_par_DWORD(6),
                             ISNIL(7) ? NULL : (HANDLE)hb_parnl(7)));
 }
 
@@ -980,7 +981,7 @@ HB_FUNC(READFILE)
   if (ISCHAR(5))
     Overlapped = (OVERLAPPED *)hb_param(5, HB_IT_STRING)->item.asString.value;
 
-  bRet = ReadFile((HANDLE)hb_parnl(1), Buffer, (DWORD)hb_parnl(3), &nRead, ISCHAR(5) ? Overlapped : NULL);
+  bRet = ReadFile((HANDLE)hb_parnl(1), Buffer, w32_par_DWORD(3), &nRead, ISCHAR(5) ? Overlapped : NULL);
 
   if (bRet)
   {

@@ -14,6 +14,8 @@
 #include "winreg.h"
 #include "tchar.h"
 
+#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+
 #if defined(__DMC__)
 __inline long PtrToLong(const void *p)
 {
@@ -210,8 +212,8 @@ HB_FUNC(REGCREATEKEYEX)
   if (ISCHAR(7))
     sa = (SECURITY_ATTRIBUTES *)hb_param(7, HB_IT_STRING)->item.asString.value;
 
-  nErr = RegCreateKeyEx((HKEY)hb_parnl(1), (LPCSTR)hb_parcx(2), (DWORD)0, (LPSTR)hb_parcx(4), (DWORD)hb_parnl(5),
-                        (DWORD)hb_parnl(6), sa, &hkResult, &dwDisposition);
+  nErr = RegCreateKeyEx((HKEY)hb_parnl(1), (LPCSTR)hb_parcx(2), (DWORD)0, (LPSTR)hb_parcx(4), w32_par_DWORD(5),
+                        w32_par_DWORD(6), sa, &hkResult, &dwDisposition);
 
   if (nErr == ERROR_SUCCESS)
   {
