@@ -12,6 +12,7 @@
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_HRGN(n) (HRGN)hb_parnl(n)
+#define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -50,7 +51,7 @@ HB_FUNC(CREATEELLIPTICRGNINDIRECT)
 
 HB_FUNC(FILLRGN)
 {
-  hb_retl(FillRgn(w32_par_HDC(1), w32_par_HRGN(2), (HBRUSH)hb_parnl(3)));
+  hb_retl(FillRgn(w32_par_HDC(1), w32_par_HRGN(2), w32_par_HBRUSH(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -263,7 +264,7 @@ HB_FUNC(GETCLIPRGN)
 
 HB_FUNC(FRAMERGN)
 {
-  hb_retl(FrameRgn(w32_par_HDC(1), w32_par_HRGN(2), (HBRUSH)hb_parnl(3), hb_parni(4), hb_parni(5)));
+  hb_retl(FrameRgn(w32_par_HDC(1), w32_par_HRGN(2), w32_par_HBRUSH(3), hb_parni(4), hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------

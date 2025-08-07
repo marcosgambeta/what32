@@ -11,6 +11,7 @@
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
+#define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -696,7 +697,7 @@ HB_FUNC(FILLRECT)
   RECT rc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
-    hb_retni(FillRect(w32_par_HDC(1), &rc, (HBRUSH)hb_parnl(3)));
+    hb_retni(FillRect(w32_par_HDC(1), &rc, w32_par_HBRUSH(3)));
   else
     hb_retni(0);
 }
@@ -712,7 +713,7 @@ HB_FUNC(FRAMERECT)
   RECT rc;
 
   if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
-    hb_retni(FrameRect(w32_par_HDC(1), &rc, (HBRUSH)hb_parnl(3)));
+    hb_retni(FrameRect(w32_par_HDC(1), &rc, w32_par_HBRUSH(3)));
   else
     hb_retni(0);
 }

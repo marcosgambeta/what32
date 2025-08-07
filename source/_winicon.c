@@ -13,6 +13,7 @@
 // #include "hbstack.h"
 
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
 
 #if defined(__DMC__)
 // SHSTDAPI_(HICON) DuplicateIcon(HINSTANCE hInst, HICON hIcon);
@@ -123,7 +124,7 @@ HB_FUNC(DRAWICON)
 HB_FUNC(DRAWICONEX)
 {
   hb_retl(DrawIconEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), (HICON)hb_parnl(4), hb_parni(5), hb_parni(6),
-                     (UINT)hb_parni(7), (HBRUSH)hb_parnl(8), (UINT)hb_parni(9)));
+                     (UINT)hb_parni(7), w32_par_HBRUSH(8), (UINT)hb_parni(9)));
 }
 
 //-----------------------------------------------------------------------------
