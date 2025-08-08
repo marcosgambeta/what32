@@ -11,6 +11,7 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
+#include "what32.h"
 #define w32_par_HWND(n) (HWND) hb_parnl(n)
 
 /* add parens to avoid warning */

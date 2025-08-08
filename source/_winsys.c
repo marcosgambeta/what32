@@ -41,6 +41,7 @@
 #endif
 #endif
 
+#include "what32.h"
 #define w32_par_HWND(n) (HWND) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)

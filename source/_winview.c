@@ -9,6 +9,7 @@
 #include "item.api"
 #include "hbapi.h"
 
+#include "what32.h"
 #define w32_par_HDC(n) (HDC) hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);

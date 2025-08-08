@@ -14,6 +14,7 @@
 #include "winreg.h"
 #include "tchar.h"
 
+#include "what32.h"
 #define w32_par_DWORD(n) (DWORD) hb_parnl(n)
 
 #if defined(__DMC__)

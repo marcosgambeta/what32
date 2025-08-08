@@ -13,6 +13,7 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
+#include "what32.h"
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_UINT(n) (UINT) hb_parni(n)
 #define w32_ret_UINT(x) hb_retni(x)

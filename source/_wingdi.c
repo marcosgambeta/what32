@@ -19,6 +19,7 @@
 // #include "hbvm.h"
 // #include "hbstack.h"
 
+#include "what32.h"
 #define w32_par_HDC(n) (HDC) hb_parnl(n)
 #define w32_par_HWND(n) (HWND) hb_parnl(n)
 #define w32_par_COLORREF(n) (COLORREF) hb_parnl(n)
