@@ -22,6 +22,7 @@
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 #define w32_par_BOOL(n) (BOOL)hb_parl(n)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 #ifndef LONG_PTR
 #define LONG_PTR LONG
@@ -394,7 +395,7 @@ HB_FUNC(SLEEP)
 
 HB_FUNC(SETHANDLECOUNT)
 {
-  hb_retni(SetHandleCount((UINT)hb_parni(1)));
+  hb_retni(SetHandleCount(w32_par_UINT(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -424,7 +425,7 @@ HB_FUNC(SETENVIRONMENTVARIABLE)
 
 HB_FUNC(WINEXEC)
 {
-  hb_retni(WinExec((LPCSTR)hb_parcx(1), (UINT)hb_parni(2)));
+  hb_retni(WinExec((LPCSTR)hb_parcx(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -514,7 +515,7 @@ HB_FUNC(RELEASEMUTEX)
 
 HB_FUNC(REGISTERHOTKEY)
 {
-  w32_ret_BOOL(RegisterHotKey(w32_par_HWND(1), hb_parni(2), (UINT)hb_parni(3), (UINT)hb_parni(4)));
+  w32_ret_BOOL(RegisterHotKey(w32_par_HWND(1), hb_parni(2), w32_par_UINT(3), w32_par_UINT(4)));
 }
 
 //-----------------------------------------------------------------------------

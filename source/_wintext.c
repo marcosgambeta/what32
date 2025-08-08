@@ -16,6 +16,7 @@
 #define w32_par_HDC(n) (HDC)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_ret_DWORD(x) hb_retnl(x)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -89,7 +90,7 @@ HB_FUNC(EXTTEXTOUT)
     }
   }
 
-  w32_ret_BOOL(ExtTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), (UINT)hb_parni(4), rcOk ? &rc : NULL, (LPCSTR)cText,
+  w32_ret_BOOL(ExtTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_UINT(4), rcOk ? &rc : NULL, (LPCSTR)cText,
                      (UINT)strlen(cText), ISARRAY(7) ? lpDx : NULL));
 
   if (ISARRAY(7))
@@ -300,7 +301,7 @@ HB_FUNC(GETTEXTALIGN)
 
 HB_FUNC(SETTEXTALIGN)
 {
-  hb_retni(SetTextAlign(w32_par_HDC(1), (UINT)hb_parni(2)));
+  hb_retni(SetTextAlign(w32_par_HDC(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------

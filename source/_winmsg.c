@@ -19,6 +19,7 @@
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
 #define w32_par_BOOL(n) (BOOL)hb_parl(n)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 //-----------------------------------------------------------------------------
 
@@ -264,7 +265,7 @@ HB_FUNC( SENDMESSAGETIMEOUT )
 
 HB_FUNC(SENDNOTIFYMESSAGE)
 {
-  w32_ret_BOOL(SendNotifyMessage(w32_par_HWND(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
+  w32_ret_BOOL(SendNotifyMessage(w32_par_HWND(1), w32_par_UINT(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -272,7 +273,7 @@ HB_FUNC(SENDNOTIFYMESSAGE)
 
 HB_FUNC(POSTTHREADMESSAGE)
 {
-  w32_ret_BOOL(PostThreadMessage(w32_par_DWORD(1), (UINT)hb_parni(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
+  w32_ret_BOOL(PostThreadMessage(w32_par_DWORD(1), w32_par_UINT(2), (WPARAM)hb_parnl(3), (LPARAM)hb_parnl(4)));
 }
 
 //----------------------------------------------------------------------------

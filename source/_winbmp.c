@@ -27,6 +27,7 @@ Modified and non-API functions:
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 #define w32_par_BOOL(n) (BOOL)hb_parl(n)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -169,7 +170,7 @@ HB_FUNC(STRETCHBLT)
 
 HB_FUNC(CREATEBITMAP)
 {
-  hb_retnl((LONG)CreateBitmap(hb_parni(1), hb_parni(2), (UINT)hb_parni(3), (UINT)hb_parni(4), hb_parcx(5)));
+  hb_retnl((LONG)CreateBitmap(hb_parni(1), hb_parni(2), w32_par_UINT(3), w32_par_UINT(4), hb_parcx(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -204,7 +205,7 @@ HB_FUNC(CREATEDIBITMAP)
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(5, HB_IT_STRING)->item.asString.value;
 
   hb_retnl(
-      (LONG)CreateDIBitmap(w32_par_HDC(1), bmih, w32_par_DWORD(3), (VOID *)hb_parcx(3), bmi, (UINT)hb_parni(6)));
+      (LONG)CreateDIBitmap(w32_par_HDC(1), bmih, w32_par_DWORD(3), (VOID *)hb_parcx(3), bmi, w32_par_UINT(6)));
 }
 
 //-----------------------------------------------------------------------------
@@ -218,7 +219,7 @@ HB_FUNC(CREATEDIBSECTION)
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(2, HB_IT_STRING)->item.asString.value;
   VOID **ppBits = (VOID **)0;
 
-  hb_retnl((LONG)CreateDIBSection(w32_par_HDC(1), bmi, (UINT)hb_parni(3), ppBits, w32_par_HANDLE(5),
+  hb_retnl((LONG)CreateDIBSection(w32_par_HDC(1), bmi, w32_par_UINT(3), ppBits, w32_par_HANDLE(5),
                                   w32_par_DWORD(6)));
 
   hb_stornl((LONG)*ppBits, 4);
@@ -290,8 +291,8 @@ HB_FUNC(SETDIBITS)
 
   // Your code goes here
 
-  hb_retni(SetDIBits(w32_par_HDC(1), w32_par_HBITMAP(2), (UINT)hb_parni(3), (UINT)hb_parni(4), (VOID *)hb_parcx(5),
-                     bmi, (UINT)hb_parni(7)));
+  hb_retni(SetDIBits(w32_par_HDC(1), w32_par_HBITMAP(2), w32_par_UINT(3), w32_par_UINT(4), (VOID *)hb_parcx(5),
+                     bmi, w32_par_UINT(7)));
 }
 
 //-----------------------------------------------------------------------------
@@ -322,8 +323,8 @@ HB_FUNC(SETDIBITSTODEVICE)
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(11, HB_IT_STRING)->item.asString.value;
 
   hb_retni(SetDIBitsToDevice(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_DWORD(4), w32_par_DWORD(5),
-                             hb_parni(6), hb_parni(7), (UINT)hb_parni(8), (UINT)hb_parni(9), (VOID *)hb_parcx(10), bmi,
-                             (UINT)hb_parni(12)));
+                             hb_parni(6), hb_parni(7), w32_par_UINT(8), w32_par_UINT(9), (VOID *)hb_parcx(10), bmi,
+                             w32_par_UINT(12)));
 }
 
 //-----------------------------------------------------------------------------
@@ -338,7 +339,7 @@ HB_FUNC(STRETCHDIBITS)
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(11, HB_IT_STRING)->item.asString.value;
 
   hb_retni(StretchDIBits(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
-                         hb_parni(8), hb_parni(9), (VOID *)hb_parcx(10), bmi, (UINT)hb_parni(12), w32_par_DWORD(13)));
+                         hb_parni(8), hb_parni(9), (VOID *)hb_parcx(10), bmi, w32_par_UINT(12), w32_par_DWORD(13)));
 }
 
 //-----------------------------------------------------------------------------

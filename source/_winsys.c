@@ -47,6 +47,7 @@
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 #if defined(__DMC__)
 #if 0
@@ -90,7 +91,7 @@ BOOL PASCAL enable_privilege(LPCTSTR privilege_name);
 //
 HB_FUNC(GETFREESPACE)
 {
-  w32_ret_DWORD((LONG)GetFreeSpace((UINT)hb_parni(1)));
+  w32_ret_DWORD((LONG)GetFreeSpace(w32_par_UINT(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -230,7 +231,7 @@ HB_FUNC(SYSTEMPARAMETERSINFO)
     return;
   }
 
-  if (SystemParametersInfo((UINT)hb_parni(1), (UINT)hb_parni(2), cText, (UINT)hb_parni(4)))
+  if (SystemParametersInfo(w32_par_UINT(1), w32_par_UINT(2), cText, w32_par_UINT(4)))
   {
     if (ISBYREF(3))
     {
@@ -339,7 +340,7 @@ HB_FUNC(GETSYSTEMMETRICS)
 //
 HB_FUNC(SETTIMER)
 {
-  hb_retni(SetTimer(w32_par_HWND(1), (UINT)hb_parni(2), (UINT)hb_parni(3), ISNIL(4) ? NULL : (TIMERPROC)hb_parnl(4)));
+  hb_retni(SetTimer(w32_par_HWND(1), w32_par_UINT(2), w32_par_UINT(3), ISNIL(4) ? NULL : (TIMERPROC)hb_parnl(4)));
 }
 
 //-------------------------------------------------------------------//
@@ -364,7 +365,7 @@ HB_FUNC(GETSYSCOLOR)
 //
 HB_FUNC(EXITWINDOWSEX)
 {
-  w32_ret_BOOL(ExitWindowsEx((UINT)hb_parni(1), w32_par_DWORD(2)));
+  w32_ret_BOOL(ExitWindowsEx(w32_par_UINT(1), w32_par_DWORD(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -481,7 +482,7 @@ HB_FUNC( SETLASTERROR )
 //
 HB_FUNC(SETERRORMODE)
 {
-  hb_retni(SetErrorMode((UINT)hb_parni(1)));
+  hb_retni(SetErrorMode(w32_par_UINT(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -572,7 +573,7 @@ HB_FUNC(LOADSTRING)
   LPTSTR cText = (char *)hb_xgrab(iLen + 1);
 
   iLen =
-      LoadString((ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1)), (UINT)hb_parni(2), (LPTSTR)cText, iLen);
+      LoadString((ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1)), w32_par_UINT(2), (LPTSTR)cText, iLen);
 
   hb_retclen(cText, iLen);
   hb_xfree(cText);
@@ -896,7 +897,7 @@ HB_FUNC( CASCADEWINDOWS )
 //
 HB_FUNC(WINHELP)
 {
-  w32_ret_BOOL(WinHelp(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (UINT)hb_parni(3), (ULONG)hb_parnl(4)));
+  w32_ret_BOOL(WinHelp(w32_par_HWND(1), (LPCSTR)hb_parcx(2), w32_par_UINT(3), (ULONG)hb_parnl(4)));
 }
 
 //-------------------------------------------------------------------//

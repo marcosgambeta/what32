@@ -26,6 +26,7 @@ Modified functions:
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI DWORD WINAPI OemKeyScan( IN WORD wOemChar);
@@ -133,7 +134,7 @@ HB_FUNC(GETKEYBOARDTYPE)
 
 HB_FUNC(MAPVIRTUALKEY)
 {
-  hb_retni(MapVirtualKey((UINT)hb_parni(1), (UINT)hb_parni(2)));
+  hb_retni(MapVirtualKey(w32_par_UINT(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -141,7 +142,7 @@ HB_FUNC(MAPVIRTUALKEY)
 
 HB_FUNC(MAPVIRTUALKEYEX)
 {
-  hb_retni(MapVirtualKeyEx((UINT)hb_parni(1), (UINT)hb_parni(2), (HKL)hb_parnl(3)));
+  hb_retni(MapVirtualKeyEx(w32_par_UINT(1), w32_par_UINT(2), (HKL)hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -157,7 +158,7 @@ HB_FUNC(GETINPUTSTATE)
 
 HB_FUNC(GETQUEUESTATUS)
 {
-  w32_ret_DWORD((LONG)GetQueueStatus((UINT)hb_parni(1)));
+  w32_ret_DWORD((LONG)GetQueueStatus(w32_par_UINT(1)));
 }
 
 //-----------------------------------------------------------------------------

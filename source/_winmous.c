@@ -22,6 +22,7 @@
 #define w32_par_HCURSOR(n) (HCURSOR)hb_parnl(n)
 #define w32_ret_HWND(x) hb_retnl(x)
 #define w32_par_BOOL(n) (BOOL)hb_parl(n)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -79,7 +80,7 @@ HB_FUNC(GETDOUBLECLICKTIME)
 
 HB_FUNC(SETDOUBLECLICKTIME)
 {
-  w32_ret_BOOL(SetDoubleClickTime((UINT)hb_parni(1)));
+  w32_ret_BOOL(SetDoubleClickTime(w32_par_UINT(1)));
 }
 
 //-----------------------------------------------------------------------------

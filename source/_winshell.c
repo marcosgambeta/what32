@@ -16,6 +16,7 @@
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 #define w32_par_BOOL(n) (BOOL)hb_parl(n)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 #if (defined(__GNUC__) || defined(__DMC__))
 DWORD WINAPI DoEnvironmentSubst(LPSTR szString, UINT cchString);
@@ -35,7 +36,7 @@ HB_FUNC(DRAGQUERYFILE)
   else
     cFile = (char *)hb_xgrab(strlen(hb_parcx(3)) + 1);
 
-  iRet = DragQueryFile((HDROP)hb_parnl(1), (UINT)hb_parni(2), hb_parni(4) > 0 ? cFile : NULL, (UINT)hb_parni(4));
+  iRet = DragQueryFile((HDROP)hb_parnl(1), w32_par_UINT(2), hb_parni(4) > 0 ? cFile : NULL, w32_par_UINT(4));
 
   if (hb_parni(4) > 0)
   {
@@ -155,7 +156,7 @@ HB_FUNC( SHAPPBARMESSAGE )
 #ifndef __WATCOMC__
 HB_FUNC(DOENVIRONMENTSUBST)
 {
-  hb_retnl((LONG)DoEnvironmentSubst((LPSTR)hb_parcx(1), (UINT)hb_parni(2)));
+  hb_retnl((LONG)DoEnvironmentSubst((LPSTR)hb_parcx(1), w32_par_UINT(2)));
 }
 #endif
 //-----------------------------------------------------------------------------
@@ -355,7 +356,7 @@ HB_FUNC( SHGETNEWLINKINFO )
 
 HB_FUNC(SHINVOKEPRINTERCOMMAND)
 {
-  hb_retl(SHInvokePrinterCommand(w32_par_HWND(1), (UINT)hb_parni(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4),
+  hb_retl(SHInvokePrinterCommand(w32_par_HWND(1), w32_par_UINT(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4),
                                  w32_par_BOOL(5)));
 }
 

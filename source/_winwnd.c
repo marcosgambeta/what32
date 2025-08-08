@@ -14,6 +14,7 @@
 #define w32_ret_DWORD(x) hb_retnl(x)
 #define w32_ret_HWND(x) hb_retnl(x)
 #define w32_par_BOOL(n) (BOOL)hb_parl(n)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -300,7 +301,7 @@ HB_FUNC(BEGINDEFERWINDOWPOS)
 HB_FUNC(DEFERWINDOWPOS)
 {
   hb_retnl((LONG)DeferWindowPos((HDWP)hb_parnl(1), w32_par_HWND(2), w32_par_HWND(3), hb_parni(4), hb_parni(5),
-                                hb_parni(6), hb_parni(7), (UINT)hb_parni(8)));
+                                hb_parni(6), hb_parni(7), w32_par_UINT(8)));
 }
 
 //-----------------------------------------------------------------------------
@@ -318,7 +319,7 @@ HB_FUNC(ENDDEFERWINDOWPOS)
 HB_FUNC(SETWINDOWPOS)
 {
   w32_ret_BOOL(SetWindowPos(w32_par_HWND(1), w32_par_HWND(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6),
-                       (UINT)hb_parni(7)));
+                       w32_par_UINT(7)));
 }
 
 //-----------------------------------------------------------------------------
@@ -492,7 +493,7 @@ HB_FUNC(GETMENUCONTEXTHELPID)
 
 HB_FUNC(GETWINDOW)
 {
-  w32_ret_HWND((LONG)GetWindow(w32_par_HWND(1), (UINT)hb_parni(2)));
+  w32_ret_HWND((LONG)GetWindow(w32_par_HWND(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -561,7 +562,7 @@ HB_FUNC(MAPWINDOWPOINTS)
   PHB_ITEM pArray = hb_param(3, HB_IT_ARRAY);
   Array2Point(pArray, &lpPoints);
 
-  hb_retni(MapWindowPoints(w32_par_HWND(1), w32_par_HWND(2), &lpPoints, (UINT)hb_parni(4)));
+  hb_retni(MapWindowPoints(w32_par_HWND(1), w32_par_HWND(2), &lpPoints, w32_par_UINT(4)));
   Point2ArrayEx(&lpPoints, pArray);
 }
 
@@ -600,7 +601,7 @@ HB_FUNC(CHILDWINDOWFROMPOINTEX)
 
   Array2Point(hb_param(2, HB_IT_ARRAY), &PoInt);
 
-  w32_ret_HWND((LONG)ChildWindowFromPointEx(w32_par_HWND(1), PoInt, (UINT)hb_parni(3)));
+  w32_ret_HWND((LONG)ChildWindowFromPointEx(w32_par_HWND(1), PoInt, w32_par_UINT(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -683,7 +684,7 @@ HB_FUNC(SETCLASSLONG)
 
 HB_FUNC(GETANCESTOR)
 {
-  w32_ret_HWND((LONG)GetAncestor(w32_par_HWND(1), (UINT)hb_parni(2)));
+  w32_ret_HWND((LONG)GetAncestor(w32_par_HWND(1), w32_par_UINT(2)));
 }
 
 #endif

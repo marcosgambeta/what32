@@ -28,6 +28,7 @@
 #define w32_par_HGDIOBJ(n) (HGDIOBJ)hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
 #define w32_par_BOOL(n) (BOOL)hb_parl(n)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -167,7 +168,7 @@ HB_FUNC(GETOBJECTTYPE)
 
 HB_FUNC(GETCURRENTOBJECT)
 {
-  hb_retnl((LONG)GetCurrentObject(w32_par_HDC(1), (UINT)hb_parni(2)));
+  hb_retnl((LONG)GetCurrentObject(w32_par_HDC(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -279,7 +280,7 @@ HB_FUNC(GETGRAPHICSMODE)
 HB_FUNC(GDICOMMENT)
 {
 
-  w32_ret_BOOL(GdiComment(w32_par_HDC(1), (UINT)hb_parni(2), (const BYTE *)hb_parcx(3)));
+  w32_ret_BOOL(GdiComment(w32_par_HDC(1), w32_par_UINT(2), (const BYTE *)hb_parcx(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -571,7 +572,7 @@ HB_FUNC(GETRASTERIZERCAPS)
 {
   LPRASTERIZER_STATUS lprs = (LPRASTERIZER_STATUS)hb_param(1, HB_IT_STRING)->item.asString.value;
 
-  if (GetRasterizerCaps(lprs, (UINT)hb_parni(2)))
+  if (GetRasterizerCaps(lprs, w32_par_UINT(2)))
     hb_retclen((char *)lprs, sizeof(RASTERIZER_STATUS));
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) lprs, sizeof(RASTERIZER_STATUS ) );
 }
@@ -751,7 +752,7 @@ HB_FUNC(DRAWFRAMECONTROL)
   // Your code goes here
   if (Array2Rect(pArray, &lpRect))
   {
-    if (DrawFrameControl(w32_par_HDC(1), &lpRect, (UINT)hb_parni(3), (UINT)hb_parni(4)))
+    if (DrawFrameControl(w32_par_HDC(1), &lpRect, w32_par_UINT(3), w32_par_UINT(4)))
     {
       Rect2ArrayEx(&lpRect, pArray);
       hb_retl(TRUE);

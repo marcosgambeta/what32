@@ -10,6 +10,7 @@
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_BOOL(n) (BOOL)hb_parl(n)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI int WINAPI SetScrollPos( IN HWND hWnd, IN int nBar, IN int nPos, IN BOOL bRedraw);
@@ -74,7 +75,7 @@ HB_FUNC(SHOWSCROLLBAR)
 
 HB_FUNC(ENABLESCROLLBAR)
 {
-  w32_ret_BOOL(EnableScrollBar(w32_par_HWND(1), (UINT)hb_parni(2), (UINT)hb_parni(3)));
+  w32_ret_BOOL(EnableScrollBar(w32_par_HWND(1), w32_par_UINT(2), w32_par_UINT(3)));
 }
 
 //-----------------------------------------------------------------------------

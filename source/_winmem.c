@@ -14,6 +14,7 @@
 #include "hbapiitm.h"
 
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 #if defined(__DMC__)
 #define SIZE_T size_t
@@ -24,7 +25,7 @@
 
 HB_FUNC(GLOBALALLOC)
 {
-  hb_retnl((LONG)GlobalAlloc((UINT)hb_parni(1), (SIZE_T)hb_parnl(2)));
+  hb_retnl((LONG)GlobalAlloc(w32_par_UINT(1), (SIZE_T)hb_parnl(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -33,7 +34,7 @@ HB_FUNC(GLOBALALLOC)
 HB_FUNC(GLOBALREALLOC)
 {
 
-  hb_retnl((LONG)GlobalReAlloc((HGLOBAL)hb_parnl(1), (SIZE_T)hb_parnl(2), (UINT)hb_parni(3)));
+  hb_retnl((LONG)GlobalReAlloc((HGLOBAL)hb_parnl(1), (SIZE_T)hb_parnl(2), w32_par_UINT(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -176,7 +177,7 @@ HB_FUNC( GLOBALMEMORYSTATUSEX )
 
 HB_FUNC(LOCALALLOC)
 {
-  hb_retnl((LONG)LocalAlloc((UINT)hb_parni(1), (SIZE_T)hb_parni(2)));
+  hb_retnl((LONG)LocalAlloc(w32_par_UINT(1), (SIZE_T)hb_parni(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -185,7 +186,7 @@ HB_FUNC(LOCALALLOC)
 HB_FUNC(LOCALREALLOC)
 {
 
-  hb_retnl((LONG)LocalReAlloc((HLOCAL)hb_parnl(1), (SIZE_T)hb_parni(2), (UINT)hb_parni(3)));
+  hb_retnl((LONG)LocalReAlloc((HLOCAL)hb_parnl(1), (SIZE_T)hb_parni(2), w32_par_UINT(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -241,7 +242,7 @@ HB_FUNC(LOCALFREE)
 
 HB_FUNC(LOCALSHRINK)
 {
-  hb_retni(LocalShrink((HLOCAL)hb_parnl(1), (UINT)hb_parni(2)));
+  hb_retni(LocalShrink((HLOCAL)hb_parnl(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -249,5 +250,5 @@ HB_FUNC(LOCALSHRINK)
 
 HB_FUNC(LOCALCOMPACT)
 {
-  hb_retni(LocalCompact((UINT)hb_parni(1)));
+  hb_retni(LocalCompact(w32_par_UINT(1)));
 }

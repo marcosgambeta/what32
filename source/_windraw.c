@@ -13,6 +13,7 @@
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 #define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -753,7 +754,7 @@ HB_FUNC(SETPOLYFILLMODE)
 HB_FUNC(EXTFLOODFILL)
 {
 
-  w32_ret_BOOL(ExtFloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4), (UINT)hb_parni(5)));
+  w32_ret_BOOL(ExtFloodFill(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_COLORREF(4), w32_par_UINT(5)));
 }
 
 //-----------------------------------------------------------------------------

@@ -27,6 +27,7 @@
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_ret_DWORD(x) hb_retnl(x)
 #define w32_ret_HWND(x) hb_retnl(x)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 //----------------------------------------------------------------------------//
 
@@ -197,7 +198,7 @@ HB_FUNC(GETCLIPBOARDDATA)
     break;
 
   default:
-    hClipMem = GetClipboardData((UINT)hb_parni(1));
+    hClipMem = GetClipboardData(w32_par_UINT(1));
 
     if (hClipMem)
     {

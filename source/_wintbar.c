@@ -17,6 +17,7 @@
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -36,7 +37,7 @@ HB_FUNC(CREATEMAPPEDBITMAP)
 {
   COLORMAP *cm = (COLORMAP *)hb_param(4, HB_IT_STRING)->item.asString.value;
 
-  hb_retnl((LONG)CreateMappedBitmap(w32_par_HINSTANCE(1), (int)hb_parni(2), (UINT)hb_parni(3),
+  hb_retnl((LONG)CreateMappedBitmap(w32_par_HINSTANCE(1), (int)hb_parni(2), w32_par_UINT(3),
                                     ISNIL(4) ? NULL : (COLORMAP *)cm, (int)hb_parni(5)));
 }
 
@@ -50,7 +51,7 @@ HB_FUNC(CREATETOOLBAREX)
 
   hb_retnl((LONG)CreateToolbarEx(w32_par_HWND(1),                        // parent
                                  w32_par_DWORD(2),                       // style
-                                 (UINT)hb_parni(3),                        // id,
+                                 w32_par_UINT(3),                        // id,
                                  (int)hb_parni(4),                         // number of btn images in bmp
                                  ISNIL(5) ? NULL : w32_par_HINSTANCE(5), // hInst of bmp
                                  (UINT)hb_parnl(6),                        // resource id, or hBmp handle
@@ -60,7 +61,7 @@ HB_FUNC(CREATETOOLBAREX)
                                  (int)hb_parni(10),                        // height of button
                                  (int)hb_parni(11),                        // width of bitmap
                                  (int)hb_parni(12),                        // height of bitmap
-                                 (UINT)hb_parni(13)));                     // size of TBBUTTON
+                                 w32_par_UINT(13)));                     // size of TBBUTTON
 }
 
 //-----------------------------------------------------------------------------

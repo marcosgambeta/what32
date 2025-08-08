@@ -20,6 +20,7 @@
 #define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
 #define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 //-----------------------------------------------------------------------------
 
@@ -41,7 +42,7 @@ HB_FUNC(CREATEPATTERNBRUSH)
 
 HB_FUNC(CREATEDIBPATTERNBRUSH)
 {
-  hb_retnl((LONG)CreateDIBPatternBrush((HGLOBAL)hb_parnl(1), (UINT)hb_parni(2)));
+  hb_retnl((LONG)CreateDIBPatternBrush((HGLOBAL)hb_parnl(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -105,7 +106,7 @@ HB_FUNC(CREATEDIBPATTERNBRUSHPT)
 {
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(1, HB_IT_STRING)->item.asString.value;
 
-  hb_retnl((LONG)CreateDIBPatternBrushPt(bmi, (UINT)hb_parni(2)));
+  hb_retnl((LONG)CreateDIBPatternBrushPt(bmi, w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------

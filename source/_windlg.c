@@ -24,6 +24,7 @@
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_ret_HWND(x) hb_retnl(x)
 #define w32_par_BOOL(n) (BOOL)hb_parl(n)
+#define w32_par_UINT(n) (UINT)hb_parni(n)
 
 //-----------------------------------------------------------------------------
 
@@ -79,7 +80,7 @@ HB_FUNC(GETDIALOGBASEUNITS)
 
 HB_FUNC(SETDLGITEMINT)
 {
-  w32_ret_BOOL(SetDlgItemInt(w32_par_HWND(1), hb_parni(2), (UINT)hb_parni(3), w32_par_BOOL(4)));
+  w32_ret_BOOL(SetDlgItemInt(w32_par_HWND(1), hb_parni(2), w32_par_UINT(3), w32_par_BOOL(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -171,7 +172,7 @@ HB_FUNC(DLGDIRLIST)
   char *cText = (char *)hb_xgrab(MAX_PATH + 1);
   // cText = hb_parcx(2);
 
-  hb_retni(DlgDirList(w32_par_HWND(1), (LPSTR)cText, hb_parni(3), hb_parni(4), (UINT)hb_parni(5)));
+  hb_retni(DlgDirList(w32_par_HWND(1), (LPSTR)cText, hb_parni(3), hb_parni(4), w32_par_UINT(5)));
 
   hb_storc(cText, 2);
   hb_xfree(cText);
@@ -201,7 +202,7 @@ HB_FUNC(DLGDIRLISTCOMBOBOX)
   char *cText = (char *)hb_xgrab(MAX_PATH + 1);
   // cText = hb_parcx(2) ;
 
-  hb_retni(DlgDirListComboBox(w32_par_HWND(1), (LPSTR)cText, hb_parni(3), hb_parni(4), (UINT)hb_parni(5)));
+  hb_retni(DlgDirListComboBox(w32_par_HWND(1), (LPSTR)cText, hb_parni(3), hb_parni(4), w32_par_UINT(5)));
   hb_storc(cText, 2);
   hb_xfree(cText);
 }
