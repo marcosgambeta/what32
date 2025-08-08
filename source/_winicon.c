@@ -96,7 +96,7 @@ HB_FUNC(CREATEICONFROMRESOURCEEX)
 
 HB_FUNC(LOADIMAGE)
 {
-  hb_retnl((LONG)LoadImage(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2),
+  hb_retnl((LONG)LoadImage(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), w32_par_LPCSTR(2),
                            w32_par_UINT(3), hb_parni(4), hb_parni(5), w32_par_UINT(6)));
 }
 
@@ -195,5 +195,5 @@ HB_FUNC(EXTRACTASSOCIATEDICON)
 HB_FUNC(EXTRACTICON)
 {
   hb_retnl(
-      (LONG)ExtractIcon(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2), w32_par_UINT(3)));
+      (LONG)ExtractIcon(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), w32_par_LPCSTR(2), w32_par_UINT(3)));
 }

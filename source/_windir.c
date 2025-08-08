@@ -34,7 +34,7 @@ HB_FUNC(GETLOGICALDRIVES)
 
 HB_FUNC(GETDRIVETYPE)
 {
-  w32_ret_UINT(GetDriveType((LPCSTR)hb_parcx(1)));
+  w32_ret_UINT(GetDriveType(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -75,7 +75,7 @@ HB_FUNC(GETTEMPFILENAME)
 {
   char cPath[MAX_PATH] = {0};
 
-  GetTempFileName((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), (UINT)(ISNIL(3) ? 0 : hb_parni(3)), (LPSTR)cPath);
+  GetTempFileName(w32_par_LPCSTR(1), w32_par_LPCSTR(2), (UINT)(ISNIL(3) ? 0 : hb_parni(3)), (LPSTR)cPath);
   hb_retc(cPath);
 }
 
@@ -113,7 +113,7 @@ HB_FUNC( GETSYSTEMWINDOWSDIRECTORY )
 HB_FUNC(SETCURRENTDIRECTORY)
 {
 
-  w32_ret_BOOL(SetCurrentDirectory((LPCSTR)hb_parcx(1)));
+  w32_ret_BOOL(SetCurrentDirectory(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -131,7 +131,7 @@ HB_FUNC(GETCURRENTDIRECTORY)
 
 HB_FUNC(SETFILEATTRIBUTES)
 {
-  w32_ret_BOOL(SetFileAttributes((LPCSTR)hb_parcx(1), w32_par_DWORD(2)));
+  w32_ret_BOOL(SetFileAttributes(w32_par_LPCSTR(1), w32_par_DWORD(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -139,7 +139,7 @@ HB_FUNC(SETFILEATTRIBUTES)
 
 HB_FUNC(GETFILEATTRIBUTES)
 {
-  w32_ret_DWORD((LONG)GetFileAttributes((LPCSTR)hb_parcx(1)));
+  w32_ret_DWORD((LONG)GetFileAttributes(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -147,7 +147,7 @@ HB_FUNC(GETFILEATTRIBUTES)
 
 HB_FUNC(DELETEFILE)
 {
-  w32_ret_BOOL(DeleteFile((LPCSTR)hb_parcx(1)));
+  w32_ret_BOOL(DeleteFile(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -155,7 +155,7 @@ HB_FUNC(DELETEFILE)
 
 HB_FUNC(SETVOLUMELABEL)
 {
-  w32_ret_BOOL(SetVolumeLabel((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2)));
+  w32_ret_BOOL(SetVolumeLabel(w32_par_LPCSTR(1), w32_par_LPCSTR(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -168,7 +168,7 @@ HB_FUNC(CREATEDIRECTORY)
   if (ISCHAR(2))
     sa = (SECURITY_ATTRIBUTES *)hb_param(2, HB_IT_STRING)->item.asString.value;
 
-  w32_ret_BOOL(CreateDirectoryA((LPCSTR)hb_parcx(1), sa));
+  w32_ret_BOOL(CreateDirectoryA(w32_par_LPCSTR(1), sa));
 }
 
 //-----------------------------------------------------------------------------
@@ -196,7 +196,7 @@ HB_FUNC( CREATEDIRECTORYEX )
 
 HB_FUNC(REMOVEDIRECTORY)
 {
-  w32_ret_BOOL(RemoveDirectory((LPCSTR)hb_parcx(1)));
+  w32_ret_BOOL(RemoveDirectory(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -262,7 +262,7 @@ HB_FUNC(GETSHORTPATHNAME)
 
 HB_FUNC(GETLONGPATHNAME)
 {
-  w32_ret_DWORD((LONG)GetLongPathName((LPCSTR)hb_parcx(1), (LPSTR)hb_parcx(2), w32_par_DWORD(3)));
+  w32_ret_DWORD((LONG)GetLongPathName(w32_par_LPCSTR(1), (LPSTR)hb_parcx(2), w32_par_DWORD(3)));
 }
 
 //-----------------------------------------------------------------------------

@@ -33,7 +33,7 @@ extern BOOL Array2Point(PHB_ITEM aPoint, POINT *pt);
 
 HB_FUNC(CREATEMETAFILE)
 {
-  hb_retnl((LONG)CreateMetaFile((LPCSTR)hb_parcx(1)));
+  hb_retnl((LONG)CreateMetaFile(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -41,7 +41,7 @@ HB_FUNC(CREATEMETAFILE)
 
 HB_FUNC(COPYMETAFILE)
 {
-  hb_retnl((LONG)CopyMetaFile((HMETAFILE)hb_parnl(1), (LPCSTR)hb_parcx(2)));
+  hb_retnl((LONG)CopyMetaFile((HMETAFILE)hb_parnl(1), w32_par_LPCSTR(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -65,7 +65,7 @@ HB_FUNC(DELETEMETAFILE)
 
 HB_FUNC(GETMETAFILE)
 {
-  hb_retnl((LONG)GetMetaFile((LPCSTR)hb_parcx(1)));
+  hb_retnl((LONG)GetMetaFile(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -144,7 +144,7 @@ HB_FUNC(CREATEENHMETAFILE)
   RECT rc;
 
   if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
-    hb_retnl((LONG)CreateEnhMetaFile(w32_par_HDC(1), (LPCSTR)hb_parcx(2), &rc, ISNIL(4) ? NULL : (LPCSTR)hb_parcx(4)));
+    hb_retnl((LONG)CreateEnhMetaFile(w32_par_HDC(1), w32_par_LPCSTR(2), &rc, ISNIL(4) ? NULL : w32_par_LPCSTR(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -152,7 +152,7 @@ HB_FUNC(CREATEENHMETAFILE)
 
 HB_FUNC(GETENHMETAFILE)
 {
-  hb_retnl((LONG)GetEnhMetaFile((LPCSTR)hb_parcx(1)));
+  hb_retnl((LONG)GetEnhMetaFile(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -202,7 +202,7 @@ HB_FUNC(PLAYENHMETAFILE)
 
 HB_FUNC(COPYENHMETAFILEA)
 {
-  hb_retnl((LONG)CopyEnhMetaFileA((HENHMETAFILE)hb_parnl(1), (LPCSTR)hb_parcx(2)));
+  hb_retnl((LONG)CopyEnhMetaFileA((HENHMETAFILE)hb_parnl(1), w32_par_LPCSTR(2)));
 }
 
 //-----------------------------------------------------------------------------

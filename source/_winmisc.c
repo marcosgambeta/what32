@@ -401,7 +401,7 @@ HB_FUNC(GETENVIRONMENTVARIABLE)
   char *cText = (char *)hb_xgrab(MAX_PATH + 1);
   DWORD dwRet;
 
-  dwRet = GetEnvironmentVariableA((LPCSTR)hb_parcx(1), (LPSTR)cText, (DWORD)dwLen);
+  dwRet = GetEnvironmentVariableA(w32_par_LPCSTR(1), (LPSTR)cText, (DWORD)dwLen);
   hb_retclen(cText, dwRet);
   hb_xfree(cText);
 }
@@ -411,7 +411,7 @@ HB_FUNC(GETENVIRONMENTVARIABLE)
 
 HB_FUNC(SETENVIRONMENTVARIABLE)
 {
-  w32_ret_BOOL(SetEnvironmentVariableA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2)));
+  w32_ret_BOOL(SetEnvironmentVariableA(w32_par_LPCSTR(1), w32_par_LPCSTR(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -419,7 +419,7 @@ HB_FUNC(SETENVIRONMENTVARIABLE)
 
 HB_FUNC(WINEXEC)
 {
-  w32_ret_UINT(WinExec((LPCSTR)hb_parcx(1), w32_par_UINT(2)));
+  w32_ret_UINT(WinExec(w32_par_LPCSTR(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -530,7 +530,7 @@ HB_FUNC(GETCLASSINFO)
 {
   WNDCLASS WndClass;
 
-  if (GetClassInfo(ISNIL(1) ? NULL : w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2), &WndClass))
+  if (GetClassInfo(ISNIL(1) ? NULL : w32_par_HINSTANCE(1), w32_par_LPCSTR(2), &WndClass))
 
     hb_retclen((char *)&WndClass, sizeof(WNDCLASS));
 
@@ -548,7 +548,7 @@ HB_FUNC(GETCLASSINFOEX)
 {
   WNDCLASSEX WndClassEx;
 
-  if (GetClassInfoEx(ISNIL(1) ? NULL : w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2), &WndClassEx))
+  if (GetClassInfoEx(ISNIL(1) ? NULL : w32_par_HINSTANCE(1), w32_par_LPCSTR(2), &WndClassEx))
 
     hb_retclen((char *)&WndClassEx, sizeof(WNDCLASSEX));
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) &WndClassEx, sizeof( WNDCLASSEX ) );

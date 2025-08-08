@@ -177,7 +177,7 @@ HB_FUNC(GETSYSTEMMENU)
 
 HB_FUNC(LOADMENU)
 {
-  hb_retnl((LONG)LoadMenu(w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2)));
+  hb_retnl((LONG)LoadMenu(w32_par_HINSTANCE(1), w32_par_LPCSTR(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -197,7 +197,7 @@ HB_FUNC(LOADMENUINDIRECT)
 
 HB_FUNC(CHANGEMENU)
 {
-  w32_ret_BOOL(ChangeMenu((HMENU)hb_parnl(1), w32_par_UINT(2), (LPCSTR)hb_parcx(3), w32_par_UINT(4), w32_par_UINT(5)));
+  w32_ret_BOOL(ChangeMenu((HMENU)hb_parnl(1), w32_par_UINT(2), w32_par_LPCSTR(3), w32_par_UINT(4), w32_par_UINT(5)));
 }
 
 //-----------------------------------------------------------------------------

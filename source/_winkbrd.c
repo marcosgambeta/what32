@@ -162,7 +162,7 @@ HB_FUNC(GETQUEUESTATUS)
 
 HB_FUNC(LOADACCELERATORS)
 {
-  hb_retnl((LONG)LoadAccelerators(w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2)));
+  hb_retnl((LONG)LoadAccelerators(w32_par_HINSTANCE(1), w32_par_LPCSTR(2)));
 }
 
 //-----------------------------------------------------------------------------

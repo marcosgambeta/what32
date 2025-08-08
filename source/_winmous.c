@@ -179,7 +179,7 @@ HB_FUNC(SWAPMOUSEBUTTON)
 
 HB_FUNC(LOADCURSORFROMFILE)
 {
-  hb_retnl((LONG)LoadCursorFromFile((LPCSTR)hb_parcx(1)));
+  hb_retnl((LONG)LoadCursorFromFile(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------

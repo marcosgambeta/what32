@@ -74,7 +74,7 @@ HB_FUNC(CREATEFONT)
 
 HB_FUNC(ADDFONTRESOURCE)
 {
-  hb_retni(AddFontResource((LPCSTR)hb_parcx(1)));
+  hb_retni(AddFontResource(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -111,7 +111,7 @@ HB_FUNC( CREATEFONTINDIRECTEX )
 HB_FUNC(CREATESCALABLEFONTRESOURCE)
 {
   w32_ret_BOOL(
-      CreateScalableFontResource(w32_par_DWORD(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4)));
+      CreateScalableFontResource(w32_par_DWORD(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3), w32_par_LPCSTR(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -128,7 +128,7 @@ HB_FUNC(ENUMFONTFAMILIES)
   {
     lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
-    hb_retni(EnumFontFamilies(w32_par_HDC(1), (LPCSTR)hb_parcx(2), (FONTENUMPROC)GenericCallblockProc, lParam));
+    hb_retni(EnumFontFamilies(w32_par_HDC(1), w32_par_LPCSTR(2), (FONTENUMPROC)GenericCallblockProc, lParam));
   }
   else
     OutputDebugString("EnumFontFamilies(): No codeblock");
@@ -169,7 +169,7 @@ HB_FUNC(ENUMFONTS)
   {
     lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
-    hb_retni(EnumFonts(w32_par_HDC(1), (LPCSTR)hb_parcx(2), (FONTENUMPROC)GenericCallblockProc, lParam));
+    hb_retni(EnumFonts(w32_par_HDC(1), w32_par_LPCSTR(2), (FONTENUMPROC)GenericCallblockProc, lParam));
   }
   else
     OutputDebugString("EnumFonts(): No codeblock");
@@ -359,7 +359,7 @@ HB_FUNC( REMOVEFONTMEMRESOURCEEX )
 
 HB_FUNC(REMOVEFONTRESOURCE)
 {
-  w32_ret_BOOL(RemoveFontResource((LPCSTR)hb_parcx(1)));
+  w32_ret_BOOL(RemoveFontResource(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------

@@ -296,7 +296,7 @@ BOOL SetConsoleTitle(LPCSTR szTitle )
 
 HB_FUNC(SETCONSOLETITLE)
 {
-  hb_retnl((LONG)SetConsoleTitle((LPCSTR)hb_parcx(1)));
+  hb_retnl((LONG)SetConsoleTitle(w32_par_LPCSTR(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -530,7 +530,7 @@ HB_FUNC(GETVERSION)
 //
 HB_FUNC(FINDRESOURCE)
 {
-  hb_retnl((LONG)FindResourceA((HMODULE)hb_parnl(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3)));
+  hb_retnl((LONG)FindResourceA((HMODULE)hb_parnl(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3)));
 }
 
 //-------------------------------------------------------------------//
@@ -539,7 +539,7 @@ HB_FUNC(FINDRESOURCE)
 //
 HB_FUNC(FINDRESOURCEEX)
 {
-  hb_retnl((LONG)FindResourceExA((HMODULE)hb_parnl(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3), (WORD)hb_parni(4)));
+  hb_retnl((LONG)FindResourceExA((HMODULE)hb_parnl(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3), (WORD)hb_parni(4)));
 }
 
 //-------------------------------------------------------------------//
@@ -630,7 +630,7 @@ HB_FUNC(GETMODULEFILENAME)
 //
 HB_FUNC(GETMODULEHANDLE)
 {
-  hb_retnl((LONG)GetModuleHandleA((ISNIL(1) ? NULL : (LPCSTR)hb_parcx(1))));
+  hb_retnl((LONG)GetModuleHandleA((ISNIL(1) ? NULL : w32_par_LPCSTR(1))));
 }
 
 //-------------------------------------------------------------------//
@@ -748,7 +748,7 @@ HB_FUNC(GETCOMPUTERNAME)
 //
 HB_FUNC(SETCOMPUTERNAME)
 {
-  w32_ret_BOOL(SetComputerNameA((LPCSTR)hb_parcx(1)));
+  w32_ret_BOOL(SetComputerNameA(w32_par_LPCSTR(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -890,7 +890,7 @@ HB_FUNC( CASCADEWINDOWS )
 //
 HB_FUNC(WINHELP)
 {
-  w32_ret_BOOL(WinHelp(w32_par_HWND(1), (LPCSTR)hb_parcx(2), w32_par_UINT(3), (ULONG)hb_parnl(4)));
+  w32_ret_BOOL(WinHelp(w32_par_HWND(1), w32_par_LPCSTR(2), w32_par_UINT(3), (ULONG)hb_parnl(4)));
 }
 
 //-------------------------------------------------------------------//

@@ -187,7 +187,7 @@ HB_FUNC(PEEKMESSAGE)
 
 HB_FUNC(REGISTERWINDOWMESSAGE)
 {
-  w32_ret_UINT(RegisterWindowMessageA((LPCSTR)hb_parcx(1)));
+  w32_ret_UINT(RegisterWindowMessageA(w32_par_LPCSTR(1)));
 }
 
 //-----------------------------------------------------------------------------

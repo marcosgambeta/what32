@@ -160,7 +160,7 @@ HB_FUNC(WRITEPRIVATEPROFILESTRING)
 
 HB_FUNC(GETPRIVATEPROFILEINT)
 {
-  w32_ret_UINT(GetPrivateProfileIntA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), hb_parni(3), (LPCSTR)hb_parcx(4)));
+  w32_ret_UINT(GetPrivateProfileIntA(w32_par_LPCSTR(1), w32_par_LPCSTR(2), hb_parni(3), w32_par_LPCSTR(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -168,7 +168,7 @@ HB_FUNC(GETPRIVATEPROFILEINT)
 
 HB_FUNC(GETPROFILEINT)
 {
-  w32_ret_UINT(GetProfileIntA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), hb_parni(3)));
+  w32_ret_UINT(GetProfileIntA(w32_par_LPCSTR(1), w32_par_LPCSTR(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -189,7 +189,7 @@ HB_FUNC( GETPROFILESECTION )
 
 HB_FUNC(WRITEPROFILESECTION)
 {
-  w32_ret_BOOL(WriteProfileSectionA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2)));
+  w32_ret_BOOL(WriteProfileSectionA(w32_par_LPCSTR(1), w32_par_LPCSTR(2)));
 }
 
 /*
@@ -213,7 +213,7 @@ HB_FUNC( GETPRIVATEPROFILESECTION )
 
 HB_FUNC(WRITEPRIVATEPROFILESECTION)
 {
-  w32_ret_BOOL(WritePrivateProfileSectionA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3)));
+  w32_ret_BOOL(WritePrivateProfileSectionA(w32_par_LPCSTR(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3)));
 }
 
 /*

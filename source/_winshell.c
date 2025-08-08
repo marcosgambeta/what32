@@ -80,8 +80,8 @@ HB_FUNC(DRAGACCEPTFILES)
 
 HB_FUNC(SHELLEXECUTE)
 {
-  hb_retnl((LONG)ShellExecute(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3),
-                              ISNIL(4) ? NULL : (LPCSTR)hb_parcx(4), (LPCSTR)hb_parcx(5), hb_parni(6)));
+  hb_retnl((LONG)ShellExecute(w32_par_HWND(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3),
+                              ISNIL(4) ? NULL : w32_par_LPCSTR(4), w32_par_LPCSTR(5), hb_parni(6)));
 }
 
 //-----------------------------------------------------------------------------
@@ -93,7 +93,7 @@ HB_FUNC(FINDEXECUTABLE)
   char cBuffer[MAX_PATH];
   HINSTANCE hInst;
 
-  hInst = FindExecutable((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), (LPSTR)cBuffer);
+  hInst = FindExecutable(w32_par_LPCSTR(1), w32_par_LPCSTR(2), (LPSTR)cBuffer);
 
   hb_retnl((LONG)hInst);
 
@@ -127,7 +127,7 @@ HB_FUNC( COMMANDLINETOARGVW )
 HB_FUNC(SHELLABOUT)
 {
   hb_retni(
-      ShellAbout(w32_par_HWND(1), (LPCSTR)hb_parcx(2), (LPCSTR)hb_parcx(3), (ISNIL(4) ? NULL : (HICON)hb_parnl(4))));
+      ShellAbout(w32_par_HWND(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3), (ISNIL(4) ? NULL : (HICON)hb_parnl(4))));
 }
 
 //-----------------------------------------------------------------------------
@@ -268,7 +268,7 @@ HB_FUNC( SHQUERYRECYCLEBIN )
 
 HB_FUNC(SHEMPTYRECYCLEBIN)
 {
-  hb_retnl(SHEmptyRecycleBin(w32_par_HWND(1), (LPCSTR)hb_parcx(2), w32_par_DWORD(3)));
+  hb_retnl(SHEmptyRecycleBin(w32_par_HWND(1), w32_par_LPCSTR(2), w32_par_DWORD(3)));
 }
 
 #endif
@@ -352,7 +352,7 @@ HB_FUNC( SHGETNEWLINKINFO )
 
 HB_FUNC(SHINVOKEPRINTERCOMMAND)
 {
-  hb_retl(SHInvokePrinterCommand(w32_par_HWND(1), w32_par_UINT(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4),
+  hb_retl(SHInvokePrinterCommand(w32_par_HWND(1), w32_par_UINT(2), w32_par_LPCSTR(3), w32_par_LPCSTR(4),
                                  w32_par_BOOL(5)));
 }
 

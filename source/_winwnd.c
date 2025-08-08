@@ -83,7 +83,7 @@ HB_FUNC(FINDWINDOW)
 
 HB_FUNC(FINDWINDOWEX)
 {
-  w32_ret_HWND((LONG)FindWindowEx(w32_par_HWND(1), w32_par_HWND(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4)));
+  w32_ret_HWND((LONG)FindWindowEx(w32_par_HWND(1), w32_par_HWND(2), w32_par_LPCSTR(3), w32_par_LPCSTR(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -763,7 +763,7 @@ HB_FUNC(GETWINDOWRGN)
 
 HB_FUNC(SETPROP)
 {
-  w32_ret_BOOL(SetProp(w32_par_HWND(1), (LPCSTR)hb_parcx(2), w32_par_HANDLE(3)));
+  w32_ret_BOOL(SetProp(w32_par_HWND(1), w32_par_LPCSTR(2), w32_par_HANDLE(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -771,7 +771,7 @@ HB_FUNC(SETPROP)
 
 HB_FUNC(GETPROP)
 {
-  hb_retnl((LONG)GetProp(w32_par_HWND(1), (LPCSTR)hb_parcx(2)));
+  hb_retnl((LONG)GetProp(w32_par_HWND(1), w32_par_LPCSTR(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -779,7 +779,7 @@ HB_FUNC(GETPROP)
 
 HB_FUNC(REMOVEPROP)
 {
-  hb_retnl((LONG)RemoveProp(w32_par_HWND(1), (LPCSTR)hb_parcx(2)));
+  hb_retnl((LONG)RemoveProp(w32_par_HWND(1), w32_par_LPCSTR(2)));
 }
 
 //-----------------------------------------------------------------------------

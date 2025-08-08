@@ -194,7 +194,7 @@ HB_FUNC(IMAGELIST_GETICON)
 HB_FUNC(IMAGELIST_LOADIMAGE)
 {
   hb_retnl((LONG)ImageList_LoadImageA(w32_par_HINSTANCE(1),
-                                      ISCHAR(2) ? (LPCSTR)hb_parcx(2) : MAKEINTRESOURCE(hb_parni(2)), hb_parni(3),
+                                      ISCHAR(2) ? w32_par_LPCSTR(2) : MAKEINTRESOURCE(hb_parni(2)), hb_parni(3),
                                       hb_parni(4), w32_par_COLORREF(5), w32_par_UINT(6), w32_par_UINT(7)));
 }
 

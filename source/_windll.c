@@ -45,7 +45,7 @@ HB_FUNC( LOADLIBRARY )
 
 HB_FUNC(LOADLIBRARYEX)
 {
-  hb_retnl((LONG)LoadLibraryExA((LPCSTR)hb_parcx(1), w32_par_HANDLE(2), w32_par_DWORD(3)));
+  hb_retnl((LONG)LoadLibraryExA(w32_par_LPCSTR(1), w32_par_HANDLE(2), w32_par_DWORD(3)));
 }
 
 //-----------------------------------------------------------------------------
