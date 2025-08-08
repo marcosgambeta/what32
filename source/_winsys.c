@@ -530,7 +530,7 @@ HB_FUNC(GETVERSION)
 //
 HB_FUNC(FINDRESOURCE)
 {
-  hb_retnl((LONG)FindResourceA((HMODULE)hb_parnl(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3)));
+  hb_retnl((LONG)FindResourceA(w32_par_HMODULE(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3)));
 }
 
 //-------------------------------------------------------------------//
@@ -539,7 +539,7 @@ HB_FUNC(FINDRESOURCE)
 //
 HB_FUNC(FINDRESOURCEEX)
 {
-  hb_retnl((LONG)FindResourceExA((HMODULE)hb_parnl(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3), (WORD)hb_parni(4)));
+  hb_retnl((LONG)FindResourceExA(w32_par_HMODULE(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3), (WORD)hb_parni(4)));
 }
 
 //-------------------------------------------------------------------//
@@ -548,7 +548,7 @@ HB_FUNC(FINDRESOURCEEX)
 //
 HB_FUNC(LOADRESOURCE)
 {
-  hb_retnl((LONG)LoadResource((HMODULE)hb_parnl(1), (HRSRC)hb_parnl(2)));
+  hb_retnl((LONG)LoadResource(w32_par_HMODULE(1), (HRSRC)hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -578,7 +578,7 @@ HB_FUNC(LOADSTRING)
 //
 HB_FUNC(SIZEOFRESOURCE)
 {
-  w32_ret_DWORD((LONG)SizeofResource((HMODULE)hb_parnl(1), (HRSRC)hb_parnl(2)));
+  w32_ret_DWORD((LONG)SizeofResource(w32_par_HMODULE(1), (HRSRC)hb_parnl(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -620,7 +620,7 @@ HB_FUNC(TONE)
 HB_FUNC(GETMODULEFILENAME)
 {
   char szBuffer[MAX_PATH + 1] = {0};
-  GetModuleFileNameA(ISNIL(1) ? GetModuleHandle(NULL) : (HMODULE)hb_parnl(1), szBuffer, MAX_PATH);
+  GetModuleFileNameA(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HMODULE(1), szBuffer, MAX_PATH);
   hb_retc(szBuffer);
 }
 

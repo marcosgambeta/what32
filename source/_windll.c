@@ -63,7 +63,7 @@ HB_FUNC( FREELIBRARY )
 
 HB_FUNC(FREELIBRARYANDEXITTHREAD)
 {
-  FreeLibraryAndExitThread((HMODULE)hb_parnl(1), w32_par_DWORD(2));
+  FreeLibraryAndExitThread(w32_par_HMODULE(1), w32_par_DWORD(2));
 }
 
 //-----------------------------------------------------------------------------
