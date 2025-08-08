@@ -17,8 +17,6 @@
 #include <vfw.h>
 
 #include "what32.h"
-#define w32_par_HWND(n) (HWND) hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
 
 #if ((defined(__GNUC__) && (__GNUC__ < 4)) || (defined(__WATCOMC__) && (__WATCOMC__ < 1290)))
 #define WM_CAP_START WM_USER

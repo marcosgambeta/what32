@@ -17,11 +17,6 @@
 #include "hbapi.h"
 
 #include "what32.h"
-#define w32_par_HDC(n) (HDC) hb_parnl(n)
-#define w32_par_COLORREF(n) (COLORREF) hb_parnl(n)
-#define w32_par_HBITMAP(n) (HBITMAP) hb_parnl(n)
-#define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_UINT(n) (UINT) hb_parni(n)
 
 //-----------------------------------------------------------------------------
 

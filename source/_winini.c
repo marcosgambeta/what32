@@ -62,8 +62,6 @@
 // #include "hbapiitm.h"
 
 #include "what32.h"
-#define w32_ret_BOOL(x) hb_retl(x)
-#define w32_ret_UINT(x) hb_retni(x)
 
 //-----------------------------------------------------------------------------
 HB_FUNC(GETPROFILESTRING)

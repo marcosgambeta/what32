@@ -21,8 +21,6 @@
 #include "tchar.h"
 
 #include "what32.h"
-#define w32_par_HWND(n) (HWND) hb_parnl(n)
-#define w32_par_HANDLE(n) (HANDLE) hb_parnl(n)
 
 //-------------------------------------------------------------------//
 /*

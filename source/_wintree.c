@@ -8,7 +8,6 @@
 #include "hbapi.h"
 
 #include "what32.h"
-#define w32_par_HWND(n) (HWND) hb_parnl(n)
 
 //-------------------------------------------------------------------------//
 

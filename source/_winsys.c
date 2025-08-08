@@ -42,14 +42,6 @@
 #endif
 
 #include "what32.h"
-#define w32_par_HWND(n) (HWND) hb_parnl(n)
-#define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
-#define w32_par_HANDLE(n) (HANDLE) hb_parnl(n)
-#define w32_ret_DWORD(x) hb_retnl(x)
-#define w32_par_UINT(n) (UINT) hb_parni(n)
-#define w32_ret_UINT(x) hb_retni(x)
 
 #if defined(__DMC__)
 #if 0

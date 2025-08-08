@@ -20,9 +20,6 @@
 #include "hbapiitm.h"
 
 #include "what32.h"
-#define w32_par_HWND(n) (HWND) hb_parnl(n)
-#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
 
 // extern __DlgProc ;
 

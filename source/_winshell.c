@@ -13,11 +13,6 @@
 #include "hbapiitm.h"
 
 #include "what32.h"
-#define w32_par_HWND(n) (HWND) hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
-#define w32_par_HANDLE(n) (HANDLE) hb_parnl(n)
-#define w32_par_BOOL(n) (BOOL) hb_parl(n)
-#define w32_par_UINT(n) (UINT) hb_parni(n)
 
 #if (defined(__GNUC__) || defined(__DMC__))
 DWORD WINAPI DoEnvironmentSubst(LPSTR szString, UINT cchString);

@@ -15,10 +15,6 @@
 // #include "hbstack.h"
 
 #include "what32.h"
-#define w32_par_HWND(n) (HWND) hb_parnl(n)
-#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
-#define w32_par_UINT(n) (UINT) hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);

@@ -14,7 +14,6 @@
 // #include "hbstack.h"
 
 #include "what32.h"
-#define w32_par_COLORREF(n) (COLORREF) hb_parnl(n)
 
 //-----------------------------------------------------------------------------
 // WINGDIAPI HPEN WINAPI CreatePen( IN int, IN int, IN COLORREF);

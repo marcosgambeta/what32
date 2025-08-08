@@ -19,8 +19,6 @@
 #include "item.api"
 
 #include "what32.h"
-#define w32_par_HDC(n) (HDC) hb_parnl(n)
-#define w32_par_HWND(n) (HWND) hb_parnl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 
