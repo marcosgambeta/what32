@@ -20,6 +20,7 @@
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HCURSOR(n) (HCURSOR)hb_parnl(n)
+#define w32_ret_HWND(x) hb_retnl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -45,7 +46,7 @@ HB_FUNC(LOADCURSOR)
 
 HB_FUNC(GETCAPTURE)
 {
-  hb_retnl((LONG)GetCapture());
+  w32_ret_HWND((LONG)GetCapture());
 }
 
 //-----------------------------------------------------------------------------
@@ -53,7 +54,7 @@ HB_FUNC(GETCAPTURE)
 
 HB_FUNC(SETCAPTURE)
 {
-  hb_retnl((LONG)SetCapture(w32_par_HWND(1)));
+  w32_ret_HWND((LONG)SetCapture(w32_par_HWND(1)));
 }
 
 //-----------------------------------------------------------------------------
