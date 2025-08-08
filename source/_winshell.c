@@ -15,6 +15,7 @@
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 #if (defined(__GNUC__) || defined(__DMC__))
 DWORD WINAPI DoEnvironmentSubst(LPSTR szString, UINT cchString);
@@ -73,7 +74,7 @@ HB_FUNC(DRAGFINISH)
 
 HB_FUNC(DRAGACCEPTFILES)
 {
-  DragAcceptFiles(w32_par_HWND(1), hb_parl(2));
+  DragAcceptFiles(w32_par_HWND(1), w32_par_BOOL(2));
 }
 
 //-----------------------------------------------------------------------------
@@ -355,7 +356,7 @@ HB_FUNC( SHGETNEWLINKINFO )
 HB_FUNC(SHINVOKEPRINTERCOMMAND)
 {
   hb_retl(SHInvokePrinterCommand(w32_par_HWND(1), (UINT)hb_parni(2), (LPCSTR)hb_parcx(3), (LPCSTR)hb_parcx(4),
-                                 hb_parl(5)));
+                                 w32_par_BOOL(5)));
 }
 
 #endif

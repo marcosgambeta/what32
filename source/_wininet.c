@@ -33,6 +33,7 @@
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 #ifndef DWORD_PTR
 #define DWORD_PTR DWORD
@@ -276,7 +277,7 @@ HB_FUNC(INTERNETREADFILE)
 HB_FUNC(FTPCOMMAND)
 {
   HINTERNET hInternet = (HINTERNET)hb_parnl(1);
-  BOOL fExpectResponse = ISNIL(2) ? 0 : hb_parl(2);
+  BOOL fExpectResponse = ISNIL(2) ? 0 : w32_par_BOOL(2);
   DWORD dwFlags = ISNIL(3) ? FTP_TRANSFER_TYPE_BINARY : hb_parnl(3);
   LPCTSTR lpszCommand = hb_parcx(4);
   DWORD_PTR dwContext = ISNIL(5) ? 0 : hb_parnl(5);
@@ -427,7 +428,7 @@ HB_FUNC(FTPGETFILE)
   HINTERNET hInternet = (HINTERNET)hb_parnl(1);
   LPCTSTR lpszRemoteFile = hb_parcx(2);
   LPCTSTR lpszLocalFile = hb_parcx(3);
-  BOOL fFailIfExist = ISNIL(4) ? FALSE : hb_parl(4);
+  BOOL fFailIfExist = ISNIL(4) ? FALSE : w32_par_BOOL(4);
   DWORD dwFlagsAndAttributes = ISNIL(5) ? FILE_ATTRIBUTE_NORMAL : hb_parnl(5);
   DWORD dwFlags = ISNIL(6) ? FTP_TRANSFER_TYPE_BINARY | INTERNET_FLAG_RELOAD : hb_parnl(6);
   DWORD_PTR dwContext = ISNIL(7) ? 0 : hb_parnl(7);

@@ -13,6 +13,7 @@
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
 #define w32_ret_HWND(x) hb_retnl(x)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -213,7 +214,7 @@ HB_FUNC(INVALIDATERECT)
 
   w32_ret_BOOL(InvalidateRect(ISNIL(1) ? NULL : w32_par_HWND(1), // handle of window with changed update region
                          bRectOk ? &rc : NULL,                // address of rectangle coordinates
-                         ISLOG(3) ? hb_parl(3) : TRUE         // erase-background flag
+                         ISLOG(3) ? w32_par_BOOL(3) : TRUE         // erase-background flag
                          ));
 }
 
@@ -273,7 +274,7 @@ HB_FUNC(GETWINDOWRECT)
 
 HB_FUNC(SHOWOWNEDPOPUPS)
 {
-  w32_ret_BOOL(ShowOwnedPopups(w32_par_HWND(1), hb_parl(2)));
+  w32_ret_BOOL(ShowOwnedPopups(w32_par_HWND(1), w32_par_BOOL(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -754,7 +755,7 @@ HB_FUNC(SETWINDOWPLACEMENT)
 
 HB_FUNC(SETWINDOWRGN)
 {
-  hb_retni(SetWindowRgn(w32_par_HWND(1), w32_par_HRGN(2), hb_parl(3)));
+  hb_retni(SetWindowRgn(w32_par_HWND(1), w32_par_HRGN(2), w32_par_BOOL(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -844,7 +845,7 @@ HB_FUNC(ADJUSTWINDOWRECT)
 
   if (Array2Rect(pArray, &lpRect))
   {
-    if (AdjustWindowRect(&lpRect, w32_par_DWORD(2), hb_parl(3)) > 0)
+    if (AdjustWindowRect(&lpRect, w32_par_DWORD(2), w32_par_BOOL(3)) > 0)
     {
       Rect2ArrayEx(&lpRect, pArray);
       hb_retl(TRUE);
@@ -875,7 +876,7 @@ HB_FUNC(ADJUSTWINDOWRECTEX)
 
   Array2Rect(pArray, &lpRect);
 
-  bAjust = AdjustWindowRectEx(&lpRect, w32_par_DWORD(2), hb_parl(3), w32_par_DWORD(4));
+  bAjust = AdjustWindowRectEx(&lpRect, w32_par_DWORD(2), w32_par_BOOL(3), w32_par_DWORD(4));
   if (bAjust)
     Rect2ArrayEx(&lpRect, pArray);
 

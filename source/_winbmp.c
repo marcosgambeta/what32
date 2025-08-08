@@ -26,6 +26,7 @@ Modified and non-API functions:
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -412,7 +413,7 @@ DrawGlyph(HDC hDC, int x , int y , int dx , int dy , HBITMAP hBmp , COLORREF rgb
 HB_FUNC(DRAWGLYPH)
 {
   Pic((HDC)hb_parni(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), (HBITMAP)hb_parni(6), w32_par_COLORREF(7),
-      hb_parl(8));
+      w32_par_BOOL(8));
   return;
 }
 

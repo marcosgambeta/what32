@@ -16,6 +16,7 @@
 #define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 extern BOOL Array2Point(PHB_ITEM aPoint, POINT *pt);
 
@@ -269,7 +270,7 @@ HB_FUNC(IMAGELIST_SETDRAGCURSORIMAGE)
 
 HB_FUNC(IMAGELIST_DRAGSHOWNOLOCK)
 {
-  hb_retl(ImageList_DragShowNolock(hb_parl(1)));
+  hb_retl(ImageList_DragShowNolock(w32_par_BOOL(1)));
 }
 
 //-----------------------------------------------------------------------------

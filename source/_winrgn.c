@@ -14,6 +14,7 @@
 #define w32_par_HRGN(n) (HRGN)hb_parnl(n)
 #define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -300,7 +301,7 @@ HB_FUNC( VALIDATERECT )
 
 HB_FUNC(INVALIDATERGN)
 {
-  w32_ret_BOOL(InvalidateRgn(w32_par_HWND(1), w32_par_HRGN(2), hb_parl(3)));
+  w32_ret_BOOL(InvalidateRgn(w32_par_HWND(1), w32_par_HRGN(2), w32_par_BOOL(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -380,7 +381,7 @@ HB_FUNC(SETRECTRGN)
 
 HB_FUNC(GETUPDATERGN)
 {
-  hb_retni(GetUpdateRgn(w32_par_HWND(1), w32_par_HRGN(2), hb_parl(3)));
+  hb_retni(GetUpdateRgn(w32_par_HWND(1), w32_par_HRGN(2), w32_par_BOOL(3)));
 }
 
 //-----------------------------------------------------------------------------

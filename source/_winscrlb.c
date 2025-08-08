@@ -9,13 +9,14 @@
 
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI int WINAPI SetScrollPos( IN HWND hWnd, IN int nBar, IN int nPos, IN BOOL bRedraw);
 
 HB_FUNC(SETSCROLLPOS)
 {
-  hb_retni(SetScrollPos(w32_par_HWND(1), hb_parni(2), hb_parni(3), hb_parl(4)));
+  hb_retni(SetScrollPos(w32_par_HWND(1), hb_parni(2), hb_parni(3), w32_par_BOOL(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -31,7 +32,7 @@ HB_FUNC(GETSCROLLPOS)
 
 HB_FUNC(SETSCROLLRANGE)
 {
-  w32_ret_BOOL(SetScrollRange(w32_par_HWND(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parl(5)));
+  w32_ret_BOOL(SetScrollRange(w32_par_HWND(1), hb_parni(2), hb_parni(3), hb_parni(4), w32_par_BOOL(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -65,7 +66,7 @@ HB_FUNC(GETSCROLLRANGE)
 
 HB_FUNC(SHOWSCROLLBAR)
 {
-  w32_ret_BOOL(ShowScrollBar(w32_par_HWND(1), hb_parni(2), hb_parl(3)));
+  w32_ret_BOOL(ShowScrollBar(w32_par_HWND(1), hb_parni(2), w32_par_BOOL(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -86,7 +87,7 @@ HB_FUNC(SETSCROLLINFO)
 {
   SCROLLINFO *scrollInfo = (SCROLLINFO *)hb_param(3, HB_IT_STRING)->item.asString.value;
 
-  hb_retni(SetScrollInfo(w32_par_HWND(1), hb_parni(2), scrollInfo, hb_parl(4)));
+  hb_retni(SetScrollInfo(w32_par_HWND(1), hb_parni(2), scrollInfo, w32_par_BOOL(4)));
 }
 
 //-----------------------------------------------------------------------------

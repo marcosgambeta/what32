@@ -21,6 +21,7 @@
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HCURSOR(n) (HCURSOR)hb_parnl(n)
 #define w32_ret_HWND(x) hb_retnl(x)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -86,7 +87,7 @@ HB_FUNC(SETDOUBLECLICKTIME)
 
 HB_FUNC(SHOWCURSOR)
 {
-  hb_retni(ShowCursor(hb_parl(1)));
+  hb_retni(ShowCursor(w32_par_BOOL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -176,7 +177,7 @@ HB_FUNC(GETCURSOR)
 
 HB_FUNC(SWAPMOUSEBUTTON)
 {
-  w32_ret_BOOL(SwapMouseButton(hb_parl(1)));
+  w32_ret_BOOL(SwapMouseButton(w32_par_BOOL(1)));
 }
 
 //-----------------------------------------------------------------------------

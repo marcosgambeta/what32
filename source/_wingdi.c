@@ -27,6 +27,7 @@
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 #define w32_par_HGDIOBJ(n) (HGDIOBJ)hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -626,7 +627,7 @@ HB_FUNC(GETUPDATERECT)
   RECT Rect;
   PHB_ITEM aRect;
 
-  if (GetUpdateRect(w32_par_HWND(1), &Rect, hb_parl(2)))
+  if (GetUpdateRect(w32_par_HWND(1), &Rect, w32_par_BOOL(2)))
   {
     aRect = Rect2Array(&Rect);
     _itemReturn(aRect);

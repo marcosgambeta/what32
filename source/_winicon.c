@@ -18,6 +18,7 @@
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 #if defined(__DMC__)
 // SHSTDAPI_(HICON) DuplicateIcon(HINSTANCE hInst, HICON hIcon);
@@ -62,7 +63,7 @@ HB_FUNC(DESTROYICON)
 HB_FUNC(LOOKUPICONIDFROMDIRECTORY)
 {
 
-  hb_retni(LookupIconIdFromDirectory((PBYTE)hb_parcx(1), hb_parl(2)));
+  hb_retni(LookupIconIdFromDirectory((PBYTE)hb_parcx(1), w32_par_BOOL(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -72,7 +73,7 @@ HB_FUNC(LOOKUPICONIDFROMDIRECTORY)
 HB_FUNC(LOOKUPICONIDFROMDIRECTORYEX)
 {
 
-  hb_retni(LookupIconIdFromDirectoryEx((PBYTE)hb_parcx(1), hb_parl(2), hb_parni(3), hb_parni(4), (UINT)hb_parni(5)));
+  hb_retni(LookupIconIdFromDirectoryEx((PBYTE)hb_parcx(1), w32_par_BOOL(2), hb_parni(3), hb_parni(4), (UINT)hb_parni(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -82,7 +83,7 @@ HB_FUNC(LOOKUPICONIDFROMDIRECTORYEX)
 HB_FUNC(CREATEICONFROMRESOURCE)
 {
 
-  hb_retnl((LONG)CreateIconFromResource((PBYTE)hb_parcx(1), w32_par_DWORD(2), hb_parl(3), w32_par_DWORD(4)));
+  hb_retnl((LONG)CreateIconFromResource((PBYTE)hb_parcx(1), w32_par_DWORD(2), w32_par_BOOL(3), w32_par_DWORD(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -92,7 +93,7 @@ HB_FUNC(CREATEICONFROMRESOURCE)
 HB_FUNC(CREATEICONFROMRESOURCEEX)
 {
 
-  hb_retnl((LONG)CreateIconFromResourceEx((PBYTE)hb_parcx(1), w32_par_DWORD(2), hb_parl(3), w32_par_DWORD(4),
+  hb_retnl((LONG)CreateIconFromResourceEx((PBYTE)hb_parcx(1), w32_par_DWORD(2), w32_par_BOOL(3), w32_par_DWORD(4),
                                           hb_parni(5), hb_parni(6), (UINT)hb_parni(7)));
 }
 

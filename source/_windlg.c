@@ -23,6 +23,7 @@
 #define w32_par_HWND(n) (HWND)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_ret_HWND(x) hb_retnl(x)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 //-----------------------------------------------------------------------------
 
@@ -46,7 +47,7 @@ HB_FUNC(GETDLGITEM)
 
 HB_FUNC(GETNEXTDLGGROUPITEM)
 {
-  w32_ret_HWND((LONG)GetNextDlgGroupItem(w32_par_HWND(1), w32_par_HWND(2), hb_parl(3)));
+  w32_ret_HWND((LONG)GetNextDlgGroupItem(w32_par_HWND(1), w32_par_HWND(2), w32_par_BOOL(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -54,7 +55,7 @@ HB_FUNC(GETNEXTDLGGROUPITEM)
 
 HB_FUNC(GETNEXTDLGTABITEM)
 {
-  w32_ret_HWND((LONG)GetNextDlgTabItem(w32_par_HWND(1), w32_par_HWND(2), hb_parl(3)));
+  w32_ret_HWND((LONG)GetNextDlgTabItem(w32_par_HWND(1), w32_par_HWND(2), w32_par_BOOL(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -78,7 +79,7 @@ HB_FUNC(GETDIALOGBASEUNITS)
 
 HB_FUNC(SETDLGITEMINT)
 {
-  w32_ret_BOOL(SetDlgItemInt(w32_par_HWND(1), hb_parni(2), (UINT)hb_parni(3), hb_parl(4)));
+  w32_ret_BOOL(SetDlgItemInt(w32_par_HWND(1), hb_parni(2), (UINT)hb_parni(3), w32_par_BOOL(4)));
 }
 
 //-----------------------------------------------------------------------------

@@ -18,6 +18,7 @@
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
+#define w32_par_BOOL(n) (BOOL)hb_parl(n)
 
 //-----------------------------------------------------------------------------
 
@@ -325,7 +326,7 @@ HB_FUNC(INSENDMESSAGEEX)
 
 HB_FUNC(MSGWAITFORMULTIPLEOBJECTS)
 {
-  w32_ret_DWORD((LONG)MsgWaitForMultipleObjects(w32_par_DWORD(1), (HANDLE *)hb_parnl(2), hb_parl(3), w32_par_DWORD(4),
+  w32_ret_DWORD((LONG)MsgWaitForMultipleObjects(w32_par_DWORD(1), (HANDLE *)hb_parnl(2), w32_par_BOOL(3), w32_par_DWORD(4),
                                            w32_par_DWORD(5)));
 }
 
@@ -443,7 +444,7 @@ HB_FUNC(UNREGISTERDEVICENOTIFICATION)
 HB_FUNC(ATTACHTHREADINPUT)
 {
 
-  w32_ret_BOOL(AttachThreadInput(w32_par_DWORD(1), w32_par_DWORD(2), hb_parl(3)));
+  w32_ret_BOOL(AttachThreadInput(w32_par_DWORD(1), w32_par_DWORD(2), w32_par_BOOL(3)));
 }
 
 //-----------------------------------------------------------------------------
