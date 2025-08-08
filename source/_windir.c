@@ -16,6 +16,7 @@
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_DWORD(n) (DWORD)hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
+#define w32_ret_UINT(x) hb_retni(x)
 
 #if defined(__DMC__)
 WINBASEAPI
@@ -36,7 +37,7 @@ HB_FUNC(GETLOGICALDRIVES)
 
 HB_FUNC(GETDRIVETYPE)
 {
-  hb_retni(GetDriveType((LPCSTR)hb_parcx(1)));
+  w32_ret_UINT(GetDriveType((LPCSTR)hb_parcx(1)));
 }
 
 //-----------------------------------------------------------------------------

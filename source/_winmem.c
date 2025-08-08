@@ -15,6 +15,7 @@
 
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_ret_UINT(x) hb_retni(x)
 
 #if defined(__DMC__)
 #define SIZE_T size_t
@@ -50,7 +51,7 @@ HB_FUNC(GLOBALSIZE)
 
 HB_FUNC(GLOBALFLAGS)
 {
-  hb_retni((UINT)GlobalFlags((HGLOBAL)hb_parnl(1)));
+  w32_ret_UINT((UINT)GlobalFlags((HGLOBAL)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -226,7 +227,7 @@ HB_FUNC(LOCALSIZE)
 
 HB_FUNC(LOCALFLAGS)
 {
-  hb_retni(LocalFlags((HLOCAL)hb_parnl(1)));
+  w32_ret_UINT(LocalFlags((HLOCAL)hb_parnl(1)));
 }
 
 //-----------------------------------------------------------------------------

@@ -19,6 +19,7 @@
 #define w32_par_HRGN(n) (HRGN)hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_ret_UINT(x) hb_retni(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -260,7 +261,7 @@ HB_FUNC( PLAYENHMETAFILERECORD )
 
 HB_FUNC(GETENHMETAFILEDESCRIPTION)
 {
-  hb_retni(GetEnhMetaFileDescription((HENHMETAFILE)hb_parnl(1), w32_par_UINT(2), (LPSTR)hb_parcx(3)));
+  w32_ret_UINT(GetEnhMetaFileDescription((HENHMETAFILE)hb_parnl(1), w32_par_UINT(2), (LPSTR)hb_parcx(3)));
 }
 
 //-----------------------------------------------------------------------------

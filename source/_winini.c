@@ -62,6 +62,7 @@
 // #include "hbapiitm.h"
 
 #define w32_ret_BOOL(x) hb_retl(x)
+#define w32_ret_UINT(x) hb_retni(x)
 
 //-----------------------------------------------------------------------------
 HB_FUNC(GETPROFILESTRING)
@@ -160,7 +161,7 @@ HB_FUNC(WRITEPRIVATEPROFILESTRING)
 
 HB_FUNC(GETPRIVATEPROFILEINT)
 {
-  hb_retni(GetPrivateProfileIntA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), hb_parni(3), (LPCSTR)hb_parcx(4)));
+  w32_ret_UINT(GetPrivateProfileIntA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), hb_parni(3), (LPCSTR)hb_parcx(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -168,7 +169,7 @@ HB_FUNC(GETPRIVATEPROFILEINT)
 
 HB_FUNC(GETPROFILEINT)
 {
-  hb_retni(GetProfileIntA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), hb_parni(3)));
+  w32_ret_UINT(GetProfileIntA((LPCSTR)hb_parcx(1), (LPCSTR)hb_parcx(2), hb_parni(3)));
 }
 
 //-----------------------------------------------------------------------------

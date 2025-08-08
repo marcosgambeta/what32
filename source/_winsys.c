@@ -48,6 +48,7 @@
 #define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
 #define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_ret_UINT(x) hb_retni(x)
 
 #if defined(__DMC__)
 #if 0
@@ -482,7 +483,7 @@ HB_FUNC( SETLASTERROR )
 //
 HB_FUNC(SETERRORMODE)
 {
-  hb_retni(SetErrorMode(w32_par_UINT(1)));
+  w32_ret_UINT(SetErrorMode(w32_par_UINT(1)));
 }
 
 //-------------------------------------------------------------------//
@@ -843,7 +844,7 @@ HB_FUNC( VERIFYVERSIONINFO )
 //
 HB_FUNC(ARRANGEICONICWINDOWS)
 {
-  hb_retni(ArrangeIconicWindows(w32_par_HWND(1)));
+  w32_ret_UINT(ArrangeIconicWindows(w32_par_HWND(1)));
 }
 
 //-------------------------------------------------------------------//

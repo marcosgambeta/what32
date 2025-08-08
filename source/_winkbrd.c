@@ -27,6 +27,7 @@ Modified functions:
 #define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
 #define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_ret_UINT(x) hb_retni(x)
 
 //-----------------------------------------------------------------------------
 // WINUSERAPI DWORD WINAPI OemKeyScan( IN WORD wOemChar);
@@ -61,7 +62,7 @@ HB_FUNC(VKKEYSCANEX)
 
 HB_FUNC(GETKBCODEPAGE)
 {
-  hb_retni(GetKBCodePage());
+  w32_ret_UINT(GetKBCodePage());
 }
 
 //-----------------------------------------------------------------------------
@@ -134,7 +135,7 @@ HB_FUNC(GETKEYBOARDTYPE)
 
 HB_FUNC(MAPVIRTUALKEY)
 {
-  hb_retni(MapVirtualKey(w32_par_UINT(1), w32_par_UINT(2)));
+  w32_ret_UINT(MapVirtualKey(w32_par_UINT(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -142,7 +143,7 @@ HB_FUNC(MAPVIRTUALKEY)
 
 HB_FUNC(MAPVIRTUALKEYEX)
 {
-  hb_retni(MapVirtualKeyEx(w32_par_UINT(1), w32_par_UINT(2), (HKL)hb_parnl(3)));
+  w32_ret_UINT(MapVirtualKeyEx(w32_par_UINT(1), w32_par_UINT(2), (HKL)hb_parnl(3)));
 }
 
 //-----------------------------------------------------------------------------

@@ -23,6 +23,7 @@
 #define w32_ret_HWND(x) hb_retnl(x)
 #define w32_par_BOOL(n) (BOOL)hb_parl(n)
 #define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_ret_UINT(x) hb_retni(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -72,7 +73,7 @@ HB_FUNC(RELEASECAPTURE)
 
 HB_FUNC(GETDOUBLECLICKTIME)
 {
-  hb_retni(GetDoubleClickTime());
+  w32_ret_UINT(GetDoubleClickTime());
 }
 
 //-----------------------------------------------------------------------------

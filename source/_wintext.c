@@ -17,6 +17,7 @@
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_ret_DWORD(x) hb_retnl(x)
 #define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_ret_UINT(x) hb_retni(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -293,7 +294,7 @@ HB_FUNC(SETBKMODE)
 
 HB_FUNC(GETTEXTALIGN)
 {
-  hb_retni(GetTextAlign(w32_par_HDC(1)));
+  w32_ret_UINT(GetTextAlign(w32_par_HDC(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -301,7 +302,7 @@ HB_FUNC(GETTEXTALIGN)
 
 HB_FUNC(SETTEXTALIGN)
 {
-  hb_retni(SetTextAlign(w32_par_HDC(1), w32_par_UINT(2)));
+  w32_ret_UINT(SetTextAlign(w32_par_HDC(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------

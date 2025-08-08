@@ -20,6 +20,7 @@
 #define w32_ret_DWORD(x) hb_retnl(x)
 #define w32_par_BOOL(n) (BOOL)hb_parl(n)
 #define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_ret_UINT(x) hb_retni(x)
 
 //-----------------------------------------------------------------------------
 
@@ -193,7 +194,7 @@ HB_FUNC(PEEKMESSAGE)
 
 HB_FUNC(REGISTERWINDOWMESSAGE)
 {
-  hb_retni(RegisterWindowMessageA((LPCSTR)hb_parcx(1)));
+  w32_ret_UINT(RegisterWindowMessageA((LPCSTR)hb_parcx(1)));
 }
 
 //-----------------------------------------------------------------------------
