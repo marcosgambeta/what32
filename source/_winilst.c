@@ -10,14 +10,14 @@
 #include <commctrl.h>
 #include "hbapi.h"
 
-#define w32_par_HDC(n) (HDC)hb_parnl(n)
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
-#define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
-#define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
+#define w32_par_HDC(n) (HDC) hb_parnl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
+#define w32_par_COLORREF(n) (COLORREF) hb_parnl(n)
+#define w32_par_HBITMAP(n) (HBITMAP) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
-#define w32_par_BOOL(n) (BOOL)hb_parl(n)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
+#define w32_par_BOOL(n) (BOOL) hb_parl(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 
 extern BOOL Array2Point(PHB_ITEM aPoint, POINT *pt);
 
@@ -136,8 +136,8 @@ HB_FUNC(IMAGELIST_SETOVERLAYIMAGE)
 
 HB_FUNC(IMAGELIST_DRAW)
 {
-  w32_ret_BOOL(ImageList_Draw((HIMAGELIST)hb_parnl(1), hb_parni(2), w32_par_HDC(3), hb_parni(4), hb_parni(5),
-                         w32_par_UINT(6)));
+  w32_ret_BOOL(
+      ImageList_Draw((HIMAGELIST)hb_parnl(1), hb_parni(2), w32_par_HDC(3), hb_parni(4), hb_parni(5), w32_par_UINT(6)));
 }
 
 //-----------------------------------------------------------------------------
@@ -162,8 +162,8 @@ HB_FUNC(IMAGELIST_ADDMASKED)
 
 HB_FUNC(IMAGELIST_DRAWEX)
 {
-  hb_retl(ImageList_DrawEx((HIMAGELIST)hb_parnl(1), hb_parni(2), w32_par_HDC(3), hb_parni(4), hb_parni(5),
-                           hb_parni(6), hb_parni(7), w32_par_COLORREF(8), w32_par_COLORREF(9), w32_par_UINT(10)));
+  hb_retl(ImageList_DrawEx((HIMAGELIST)hb_parnl(1), hb_parni(2), w32_par_HDC(3), hb_parni(4), hb_parni(5), hb_parni(6),
+                           hb_parni(7), w32_par_COLORREF(8), w32_par_COLORREF(9), w32_par_UINT(10)));
 }
 
 //-----------------------------------------------------------------------------
@@ -210,8 +210,7 @@ HB_FUNC(IMAGELIST_LOADIMAGE)
 
 HB_FUNC(IMAGELIST_COPY)
 {
-  hb_retl(
-      ImageList_Copy((HIMAGELIST)hb_parnl(1), hb_parni(2), (HIMAGELIST)hb_parnl(3), hb_parni(4), w32_par_UINT(5)));
+  hb_retl(ImageList_Copy((HIMAGELIST)hb_parnl(1), hb_parni(2), (HIMAGELIST)hb_parnl(3), hb_parni(4), w32_par_UINT(5)));
 }
 
 //-----------------------------------------------------------------------------

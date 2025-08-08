@@ -12,9 +12,9 @@
 #include "hbstack.h"
 // #include "hbapiitm.h"
 
-#define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_HDC(n) (HDC) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
@@ -59,14 +59,14 @@ HB_FUNC(CREATEFONT)
                               ISNIL(3) ? 0 : hb_parni(3), // nEscapement
                               ISNIL(4) ? 0 : hb_parni(4), // nOrientation
                               ISNIL(5) ? 0 : hb_parni(5), // fnWeight
-                              w32_par_DWORD(6),         // fdwItalic
-                              w32_par_DWORD(7),         // fdwUnderline
-                              w32_par_DWORD(8),         // fdwStrikeOut
-                              w32_par_DWORD(9),         // fdwCharSet
-                              w32_par_DWORD(10),        // fdwOutputPrecision
-                              w32_par_DWORD(11),        // fdwClipPrecision
-                              w32_par_DWORD(12),        // fdwQuality
-                              w32_par_DWORD(13),        // fdwPitchAndFamily
+                              w32_par_DWORD(6),           // fdwItalic
+                              w32_par_DWORD(7),           // fdwUnderline
+                              w32_par_DWORD(8),           // fdwStrikeOut
+                              w32_par_DWORD(9),           // fdwCharSet
+                              w32_par_DWORD(10),          // fdwOutputPrecision
+                              w32_par_DWORD(11),          // fdwClipPrecision
+                              w32_par_DWORD(12),          // fdwQuality
+                              w32_par_DWORD(13),          // fdwPitchAndFamily
                               (LPCSTR)hb_parcx(14)        // lpszFace
                               ));
   }

@@ -14,7 +14,7 @@
 #include "winreg.h"
 #include "tchar.h"
 
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
 
 #if defined(__DMC__)
 __inline long PtrToLong(const void *p)

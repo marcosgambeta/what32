@@ -13,7 +13,7 @@
 #include "hbvm.h"
 #include "hbstack.h"
 
-#define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_HDC(n) (HDC) hb_parnl(n)
 
 //-----------------------------------------------------------------------------
 // HDC StartDoc( hDC, cDocName, [ cFilename ], [ cDataType ], [DI_Flag] )

@@ -13,15 +13,15 @@
 // #include "hbvm.h"
 // #include "hbstack.h"
 
-#define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
+#define w32_par_COLORREF(n) (COLORREF) hb_parnl(n)
 
 //-----------------------------------------------------------------------------
 // WINGDIAPI HPEN WINAPI CreatePen( IN int, IN int, IN COLORREF);
 
 HB_FUNC(CREATEPEN)
 {
-  hb_retnl((LONG)CreatePen(hb_parni(1),          // pen style
-                           hb_parni(2),          // pen width
+  hb_retnl((LONG)CreatePen(hb_parni(1),        // pen style
+                           hb_parni(2),        // pen width
                            w32_par_COLORREF(3) // pen color
                            ));
 }

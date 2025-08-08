@@ -14,10 +14,10 @@
 // #include "hbvm.h"
 // #include "hbstack.h"
 
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
-#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -52,15 +52,15 @@ HB_FUNC(CREATETOOLBAREX)
   hb_retnl((LONG)CreateToolbarEx(w32_par_HWND(1),                        // parent
                                  w32_par_DWORD(2),                       // style
                                  w32_par_UINT(3),                        // id,
-                                 (int)hb_parni(4),                         // number of btn images in bmp
+                                 (int)hb_parni(4),                       // number of btn images in bmp
                                  ISNIL(5) ? NULL : w32_par_HINSTANCE(5), // hInst of bmp
-                                 (UINT)hb_parnl(6),                        // resource id, or hBmp handle
-                                 (LPCTBBUTTON)hb_parcx(7),                 // array of button structures
-                                 (int)hb_parni(8),                         // number of buttons to add
-                                 (int)hb_parni(9),                         // width of button
-                                 (int)hb_parni(10),                        // height of button
-                                 (int)hb_parni(11),                        // width of bitmap
-                                 (int)hb_parni(12),                        // height of bitmap
+                                 (UINT)hb_parnl(6),                      // resource id, or hBmp handle
+                                 (LPCTBBUTTON)hb_parcx(7),               // array of button structures
+                                 (int)hb_parni(8),                       // number of buttons to add
+                                 (int)hb_parni(9),                       // width of button
+                                 (int)hb_parni(10),                      // height of button
+                                 (int)hb_parni(11),                      // width of bitmap
+                                 (int)hb_parni(12),                      // height of bitmap
                                  w32_par_UINT(13)));                     // size of TBBUTTON
 }
 

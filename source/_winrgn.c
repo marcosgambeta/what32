@@ -9,12 +9,12 @@
 #include "item.api"
 #include "hbapi.h"
 
-#define w32_par_HDC(n) (HDC)hb_parnl(n)
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
-#define w32_par_HRGN(n) (HRGN)hb_parnl(n)
-#define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
+#define w32_par_HDC(n) (HDC) hb_parnl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
+#define w32_par_HRGN(n) (HRGN) hb_parnl(n)
+#define w32_par_HBRUSH(n) (HBRUSH) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_BOOL(n) (BOOL)hb_parl(n)
+#define w32_par_BOOL(n) (BOOL) hb_parl(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);

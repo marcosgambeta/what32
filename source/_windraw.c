@@ -9,11 +9,11 @@
 #include "item.api"
 #include "hbapi.h"
 
-#define w32_par_HDC(n) (HDC)hb_parnl(n)
-#define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
-#define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
+#define w32_par_HDC(n) (HDC) hb_parnl(n)
+#define w32_par_COLORREF(n) (COLORREF) hb_parnl(n)
+#define w32_par_HBRUSH(n) (HBRUSH) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -29,8 +29,8 @@ HB_FUNC(MOVETO)
 {
 
   hb_retl(MoveToEx(w32_par_HDC(1), // device context handle
-                   hb_parni(2),      // x-coordinate of line's ending point
-                   hb_parni(3),      // y-coordinate of line's ending point
+                   hb_parni(2),    // x-coordinate of line's ending point
+                   hb_parni(3),    // y-coordinate of line's ending point
                    NULL));
 }
 
@@ -46,8 +46,8 @@ HB_FUNC(MOVETOEX)
   PHB_ITEM aPt;
 
   if (MoveToEx(w32_par_HDC(1), // device context handle
-               hb_parni(2),      // x-coordinate of line's ending point
-               hb_parni(3),      // y-coordinate of line's ending point
+               hb_parni(2),    // x-coordinate of line's ending point
+               hb_parni(3),    // y-coordinate of line's ending point
                &Point))
 
   {
@@ -201,7 +201,7 @@ HB_FUNC(SETARCDIRECTION)
 HB_FUNC(ARC)
 {
   w32_ret_BOOL(Arc(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
-              hb_parni(8), hb_parni(9)));
+                   hb_parni(8), hb_parni(9)));
 }
 
 //-----------------------------------------------------------------------------
@@ -564,7 +564,7 @@ HB_FUNC(ROUNDRECT)
 HB_FUNC(CHORD)
 {
   w32_ret_BOOL(Chord(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
-                hb_parni(8), hb_parni(9)));
+                     hb_parni(8), hb_parni(9)));
 }
 
 //-----------------------------------------------------------------------------
@@ -573,7 +573,7 @@ HB_FUNC(CHORD)
 HB_FUNC(PIE)
 {
   w32_ret_BOOL(Pie(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6), hb_parni(7),
-              hb_parni(8), hb_parni(9)));
+                   hb_parni(8), hb_parni(9)));
 }
 
 //-----------------------------------------------------------------------------

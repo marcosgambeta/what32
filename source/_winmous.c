@@ -15,14 +15,14 @@
 // #include "hbvm.h"
 // #include "hbstack.h"
 
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
-#define w32_par_HCURSOR(n) (HCURSOR)hb_parnl(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
+#define w32_par_HCURSOR(n) (HCURSOR) hb_parnl(n)
 #define w32_ret_HWND(x) hb_retnl(x)
-#define w32_par_BOOL(n) (BOOL)hb_parl(n)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_BOOL(n) (BOOL) hb_parl(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 #define w32_ret_UINT(x) hb_retni(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);

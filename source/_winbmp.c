@@ -19,15 +19,15 @@ Modified and non-API functions:
 #include "item.api"
 #include "hbapi.h"
 
-#define w32_par_HDC(n) (HDC)hb_parnl(n)
-#define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
-#define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
+#define w32_par_HDC(n) (HDC) hb_parnl(n)
+#define w32_par_COLORREF(n) (COLORREF) hb_parnl(n)
+#define w32_par_HBITMAP(n) (HBITMAP) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
-#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
-#define w32_par_BOOL(n) (BOOL)hb_parl(n)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE) hb_parnl(n)
+#define w32_par_BOOL(n) (BOOL) hb_parl(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -162,7 +162,7 @@ HB_FUNC(SETSTRETCHBLTMODE)
 HB_FUNC(STRETCHBLT)
 {
   w32_ret_BOOL(StretchBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6),
-                     hb_parni(7), hb_parni(8), hb_parni(9), hb_parni(10), w32_par_DWORD(11)));
+                          hb_parni(7), hb_parni(8), hb_parni(9), hb_parni(10), w32_par_DWORD(11)));
 }
 
 //-----------------------------------------------------------------------------
@@ -204,8 +204,7 @@ HB_FUNC(CREATEDIBITMAP)
   BITMAPINFOHEADER *bmih = (BITMAPINFOHEADER *)hb_param(2, HB_IT_STRING)->item.asString.value;
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(5, HB_IT_STRING)->item.asString.value;
 
-  hb_retnl(
-      (LONG)CreateDIBitmap(w32_par_HDC(1), bmih, w32_par_DWORD(3), (VOID *)hb_parcx(3), bmi, w32_par_UINT(6)));
+  hb_retnl((LONG)CreateDIBitmap(w32_par_HDC(1), bmih, w32_par_DWORD(3), (VOID *)hb_parcx(3), bmi, w32_par_UINT(6)));
 }
 
 //-----------------------------------------------------------------------------
@@ -219,8 +218,7 @@ HB_FUNC(CREATEDIBSECTION)
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(2, HB_IT_STRING)->item.asString.value;
   VOID **ppBits = (VOID **)0;
 
-  hb_retnl((LONG)CreateDIBSection(w32_par_HDC(1), bmi, w32_par_UINT(3), ppBits, w32_par_HANDLE(5),
-                                  w32_par_DWORD(6)));
+  hb_retnl((LONG)CreateDIBSection(w32_par_HDC(1), bmi, w32_par_UINT(3), ppBits, w32_par_HANDLE(5), w32_par_DWORD(6)));
 
   hb_stornl((LONG)*ppBits, 4);
 }
@@ -240,7 +238,7 @@ HB_FUNC(CREATEDISCARDABLEBITMAP)
 HB_FUNC(MASKBLT)
 {
   w32_ret_BOOL(MaskBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6), hb_parni(7),
-                  hb_parni(8), w32_par_HBITMAP(9), hb_parni(10), hb_parni(11), w32_par_DWORD(12)));
+                       hb_parni(8), w32_par_HBITMAP(9), hb_parni(10), hb_parni(11), w32_par_DWORD(12)));
 }
 
 //-----------------------------------------------------------------------------
@@ -249,7 +247,7 @@ HB_FUNC(MASKBLT)
 HB_FUNC(BITBLT)
 {
   w32_ret_BOOL(BitBlt(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), w32_par_HDC(6), hb_parni(7),
-                 hb_parni(8), w32_par_DWORD(9)));
+                      hb_parni(8), w32_par_DWORD(9)));
 }
 
 //-----------------------------------------------------------------------------
@@ -291,8 +289,8 @@ HB_FUNC(SETDIBITS)
 
   // Your code goes here
 
-  hb_retni(SetDIBits(w32_par_HDC(1), w32_par_HBITMAP(2), w32_par_UINT(3), w32_par_UINT(4), (VOID *)hb_parcx(5),
-                     bmi, w32_par_UINT(7)));
+  hb_retni(SetDIBits(w32_par_HDC(1), w32_par_HBITMAP(2), w32_par_UINT(3), w32_par_UINT(4), (VOID *)hb_parcx(5), bmi,
+                     w32_par_UINT(7)));
 }
 
 //-----------------------------------------------------------------------------
@@ -322,8 +320,8 @@ HB_FUNC(SETDIBITSTODEVICE)
 
   BITMAPINFO *bmi = (BITMAPINFO *)hb_param(11, HB_IT_STRING)->item.asString.value;
 
-  hb_retni(SetDIBitsToDevice(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_DWORD(4), w32_par_DWORD(5),
-                             hb_parni(6), hb_parni(7), w32_par_UINT(8), w32_par_UINT(9), (VOID *)hb_parcx(10), bmi,
+  hb_retni(SetDIBitsToDevice(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_DWORD(4), w32_par_DWORD(5), hb_parni(6),
+                             hb_parni(7), w32_par_UINT(8), w32_par_UINT(9), (VOID *)hb_parcx(10), bmi,
                              w32_par_UINT(12)));
 }
 

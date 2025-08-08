@@ -12,14 +12,14 @@
 // #include "hbvm.h"
 // #include "hbstack.h"
 
-#define w32_par_HDC(n) (HDC)hb_parnl(n)
-#define w32_par_HBRUSH(n) (HBRUSH)hb_parnl(n)
+#define w32_par_HDC(n) (HDC) hb_parnl(n)
+#define w32_par_HBRUSH(n) (HBRUSH) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
-#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
-#define w32_par_BOOL(n) (BOOL)hb_parl(n)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE) hb_parnl(n)
+#define w32_par_BOOL(n) (BOOL) hb_parl(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 
 #if defined(__DMC__)
 // SHSTDAPI_(HICON) DuplicateIcon(HINSTANCE hInst, HICON hIcon);
@@ -130,7 +130,7 @@ HB_FUNC(DRAWICON)
 HB_FUNC(DRAWICONEX)
 {
   w32_ret_BOOL(DrawIconEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), (HICON)hb_parnl(4), hb_parni(5), hb_parni(6),
-                     w32_par_UINT(7), w32_par_HBRUSH(8), w32_par_UINT(9)));
+                          w32_par_UINT(7), w32_par_HBRUSH(8), w32_par_UINT(9)));
 }
 
 //-----------------------------------------------------------------------------
@@ -201,6 +201,6 @@ HB_FUNC(EXTRACTASSOCIATEDICON)
 
 HB_FUNC(EXTRACTICON)
 {
-  hb_retnl((LONG)ExtractIcon(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2),
-                             w32_par_UINT(3)));
+  hb_retnl(
+      (LONG)ExtractIcon(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), (LPCSTR)hb_parcx(2), w32_par_UINT(3)));
 }

@@ -21,9 +21,9 @@
 #include "winreg.h"
 #include "tchar.h"
 
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
-#define w32_par_COLORREF(n) (COLORREF)hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
+#define w32_par_COLORREF(n) (COLORREF) hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
 
 #ifdef __DMC__
 #define GDT_VALID 0
@@ -61,12 +61,12 @@ HB_FUNC(DATETIME_CREATE)
   hb_retnl((LONG)CreateWindowEx(ISNIL(1) ? 0 : hb_parnl(1),
                                 "SysDateTimePick32",                     // CLASSNAME
                                 0,                                       // Window Name   // ????????
-                                w32_par_DWORD(2),                      // nStyle
+                                w32_par_DWORD(2),                        // nStyle
                                 hb_parni(3),                             // x
                                 hb_parni(4),                             // y
                                 hb_parni(5),                             // nWidth
                                 hb_parni(6),                             // nHeight
-                                w32_par_HWND(7),                       // hParent
+                                w32_par_HWND(7),                         // hParent
                                 (HMENU)hb_parni(8),                      // hMenu
                                 GetModuleHandle(NULL),                   // hInstance
                                 ISNIL(9) ? NULL : (void *)hb_parnl(9))); // lpParam
@@ -104,7 +104,7 @@ HB_FUNC(DATETIME_GETMONTHCALCOLOR)
 
   hb_retnl((LONG)DateTime_GetMonthCalColor(
       w32_par_HWND(1), // Handle to a DTP control
-      hb_parni(2)        // Value of type int specifying which month calendar color to retrieve.
+      hb_parni(2)      // Value of type int specifying which month calendar color to retrieve.
 
       ));
 }
@@ -251,10 +251,10 @@ HB_FUNC(DATETIME_GETSYSTEMTIME)
   long nRet;
 
   nRet = DateTime_GetSystemtime(w32_par_HWND(1), // Handle to a DTP control
-                                &SysTime           // Pointer to a SYSTEMTIME structure. If DTM_GETSYSTEMTIME returns
-                                                   // GDT_VALID, this structure will contain the system time.
-                                                   // Otherwise, it will not contain valid information.
-                                                   // This parameter must be a valid pointer; it cannot be NULL.
+                                &SysTime         // Pointer to a SYSTEMTIME structure. If DTM_GETSYSTEMTIME returns
+                                                 // GDT_VALID, this structure will contain the system time.
+                                                 // Otherwise, it will not contain valid information.
+                                                 // This parameter must be a valid pointer; it cannot be NULL.
   );
 
   if (nRet == GDT_VALID) // Time is valid
@@ -314,7 +314,7 @@ HB_FUNC(DATETIME_GETSYSTEMTIME)
 HB_FUNC(DATETIME_SETFORMAT)
 {
   hb_retl(
-      DateTime_SetFormat(w32_par_HWND(1),   // Handle to a DTP control
+      DateTime_SetFormat(w32_par_HWND(1),     // Handle to a DTP control
                          (LPCTSTR)hb_parcx(2) // Pointer to a zero-terminated format string that defines
                                               // the desired display. Setting this parameter to NULL will
                                               // reset the control to the default format string for the current style.
@@ -338,7 +338,7 @@ HB_FUNC(DATETIME_SETMONTHCALCOLOR)
 {
   hb_retnl((LONG)DateTime_SetMonthCalColor(
       w32_par_HWND(1), // Handle to a DTP control
-      hb_parni(2),       // Value of type int specifying which month calendar color to set.
+      hb_parni(2),     // Value of type int specifying which month calendar color to set.
       w32_par_COLORREF(
           3) // COLORREF value that represents the color that will be set for the specified area of the month calendar.
       ));
@@ -359,7 +359,7 @@ HB_FUNC(DATETIME_SETMONTHCALCOLOR)
 HB_FUNC(DATETIME_SETMONTHCALFONT)
 {
 
-  DateTime_SetMonthCalFont(w32_par_HWND(1),  // Handle to a DTP control
+  DateTime_SetMonthCalFont(w32_par_HWND(1),    // Handle to a DTP control
                            (HFONT)hb_parnl(2), // Handle to the font that will be set.
                            (BOOL)hb_parl(3)    // Specifies whether the control should be redrawn
                                                // immediately upon setting the font. Setting this
@@ -412,6 +412,6 @@ HB_FUNC(DATETIME_SETSYSTEMTIME)
 
   hb_retl(DateTime_SetSystemtime(w32_par_HWND(1),  // Handle to a DTP control
                                  w32_par_DWORD(2), // Value that specifies the action that should be performed.
-                                 lpSysTime           // Pointer to SYSTEMTIME structures
+                                 lpSysTime         // Pointer to SYSTEMTIME structures
                                  ));
 }

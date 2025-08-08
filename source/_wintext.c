@@ -13,10 +13,10 @@
 // #include "hbvm.h"
 // #include "hbstack.h"
 
-#define w32_par_HDC(n) (HDC)hb_parnl(n)
+#define w32_par_HDC(n) (HDC) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_ret_DWORD(x) hb_retnl(x)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 #define w32_ret_UINT(x) hb_retni(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
@@ -39,12 +39,12 @@ extern void Size2ArrayEx(SIZE *siz, PHB_ITEM aSize);
 HB_FUNC(TEXTOUT)
 {
 
-  w32_ret_BOOL(TextOut(w32_par_HDC(1),     // handle of device context
-                  hb_parni(2),          // x-coordinate of starting position
-                  hb_parni(3),          // y-coordinate of starting position
-                  (LPCTSTR)hb_parcx(4), // address of string
-                  hb_parclen(4)         // number of characters in string
-                  ));
+  w32_ret_BOOL(TextOut(w32_par_HDC(1),       // handle of device context
+                       hb_parni(2),          // x-coordinate of starting position
+                       hb_parni(3),          // y-coordinate of starting position
+                       (LPCTSTR)hb_parcx(4), // address of string
+                       hb_parclen(4)         // number of characters in string
+                       ));
 }
 //-----------------------------------------------------------------------------
 // WINGDIAPI BOOL WINAPI PolyTextOutA( IN HDC, IN CONST POLYTEXTA *, IN int);
@@ -92,7 +92,7 @@ HB_FUNC(EXTTEXTOUT)
   }
 
   w32_ret_BOOL(ExtTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_UINT(4), rcOk ? &rc : NULL, (LPCSTR)cText,
-                     (UINT)strlen(cText), ISARRAY(7) ? lpDx : NULL));
+                          (UINT)strlen(cText), ISARRAY(7) ? lpDx : NULL));
 
   if (ISARRAY(7))
     hb_xfree(lpDx);
@@ -111,8 +111,8 @@ HB_FUNC(DRAWTEXT)
 
   if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
     hb_retni(DrawText(w32_par_HDC(1), // handle of device context
-                      (LPCTSTR)cText,   // address of string
-                      strlen(cText),    // number of characters in string
+                      (LPCTSTR)cText, // address of string
+                      strlen(cText),  // number of characters in string
                       &rc, ISNIL(4) ? DT_LEFT : hb_parni(4)));
   else
     hb_retni(0);
@@ -135,8 +135,8 @@ HB_FUNC(DRAWTEXTEX)
 
   if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
     hb_retni(DrawTextEx(w32_par_HDC(1), // handle of device context
-                        (LPTSTR)cText,    // address of string
-                        strlen(cText),    // number of characters in string
+                        (LPTSTR)cText,  // address of string
+                        strlen(cText),  // number of characters in string
                         (LPRECT)&rc, ISNIL(4) ? DT_LEFT : hb_parni(4), ISCHAR(5) ? (LPDRAWTEXTPARAMS)dtp : NULL));
   else
     hb_retni(0);
@@ -165,8 +165,8 @@ HB_FUNC(TABBEDTEXTOUT)
       *(aiTabs + i) = hb_parni(5, i + 1);
     }
 
-    hb_retnl((LONG)TabbedTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), (LPCSTR)cText, strlen(cText), iCount,
-                                 aiTabs, hb_parni(6)));
+    hb_retnl((LONG)TabbedTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), (LPCSTR)cText, strlen(cText), iCount, aiTabs,
+                                 hb_parni(6)));
     hb_xfree(aiTabs);
   }
   else

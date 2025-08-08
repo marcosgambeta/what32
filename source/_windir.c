@@ -14,7 +14,7 @@
 #include "hbapi.h"
 
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
 #define w32_ret_UINT(x) hb_retni(x)
 

@@ -13,13 +13,13 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
-#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE) hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
-#define w32_par_BOOL(n) (BOOL)hb_parl(n)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_BOOL(n) (BOOL) hb_parl(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 #define w32_ret_UINT(x) hb_retni(x)
 
 //-----------------------------------------------------------------------------
@@ -328,8 +328,8 @@ HB_FUNC(INSENDMESSAGEEX)
 
 HB_FUNC(MSGWAITFORMULTIPLEOBJECTS)
 {
-  w32_ret_DWORD((LONG)MsgWaitForMultipleObjects(w32_par_DWORD(1), (HANDLE *)hb_parnl(2), w32_par_BOOL(3), w32_par_DWORD(4),
-                                           w32_par_DWORD(5)));
+  w32_ret_DWORD((LONG)MsgWaitForMultipleObjects(w32_par_DWORD(1), (HANDLE *)hb_parnl(2), w32_par_BOOL(3),
+                                                w32_par_DWORD(4), w32_par_DWORD(5)));
 }
 
 //-----------------------------------------------------------------------------
@@ -339,7 +339,7 @@ HB_FUNC(MSGWAITFORMULTIPLEOBJECTS)
 HB_FUNC(MSGWAITFORMULTIPLEOBJECTSEX)
 {
   w32_ret_DWORD((LONG)MsgWaitForMultipleObjectsEx(w32_par_DWORD(1), (HANDLE *)hb_parnl(2), w32_par_DWORD(3),
-                                             w32_par_DWORD(4), w32_par_DWORD(5)));
+                                                  w32_par_DWORD(4), w32_par_DWORD(5)));
 }
 
 //-----------------------------------------------------------------------------

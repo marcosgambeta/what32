@@ -5,16 +5,16 @@
 #include "item.api"
 #include "hbapi.h"
 
-#define w32_par_HDC(n) (HDC)hb_parnl(n)
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
-#define w32_par_HRGN(n) (HRGN)hb_parnl(n)
+#define w32_par_HDC(n) (HDC) hb_parnl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
+#define w32_par_HRGN(n) (HRGN) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
-#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE) hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
 #define w32_ret_HWND(x) hb_retnl(x)
-#define w32_par_BOOL(n) (BOOL)hb_parl(n)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_BOOL(n) (BOOL) hb_parl(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
 extern BOOL Array2Rect(PHB_ITEM aRect, RECT *rc);
@@ -162,8 +162,8 @@ HB_FUNC(SHOWWINDOW)
 //-----------------------------------------------------------------------------
 HB_FUNC(MOVEWINDOW)
 {
-  hb_retl(MoveWindow(w32_par_HWND(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5),
-                     (ISNIL(6) ? TRUE : hb_parl(6))));
+  hb_retl(
+      MoveWindow(w32_par_HWND(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), (ISNIL(6) ? TRUE : hb_parl(6))));
 }
 
 //-----------------------------------------------------------------------------
@@ -214,9 +214,9 @@ HB_FUNC(INVALIDATERECT)
   bRectOk = (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc));
 
   w32_ret_BOOL(InvalidateRect(ISNIL(1) ? NULL : w32_par_HWND(1), // handle of window with changed update region
-                         bRectOk ? &rc : NULL,                // address of rectangle coordinates
-                         ISLOG(3) ? w32_par_BOOL(3) : TRUE         // erase-background flag
-                         ));
+                              bRectOk ? &rc : NULL,              // address of rectangle coordinates
+                              ISLOG(3) ? w32_par_BOOL(3) : TRUE  // erase-background flag
+                              ));
 }
 
 //-----------------------------------------------------------------------------
@@ -230,10 +230,10 @@ HB_FUNC(REDRAWWINDOW)
   bRectOk = (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc));
 
   w32_ret_BOOL(RedrawWindow(w32_par_HWND(1),                   // handle of window
-                       bRectOk ? &rc : NULL,                // address of structure with update rectangle
-                       ISNIL(3) ? NULL : w32_par_HRGN(3), // handle of update region
-                       hb_parni(4)                          // array of redraw flags
-                       ));
+                            bRectOk ? &rc : NULL,              // address of structure with update rectangle
+                            ISNIL(3) ? NULL : w32_par_HRGN(3), // handle of update region
+                            hb_parni(4)                        // array of redraw flags
+                            ));
 }
 
 //-----------------------------------------------------------------------------
@@ -319,7 +319,7 @@ HB_FUNC(ENDDEFERWINDOWPOS)
 HB_FUNC(SETWINDOWPOS)
 {
   w32_ret_BOOL(SetWindowPos(w32_par_HWND(1), w32_par_HWND(2), hb_parni(3), hb_parni(4), hb_parni(5), hb_parni(6),
-                       w32_par_UINT(7)));
+                            w32_par_UINT(7)));
 }
 
 //-----------------------------------------------------------------------------

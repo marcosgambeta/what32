@@ -15,9 +15,9 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
-#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
-#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE) hb_parnl(n)
 
 LRESULT CALLBACK __WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK __WndProc2(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

@@ -19,8 +19,8 @@
 #include <winsock2.h>
 #include <windows.h>
 
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
-#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE) hb_parnl(n)
 
 #ifndef DWORD_PTR
 #define DWORD_PTR DWORD
@@ -618,8 +618,8 @@ HB_FUNC(WSAASYNCGETHOSTBYADDR)
   char *buf = (char *)hb_xgrab(MAXGETHOSTSTRUCT);
   HANDLE hRet;
 
-  if ((hRet = WSAAsyncGetHostByAddr(w32_par_HWND(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3),
-                                    (int)hb_parclen(3), (int)hb_parni(4), (char *)buf, (int)MAXGETHOSTSTRUCT)) != 0)
+  if ((hRet = WSAAsyncGetHostByAddr(w32_par_HWND(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3), (int)hb_parclen(3),
+                                    (int)hb_parni(4), (char *)buf, (int)MAXGETHOSTSTRUCT)) != 0)
 
     hb_storclen(buf, sizeof(HOSTENT), 5);
 

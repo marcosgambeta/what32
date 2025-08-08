@@ -20,11 +20,11 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_ret_HWND(x) hb_retnl(x)
-#define w32_par_BOOL(n) (BOOL)hb_parl(n)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_BOOL(n) (BOOL) hb_parl(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 
 //-----------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ HB_FUNC(ENDDIALOG)
 HB_FUNC(GETDLGITEM)
 {
   HWND hWnd = GetDlgItem(w32_par_HWND(1), // handle of dialog box
-                         hb_parni(2)        // identifier of control
+                         hb_parni(2)      // identifier of control
   );
   hb_retnl((LONG)hWnd);
 }
@@ -87,7 +87,7 @@ HB_FUNC(SETDLGITEMINT)
 
 HB_FUNC(SETDLGITEMTEXT)
 {
-  SetDlgItemText(w32_par_HWND(1),   // handle of dialog box
+  SetDlgItemText(w32_par_HWND(1),     // handle of dialog box
                  hb_parni(2),         // identifier of control
                  (LPCTSTR)hb_parcx(3) // text to set
   );
@@ -104,9 +104,9 @@ HB_FUNC(GETDLGITEMTEXT) // GETDLGITMTEXT
   char *cText = (char *)hb_xgrab(iLen);
 
   GetDlgItemText(w32_par_HWND(1), // handle of dialog box
-                 hb_parni(2),       // identifier of control
-                 (LPTSTR)cText,     // address of buffer for text
-                 iLen               // maximum size of string
+                 hb_parni(2),     // identifier of control
+                 (LPTSTR)cText,   // address of buffer for text
+                 iLen             // maximum size of string
   );
 
   hb_retc(cText);
@@ -138,7 +138,7 @@ HB_FUNC(GETLBITEMTEXT) // GETDLGITMTEXT
 HB_FUNC(CHECKDLGBUTTON)
 {
   hb_retl(CheckDlgButton(w32_par_HWND(1), // handle of dialog box
-                         hb_parni(2),       // identifier of control
+                         hb_parni(2),     // identifier of control
                          ISNUM(3) ? hb_parni(3) : (UINT)hb_parl(3)));
 }
 
@@ -147,9 +147,9 @@ HB_FUNC(CHECKDLGBUTTON)
 HB_FUNC(CHECKRADIOBUTTON)
 {
   hb_retl(CheckRadioButton(w32_par_HWND(1), // handle of dialog box
-                           hb_parni(2),       // identifier of first radio button in group
-                           hb_parni(3),       // identifier of last radio button in group
-                           hb_parni(4)        // identifier of radio button to select
+                           hb_parni(2),     // identifier of first radio button in group
+                           hb_parni(3),     // identifier of last radio button in group
+                           hb_parni(4)      // identifier of radio button to select
                            ));
 }
 
@@ -158,7 +158,7 @@ HB_FUNC(CHECKRADIOBUTTON)
 HB_FUNC(ISDLGBUTTONCHECKED)
 {
   hb_retni(IsDlgButtonChecked(w32_par_HWND(1), // handle of dialog box
-                              hb_parni(2)        // button identifier
+                              hb_parni(2)      // button identifier
                               ));
 }
 

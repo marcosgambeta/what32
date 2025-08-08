@@ -31,9 +31,9 @@
 #include "hbapiitm.h"
 #include "winreg.h"
 
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
-#define w32_par_BOOL(n) (BOOL)hb_parl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
+#define w32_par_BOOL(n) (BOOL) hb_parl(n)
 
 #ifndef DWORD_PTR
 #define DWORD_PTR DWORD

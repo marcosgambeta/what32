@@ -15,10 +15,10 @@
 #include "hbvm.h"
 #include "hbstack.h"
 
-#define w32_par_HDC(n) (HDC)hb_parnl(n)
-#define w32_par_HRGN(n) (HRGN)hb_parnl(n)
+#define w32_par_HDC(n) (HDC) hb_parnl(n)
+#define w32_par_HRGN(n) (HRGN) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 #define w32_ret_UINT(x) hb_retni(x)
 
 extern PHB_ITEM Rect2Array(RECT *rc);
@@ -148,8 +148,7 @@ HB_FUNC(CREATEENHMETAFILE)
   RECT rc;
 
   if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
-    hb_retnl(
-        (LONG)CreateEnhMetaFile(w32_par_HDC(1), (LPCSTR)hb_parcx(2), &rc, ISNIL(4) ? NULL : (LPCSTR)hb_parcx(4)));
+    hb_retnl((LONG)CreateEnhMetaFile(w32_par_HDC(1), (LPCSTR)hb_parcx(2), &rc, ISNIL(4) ? NULL : (LPCSTR)hb_parcx(4)));
 }
 
 //-----------------------------------------------------------------------------

@@ -22,11 +22,11 @@ Modified functions:
 #include "hbapi.h"
 // #include "commctrl.h"
 
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
 #define w32_ret_DWORD(x) hb_retnl(x)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 #define w32_ret_UINT(x) hb_retni(x)
 
 //-----------------------------------------------------------------------------

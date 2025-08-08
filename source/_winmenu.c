@@ -12,12 +12,12 @@
 #include "hbstack.h"
 #include "hbapiitm.h"
 
-#define w32_par_HWND(n) (HWND)hb_parnl(n)
-#define w32_par_HBITMAP(n) (HBITMAP)hb_parnl(n)
+#define w32_par_HWND(n) (HWND) hb_parnl(n)
+#define w32_par_HBITMAP(n) (HBITMAP) hb_parnl(n)
 #define w32_ret_BOOL(x) hb_retl(x)
-#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
-#define w32_par_BOOL(n) (BOOL)hb_parl(n)
-#define w32_par_UINT(n) (UINT)hb_parni(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
+#define w32_par_BOOL(n) (BOOL) hb_parl(n)
+#define w32_par_UINT(n) (UINT) hb_parni(n)
 
 //-----------------------------------------------------------------------------
 
@@ -295,8 +295,8 @@ HB_FUNC(INSERTMENUITEM)
 HB_FUNC(GETMENUITEMINFO)
 {
   LPCMENUITEMINFOA lpcmenuitemInfoa = (LPCMENUITEMINFOA)hb_param(4, HB_IT_STRING)->item.asString.value;
-  w32_ret_BOOL(
-      GetMenuItemInfo((HMENU)hb_parnl(1), w32_par_UINT(2), w32_par_BOOL(3), (struct tagMENUITEMINFOA *)lpcmenuitemInfoa));
+  w32_ret_BOOL(GetMenuItemInfo((HMENU)hb_parnl(1), w32_par_UINT(2), w32_par_BOOL(3),
+                               (struct tagMENUITEMINFOA *)lpcmenuitemInfoa));
 }
 
 //-----------------------------------------------------------------------------
@@ -334,8 +334,7 @@ HB_FUNC( GETMENUBARINFO )
 
 HB_FUNC(CHECKMENURADIOITEM)
 {
-  hb_retl(CheckMenuRadioItem((HMENU)hb_parnl(1), w32_par_UINT(2), w32_par_UINT(3), w32_par_UINT(4),
-                             w32_par_UINT(5)));
+  hb_retl(CheckMenuRadioItem((HMENU)hb_parnl(1), w32_par_UINT(2), w32_par_UINT(3), w32_par_UINT(4), w32_par_UINT(5)));
 }
 
 HB_FUNC(ISMENU)

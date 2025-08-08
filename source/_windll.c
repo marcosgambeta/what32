@@ -22,9 +22,9 @@
 #include "stdlib.h"
 #include <time.h>
 
-#define w32_par_HINSTANCE(n) (HINSTANCE)hb_parnl(n)
-#define w32_par_DWORD(n) (DWORD)hb_parnl(n)
-#define w32_par_HANDLE(n) (HANDLE)hb_parnl(n)
+#define w32_par_HINSTANCE(n) (HINSTANCE) hb_parnl(n)
+#define w32_par_DWORD(n) (DWORD) hb_parnl(n)
+#define w32_par_HANDLE(n) (HANDLE) hb_parnl(n)
 
 //------------------------------------------------------------------
 #include <stdio.h>
