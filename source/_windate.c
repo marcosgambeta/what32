@@ -358,7 +358,7 @@ HB_FUNC(DATETIME_SETMONTHCALFONT)
 {
 
   DateTime_SetMonthCalFont(w32_par_HWND(1),    // Handle to a DTP control
-                           (HFONT)hb_parnl(2), // Handle to the font that will be set.
+                           w32_par_HFONT(2), // Handle to the font that will be set.
                            (BOOL)hb_parl(3)    // Specifies whether the control should be redrawn
                                                // immediately upon setting the font. Setting this
                                                // parameter to TRUE causes the control to redraw itself.
