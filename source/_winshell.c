@@ -127,7 +127,7 @@ HB_FUNC( COMMANDLINETOARGVW )
 HB_FUNC(SHELLABOUT)
 {
   hb_retni(
-      ShellAbout(w32_par_HWND(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3), (ISNIL(4) ? NULL : (HICON)hb_parnl(4))));
+      ShellAbout(w32_par_HWND(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3), (ISNIL(4) ? NULL : w32_par_HICON(4))));
 }
 
 //-----------------------------------------------------------------------------

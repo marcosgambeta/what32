@@ -55,7 +55,7 @@ HB_FUNC(IMAGELIST_CREATE)
 
 HB_FUNC(IMAGELIST_REPLACEICON)
 {
-  hb_retni(ImageList_ReplaceIcon(w32_par_HIMAGELIST(1), (int)hb_parni(2), (HICON)hb_parnl(3)));
+  hb_retni(ImageList_ReplaceIcon(w32_par_HIMAGELIST(1), (int)hb_parni(2), w32_par_HICON(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -63,7 +63,7 @@ HB_FUNC(IMAGELIST_REPLACEICON)
 
 HB_FUNC(IMAGELIST_ADDICON)
 {
-  hb_retni(ImageList_AddIcon(w32_par_HIMAGELIST(1), (HICON)hb_parnl(2)));
+  hb_retni(ImageList_AddIcon(w32_par_HIMAGELIST(1), w32_par_HICON(2)));
 }
 
 //-----------------------------------------------------------------------------

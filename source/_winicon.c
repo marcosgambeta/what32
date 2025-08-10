@@ -47,7 +47,7 @@ HB_FUNC(CREATEICON)
 
 HB_FUNC(DESTROYICON)
 {
-  w32_ret_BOOL(DestroyIcon((HICON)hb_parnl(1)));
+  w32_ret_BOOL(DestroyIcon(w32_par_HICON(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -113,7 +113,7 @@ HB_FUNC(COPYIMAGE)
 
 HB_FUNC(DRAWICON)
 {
-  w32_ret_BOOL(DrawIcon(w32_par_HDC(1), hb_parni(2), hb_parni(3), (HICON)hb_parnl(4)));
+  w32_ret_BOOL(DrawIcon(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_HICON(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -122,7 +122,7 @@ HB_FUNC(DRAWICON)
 
 HB_FUNC(DRAWICONEX)
 {
-  w32_ret_BOOL(DrawIconEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), (HICON)hb_parnl(4), hb_parni(5), hb_parni(6),
+  w32_ret_BOOL(DrawIconEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_HICON(4), hb_parni(5), hb_parni(6),
                           w32_par_UINT(7), w32_par_HBRUSH(8), w32_par_UINT(9)));
 }
 
@@ -143,7 +143,7 @@ HB_FUNC(CREATEICONINDIRECT)
 
 HB_FUNC(COPYICON)
 {
-  hb_retnl((LONG)CopyIcon((HICON)hb_parnl(1)));
+  hb_retnl((LONG)CopyIcon(w32_par_HICON(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -153,7 +153,7 @@ HB_FUNC(GETICONINFO)
 {
   ICONINFO ii;
 
-  w32_ret_BOOL(GetIconInfo((HICON)hb_parnl(1), &ii));
+  w32_ret_BOOL(GetIconInfo(w32_par_HICON(1), &ii));
 
   // verify !!
   // assign into structure
@@ -167,7 +167,7 @@ HB_FUNC(GETICONINFO)
 #ifndef __WATCOMC__
 HB_FUNC(DUPLICATEICON)
 {
-  hb_retnl((LONG)DuplicateIcon(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), (HICON)hb_parnl(2)));
+  hb_retnl((LONG)DuplicateIcon(ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1), w32_par_HICON(2)));
 }
 #endif
 //-----------------------------------------------------------------------------
