@@ -181,7 +181,7 @@ HB_FUNC(TABCTRL_GETIMAGELIST)
 
 HB_FUNC(TABCTRL_SETIMAGELIST)
 {
-  hb_retnl((LONG)TabCtrl_SetImageList(w32_par_HWND(1), (LPARAM)(HIMAGELIST)hb_parnl(2)));
+  hb_retnl((LONG)TabCtrl_SetImageList(w32_par_HWND(1), (LPARAM)w32_par_HIMAGELIST(2)));
 }
 
 //---------------------------------------------------------------------------//

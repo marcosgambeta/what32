@@ -43,7 +43,7 @@ HB_FUNC(TVDELETEITEM)
 
 HB_FUNC(TVSETIMAGELIST) // ( hWnd, hImageList, nType )
 {
-  hb_retnl((LONG)TreeView_SetImageList(w32_par_HWND(1), (HIMAGELIST)hb_parnl(2), hb_parnl(3)));
+  hb_retnl((LONG)TreeView_SetImageList(w32_par_HWND(1), w32_par_HIMAGELIST(2), hb_parnl(3)));
 }
 
 //-------------------------------------------------------------------------//
