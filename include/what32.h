@@ -24,6 +24,7 @@
 #define w32_par_HICON(n) (HICON) hb_parnl(n)
 #define w32_par_HRSRC(n) (HRSRC) hb_parnl(n)
 #define w32_par_HLOCAL(n) (HLOCAL) hb_parnl(n)
+#define w32_par_HKL(n) (HKL) hb_parnl(n)
 
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_ret_DWORD(x) hb_retnl(x)

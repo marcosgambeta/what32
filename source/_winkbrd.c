@@ -49,7 +49,7 @@ HB_FUNC(VKKEYSCANEX)
 {
   char *Buffer = (char *)hb_parcx(1);
 
-  hb_retni(VkKeyScanEx(*Buffer, (HKL)hb_parnl(2)));
+  hb_retni(VkKeyScanEx(*Buffer, w32_par_HKL(2)));
 }
 
 //-----------------------------------------------------------------------------
@@ -138,7 +138,7 @@ HB_FUNC(MAPVIRTUALKEY)
 
 HB_FUNC(MAPVIRTUALKEYEX)
 {
-  w32_ret_UINT(MapVirtualKeyEx(w32_par_UINT(1), w32_par_UINT(2), (HKL)hb_parnl(3)));
+  w32_ret_UINT(MapVirtualKeyEx(w32_par_UINT(1), w32_par_UINT(2), w32_par_HKL(3)));
 }
 
 //-----------------------------------------------------------------------------
