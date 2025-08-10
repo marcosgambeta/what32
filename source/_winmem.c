@@ -33,7 +33,7 @@ HB_FUNC(GLOBALALLOC)
 HB_FUNC(GLOBALREALLOC)
 {
 
-  hb_retnl((LONG)GlobalReAlloc((HGLOBAL)hb_parnl(1), (SIZE_T)hb_parnl(2), w32_par_UINT(3)));
+  hb_retnl((LONG)GlobalReAlloc(w32_par_HGLOBAL(1), (SIZE_T)hb_parnl(2), w32_par_UINT(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -41,7 +41,7 @@ HB_FUNC(GLOBALREALLOC)
 
 HB_FUNC(GLOBALSIZE)
 {
-  hb_retnl((LONG)GlobalSize((HGLOBAL)hb_parnl(1)));
+  hb_retnl((LONG)GlobalSize(w32_par_HGLOBAL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -49,7 +49,7 @@ HB_FUNC(GLOBALSIZE)
 
 HB_FUNC(GLOBALFLAGS)
 {
-  w32_ret_UINT((UINT)GlobalFlags((HGLOBAL)hb_parnl(1)));
+  w32_ret_UINT((UINT)GlobalFlags(w32_par_HGLOBAL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -57,7 +57,7 @@ HB_FUNC(GLOBALFLAGS)
 
 HB_FUNC(GLOBALLOCK)
 {
-  hb_retnl((LONG)GlobalLock((HGLOBAL)hb_parnl(1)));
+  hb_retnl((LONG)GlobalLock(w32_par_HGLOBAL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -73,7 +73,7 @@ HB_FUNC(GLOBALHANDLE)
 
 HB_FUNC(GLOBALUNLOCK)
 {
-  w32_ret_BOOL(GlobalUnlock((HGLOBAL)hb_parnl(1)));
+  w32_ret_BOOL(GlobalUnlock(w32_par_HGLOBAL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -81,7 +81,7 @@ HB_FUNC(GLOBALUNLOCK)
 
 HB_FUNC(GLOBALFREE)
 {
-  hb_retnl((LONG)GlobalFree((HGLOBAL)hb_parnl(1)));
+  hb_retnl((LONG)GlobalFree(w32_par_HGLOBAL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -101,7 +101,7 @@ HB_FUNC(GLOBALCOMPACT)
 
 HB_FUNC(GLOBALFIX)
 {
-  GlobalFix((HGLOBAL)hb_parnl(1));
+  GlobalFix(w32_par_HGLOBAL(1));
 }
 
 //-----------------------------------------------------------------------------
@@ -111,7 +111,7 @@ HB_FUNC(GLOBALFIX)
 
 HB_FUNC(GLOBALUNFIX)
 {
-  GlobalUnfix((HGLOBAL)hb_parnl(1));
+  GlobalUnfix(w32_par_HGLOBAL(1));
 }
 
 //-----------------------------------------------------------------------------
@@ -121,7 +121,7 @@ HB_FUNC(GLOBALUNFIX)
 
 HB_FUNC(GLOBALWIRE)
 {
-  hb_retnl((LONG)GlobalWire((HGLOBAL)hb_parnl(1)));
+  hb_retnl((LONG)GlobalWire(w32_par_HGLOBAL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -131,7 +131,7 @@ HB_FUNC(GLOBALWIRE)
 
 HB_FUNC(GLOBALUNWIRE)
 {
-  w32_ret_BOOL(GlobalUnWire((HGLOBAL)hb_parnl(1)));
+  w32_ret_BOOL(GlobalUnWire(w32_par_HGLOBAL(1)));
 }
 
 //-----------------------------------------------------------------------------

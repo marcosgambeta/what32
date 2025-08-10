@@ -38,7 +38,7 @@ HB_FUNC(CREATEPATTERNBRUSH)
 
 HB_FUNC(CREATEDIBPATTERNBRUSH)
 {
-  hb_retnl((LONG)CreateDIBPatternBrush((HGLOBAL)hb_parnl(1), w32_par_UINT(2)));
+  hb_retnl((LONG)CreateDIBPatternBrush(w32_par_HGLOBAL(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------

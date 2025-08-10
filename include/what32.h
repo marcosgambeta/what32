@@ -18,6 +18,7 @@
 #define w32_par_LPCSTR(n) (LPCSTR) hb_parcx(n)
 #define w32_par_HENHMETAFILE(n) (HENHMETAFILE) hb_parnl(n)
 #define w32_par_HMODULE(n) (HMODULE) hb_parnl(n)
+#define w32_par_HGLOBAL(n) (HGLOBAL) hb_parnl(n)
 
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_ret_DWORD(x) hb_retnl(x)

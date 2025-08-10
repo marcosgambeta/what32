@@ -245,7 +245,7 @@ HB_FUNC(SYSTEMPARAMETERSINFO)
 //
 HB_FUNC(FREERESOURCE)
 {
-  w32_ret_BOOL(FreeResource((HGLOBAL)hb_parnl(6)));
+  w32_ret_BOOL(FreeResource(w32_par_HGLOBAL(6)));
 }
 
 //-------------------------------------------------------------------//
@@ -587,7 +587,7 @@ HB_FUNC(SIZEOFRESOURCE)
 //
 HB_FUNC(LOCKRESOURCE)
 {
-  hb_retnl((LONG)LockResource((HGLOBAL)hb_parnl(1)));
+  hb_retnl((LONG)LockResource(w32_par_HGLOBAL(1)));
 }
 
 //-------------------------------------------------------------------//
