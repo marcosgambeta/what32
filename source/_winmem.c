@@ -185,7 +185,7 @@ HB_FUNC(LOCALALLOC)
 HB_FUNC(LOCALREALLOC)
 {
 
-  hb_retnl((LONG)LocalReAlloc((HLOCAL)hb_parnl(1), (SIZE_T)hb_parni(2), w32_par_UINT(3)));
+  hb_retnl((LONG)LocalReAlloc(w32_par_HLOCAL(1), (SIZE_T)hb_parni(2), w32_par_UINT(3)));
 }
 
 //-----------------------------------------------------------------------------
@@ -193,7 +193,7 @@ HB_FUNC(LOCALREALLOC)
 
 HB_FUNC(LOCALLOCK)
 {
-  hb_retnl((LONG)LocalLock((HLOCAL)hb_parnl(1)));
+  hb_retnl((LONG)LocalLock(w32_par_HLOCAL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -209,7 +209,7 @@ HB_FUNC(LOCALHANDLE)
 
 HB_FUNC(LOCALUNLOCK)
 {
-  w32_ret_BOOL(LocalUnlock((HLOCAL)hb_parnl(1)));
+  w32_ret_BOOL(LocalUnlock(w32_par_HLOCAL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -217,7 +217,7 @@ HB_FUNC(LOCALUNLOCK)
 
 HB_FUNC(LOCALSIZE)
 {
-  hb_retni(LocalSize((HLOCAL)hb_parnl(1)));
+  hb_retni(LocalSize(w32_par_HLOCAL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -225,7 +225,7 @@ HB_FUNC(LOCALSIZE)
 
 HB_FUNC(LOCALFLAGS)
 {
-  w32_ret_UINT(LocalFlags((HLOCAL)hb_parnl(1)));
+  w32_ret_UINT(LocalFlags(w32_par_HLOCAL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -233,7 +233,7 @@ HB_FUNC(LOCALFLAGS)
 
 HB_FUNC(LOCALFREE)
 {
-  hb_retnl((LONG)LocalFree((HLOCAL)hb_parnl(1)));
+  hb_retnl((LONG)LocalFree(w32_par_HLOCAL(1)));
 }
 
 //-----------------------------------------------------------------------------
@@ -241,7 +241,7 @@ HB_FUNC(LOCALFREE)
 
 HB_FUNC(LOCALSHRINK)
 {
-  hb_retni(LocalShrink((HLOCAL)hb_parnl(1), w32_par_UINT(2)));
+  hb_retni(LocalShrink(w32_par_HLOCAL(1), w32_par_UINT(2)));
 }
 
 //-----------------------------------------------------------------------------
