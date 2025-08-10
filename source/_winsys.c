@@ -548,7 +548,7 @@ HB_FUNC(FINDRESOURCEEX)
 //
 HB_FUNC(LOADRESOURCE)
 {
-  hb_retnl((LONG)LoadResource(w32_par_HMODULE(1), (HRSRC)hb_parnl(2)));
+  hb_retnl((LONG)LoadResource(w32_par_HMODULE(1), w32_par_HRSRC(2)));
 }
 
 //-------------------------------------------------------------------//
@@ -578,7 +578,7 @@ HB_FUNC(LOADSTRING)
 //
 HB_FUNC(SIZEOFRESOURCE)
 {
-  w32_ret_DWORD((LONG)SizeofResource(w32_par_HMODULE(1), (HRSRC)hb_parnl(2)));
+  w32_ret_DWORD((LONG)SizeofResource(w32_par_HMODULE(1), w32_par_HRSRC(2)));
 }
 
 //-------------------------------------------------------------------//

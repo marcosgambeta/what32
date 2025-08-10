@@ -22,6 +22,7 @@
 #define w32_par_HFONT(n) (HFONT) hb_parnl(n)
 #define w32_par_HIMAGELIST(n) (HIMAGELIST) hb_parnl(n)
 #define w32_par_HICON(n) (HICON) hb_parnl(n)
+#define w32_par_HRSRC(n) (HRSRC) hb_parnl(n)
 
 #define w32_ret_BOOL(x) hb_retl(x)
 #define w32_ret_DWORD(x) hb_retnl(x)
