@@ -291,7 +291,7 @@ HB_FUNC(BEGINDEFERWINDOWPOS)
 
 HB_FUNC(DEFERWINDOWPOS)
 {
-  hb_retnl((LONG)DeferWindowPos((HDWP)hb_parnl(1), w32_par_HWND(2), w32_par_HWND(3), hb_parni(4), hb_parni(5),
+  hb_retnl((LONG)DeferWindowPos(w32_par_HDWP(1), w32_par_HWND(2), w32_par_HWND(3), hb_parni(4), hb_parni(5),
                                 hb_parni(6), hb_parni(7), w32_par_UINT(8)));
 }
 
@@ -300,7 +300,7 @@ HB_FUNC(DEFERWINDOWPOS)
 
 HB_FUNC(ENDDEFERWINDOWPOS)
 {
-  w32_ret_BOOL(EndDeferWindowPos((HDWP)hb_parnl(1)));
+  w32_ret_BOOL(EndDeferWindowPos(w32_par_HDWP(1)));
 }
 
 //-----------------------------------------------------------------------------
