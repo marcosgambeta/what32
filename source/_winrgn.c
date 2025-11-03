@@ -66,20 +66,17 @@ HB_FUNC(CREATEPOLYGONRGN)
   PHB_ITEM aParam;
   PHB_ITEM aSub;
 
-  if (ISARRAY(1))
-  {
+  if (ISARRAY(1)) {
     iCount = (int)hb_parinfa(1, 0);
     Point = (POINT *)hb_xgrab(iCount * sizeof(POINT));
     aParam = hb_param(1, HB_IT_ARRAY);
 
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
 
       if (Array2Point(aSub, &pt))
         *(Point + i) = pt;
-      else
-      {
+      else {
         hb_retnl(0);
         hb_xfree(Point);
         return;
@@ -88,8 +85,7 @@ HB_FUNC(CREATEPOLYGONRGN)
 
     hb_retnl((LONG)CreatePolygonRgn(Point, iCount, hb_parni(2)));
     hb_xfree(Point);
-  }
-  else
+  } else
     hb_retnl(0);
 }
 
@@ -110,13 +106,11 @@ HB_FUNC(CREATEPOLYPOLYGONRGN)
   PHB_ITEM aParam;
   PHB_ITEM aSub;
 
-  if (ISARRAY(1) && ISARRAY(2))
-  {
+  if (ISARRAY(1) && ISARRAY(2)) {
     iPolyCount = hb_parinfa(2, 0);
     PolyPoints = (INT *)hb_xgrab(iPolyCount * sizeof(INT));
 
-    for (i = 0; i < iPolyCount; i++)
-    {
+    for (i = 0; i < iPolyCount; i++) {
       *(PolyPoints + i) = hb_parni(2, i + 1);
     }
 
@@ -124,14 +118,12 @@ HB_FUNC(CREATEPOLYPOLYGONRGN)
     Point = (POINT *)hb_xgrab(iCount * sizeof(POINT));
     aParam = hb_param(1, HB_IT_ARRAY);
 
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
 
       if (Array2Point(aSub, &pt))
         *(Point + i) = pt;
-      else
-      {
+      else {
         hb_retnl(0);
         hb_xfree(PolyPoints);
         hb_xfree(Point);
@@ -142,8 +134,7 @@ HB_FUNC(CREATEPOLYPOLYGONRGN)
     hb_retnl((LONG)CreatePolyPolygonRgn(Point, PolyPoints, iPolyCount, hb_parni(3)));
     hb_xfree(PolyPoints);
     hb_xfree(Point);
-  }
-  else
+  } else
     hb_retnl(0);
 }
 
@@ -207,8 +198,7 @@ HB_FUNC(GETREGIONDATA)
   DWORD nBytes = GetRegionData(w32_par_HRGN(1), 0, NULL);
   DWORD nRet;
 
-  if (nBytes)
-  {
+  if (nBytes) {
     RgnData = (RGNDATA *)hb_xgrab(nBytes);
     nRet = GetRegionData(w32_par_HRGN(1), nBytes, RgnData);
     if (nRet == 1)

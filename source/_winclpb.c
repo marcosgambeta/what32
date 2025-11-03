@@ -91,8 +91,7 @@ HB_FUNC(GETPRIORITYCLIPBOARDFORMAT)
   UINT i;
 
   p = paFP = (PUINT)hb_xgrab(hb_parinfa(1, 0) * sizeof(UINT));
-  for (i = 1; i <= hb_parinfa(1, 0); i++)
-  {
+  for (i = 1; i <= hb_parinfa(1, 0); i++) {
     *p++ = hb_parni(1, i);
   }
   hb_retni(GetPriorityClipboardFormat((UINT *)paFP, hb_parinfa(1, 0)));
@@ -172,16 +171,13 @@ HB_FUNC(GETCLIPBOARDDATA)
   HANDLE hClipMem;
   LPSTR lpClip;
 
-  switch (wType)
-  {
+  switch (wType) {
   case CF_TEXT:
     hMem = GetClipboardData(CF_TEXT);
-    if (hMem)
-    {
+    if (hMem) {
       hb_retc((char *)GlobalLock(hMem));
       GlobalUnlock(hMem);
-    }
-    else
+    } else
       hb_retc("");
     break;
 
@@ -195,8 +191,7 @@ HB_FUNC(GETCLIPBOARDDATA)
   default:
     hClipMem = GetClipboardData(w32_par_UINT(1));
 
-    if (hClipMem)
-    {
+    if (hClipMem) {
       lpClip = (LPSTR)GlobalLock(hClipMem);
       hb_retclen(lpClip, GlobalSize(hClipMem));
       GlobalUnlock(hClipMem);
@@ -253,16 +248,13 @@ HB_FUNC(SETCLIPBOARDDATA)
   DWORD dwLen;
   void *pMem;
 
-  switch (wType)
-  {
+  switch (wType) {
   case CF_TEXT:
     hMem = GetClipboardData(CF_TEXT);
-    if (hMem)
-    {
+    if (hMem) {
       hb_retc((char *)GlobalLock(hMem));
       GlobalUnlock(hMem);
-    }
-    else
+    } else
       hb_retc("");
     break;
 
@@ -276,15 +268,12 @@ HB_FUNC(SETCLIPBOARDDATA)
   default:
     dwLen = (DWORD)hb_parclen(2);
     hMem = GlobalAlloc((GMEM_MOVEABLE | GMEM_DDESHARE), dwLen);
-    if (hMem)
-    {
+    if (hMem) {
       pMem = GlobalLock(hMem);
       memcpy(pMem, hb_parcx(2), dwLen);
       GlobalUnlock(hMem);
       hb_retnl((ULONG)SetClipboardData((UINT)hb_parni(1), hMem));
-    }
-    else
-    {
+    } else {
       hb_retnl(0);
     }
     break;

@@ -62,8 +62,7 @@ HB_FUNC(GETCARETPOS)
   POINT Point;
   PHB_ITEM aPt;
 
-  if (GetCaretPos((LPPOINT)&Point))
-  {
+  if (GetCaretPos((LPPOINT)&Point)) {
     aPt = Point2Array(&Point);
     _itemReturn(aPt);
     _itemRelease(aPt);

@@ -214,27 +214,20 @@ HB_FUNC(SYSTEMPARAMETERSINFO)
   char *cText;
   PHB_ITEM pBuffer = hb_param(3, HB_IT_STRING);
 
-  if (pBuffer)
-  {
+  if (pBuffer) {
     cText = (char *)hb_xgrab(pBuffer->item.asString.length + 1);
     hb_xmemcpy(cText, pBuffer->item.asString.value, pBuffer->item.asString.length + 1);
-  }
-  else
-  {
+  } else {
     hb_retl(FALSE);
     return;
   }
 
-  if (SystemParametersInfo(w32_par_UINT(1), w32_par_UINT(2), cText, w32_par_UINT(4)))
-  {
-    if (ISBYREF(3))
-    {
+  if (SystemParametersInfo(w32_par_UINT(1), w32_par_UINT(2), cText, w32_par_UINT(4))) {
+    if (ISBYREF(3)) {
       hb_itemPutCRaw(pBuffer, cText, pBuffer->item.asString.length);
       hb_retl(TRUE);
     }
-  }
-  else
-  {
+  } else {
     hb_retl(FALSE);
   }
 }
@@ -979,8 +972,7 @@ HB_FUNC(READFILE)
 
   bRet = ReadFile(w32_par_HANDLE(1), Buffer, w32_par_DWORD(3), &nRead, ISCHAR(5) ? Overlapped : NULL);
 
-  if (bRet)
-  {
+  if (bRet) {
     hb_storclen((char *)Buffer, nRead, 2);
   }
 
@@ -1075,13 +1067,10 @@ DWORD VirtualQuery( LPCVOID lpAddress, PMEMORY_BASIC_INFORMATION lpBuffer,  SIZE
 */
 HB_FUNC(VIRTUALQUERY)
 {
-  if ((USHORT)hb_parni(1) >= sizeof(MEMORY_BASIC_INFORMATION))
-  {
+  if ((USHORT)hb_parni(1) >= sizeof(MEMORY_BASIC_INFORMATION)) {
     hb_retl(VirtualQuery((void *)hb_parnl(1), (struct _MEMORY_BASIC_INFORMATION *)hb_parnl(2),
                          sizeof(MEMORY_BASIC_INFORMATION)));
-  }
-  else
-  {
+  } else {
     SetLastError(ERROR_INSUFFICIENT_BUFFER);
     hb_retl(FALSE);
   }
@@ -1122,17 +1111,13 @@ HB_FUNC(FILETIMETOSYSTEMTIME)
   FILETIME *FileTime = (FILETIME *)hb_param(1, HB_IT_STRING)->item.asString.value;
   SYSTEMTIME SystemTime;
 
-  if (FileTimeToSystemTime(FileTime, &SystemTime))
-  {
+  if (FileTimeToSystemTime(FileTime, &SystemTime)) {
     hb_retl(TRUE);
 
-    if (ISBYREF(2))
-    {
+    if (ISBYREF(2)) {
       hb_storclen((char *)&SystemTime, sizeof(SYSTEMTIME), 2);
     }
-  }
-  else
-  {
+  } else {
     hb_retl(FALSE);
   }
 }

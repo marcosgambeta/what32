@@ -261,16 +261,13 @@ HB_FUNC(CALLDLL)
     iArgCnt /= 2;
 
   // printf( "\nNo. Parameters: %i\n", iArgCnt ) ;
-  if (iArgCnt > 0)
-  {
-    for (i = 6; i <= iParams; i += 2)
-    {
+  if (iArgCnt > 0) {
+    for (i = 6; i <= iParams; i += 2) {
       // printf( "\nParameter Type: %i\n", hb_parni( i ) ) ;
       // printf( "Parameter: %i\n", hb_parni( i + 2) ) ;
       // printf( "Parameter: %i\n", hb_parni( i + 4) ) ;
       // printf( "Parameter: %i\n", hb_parni( i + 6) ) ;
-      switch (hb_parni(i - 1))
-      {
+      switch (hb_parni(i - 1)) {
       case CTYPE_CHAR_PTR:
         Parm[iCnt].nWidth = sizeof(char *);
         if (ISNIL(i))
@@ -388,8 +385,7 @@ HB_FUNC(CALLDLL)
   rc = DynaCall(Flags, lpFunction, iArgCnt, Parm, NULL, 0);
 
   // return the correct value
-  switch (iReturn)
-  {
+  switch (iReturn) {
   case CTYPE_BOOL:
     // printf("\nAt BOOL Return\n");
     hb_retl((BOOL)rc.Long);

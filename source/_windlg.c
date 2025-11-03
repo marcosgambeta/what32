@@ -230,8 +230,7 @@ HB_FUNC(MAPDIALOGRECT)
 {
   RECT lpRect;
   PHB_ITEM pArray;
-  if (ISARRAY(2))
-  {
+  if (ISARRAY(2)) {
     pArray = hb_param(2, HB_IT_ARRAY);
     lpRect.left = hb_arrayGetNL(pArray, 1);
     lpRect.top = hb_arrayGetNL(pArray, 2);
@@ -243,8 +242,7 @@ HB_FUNC(MAPDIALOGRECT)
     hb_stornl(lpRect.top, 2, 2);
     hb_stornl(lpRect.right, 2, 3);
     hb_stornl(lpRect.bottom, 2, 4);
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 
@@ -300,12 +298,10 @@ HB_FUNC(GETLISTBOXINFO)
   DWORD dwGLIRet = 0;
   HWND hWnd = w32_par_HWND(1);
 
-  if (h)
-  {
+  if (h) {
     typedef DWORD(WINAPI * xdwGetListBoxInfo)(HWND hWnd);
     xdwGetListBoxInfo pfnGLI = (xdwGetListBoxInfo)GetProcAddress(h, "GetListBoxInfo");
-    if (pfnGLI)
-    {
+    if (pfnGLI) {
       dwGLIRet = (DWORD)pfnGLI(hWnd);
     }
     FreeLibrary(h);

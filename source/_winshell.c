@@ -34,8 +34,7 @@ HB_FUNC(DRAGQUERYFILE)
 
   iRet = DragQueryFile((HDROP)hb_parnl(1), w32_par_UINT(2), hb_parni(4) > 0 ? cFile : NULL, w32_par_UINT(4));
 
-  if (hb_parni(4) > 0)
-  {
+  if (hb_parni(4) > 0) {
     hb_storclen(cFile, iRet, 3);
     hb_xfree(cFile);
   }
@@ -50,8 +49,7 @@ HB_FUNC(DRAGQUERYPOINT)
   POINT lpPoInt;
   BOOL lRet;
   lRet = DragQueryPoint((HDROP)hb_parnl(1), (LPPOINT)&lpPoInt);
-  if (ISBYREF(2))
-  {
+  if (ISBYREF(2)) {
     hb_stornl(2, lpPoInt.x, 1);
     hb_stornl(2, lpPoInt.y, 2);
   }
@@ -126,8 +124,7 @@ HB_FUNC( COMMANDLINETOARGVW )
 
 HB_FUNC(SHELLABOUT)
 {
-  hb_retni(
-      ShellAbout(w32_par_HWND(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3), (ISNIL(4) ? NULL : w32_par_HICON(4))));
+  hb_retni(ShellAbout(w32_par_HWND(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3), (ISNIL(4) ? NULL : w32_par_HICON(4))));
 }
 
 //-----------------------------------------------------------------------------
@@ -352,8 +349,8 @@ HB_FUNC( SHGETNEWLINKINFO )
 
 HB_FUNC(SHINVOKEPRINTERCOMMAND)
 {
-  hb_retl(SHInvokePrinterCommand(w32_par_HWND(1), w32_par_UINT(2), w32_par_LPCSTR(3), w32_par_LPCSTR(4),
-                                 w32_par_BOOL(5)));
+  hb_retl(
+      SHInvokePrinterCommand(w32_par_HWND(1), w32_par_UINT(2), w32_par_LPCSTR(3), w32_par_LPCSTR(4), w32_par_BOOL(5)));
 }
 
 #endif

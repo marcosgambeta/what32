@@ -142,8 +142,7 @@ HB_FUNC(BIN2F)
 
 BOOL Array2Rect(PHB_ITEM aRect, RECT *rc)
 {
-  if (HB_IS_ARRAY(aRect) && hb_arrayLen(aRect) == 4)
-  {
+  if (HB_IS_ARRAY(aRect) && hb_arrayLen(aRect) == 4) {
     rc->left = hb_arrayGetNL(aRect, 1);
     rc->top = hb_arrayGetNL(aRect, 2);
     rc->right = hb_arrayGetNL(aRect, 3);
@@ -212,8 +211,7 @@ PHB_ITEM Rect2Array(RECT *rc)
 
 BOOL Array2Point(PHB_ITEM aPoint, POINT *pt)
 {
-  if (HB_IS_ARRAY(aPoint) && hb_arrayLen(aPoint) == 2)
-  {
+  if (HB_IS_ARRAY(aPoint) && hb_arrayLen(aPoint) == 2) {
     pt->x = hb_arrayGetNL(aPoint, 1);
     pt->y = hb_arrayGetNL(aPoint, 2);
     return TRUE;
@@ -267,8 +265,7 @@ PHB_ITEM Point2Array(POINT *pt)
 
 BOOL Array2Size(PHB_ITEM aSize, SIZE *siz)
 {
-  if (HB_IS_ARRAY(aSize) && hb_arrayLen(aSize) == 2)
-  {
+  if (HB_IS_ARRAY(aSize) && hb_arrayLen(aSize) == 2) {
     siz->cx = hb_arrayGetNL(aSize, 1);
     siz->cy = hb_arrayGetNL(aSize, 2);
     return TRUE;
@@ -443,8 +440,7 @@ int nCopyAnsiToWideChar(LPWORD lpWCStr, LPSTR lpAnsiIn)
 {
   int nChar = 0;
 
-  do
-  {
+  do {
     *lpWCStr++ = (WORD)*lpAnsiIn;
     nChar++;
   } while (*lpAnsiIn++);
@@ -480,8 +476,7 @@ HB_FUNC(CREATEMUTEX)
 {
   SECURITY_ATTRIBUTES *sa = NULL;
 
-  if (ISCHAR(1))
-  {
+  if (ISCHAR(1)) {
     sa = (SECURITY_ATTRIBUTES *)hb_param(1, HB_IT_STRING)->item.asString.value;
   }
 

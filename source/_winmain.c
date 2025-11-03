@@ -99,10 +99,8 @@ int WINAPI WinMain(HINSTANCE hInstance,     /* handle to current instance */
   if (*pArgs != 0)
     argv[++argc] = pArgs;
 
-  while (*pArg != 0)
-  {
-    if (*pArg == ' ')
-    {
+  while (*pArg != 0) {
+    if (*pArg == ' ') {
       *pArg++ = 0;
       argc++;
 
@@ -113,8 +111,7 @@ int WINAPI WinMain(HINSTANCE hInstance,     /* handle to current instance */
         argv[argc] = pArg++;
       else
         argc--;
-    }
-    else
+    } else
       pArg++;
   }
   argc++;

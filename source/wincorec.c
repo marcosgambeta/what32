@@ -127,8 +127,7 @@ LRESULT CALLBACK __WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
   if (!pSymTest)
     pSymTest = hb_dynsymFind("_PROCESSMSG");
 
-  if (pSymTest)
-  {
+  if (pSymTest) {
     hb_vmPushSymbol(pSymTest->pSymbol);
     hb_vmPushNil();
     hb_vmPushLong((LONG)hWnd);
@@ -140,8 +139,7 @@ LRESULT CALLBACK __WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam
     res = hb_itemGetNL(hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
     return (DefWindowProc(hWnd, message, wParam, lParam));
 }
 
@@ -155,8 +153,7 @@ LRESULT CALLBACK __WndProc2(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
   if (!pSymTest)
     pSymTest = hb_dynsymFind("_PROCESSMSG");
 
-  if (pSymTest)
-  {
+  if (pSymTest) {
     hb_vmPushSymbol(pSymTest->pSymbol);
     hb_vmPushNil();
     hb_vmPushLong((LONG)hWnd);
@@ -168,8 +165,7 @@ LRESULT CALLBACK __WndProc2(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     res = hb_itemGetNL(hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
     return (DefWindowProc(hWnd, message, wParam, lParam));
 }
 
@@ -183,8 +179,7 @@ LRESULT CALLBACK __WndProc3(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
   if (!pSymTest)
     pSymTest = hb_dynsymFind("_PROCESSMSG");
 
-  if (pSymTest)
-  {
+  if (pSymTest) {
     hb_vmPushSymbol(pSymTest->pSymbol);
     hb_vmPushNil();
     hb_vmPushLong((LONG)hWnd);
@@ -196,8 +191,7 @@ LRESULT CALLBACK __WndProc3(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     res = hb_itemGetNL(hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
     return (DefWindowProc(hWnd, message, wParam, lParam));
 }
 
@@ -211,8 +205,7 @@ LRESULT CALLBACK __WndProc4(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
   if (!pSymTest)
     pSymTest = hb_dynsymFind("_PROCESSMSG");
 
-  if (pSymTest)
-  {
+  if (pSymTest) {
     hb_vmPushSymbol(pSymTest->pSymbol);
     hb_vmPushNil();
     hb_vmPushLong((LONG)hWnd);
@@ -224,8 +217,7 @@ LRESULT CALLBACK __WndProc4(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     res = hb_itemGetNL(hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
     return (DefWindowProc(hWnd, message, wParam, lParam));
 }
 
@@ -239,8 +231,7 @@ LRESULT CALLBACK __WndProc5(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
   if (!pSymTest)
     pSymTest = hb_dynsymFind("_PROCESSMSG");
 
-  if (pSymTest)
-  {
+  if (pSymTest) {
     hb_vmPushSymbol(pSymTest->pSymbol);
     hb_vmPushNil();
     hb_vmPushLong((LONG)hWnd);
@@ -252,8 +243,7 @@ LRESULT CALLBACK __WndProc5(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     res = hb_itemGetNL(hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
     return (DefWindowProc(hWnd, message, wParam, lParam));
 }
 //-----------------------------------------------------------------------------
@@ -266,8 +256,7 @@ LRESULT CALLBACK __WndProc6(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
   if (!pSymTest)
     pSymTest = hb_dynsymFind("_PROCESSMSG");
 
-  if (pSymTest)
-  {
+  if (pSymTest) {
     hb_vmPushSymbol(pSymTest->pSymbol);
     hb_vmPushNil();
     hb_vmPushLong((LONG)hWnd);
@@ -279,8 +268,7 @@ LRESULT CALLBACK __WndProc6(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     res = hb_itemGetNL(hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
     return (DefWindowProc(hWnd, message, wParam, lParam));
 }
 
@@ -294,8 +282,7 @@ LRESULT CALLBACK __WndProc7(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
   if (!pSymTest)
     pSymTest = hb_dynsymFind("_PROCESSMSG");
 
-  if (pSymTest)
-  {
+  if (pSymTest) {
     hb_vmPushSymbol(pSymTest->pSymbol);
     hb_vmPushNil();
     hb_vmPushLong((LONG)hWnd);
@@ -307,8 +294,7 @@ LRESULT CALLBACK __WndProc7(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     res = hb_itemGetNL(hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
     return (DefWindowProc(hWnd, message, wParam, lParam));
 }
 
@@ -322,8 +308,7 @@ LRESULT CALLBACK __WndProc8(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
   if (!pSymTest)
     pSymTest = hb_dynsymFind("_PROCESSMSG");
 
-  if (pSymTest)
-  {
+  if (pSymTest) {
     hb_vmPushSymbol(pSymTest->pSymbol);
     hb_vmPushNil();
     hb_vmPushLong((LONG)hWnd);
@@ -335,8 +320,7 @@ LRESULT CALLBACK __WndProc8(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     res = hb_itemGetNL(hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
     return (DefWindowProc(hWnd, message, wParam, lParam));
 }
 
@@ -350,8 +334,7 @@ LRESULT CALLBACK __WndProc9(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
   if (!pSymTest)
     pSymTest = hb_dynsymFind("_PROCESSMSG");
 
-  if (pSymTest)
-  {
+  if (pSymTest) {
     hb_vmPushSymbol(pSymTest->pSymbol);
     hb_vmPushNil();
     hb_vmPushLong((LONG)hWnd);
@@ -363,8 +346,7 @@ LRESULT CALLBACK __WndProc9(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     res = hb_itemGetNL(hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
     return (DefWindowProc(hWnd, message, wParam, lParam));
 }
 
@@ -378,8 +360,7 @@ LRESULT CALLBACK __WndProc10(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
   if (!pSymTest)
     pSymTest = hb_dynsymFind("_PROCESSMSG");
 
-  if (pSymTest)
-  {
+  if (pSymTest) {
     hb_vmPushSymbol(pSymTest->pSymbol);
     hb_vmPushNil();
     hb_vmPushLong((LONG)hWnd);
@@ -391,8 +372,7 @@ LRESULT CALLBACK __WndProc10(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
     res = hb_itemGetNL(hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
     return (DefWindowProc(hWnd, message, wParam, lParam));
 }
 
@@ -403,8 +383,7 @@ LRESULT CALLBACK __WndProc10(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPar
 HB_FUNC(GETWNDPROC)
 {
 
-  switch (hb_parni(1))
-  {
+  switch (hb_parni(1)) {
   case 10:
     hb_retnl((ULONG)__WndProc10);
     return;
@@ -468,8 +447,7 @@ BOOL CALLBACK __DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
   if (!pSymTest)
     pSymTest = hb_dynsymFind("_PROCESSDLGMSG");
 
-  if (pSymTest)
-  {
+  if (pSymTest) {
     hb_vmPushSymbol(pSymTest->pSymbol);
     hb_vmPushNil();
     hb_vmPushLong((LONG)hWnd);
@@ -480,8 +458,7 @@ BOOL CALLBACK __DlgProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     res = hb_itemGetNL(hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
     return FALSE;
 }
 
@@ -566,18 +543,15 @@ HB_FUNC(_MAKEDLGTEMPLATE)
   *p++ = (short)0;              // Menu (ignored for now.)
   *p++ = (short)0x00;           // Class also ignored
 
-  if (hb_parinfa(1, 11) == HB_IT_STRING)
-  {
+  if (hb_parinfa(1, 11) == HB_IT_STRING) {
     nchar = nCopyAnsiToWideChar(p, TEXT((LPTSTR)hb_parc(1, 11)));
     p += nchar;
-  }
-  else
+  } else
     *p++ = 0;
 
   // add in the wPointSize and szFontName here iff the DS_SETFONT bit on
 
-  if ((lStyle & DS_SETFONT))
-  {
+  if ((lStyle & DS_SETFONT)) {
     *p++ = (short)hb_parni(1, 12);
     *p++ = (short)hb_parni(1, 13);
     *p++ = (short)hb_parni(1, 14);
@@ -589,8 +563,7 @@ HB_FUNC(_MAKEDLGTEMPLATE)
   //---------------
   // Now, for the items
 
-  for (i = 1; i <= nItems; i++)
-  {
+  for (i = 1; i <= nItems; i++) {
 
     // make sure each item starts on a DWORD boundary
     p = lpwAlign(p);
@@ -612,24 +585,18 @@ HB_FUNC(_MAKEDLGTEMPLATE)
     *p++ = LOWORD(hb_parnl(9, i)); // id
     *p++ = HIWORD(hb_parnl(9, i)); // id   // 0;
 
-    if (hb_parinfa(10, i) == HB_IT_STRING)
-    {
+    if (hb_parinfa(10, i) == HB_IT_STRING) {
       nchar = nCopyAnsiToWideChar(p, TEXT((LPTSTR)hb_parc(10, i))); // class
       p += nchar;
-    }
-    else
-    {
+    } else {
       *p++ = 0xFFFF;
       *p++ = (WORD)hb_parni(10, i);
     }
 
-    if (hb_parinfa(11, i) == HB_IT_STRING)
-    {
+    if (hb_parinfa(11, i) == HB_IT_STRING) {
       nchar = nCopyAnsiToWideChar(p, (LPSTR)hb_parc(11, i)); // text
       p += nchar;
-    }
-    else
-    {
+    } else {
       *p++ = 0xFFFF;
       *p++ = (WORD)hb_parni(11, i);
     }

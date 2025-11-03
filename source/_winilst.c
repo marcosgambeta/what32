@@ -289,13 +289,11 @@ HB_FUNC(IMAGELIST_GETICONSIZE)
   int cx;
   int cy;
 
-  if (ImageList_GetIconSize(w32_par_HIMAGELIST(1), &cx, &cy))
-  {
+  if (ImageList_GetIconSize(w32_par_HIMAGELIST(1), &cx, &cy)) {
     hb_storni(cx, 2);
     hb_storni(cy, 3);
     hb_retl(1);
-  }
-  else
+  } else
     hb_retl(0);
 }
 
@@ -326,8 +324,8 @@ HB_FUNC(IMAGELIST_GETIMAGEINFO)
 
 HB_FUNC(IMAGELIST_MERGE)
 {
-  hb_retnl((LONG)ImageList_Merge(w32_par_HIMAGELIST(1), hb_parni(2), w32_par_HIMAGELIST(3), hb_parni(4),
-                                 hb_parni(5), hb_parni(6)));
+  hb_retnl((LONG)ImageList_Merge(w32_par_HIMAGELIST(1), hb_parni(2), w32_par_HIMAGELIST(3), hb_parni(4), hb_parni(5),
+                                 hb_parni(6)));
 }
 
 //-----------------------------------------------------------------------------

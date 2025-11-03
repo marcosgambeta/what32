@@ -110,12 +110,10 @@ HB_FUNC(PRINTDLG)
 
   pd->lStructSize = sizeof(PRINTDLG);
 
-  if (PrintDlg(pd))
-  {
+  if (PrintDlg(pd)) {
     hb_storclen((char *)pd, sizeof(PRINTDLG), 1);
     hb_retl(TRUE);
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 
@@ -150,12 +148,10 @@ HB_FUNC(PAGESETUPDLG)
 
   psd->lStructSize = sizeof(PAGESETUPDLG);
 
-  if (PageSetupDlg(psd))
-  {
+  if (PageSetupDlg(psd)) {
     hb_storclen((char *)psd, sizeof(PAGESETUPDLG), 1);
     hb_retl(TRUE);
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 
@@ -205,15 +201,12 @@ HB_FUNC(_GETOPENFILENAME)
   ofn.lpstrFile = szFileName;
   ofn.nMaxFile = hb_parcsiz(2);
 
-  if (GetOpenFileName(&ofn))
-  {
+  if (GetOpenFileName(&ofn)) {
     hb_stornl(ofn.nFilterIndex, 8);
     hb_storclen(szFileName, hb_parcsiz(2), 2);
     hb_xfree(szFileName);
     hb_retc((char *)ofn.lpstrFile);
-  }
-  else
-  {
+  } else {
     hb_retc("");
   }
 }
@@ -239,13 +232,10 @@ HB_FUNC(_GETSAVEFILENAME)
   ofn.nFilterIndex = hb_parni(8);
   ofn.lpstrFile = szFileName;
   ofn.nMaxFile = MAX_PATH;
-  if (GetSaveFileName(&ofn))
-  {
+  if (GetSaveFileName(&ofn)) {
     hb_stornl(ofn.nFilterIndex, 8);
     hb_retc(ofn.lpstrFile);
-  }
-  else
-  {
+  } else {
     hb_retc("");
   }
 }
@@ -272,13 +262,10 @@ HB_FUNC(SHBROWSEFORFOLDER)
   BrowseInfo.iImage = 0;
   pidlBrowse = SHBrowseForFolder(&BrowseInfo);
 
-  if (pidlBrowse)
-  {
+  if (pidlBrowse) {
     SHGetPathFromIDList(pidlBrowse, lpBuffer);
     hb_retc(lpBuffer);
-  }
-  else
-  {
+  } else {
     hb_retc("");
   }
 

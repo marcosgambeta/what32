@@ -248,10 +248,8 @@ HB_FUNC(INTERNETREADFILE)
 
   hb_retl(bRet);
 
-  if (bRet)
-  {
-    if ISBYREF (4)
-    {
+  if (bRet) {
+    if ISBYREF (4) {
       hb_stornl((ULONG)lpdwNumberOfBytesRead, 4);
     }
     hb_storclen((char *)lpBuffer, (ULONG)lpdwNumberOfBytesRead, 2);
@@ -287,8 +285,7 @@ HB_FUNC(FTPCOMMAND)
 
   hb_retl(bRet);
 
-  if (bRet)
-  {
+  if (bRet) {
     if (ISBYREF(6))
       hb_stornl((ULONG)phFtpCommand, 6);
   }
@@ -394,13 +391,11 @@ HB_FUNC(INTERNETFINDNEXTFILE)
   HINTERNET hFind = (HINTERNET)hb_parnl(1);
   WIN32_FIND_DATA FindFileData;
 
-  if (InternetFindNextFile(hFind, &FindFileData))
-  {
+  if (InternetFindNextFile(hFind, &FindFileData)) {
     hb_retl(TRUE);
     if (ISBYREF(2))
       hb_storclen((char *)&FindFileData, sizeof(WIN32_FIND_DATA), 2);
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 
@@ -565,8 +560,7 @@ HB_FUNC(FTPGETCURRENTDIRECTORY)
   bRet = FtpGetCurrentDirectory(hInternet, lpszCurrentDirectory, &dwCurrentDirectory);
   hb_retl(bRet);
 
-  if (bRet)
-  {
+  if (bRet) {
     if (ISBYREF(2))
       hb_storclen((char *)lpszCurrentDirectory, (ULONG)dwCurrentDirectory, 2);
   }

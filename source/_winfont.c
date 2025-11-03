@@ -31,8 +31,7 @@ int CALLBACK GenericCallblockProc(LONG param1, LONG param2, int wParam, LPARAM l
 HB_FUNC(CREATEFONT)
 {
 
-  if (ISARRAY(1))
-  {
+  if (ISARRAY(1)) {
     hb_retnl((LONG)CreateFont(hb_parni(1, 1),         // nHeight
                               hb_parni(1, 2),         // nWidth
                               hb_parni(1, 3),         // nEscapement
@@ -48,9 +47,7 @@ HB_FUNC(CREATEFONT)
                               (DWORD)hb_parnl(1, 13), // fdwPitchAndFamily
                               (LPCSTR)hb_parcx(1, 14) // lpszFace
                               ));
-  }
-  else
-  {
+  } else {
     hb_retnl((LONG)CreateFont(ISNIL(1) ? 0 : hb_parni(1), // nHeight
                               ISNIL(2) ? 0 : hb_parni(2), // nWidth
                               ISNIL(3) ? 0 : hb_parni(3), // nEscapement
@@ -110,8 +107,7 @@ HB_FUNC( CREATEFONTINDIRECTEX )
 
 HB_FUNC(CREATESCALABLEFONTRESOURCE)
 {
-  w32_ret_BOOL(
-      CreateScalableFontResource(w32_par_DWORD(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3), w32_par_LPCSTR(4)));
+  w32_ret_BOOL(CreateScalableFontResource(w32_par_DWORD(1), w32_par_LPCSTR(2), w32_par_LPCSTR(3), w32_par_LPCSTR(4)));
 }
 
 //-----------------------------------------------------------------------------
@@ -124,13 +120,11 @@ HB_FUNC(ENUMFONTFAMILIES)
 {
   LPARAM lParam;
 
-  if (ISBLOCK(3))
-  {
+  if (ISBLOCK(3)) {
     lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
     hb_retni(EnumFontFamilies(w32_par_HDC(1), w32_par_LPCSTR(2), (FONTENUMPROC)GenericCallblockProc, lParam));
-  }
-  else
+  } else
     OutputDebugString("EnumFontFamilies(): No codeblock");
 }
 
@@ -145,13 +139,11 @@ HB_FUNC(ENUMFONTFAMILIESEX)
   LOGFONT *LogFont = (LOGFONT *)hb_param(2, HB_IT_STRING)->item.asString.value;
   LPARAM lParam;
 
-  if (ISBLOCK(3))
-  {
+  if (ISBLOCK(3)) {
     lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
     hb_retni(EnumFontFamiliesEx(w32_par_HDC(1), LogFont, (FONTENUMPROC)GenericCallblockProc, lParam, 0));
-  }
-  else
+  } else
     OutputDebugString("EnumFontFamiliesEx(): No codeblock");
 }
 
@@ -165,13 +157,11 @@ HB_FUNC(ENUMFONTS)
 {
   LPARAM lParam;
 
-  if (ISBLOCK(3))
-  {
+  if (ISBLOCK(3)) {
     lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
     hb_retni(EnumFonts(w32_par_HDC(1), w32_par_LPCSTR(2), (FONTENUMPROC)GenericCallblockProc, lParam));
-  }
-  else
+  } else
     OutputDebugString("EnumFonts(): No codeblock");
 }
 
@@ -217,15 +207,13 @@ int CALLBACK GenericCallblockProc(LONG param1, LONG param2, int wParam, LPARAM l
   long int res;
   static PHB_DYNS s_pEval = NULL;
 
-  if (s_pEval == NULL)
-  {
+  if (s_pEval == NULL) {
     s_pEval = hb_dynsymFind("__EVAL");
   }
 
   pItem = (PHB_ITEM)lParam;
 
-  if (pItem)
-  {
+  if (pItem) {
     hb_vmPushSymbol(s_pEval->pSymbol);
     hb_vmPush(pItem);
 
@@ -238,8 +226,7 @@ int CALLBACK GenericCallblockProc(LONG param1, LONG param2, int wParam, LPARAM l
     res = hb_itemGetNL((PHB_ITEM)hb_param(-1, HB_IT_ANY));
 
     return res;
-  }
-  else // shouldn't happen
+  } else // shouldn't happen
   {
     return (0);
   }
@@ -264,8 +251,7 @@ HB_FUNC(GETFONTDATA)
 
   w32_ret_DWORD((LONG)dwRet);
 
-  if (!ISNIL(5) && (hb_parnl(5) > 0))
-  {
+  if (!ISNIL(5) && (hb_parnl(5) > 0)) {
     hb_storclen(cBuffer, dwRet, 4);
     hb_xfree(cBuffer);
   }

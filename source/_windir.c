@@ -232,13 +232,11 @@ HB_FUNC(GETVOLUMEPATHNAME)
   char buffer[MAX_PATH + 1] = {0};
   P_GVPN pGVPN;
   pGVPN = (P_GVPN)GetProcAddress(GetModuleHandle("kernel32.dll"), "GetVolumePathNameA");
-  if (pGVPN)
-  {
+  if (pGVPN) {
     bResult = pGVPN((LPCSTR)hb_parcx(1), buffer, MAX_PATH);
   }
   hb_retl(bResult);
-  if (ISBYREF(2))
-  {
+  if (ISBYREF(2)) {
     hb_storc(buffer, 2);
   }
 }
@@ -298,8 +296,7 @@ HB_FUNC(GETVOLUMEINFORMATION)
   bRet = GetVolumeInformation(ISNIL(1) ? NULL : (LPCTSTR)hb_parcx(1), (LPTSTR)VolumeNameBuffer, MAX_PATH,
                               &VolumeSerialNumber, &MaximumComponentLength, &FileSystemFlags,
                               (LPTSTR)FileSystemNameBuffer, MAX_PATH);
-  if (bRet)
-  {
+  if (bRet) {
     if (ISBYREF(2))
       hb_storc((char *)VolumeNameBuffer, 2);
     if (ISBYREF(3))

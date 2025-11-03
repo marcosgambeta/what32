@@ -247,8 +247,7 @@ HB_FUNC(TABCTRL_ADJUSTRECT)
 {
   RECT rc;
 
-  if (ISARRAY(3))
-  {
+  if (ISARRAY(3)) {
     rc.left = hb_parnl(3, 1);
     rc.top = hb_parnl(3, 2);
     rc.right = hb_parnl(3, 3);

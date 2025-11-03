@@ -184,13 +184,11 @@ HB_FUNC(CREATEACCELERATORTABLE)
   PHB_ITEM aSub;
   PHB_ITEM aParam;
 
-  if (hb_parinfo(1) == HB_IT_ARRAY)
-  {
+  if (hb_parinfo(1) == HB_IT_ARRAY) {
     iCount = hb_parinfa(1, 0);
     aAccel = (ACCEL *)hb_xgrab(iCount * sizeof(ACCEL));
     aParam = hb_param(1, HB_IT_ARRAY);
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
       aAccel[i].fVirt = (BYTE)hb_arrayGetNI(aSub, 1);
       aAccel[i].key = (WORD)hb_arrayGetNI(aSub, 2);
@@ -198,8 +196,7 @@ HB_FUNC(CREATEACCELERATORTABLE)
     }
     hb_retnl((LONG)CreateAcceleratorTable(aAccel, iCount));
     hb_xfree(aAccel);
-  }
-  else
+  } else
     hb_retnl(0);
 }
 
@@ -234,16 +231,14 @@ HB_FUNC(COPYACCELERATORTABLE)
 
   iRet = CopyAcceleratorTable((HACCEL)hb_parnl(1), (iCount == 0 ? NULL : lpAccelDst), iCount);
 
-  if ((iCount > 0) && (iRet > 0))
-  {
+  if ((iCount > 0) && (iRet > 0)) {
     // read accelerator table elements into a subarrays
     // and store them into the original array elements
 
     aParam = hb_param(2, HB_IT_ARRAY);
     aSub = hb_itemArrayNew(3);
     item = hb_itemNew(NULL);
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       hb_arraySet(aSub, 1, hb_itemPutNI(item, lpAccelDst->fVirt));
       hb_arraySet(aSub, 2, hb_itemPutNI(item, lpAccelDst->key));
       hb_arraySet(aSub, 3, hb_itemPutNI(item, lpAccelDst->cmd));

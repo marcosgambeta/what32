@@ -40,8 +40,7 @@ HB_FUNC(ACCEPT)
 
   if (ISNIL(2))
     hb_retnl((LONG)accept((SOCKET)hb_parnl(1), NULL, NULL));
-  else
-  {
+  else {
     addr = hb_parcx(2);
     addrlen = ISNIL(3) ? hb_parni(3) : hb_parclen(2);
     hb_retnl((LONG)accept((SOCKET)hb_parnl(1), (struct sockaddr *)addr, &addrlen));
@@ -301,8 +300,7 @@ HB_FUNC(SENDTO)
   struct sockaddr *to = NULL;
   int iToLen = 0;
 
-  if (ISCHAR(5))
-  {
+  if (ISCHAR(5)) {
     to = (struct sockaddr *)hb_param(5, HB_IT_STRING)->item.asString.value;
     iToLen = (ISNIL(6) ? (ISNIL(5) ? 0 : hb_parclen(5)) : hb_parni(6));
   }
@@ -656,8 +654,7 @@ int _stdcall _WSACondFunc(LPWSABUF lpCallerId, LPWSABUF lpCallerData, LPQOS lpSQ
 
   int res = CF_ACCEPT;
 
-  if (dwCallbackData != 0)
-  {
+  if (dwCallbackData != 0) {
     hb_vmPushSymbol((HB_SYMB *)dwCallbackData); // Harbour function pointer
     hb_vmPushNil();
 

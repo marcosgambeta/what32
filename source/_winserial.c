@@ -283,12 +283,10 @@ HB_FUNC(GETDEFAULTCOMMCONFIG)
   char *Buffer = (char *)hb_xgrab(sizeof(COMMCONFIG));
   DWORD size = sizeof(COMMCONFIG);
 
-  if (GetDefaultCommConfig((LPCTSTR)hb_parcx(1), (COMMCONFIG *)Buffer, &size) == 0)
-  {
+  if (GetDefaultCommConfig((LPCTSTR)hb_parcx(1), (COMMCONFIG *)Buffer, &size) == 0) {
     hb_xfree(Buffer);
     Buffer = (char *)hb_xgrab(size);
-    if (GetDefaultCommConfig((LPCTSTR)hb_parcx(1), (COMMCONFIG *)Buffer, &size) == 0)
-    {
+    if (GetDefaultCommConfig((LPCTSTR)hb_parcx(1), (COMMCONFIG *)Buffer, &size) == 0) {
       hb_xfree(Buffer);
       hb_retl(FALSE);
       return;

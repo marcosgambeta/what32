@@ -76,13 +76,11 @@ HB_FUNC(REGCLOSEKEY)
 
   HKEY hwHandle = (HKEY)hb_parnl(1);
 
-  if (RegCloseKey(hwHandle) == ERROR_SUCCESS)
-  {
+  if (RegCloseKey(hwHandle) == ERROR_SUCCESS) {
     hb_retnl(ERROR_SUCCESS);
   }
 
-  else
-  {
+  else {
     hb_retnl(-1);
   }
 }
@@ -97,13 +95,11 @@ HB_FUNC(REGOPENKEYEX)
 
   lError = RegOpenKeyExA((HKEY)hwKey, lpValue, 0, KEY_ALL_ACCESS, &phwHandle);
 
-  if (lError > 0)
-  {
+  if (lError > 0) {
     hb_retnl(-1);
   }
 
-  else
-  {
+  else {
     hb_stornl(PtrToLong(phwHandle), 5);
     hb_retnl(0);
   }
@@ -117,18 +113,14 @@ HB_FUNC(REGQUERYVALUEEX)
   DWORD lpcbData = 0;
   lError = RegQueryValueExA((HKEY)hb_parnl(1), (LPTSTR)hb_parcx(2), NULL, &lpType, NULL, &lpcbData);
 
-  if (lError == ERROR_SUCCESS)
-  {
+  if (lError == ERROR_SUCCESS) {
     BYTE *lpData;
     lpData = (BYTE *)malloc((int)lpcbData + 1);
     lError = RegQueryValueExA((HKEY)hb_parnl(1), (LPTSTR)hb_parcx(2), NULL, &lpType, (BYTE *)lpData, &lpcbData);
 
-    if (lError > 0)
-    {
+    if (lError > 0) {
       hb_retnl(-1);
-    }
-    else
-    {
+    } else {
       hb_storc((char *)lpData, 5);
       hb_retnl(0);
     }
@@ -149,12 +141,9 @@ HB_FUNC(REGENUMKEYEX)
 
   bErr = RegEnumKeyEx((HKEY)hb_parnl(1), hb_parnl(2), Buffer, &dwBuffSize, NULL, Class, &dwClass, &ft);
 
-  if (bErr != ERROR_SUCCESS)
-  {
+  if (bErr != ERROR_SUCCESS) {
     hb_retnl(bErr);
-  }
-  else
-  {
+  } else {
     hb_storc(Buffer, 3);
     hb_stornl((long)dwBuffSize, 4);
     hb_storc(Class, 6);
@@ -177,8 +166,7 @@ HB_FUNC(REGCREATEKEY)
   LONG nErr;
 
   nErr = RegCreateKey((HKEY)hb_parnl(1), hb_parcx(2), &hKey);
-  if (nErr == ERROR_SUCCESS)
-  {
+  if (nErr == ERROR_SUCCESS) {
     hb_stornl(PtrToLong(hKey), 3);
   }
   hb_retnl(nErr);
@@ -215,8 +203,7 @@ HB_FUNC(REGCREATEKEYEX)
   nErr = RegCreateKeyEx((HKEY)hb_parnl(1), (LPCSTR)hb_parcx(2), (DWORD)0, (LPSTR)hb_parcx(4), w32_par_DWORD(5),
                         w32_par_DWORD(6), sa, &hkResult, &dwDisposition);
 
-  if (nErr == ERROR_SUCCESS)
-  {
+  if (nErr == ERROR_SUCCESS) {
     hb_stornl((LONG)hkResult, 8);
     hb_stornl((LONG)dwDisposition, 9);
   }
@@ -226,12 +213,9 @@ HB_FUNC(REGCREATEKEYEX)
 HB_FUNC(REGDELETEKEY)
 {
 
-  if (RegDeleteKeyA((HKEY)hb_parnl(1), (LPCTSTR)hb_parcx(2)) == ERROR_SUCCESS)
-  {
+  if (RegDeleteKeyA((HKEY)hb_parnl(1), (LPCTSTR)hb_parcx(2)) == ERROR_SUCCESS) {
     hb_retnl(0);
-  }
-  else
-  {
+  } else {
     hb_retnl(-1);
   }
 }
@@ -241,12 +225,9 @@ HB_FUNC(REGDELETEKEY)
 
 HB_FUNC(REGDELETEVALUE)
 {
-  if (RegDeleteValue((HKEY)hb_parnl(1), hb_parcx(2)) == ERROR_SUCCESS)
-  {
+  if (RegDeleteValue((HKEY)hb_parnl(1), hb_parcx(2)) == ERROR_SUCCESS) {
     hb_retnl(0);
-  }
-  else
-  {
+  } else {
     hb_retnl(-1);
   }
 }

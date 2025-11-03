@@ -357,11 +357,11 @@ HB_FUNC(DATETIME_SETMONTHCALCOLOR)
 HB_FUNC(DATETIME_SETMONTHCALFONT)
 {
 
-  DateTime_SetMonthCalFont(w32_par_HWND(1),    // Handle to a DTP control
+  DateTime_SetMonthCalFont(w32_par_HWND(1),  // Handle to a DTP control
                            w32_par_HFONT(2), // Handle to the font that will be set.
-                           (BOOL)hb_parl(3)    // Specifies whether the control should be redrawn
-                                               // immediately upon setting the font. Setting this
-                                               // parameter to TRUE causes the control to redraw itself.
+                           (BOOL)hb_parl(3)  // Specifies whether the control should be redrawn
+                                             // immediately upon setting the font. Setting this
+                                             // parameter to TRUE causes the control to redraw itself.
   );
 }
 
@@ -394,15 +394,11 @@ HB_FUNC(DATETIME_SETSYSTEMTIME)
     SysTime.wSecond = (WORD)hb_parnl(3, 7);
     SysTime.wMilliseconds = (WORD)hb_parnl(3, 8);
     lpSysTime = &SysTime;
-  }
-  else
-  {
+  } else {
     if (ISCHAR(2)) // xHarbour structure
     {
       lpSysTime = (SYSTEMTIME *)hb_param(3, HB_IT_STRING)->item.asString.value;
-    }
-    else
-    {
+    } else {
       hb_retl(0);
       return;
     }

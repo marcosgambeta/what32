@@ -160,11 +160,9 @@ HB_FUNC(SETRECT)
 {
   RECT lprc;
 
-  if (SetRect(&lprc, hb_parni(1), hb_parni(2), hb_parni(3), hb_parni(4)))
-  {
+  if (SetRect(&lprc, hb_parni(1), hb_parni(2), hb_parni(3), hb_parni(4))) {
     hb_itemRelease(hb_itemReturn(Rect2Array(&lprc)));
-  }
-  else
+  } else
     hb_ret();
 }
 
@@ -179,11 +177,9 @@ HB_FUNC(SETRECT)
 HB_FUNC(SETRECTEMPTY)
 {
   RECT lprc;
-  if (SetRectEmpty(&lprc))
-  {
+  if (SetRectEmpty(&lprc)) {
     hb_itemRelease(hb_itemReturn(Rect2Array(&lprc)));
-  }
-  else
+  } else
     hb_ret();
 }
 
@@ -200,16 +196,12 @@ HB_FUNC(COPYRECT)
 {
   RECT lprcDst;
   RECT lprcSrc;
-  if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc))
-  {
-    if (CopyRect(&lprcDst, &lprcSrc))
-    {
+  if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc)) {
+    if (CopyRect(&lprcDst, &lprcSrc)) {
       hb_itemRelease(hb_itemReturn(Rect2Array(&lprcDst)));
-    }
-    else
+    } else
       hb_ret();
-  }
-  else
+  } else
     hb_ret();
 }
 
@@ -226,17 +218,13 @@ HB_FUNC(INFLATERECT)
   RECT lprc;
   PHB_ITEM pArray = hb_param(1, HB_IT_ARRAY);
 
-  if (Array2Rect(pArray, &lprc))
-  {
-    if (InflateRect(&lprc, hb_parni(2), hb_parni(3)))
-    {
+  if (Array2Rect(pArray, &lprc)) {
+    if (InflateRect(&lprc, hb_parni(2), hb_parni(3))) {
       Rect2ArrayEx(&lprc, pArray);
       hb_retl(TRUE);
-    }
-    else
+    } else
       hb_retl(FALSE);
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 
@@ -256,14 +244,12 @@ HB_FUNC(INTERSECTRECT)
   RECT lprcSrc1;
   RECT lprcSrc2;
 
-  if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc1) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprcSrc2))
-  {
+  if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc1) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprcSrc2)) {
     if (IntersectRect(&lprcDst, &lprcSrc1, &lprcSrc2))
       hb_itemRelease(hb_itemReturn(Rect2Array(&lprcDst)));
     else
       hb_ret();
-  }
-  else
+  } else
     hb_ret();
 }
 
@@ -283,16 +269,12 @@ HB_FUNC(UNIONRECT)
   RECT lprcSrc1;
   RECT lprcSrc2;
 
-  if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc1) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprcSrc2))
-  {
-    if (UnionRect(&lprcDst, &lprcSrc1, &lprcSrc2))
-    {
+  if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc1) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprcSrc2)) {
+    if (UnionRect(&lprcDst, &lprcSrc1, &lprcSrc2)) {
       hb_itemRelease(hb_itemReturn(Rect2Array(&lprcDst)));
-    }
-    else
+    } else
       hb_ret();
-  }
-  else
+  } else
     hb_ret();
 }
 
@@ -312,16 +294,12 @@ HB_FUNC(SUBTRACTRECT)
   RECT lprcSrc1;
   RECT lprcSrc2;
 
-  if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc1) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprcSrc2))
-  {
-    if (SubtractRect(&lprcDst, &lprcSrc1, &lprcSrc2))
-    {
+  if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc1) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprcSrc2)) {
+    if (SubtractRect(&lprcDst, &lprcSrc1, &lprcSrc2)) {
       hb_itemRelease(hb_itemReturn(Rect2Array(&lprcDst)));
-    }
-    else
+    } else
       hb_ret();
-  }
-  else
+  } else
     hb_ret();
 }
 
@@ -338,17 +316,13 @@ HB_FUNC(OFFSETRECT)
   RECT lprc;
   PHB_ITEM pSrc1 = hb_param(1, HB_IT_ARRAY);
 
-  if (ISARRAY(1) && Array2Rect(pSrc1, &lprc))
-  {
-    if (OffsetRect(&lprc, hb_parni(2), hb_parni(3)))
-    {
+  if (ISARRAY(1) && Array2Rect(pSrc1, &lprc)) {
+    if (OffsetRect(&lprc, hb_parni(2), hb_parni(3))) {
       Rect2ArrayEx(&lprc, pSrc1);
       hb_retl(TRUE);
-    }
-    else
+    } else
       hb_retl(FALSE);
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 
@@ -365,11 +339,9 @@ HB_FUNC(ISRECTEMPTY)
   RECT lprc;
   PHB_ITEM pSrc1 = hb_param(1, HB_IT_ARRAY);
 
-  if (ISARRAY(1) && Array2Rect(pSrc1, &lprc))
-  {
+  if (ISARRAY(1) && Array2Rect(pSrc1, &lprc)) {
     w32_ret_BOOL(IsRectEmpty(&lprc));
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 
@@ -387,11 +359,9 @@ HB_FUNC(EQUALRECT)
   RECT lprc2;
   PHB_ITEM pSrc1 = hb_param(1, HB_IT_ARRAY), pSrc2 = hb_param(2, HB_IT_ARRAY);
 
-  if (Array2Rect(pSrc1, &lprc1) && Array2Rect(pSrc2, &lprc2))
-  {
+  if (Array2Rect(pSrc1, &lprc1) && Array2Rect(pSrc2, &lprc2)) {
     w32_ret_BOOL(EqualRect(&lprc1, &lprc2));
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 
@@ -410,11 +380,9 @@ HB_FUNC(PTINRECT)
   POINT pt;
   PHB_ITEM pSrc1 = hb_param(1, HB_IT_ARRAY), pSrc2 = hb_param(2, HB_IT_ARRAY);
 
-  if (Array2Rect(pSrc1, &lprc) && Array2Point(pSrc2, &pt))
-  {
+  if (Array2Rect(pSrc1, &lprc) && Array2Point(pSrc2, &pt)) {
     w32_ret_BOOL((BOOL)PtInRect(&lprc, pt));
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 

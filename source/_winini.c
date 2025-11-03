@@ -73,17 +73,14 @@ HB_FUNC(GETPROFILESTRING)
   char *lpEntry = ISNIL(2) ? NULL : (char *)hb_parcx(2);
   char *lpDefault = (char *)hb_parc(3);
 
-  while (TRUE)
-  {
+  while (TRUE) {
     dwLen = GetProfileString(lpSection, lpEntry, lpDefault, bBuffer, nSize);
     if ((((lpSection == NULL) || (lpEntry == NULL)) && (nSize - dwLen == 2)) ||
-        ((lpSection && lpEntry) && (nSize - dwLen == 1)))
-    {
+        ((lpSection && lpEntry) && (nSize - dwLen == 1))) {
       hb_xfree(bBuffer);
       nSize *= 2;
       bBuffer = (LPTSTR)hb_xgrab(nSize);
-    }
-    else
+    } else
       break;
   }
 
@@ -106,17 +103,14 @@ HB_FUNC(GETPRIVATEPROFILESTRING)
   char *lpDefault = (char *)hb_parcx(3);
   char *lpFileName = (char *)hb_parcx(4);
 
-  while (TRUE)
-  {
+  while (TRUE) {
     dwLen = GetPrivateProfileString(lpSection, lpEntry, lpDefault, bBuffer, nSize, lpFileName);
     if ((((lpSection == NULL) || (lpEntry == NULL)) && (nSize - dwLen == 2)) ||
-        ((lpSection && lpEntry) && (nSize - dwLen == 1)))
-    {
+        ((lpSection && lpEntry) && (nSize - dwLen == 1))) {
       hb_xfree(bBuffer);
       nSize *= 2;
       bBuffer = (LPTSTR)hb_xgrab(nSize);
-    }
-    else
+    } else
       break;
   }
   if (dwLen)

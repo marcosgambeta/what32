@@ -77,12 +77,10 @@ HB_FUNC(EXTTEXTOUT)
 
   rcOk = (ISARRAY(5) && Array2Rect(hb_param(5, HB_IT_ARRAY), &rc));
 
-  if (ISARRAY(7))
-  {
+  if (ISARRAY(7)) {
     iCount = hb_parinfa(7, 0);
     lpDx = (INT *)hb_xgrab(iCount * sizeof(INT));
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       *(lpDx + i) = hb_parni(7, i + 1);
     }
   }
@@ -152,20 +150,17 @@ HB_FUNC(TABBEDTEXTOUT)
   int *aiTabs;
   int i;
 
-  if (ISARRAY(5))
-  {
+  if (ISARRAY(5)) {
     iCount = hb_parinfa(5, 0);
     aiTabs = (INT *)hb_xgrab(iCount * sizeof(INT));
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       *(aiTabs + i) = hb_parni(5, i + 1);
     }
 
     hb_retnl((LONG)TabbedTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), (LPCSTR)cText, strlen(cText), iCount, aiTabs,
                                  hb_parni(6)));
     hb_xfree(aiTabs);
-  }
-  else
+  } else
     hb_retnl(0);
 }
 
@@ -201,20 +196,17 @@ HB_FUNC(GETTABBEDTEXTEXTENT)
   int *aiTabs;
   int i;
 
-  if (ISARRAY(3))
-  {
+  if (ISARRAY(3)) {
     iCount = hb_parinfa(3, 0);
     aiTabs = (INT *)hb_xgrab(iCount * sizeof(INT));
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       *(aiTabs + i) = hb_parni(3, i + 1);
     }
     cText = hb_parcx(2);
     w32_ret_DWORD((LONG)GetTabbedTextExtent(w32_par_HDC(1), (LPCTSTR)cText, strlen(cText), iCount, aiTabs));
 
     hb_xfree(aiTabs);
-  }
-  else
+  } else
     hb_retnl(0);
 }
 
@@ -261,8 +253,7 @@ HB_FUNC(GETTEXTEXTENTPOINT32)
   SIZE sz;
   PHB_ITEM aMetr;
 
-  if (GetTextExtentPoint32(w32_par_HDC(1), pstr, strlen(pstr), &sz))
-  {
+  if (GetTextExtentPoint32(w32_par_HDC(1), pstr, strlen(pstr), &sz)) {
     aMetr = Size2Array(&sz);
     _itemReturn(aMetr);
     _itemRelease(aMetr);

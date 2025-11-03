@@ -122,8 +122,7 @@ HB_FUNC(GETCURSORPOS)
   POINT Point;
   PHB_ITEM gcPos;
 
-  if (GetCursorPos(&Point))
-  {
+  if (GetCursorPos(&Point)) {
     gcPos = Point2Array(&Point);
     _itemReturn(gcPos);
     _itemRelease(gcPos);

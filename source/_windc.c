@@ -149,8 +149,7 @@ HB_FUNC(GETDCORGEX)
   POINT Point;
   PHB_ITEM aPt;
 
-  if (GetDCOrgEx(w32_par_HDC(1), &Point))
-  {
+  if (GetDCOrgEx(w32_par_HDC(1), &Point)) {
     aPt = Point2Array(&Point);
     _itemReturn(aPt);
     _itemRelease(aPt);
@@ -175,16 +174,12 @@ HB_FUNC(SCROLLDC)
   RECT lprcUpdate;
   PHB_ITEM pArray = hb_param(7, HB_IT_ARRAY);
 
-  if (Array2Rect(hb_param(4, HB_IT_ARRAY), &lprcScroll) && Array2Rect(hb_param(5, HB_IT_ARRAY), &lprcClip))
-  {
-    if (ScrollDC(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lprcScroll, &lprcClip, w32_par_HRGN(6), &lprcUpdate))
-    {
+  if (Array2Rect(hb_param(4, HB_IT_ARRAY), &lprcScroll) && Array2Rect(hb_param(5, HB_IT_ARRAY), &lprcClip)) {
+    if (ScrollDC(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lprcScroll, &lprcClip, w32_par_HRGN(6), &lprcUpdate)) {
       Rect2ArrayEx(&lprcUpdate, pArray);
       hb_retl(TRUE);
-    }
-    else
+    } else
       hb_retl(FALSE);
-  }
-  else
+  } else
     hb_retl(FALSE);
 }

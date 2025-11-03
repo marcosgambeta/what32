@@ -161,15 +161,12 @@ HB_FUNC(CREATEPROGRESSBAR)
   LONG nStyle = ISNIL(8) ? 0 : hb_parnl(8);
 
   int x1, y1, nwidth, nheight;
-  if (hb_pcount() > 2)
-  {
+  if (hb_pcount() > 2) {
     x1 = hb_parni(3);
     y1 = hb_parni(4);
     nwidth = hb_parni(5);
     nheight = cyVScroll;
-  }
-  else
-  {
+  } else {
     GetClientRect(hParentWindow, &rcClient);
     x1 = rcClient.left;
     y1 = rcClient.bottom - cyVScroll;
@@ -187,8 +184,7 @@ HB_FUNC(CREATEPROGRESSBAR)
   SendMessage(hPBar, PBM_SETRANGE, 0, MAKELPARAM(0, hb_parni(2)));
   SendMessage(hPBar, PBM_SETSTEP, (WPARAM)1, 0);
 
-  if (bBorder)
-  {
+  if (bBorder) {
     ProgressBarStyle = GetWindowLong(hPBar, GWL_EXSTYLE);
     ProgressBarStyle = ProgressBarStyle - WS_EX_STATICEDGE;
     SetWindowLong(hPBar, GWL_EXSTYLE, ProgressBarStyle);
@@ -257,8 +253,7 @@ HB_FUNC(INITLISTVIEW)
   SendMessage(hbutton, LVM_SETEXTENDEDLISTVIEWSTYLE, 0,
               LVS_EX_GRIDLINES | LVS_EX_FULLROWSELECT | LVS_EX_HEADERDRAGDROP);
 
-  if (hb_parni(8) != 0)
-  {
+  if (hb_parni(8) != 0) {
     // SendMessage(hbutton,(UINT)WM_SETFONT,(WPARAM) PrepareFont ( hb_parcx(7) , (LPARAM) hb_parni(8)) , 1 ) ;
   }
 
@@ -285,8 +280,7 @@ HB_FUNC(INITLISTVIEWCOLUMNS)
   COL.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
   COL.fmt = LVCFMT_LEFT;
 
-  for (s = 0; s <= l9; s = s + 1)
-  {
+  for (s = 0; s <= l9; s = s + 1) {
 
     caption = hb_itemGetCPtr(hArray->item.asArray.value->pItems + s);
     vi = hb_itemGetNI(wArray->item.asArray.value->pItems + s);
@@ -323,8 +317,7 @@ HB_FUNC(ADDLISTVIEWITEMS)
   LI.pszText = caption;
   ListView_InsertItem(h, &LI);
 
-  for (s = 1; s <= l; s = s + 1)
-  {
+  for (s = 1; s <= l; s = s + 1) {
     caption = hb_itemGetCPtr(hArray->item.asArray.value->pItems + s);
     ListView_SetItemText(h, c, s, caption);
   }

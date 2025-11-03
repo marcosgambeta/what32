@@ -42,7 +42,7 @@ extern BOOL Array2Point(PHB_ITEM aPoint, POINT *pt);
   (int)SNDMSG((hwnd), HDM_EDITFILTER, (WPARAM)(i), MAKELPARAM(fDiscardChanges, 0))
 #define HDM_CLEARFILTER (HDM_FIRST + 24)
 #define Header_ClearFilter(hwnd, i) (int)SNDMSG((hwnd), HDM_CLEARFILTER, (WPARAM)(i), 0)
-#define Header_ClearAllFilters(hwnd) (int)SNDMSG((hwnd), HDM_CLEARFILTER, (WPARAM)-1, 0)
+#define Header_ClearAllFilters(hwnd) (int)SNDMSG((hwnd), HDM_CLEARFILTER, (WPARAM) - 1, 0)
 #if (defined(__GNUC__) || defined(__WATCOMC__) || defined(__DMC__))
 #if defined(__DMC__)
 #define HDM_SETHOTDIVIDER (HDM_FIRST + 19)
@@ -185,11 +185,9 @@ HB_FUNC(HEADER_GETORDERARRAY)
   BOOL lRet = Header_GetOrderArray(w32_par_HWND(1), iCount, lpi);
   UINT i;
 
-  if (lRet)
-  {
+  if (lRet) {
     aInt = _itemArrayNew(iCount);
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       temp = _itemPutNL(NULL, lpi[i]);
       hb_arraySet(aInt, i + 1, temp);
       _itemRelease(temp);
@@ -219,19 +217,16 @@ HB_FUNC(HEADER_SETORDERARRAY)
   INT *lpi;
   UINT i;
 
-  if (hb_parinfo(2) == HB_IT_ARRAY)
-  {
+  if (hb_parinfo(2) == HB_IT_ARRAY) {
 
     iCount = hb_parinfa(2, 0);
     lpi = (INT *)hb_xgrab(iCount * sizeof(INT));
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       lpi[i] = hb_parni(2, i + 1);
     }
 
     hb_retl(Header_SetOrderArray(w32_par_HWND(1), iCount, lpi));
-  }
-  else
+  } else
     hb_retl(0);
 }
 
@@ -245,8 +240,7 @@ HB_FUNC(HEADER_GETITEMRECT)
   RECT rc;
   PHB_ITEM aRc;
 
-  if (Header_GetItemRect(w32_par_HWND(1), (WPARAM)hb_parni(2), &rc))
-  {
+  if (Header_GetItemRect(w32_par_HWND(1), (WPARAM)hb_parni(2), &rc)) {
     aRc = Rect2Array(&rc);
     _itemReturn(aRc);
     _itemRelease(aRc);

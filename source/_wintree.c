@@ -54,16 +54,14 @@ HB_FUNC(TVGETSELTEXT) // ( hWnd ) --> cText
   HTREEITEM hItem = TreeView_GetSelection(hWnd);
   TV_ITEM tvi;
   BYTE buffer[100];
-  if (hItem)
-  {
+  if (hItem) {
     tvi.mask = TVIF_TEXT;
     tvi.hItem = hItem;
     tvi.pszText = (char *)buffer;
     tvi.cchTextMax = 100;
     TreeView_GetItem(hWnd, &tvi);
     hb_retc(tvi.pszText);
-  }
-  else
+  } else
     hb_retc("");
 }
 

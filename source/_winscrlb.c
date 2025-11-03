@@ -44,18 +44,14 @@ HB_FUNC(GETSCROLLRANGE)
   LPINT lpMinPos = 0;
   LPINT lpMaxPos = 0;
 
-  if (GetScrollRange(w32_par_HWND(1), hb_parni(2), lpMinPos, lpMaxPos))
-  {
-    if (ISBYREF(3) && ISBYREF(4))
-    {
+  if (GetScrollRange(w32_par_HWND(1), hb_parni(2), lpMinPos, lpMaxPos)) {
+    if (ISBYREF(3) && ISBYREF(4)) {
       hb_storni(3, *lpMinPos);
       hb_storni(4, *lpMaxPos);
       hb_retl(1);
-    }
-    else
+    } else
       hb_retl(0);
-  }
-  else
+  } else
     hb_retl(0);
 }
 

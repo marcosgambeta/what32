@@ -58,8 +58,7 @@ HB_FUNC(POSTMESSAGE)
 
   char *cText = NULL;
 
-  if (ISBYREF(4))
-  {
+  if (ISBYREF(4)) {
     cText = (char *)hb_xgrab(hb_parcsiz(4));
     hb_xmemcpy(cText, hb_parcx(4), hb_parcsiz(4));
   }
@@ -70,8 +69,7 @@ HB_FUNC(POSTMESSAGE)
            ? 0
            : (ISBYREF(4) ? (LPARAM)(LPSTR)cText : (ISCHAR(4) ? (LPARAM)(LPSTR)hb_parcx(4) : (LPARAM)hb_parnl(4))))));
 
-  if (ISBYREF(4))
-  {
+  if (ISBYREF(4)) {
     hb_storclen(cText, hb_parcsiz(4), 4);
     hb_xfree(cText);
   }
@@ -84,8 +82,7 @@ HB_FUNC(SENDMESSAGE)
 
   char *cText = NULL;
 
-  if (ISBYREF(4))
-  {
+  if (ISBYREF(4)) {
     cText = (char *)hb_xgrab(hb_parcsiz(4));
     hb_xmemcpy(cText, hb_parcx(4), hb_parcsiz(4));
   }
@@ -96,8 +93,7 @@ HB_FUNC(SENDMESSAGE)
            ? 0
            : (ISBYREF(4) ? (LPARAM)(LPSTR)cText : (ISCHAR(4) ? (LPARAM)(LPSTR)hb_parcx(4) : (LPARAM)hb_parnl(4))))));
 
-  if (ISBYREF(4))
-  {
+  if (ISBYREF(4)) {
     hb_storclen(cText, hb_parcsiz(4), 4);
     hb_xfree(cText);
   }
@@ -110,13 +106,10 @@ HB_FUNC(SENDDLGITEMMESSAGE)
   char *cText;
   PHB_ITEM pText = hb_param(5, HB_IT_STRING);
 
-  if (pText)
-  {
+  if (pText) {
     cText = (char *)hb_xgrab(pText->item.asString.length + 1);
     hb_xmemcpy(cText, pText->item.asString.value, pText->item.asString.length + 1);
-  }
-  else
-  {
+  } else {
     cText = NULL;
   }
 
@@ -125,13 +118,11 @@ HB_FUNC(SENDDLGITEMMESSAGE)
                                     (cText ? (LPARAM)cText : (LPARAM)hb_parnl(5))));
 
   // Will be ignored if not BYREF.
-  if (pText)
-  {
+  if (pText) {
     hb_storclen(cText, pText->item.asString.length, 5);
   }
 
-  if (cText)
-  {
+  if (cText) {
     hb_xfree(cText);
   }
 
@@ -157,12 +148,10 @@ HB_FUNC(GETMESSAGE)
 {
   MSG Msg;
 
-  if (GetMessage(&Msg, ISNIL(2) ? NULL : w32_par_HWND(2), ISNIL(3) ? 0 : hb_parnl(3), ISNIL(4) ? 0 : hb_parnl(4)))
-  {
+  if (GetMessage(&Msg, ISNIL(2) ? NULL : w32_par_HWND(2), ISNIL(3) ? 0 : hb_parnl(3), ISNIL(4) ? 0 : hb_parnl(4))) {
     hb_storclen((LPSTR)&Msg, sizeof(MSG), 1);
     hb_retl(1);
-  }
-  else
+  } else
     hb_retl(0);
 }
 
@@ -173,12 +162,10 @@ HB_FUNC(PEEKMESSAGE)
   MSG Msg;
 
   if (PeekMessage((MSG *)&Msg, ISNIL(2) ? NULL : w32_par_HWND(2), ISNIL(3) ? 0 : hb_parnl(3),
-                  ISNIL(4) ? 0 : hb_parnl(4), ISNIL(5) ? PM_NOREMOVE : hb_parnl(5)))
-  {
+                  ISNIL(4) ? 0 : hb_parnl(4), ISNIL(5) ? PM_NOREMOVE : hb_parnl(5))) {
     hb_storclen((LPSTR)&Msg, sizeof(MSG), 1);
     hb_retl(1);
-  }
-  else
+  } else
     hb_retl(0);
 }
 

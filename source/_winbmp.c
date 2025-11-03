@@ -56,13 +56,10 @@ HB_FUNC(DRAWBITMAP)
 
   SelectObject(hDCmem, hBitmap);
   GetObject(hBitmap, sizeof(BITMAP), (LPVOID)&bitmap);
-  if (nWidthDest && (nWidthDest != bitmap.bmWidth || nHeightDest != bitmap.bmHeight))
-  {
+  if (nWidthDest && (nWidthDest != bitmap.bmWidth || nHeightDest != bitmap.bmHeight)) {
     StretchBlt(hDC, hb_parni(4), hb_parni(5), nWidthDest, nHeightDest, hDCmem, 0, 0, bitmap.bmWidth, bitmap.bmHeight,
                dwraster);
-  }
-  else
-  {
+  } else {
     BitBlt(hDC, hb_parni(4), hb_parni(5), bitmap.bmWidth, bitmap.bmHeight, hDCmem, 0, 0, dwraster);
   }
 
@@ -101,8 +98,7 @@ HB_FUNC(GETBITMAPDIMENSIONEX)
   SIZE Size;
   PHB_ITEM aSize;
 
-  if (GetBitmapDimensionEx(w32_par_HBITMAP(1), &Size))
-  {
+  if (GetBitmapDimensionEx(w32_par_HBITMAP(1), &Size)) {
     aSize = Size2Array(&Size);
     _itemReturn(aSize);
     _itemRelease(aSize);
@@ -121,8 +117,7 @@ HB_FUNC(SETBITMAPDIMENSIONEX)
   PHB_ITEM aSize;
   PHB_ITEM temp;
 
-  if (SetBitmapDimensionEx(w32_par_HBITMAP(1), hb_parni(2), hb_parni(3), &Size))
-  {
+  if (SetBitmapDimensionEx(w32_par_HBITMAP(1), hb_parni(2), hb_parni(3), &Size)) {
 
     aSize = hb_itemArrayNew(2);
 
@@ -364,8 +359,7 @@ void Pic(HDC hDC, int x, int y, int dx, int dy, HBITMAP hBmp, COLORREF rgbTransp
   SetBkColor(hDCMem, rgbTransparent);
   BitBlt(hDCMem2, 0, 0, dx, dy, hDCMem, 0, 0, SRCCOPY);
 
-  if (disabled)
-  {
+  if (disabled) {
     hBr = CreateSolidBrush(GetSysColor(COLOR_BTNHIGHLIGHT));
     hOld = (HBRUSH)SelectObject(hDC, hBr);
     BitBlt(hDC, x + 1, y + 1, dx - 2, dy - 2, hDCMem2, 0, 0, 12060490);
@@ -377,9 +371,7 @@ void Pic(HDC hDC, int x, int y, int dx, int dy, HBITMAP hBmp, COLORREF rgbTransp
     BitBlt(hDC, x, y, dx - 2, dy - 2, hDCMem2, 0, 0, 12060490);
     SelectObject(hDC, hOld);
     DeleteObject(hBr);
-  }
-  else
-  {
+  } else {
     BitBlt(hDC, x, y, dx, dy, hDCMem, 0, 0, SRCINVERT);
     BitBlt(hDC, x, y, dx, dy, hDCMem2, 0, 0, SRCAND);
     BitBlt(hDC, x, y, dx, dy, hDCMem, 0, 0, SRCINVERT);

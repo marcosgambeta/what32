@@ -219,8 +219,7 @@ HB_FUNC(GETWINMETAFILEBITS)
 
   nBytes = GetWinMetaFileBits(w32_par_HENHMETAFILE(1), 0, NULL, hb_parni(2), w32_par_HDC(3));
 
-  if (nBytes)
-  {
+  if (nBytes) {
     Buffer = (BYTE *)hb_xgrab(nBytes);
 
     if (GetWinMetaFileBits(w32_par_HENHMETAFILE(1), nBytes, Buffer, hb_parni(2), w32_par_HDC(3)))

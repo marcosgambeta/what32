@@ -501,17 +501,13 @@ HB_FUNC(CLIENTTOSCREEN)
   POINT Point;
   PHB_ITEM pArray;
   pArray = hb_param(2, HB_IT_ARRAY);
-  if (Array2Point(pArray, &Point))
-  {
-    if (ClientToScreen(w32_par_HWND(1), &Point))
-    {
+  if (Array2Point(pArray, &Point)) {
+    if (ClientToScreen(w32_par_HWND(1), &Point)) {
       Point2ArrayEx(&Point, pArray);
       hb_retl(TRUE);
-    }
-    else
+    } else
       hb_retl(FALSE);
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 
@@ -529,17 +525,13 @@ HB_FUNC(SCREENTOCLIENT)
   POINT Point;
   PHB_ITEM pArray = hb_param(2, HB_IT_ARRAY);
 
-  if (Array2Point(pArray, &Point))
-  {
-    if (ScreenToClient(w32_par_HWND(1), &Point) > 0)
-    {
+  if (Array2Point(pArray, &Point)) {
+    if (ScreenToClient(w32_par_HWND(1), &Point) > 0) {
       Point2ArrayEx(&Point, pArray);
       hb_retl(TRUE);
-    }
-    else
+    } else
       hb_retl(FALSE);
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 
@@ -835,17 +827,13 @@ HB_FUNC(ADJUSTWINDOWRECT)
   PHB_ITEM pArray = hb_param(1, HB_IT_ARRAY);
   // PHB_ITEM pItem =hb_stackItemFromBase( 1 );
 
-  if (Array2Rect(pArray, &lpRect))
-  {
-    if (AdjustWindowRect(&lpRect, w32_par_DWORD(2), w32_par_BOOL(3)) > 0)
-    {
+  if (Array2Rect(pArray, &lpRect)) {
+    if (AdjustWindowRect(&lpRect, w32_par_DWORD(2), w32_par_BOOL(3)) > 0) {
       Rect2ArrayEx(&lpRect, pArray);
       hb_retl(TRUE);
-    }
-    else
+    } else
       hb_retl(FALSE);
-  }
-  else
+  } else
     hb_retl(FALSE);
 }
 
@@ -1017,8 +1005,7 @@ HB_FUNC(SETWINDOWEXTEX)
   SIZE lpSize;
   PHB_ITEM pArray;
 
-  if (SetWindowExtEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lpSize) > 0)
-  {
+  if (SetWindowExtEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lpSize) > 0) {
 
     pArray = Size2Array(&lpSize);
     _itemReturn(pArray);
@@ -1082,8 +1069,7 @@ HB_FUNC(SETMINMAXINFO)
   pt.x = hb_parni(3, 1);
   pt.y = hb_parni(3, 2);
 
-  switch (hb_parni(2))
-  {
+  switch (hb_parni(2)) {
   case 2:
     mmi->ptMaxSize = pt;
     break;
@@ -1127,7 +1113,7 @@ HB_FUNC( ALLOWSETFOREGROUNDWINDOW )
 */
 
 #ifndef ASFW_ANY
-#define ASFW_ANY ((DWORD)-1)
+#define ASFW_ANY ((DWORD) - 1)
 #endif
 
 HB_FUNC(ALLOWSETFOREGROUNDWINDOW)
@@ -1137,13 +1123,11 @@ HB_FUNC(ALLOWSETFOREGROUNDWINDOW)
   BOOL bASFWRet = (BOOL)FALSE;
   DWORD dwProcessId = ISNIL(1) ? ASFW_ANY : w32_par_DWORD(1);
 
-  if (h)
-  {
+  if (h) {
     typedef BOOL(WINAPI * xbAllowSetForegroundWindow)(DWORD dwProcessId);
     xbAllowSetForegroundWindow pfnASFW = (xbAllowSetForegroundWindow)GetProcAddress(h, "AllowSetForegroundWindow");
 
-    if (pfnASFW)
-    {
+    if (pfnASFW) {
       bASFWRet = (BOOL)pfnASFW(dwProcessId);
     }
 

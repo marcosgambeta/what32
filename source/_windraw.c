@@ -65,8 +65,7 @@ HB_FUNC(GETCURRENTPOSITIONEX)
   POINT pt;
   PHB_ITEM aPt;
 
-  if (GetCurrentPositionEx(w32_par_HDC(1), &pt))
-  {
+  if (GetCurrentPositionEx(w32_par_HDC(1), &pt)) {
     aPt = Point2Array(&pt);
     _itemReturn(aPt);
     _itemRelease(aPt);
@@ -239,23 +238,18 @@ HB_FUNC(POLYLINE)
   PHB_ITEM aParam;
   PHB_ITEM aSub;
 
-  if (ISARRAY(2))
-  {
+  if (ISARRAY(2)) {
     iCount = (DWORD)hb_parinfa(2, 0);
     Point = (POINT *)hb_xgrab(iCount * sizeof(POINT));
     aParam = hb_param(2, HB_IT_ARRAY);
 
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
 
-      if (Array2Point(aSub, &pt))
-      {
+      if (Array2Point(aSub, &pt)) {
         *(Point + i) = pt;
         _itemRelease(aSub);
-      }
-      else
-      {
+      } else {
         hb_retl(0);
         hb_xfree(Point);
         _itemRelease(aSub);
@@ -265,8 +259,7 @@ HB_FUNC(POLYLINE)
 
     w32_ret_BOOL(Polyline(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
-  }
-  else
+  } else
     hb_retl(0);
 }
 
@@ -285,23 +278,18 @@ HB_FUNC(POLYLINETO)
   PHB_ITEM aParam;
   PHB_ITEM aSub;
 
-  if (ISARRAY(2))
-  {
+  if (ISARRAY(2)) {
     iCount = (DWORD)hb_parinfa(2, 0);
     Point = (POINT *)hb_xgrab(iCount * sizeof(POINT));
     aParam = hb_param(2, HB_IT_ARRAY);
 
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
 
-      if (Array2Point(aSub, &pt))
-      {
+      if (Array2Point(aSub, &pt)) {
         *(Point + i) = pt;
         _itemRelease(aSub);
-      }
-      else
-      {
+      } else {
         hb_retl(0);
         hb_xfree(Point);
         _itemRelease(aSub);
@@ -311,8 +299,7 @@ HB_FUNC(POLYLINETO)
 
     hb_retl(PolylineTo(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
-  }
-  else
+  } else
     hb_retl(0);
 }
 
@@ -333,13 +320,11 @@ HB_FUNC(POLYPOLYLINE)
   PHB_ITEM aParam;
   PHB_ITEM aSub;
 
-  if (ISARRAY(2) && ISARRAY(3))
-  {
+  if (ISARRAY(2) && ISARRAY(3)) {
     iPolyCount = hb_parinfa(3, 0);
     PolyPoints = (DWORD *)hb_xgrab(iPolyCount * sizeof(DWORD));
 
-    for (i = 0; i < iPolyCount; i++)
-    {
+    for (i = 0; i < iPolyCount; i++) {
       *(PolyPoints + i) = hb_parnl(3, i + 1);
     }
 
@@ -347,17 +332,13 @@ HB_FUNC(POLYPOLYLINE)
     Point = (POINT *)hb_xgrab(iCount * sizeof(POINT));
     aParam = hb_param(2, HB_IT_ARRAY);
 
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
 
-      if (Array2Point(aSub, &pt))
-      {
+      if (Array2Point(aSub, &pt)) {
         *(Point + i) = pt;
         _itemRelease(aSub);
-      }
-      else
-      {
+      } else {
         hb_retl(0);
         hb_xfree(PolyPoints);
         hb_xfree(Point);
@@ -369,8 +350,7 @@ HB_FUNC(POLYPOLYLINE)
     w32_ret_BOOL(PolyPolyline(w32_par_HDC(1), Point, PolyPoints, iPolyCount));
     hb_xfree(PolyPoints);
     hb_xfree(Point);
-  }
-  else
+  } else
     hb_retl(0);
 }
 
@@ -456,23 +436,18 @@ HB_FUNC(POLYBEZIER)
   PHB_ITEM aParam;
   PHB_ITEM aSub;
 
-  if (ISARRAY(2))
-  {
+  if (ISARRAY(2)) {
     iCount = (DWORD)hb_parinfa(2, 0);
     Point = (POINT *)hb_xgrab(iCount * sizeof(POINT));
     aParam = hb_param(2, HB_IT_ARRAY);
 
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
 
-      if (Array2Point(aSub, &pt))
-      {
+      if (Array2Point(aSub, &pt)) {
         *(Point + i) = pt;
         _itemRelease(aSub);
-      }
-      else
-      {
+      } else {
         hb_retl(0);
         hb_xfree(Point);
         _itemRelease(aSub);
@@ -482,8 +457,7 @@ HB_FUNC(POLYBEZIER)
 
     w32_ret_BOOL(PolyBezier(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
-  }
-  else
+  } else
     hb_retl(0);
 }
 
@@ -503,23 +477,18 @@ HB_FUNC(POLYBEZIERTO)
   PHB_ITEM aParam;
   PHB_ITEM aSub;
 
-  if (ISARRAY(2))
-  {
+  if (ISARRAY(2)) {
     iCount = (DWORD)hb_parinfa(2, 0);
     Point = (POINT *)hb_xgrab(iCount * sizeof(POINT));
     aParam = hb_param(2, HB_IT_ARRAY);
 
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
 
-      if (Array2Point(aSub, &pt))
-      {
+      if (Array2Point(aSub, &pt)) {
         *(Point + i) = pt;
         _itemRelease(aSub);
-      }
-      else
-      {
+      } else {
         hb_retl(0);
         hb_xfree(Point);
         _itemRelease(aSub);
@@ -529,8 +498,7 @@ HB_FUNC(POLYBEZIERTO)
 
     w32_ret_BOOL(PolyBezierTo(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
-  }
-  else
+  } else
     hb_retl(0);
 }
 
@@ -595,23 +563,18 @@ HB_FUNC(POLYGON)
   PHB_ITEM aParam;
   PHB_ITEM aSub;
 
-  if (ISARRAY(2))
-  {
+  if (ISARRAY(2)) {
     iCount = (int)hb_parinfa(2, 0);
     Point = (POINT *)hb_xgrab(iCount * sizeof(POINT));
     aParam = hb_param(2, HB_IT_ARRAY);
 
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
 
-      if (Array2Point(aSub, &pt))
-      {
+      if (Array2Point(aSub, &pt)) {
         *(Point + i) = pt;
         _itemRelease(aSub);
-      }
-      else
-      {
+      } else {
         hb_retl(0);
         hb_xfree(Point);
         _itemRelease(aSub);
@@ -621,8 +584,7 @@ HB_FUNC(POLYGON)
 
     w32_ret_BOOL(Polygon(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
-  }
-  else
+  } else
     hb_retl(0);
 }
 
@@ -643,13 +605,11 @@ HB_FUNC(POLYPOLYGON)
   PHB_ITEM aParam;
   PHB_ITEM aSub;
 
-  if (ISARRAY(2) && ISARRAY(3))
-  {
+  if (ISARRAY(2) && ISARRAY(3)) {
     iPolyCount = hb_parinfa(3, 0);
     PolyPoints = (INT *)hb_xgrab(iPolyCount * sizeof(INT));
 
-    for (i = 0; i < iPolyCount; i++)
-    {
+    for (i = 0; i < iPolyCount; i++) {
       *(PolyPoints + i) = hb_parni(3, i + 1);
     }
 
@@ -657,17 +617,13 @@ HB_FUNC(POLYPOLYGON)
     Point = (POINT *)hb_xgrab(iCount * sizeof(POINT));
     aParam = hb_param(2, HB_IT_ARRAY);
 
-    for (i = 0; i < iCount; i++)
-    {
+    for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
 
-      if (Array2Point(aSub, &pt))
-      {
+      if (Array2Point(aSub, &pt)) {
         *(Point + i) = pt;
         _itemRelease(aSub);
-      }
-      else
-      {
+      } else {
         hb_retl(0);
         hb_xfree(PolyPoints);
         hb_xfree(Point);
@@ -679,8 +635,7 @@ HB_FUNC(POLYPOLYGON)
     w32_ret_BOOL(PolyPolygon(w32_par_HDC(1), Point, PolyPoints, iPolyCount));
     hb_xfree(PolyPoints);
     hb_xfree(Point);
-  }
-  else
+  } else
     hb_retl(0);
 }
 

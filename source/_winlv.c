@@ -62,19 +62,15 @@ HB_FUNC(LISTVIEWNOTIFY)
   PHB_ITEM DArray;
   LPSTR cAlias;
   static PHB_DYNS pSymTest = 0;
-  switch (lpnmh->code)
-  {
+  switch (lpnmh->code) {
   case LVN_GETDISPINFO: {
     LV_DISPINFO *lpdi = (LV_DISPINFO *)lParam;
     // TCHAR szString[MAX_PATH];
-    if (lpdi->item.iSubItem)
-    {
-      if (lpdi->item.mask & LVIF_TEXT)
-      {
+    if (lpdi->item.iSubItem) {
+      if (lpdi->item.mask & LVIF_TEXT) {
         if (!pSymTest)
           pSymTest = hb_dynsymFind("_WINLVGETDBINFO");
-        if (pSymTest)
-        {
+        if (pSymTest) {
           pArray = hb_param(3, HB_IT_ARRAY);
           DArray = hb_param(4, HB_IT_ARRAY);
           cAlias = (LPSTR)hb_parcx(5);
@@ -91,15 +87,11 @@ HB_FUNC(LISTVIEWNOTIFY)
           lstrcpy(lpdi->item.pszText, cRet);
         }
       }
-    }
-    else
-    {
-      if (lpdi->item.mask & LVIF_TEXT)
-      {
+    } else {
+      if (lpdi->item.mask & LVIF_TEXT) {
         if (!pSymTest)
           pSymTest = hb_dynsymFind("_WINLVGETDBINFO");
-        if (pSymTest)
-        {
+        if (pSymTest) {
           pArray = hb_param(3, HB_IT_ARRAY);
           DArray = hb_param(4, HB_IT_ARRAY);
           cAlias = (LPSTR)hb_parcx(5);
@@ -116,8 +108,7 @@ HB_FUNC(LISTVIEWNOTIFY)
           lstrcpy(lpdi->item.pszText, cRet);
         }
       }
-      if (lpdi->item.mask & LVIF_IMAGE)
-      {
+      if (lpdi->item.mask & LVIF_IMAGE) {
         lpdi->item.iImage = lpdi->item.iItem;
       }
     }
