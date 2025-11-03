@@ -44,9 +44,7 @@ HB_FUNC(MOVETOEX)
   if (MoveToEx(w32_par_HDC(1), // device context handle
                hb_parni(2),    // x-coordinate of line's ending point
                hb_parni(3),    // y-coordinate of line's ending point
-               &Point))
-
-  {
+               &Point)) {
 
     aPt = Point2Array(&Point);
     _itemReturn(aPt);
@@ -106,8 +104,9 @@ HB_FUNC(DESCRIBEPIXELFORMAT)
   UINT nBytes = sizeof(pfd);
 
   hb_retni(DescribePixelFormat(w32_par_HDC(1), hb_parni(2), nBytes, &pfd));
-  if (ISBYREF(3))
+  if (ISBYREF(3)) {
     hb_storclen((char *)&pfd, sizeof(PIXELFORMATDESCRIPTOR), 3);
+  }  
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) pfd , sizeof( PIXELFORMATDESCRIPTOR ) );
 }
 
@@ -259,8 +258,9 @@ HB_FUNC(POLYLINE)
 
     w32_ret_BOOL(Polyline(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
-  } else
+  } else {
     hb_retl(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -299,8 +299,9 @@ HB_FUNC(POLYLINETO)
 
     hb_retl(PolylineTo(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
-  } else
+  } else {
     hb_retl(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -350,8 +351,9 @@ HB_FUNC(POLYPOLYLINE)
     w32_ret_BOOL(PolyPolyline(w32_par_HDC(1), Point, PolyPoints, iPolyCount));
     hb_xfree(PolyPoints);
     hb_xfree(Point);
-  } else
+  } else {
     hb_retl(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -379,11 +381,9 @@ HB_FUNC( POLYDRAW )
    PHB_ITEM aParam ;
    PHB_ITEM aSub ;
 
-   if (ISARRAY( 2 ) && ISCHAR( 3 ) )
-   {
+   if (ISARRAY( 2 ) && ISCHAR( 3 ) ) {
        iCount = hb_parinfa( 2, 0 ) ;
-       if ( iCount == hb_parclen( 3 ) )
-       {
+       if ( iCount == hb_parclen( 3 ) ) {
             Point = (POINT *) hb_xgrab( iCount * sizeof (POINT) ) ;
             aParam = hb_param(2,HB_IT_ARRAY);
 
@@ -391,13 +391,10 @@ HB_FUNC( POLYDRAW )
             {
                aSub = hb_itemArrayGet( aParam, i+1 );
 
-               if ( Array2Point(aSub, &pt ))
-               {
+               if ( Array2Point(aSub, &pt )) {
                     *(Point+i) = pt ;
                     _itemRelease( aSub );
-               }
-               else
-               {
+               } else {
                   hb_retl(0);
                   hb_xfree(PolyPoints);
                   hb_xfree(Point);
@@ -411,9 +408,9 @@ HB_FUNC( POLYDRAW )
             hb_xfree(PolyPoints);
             hb_xfree(Point);
        }
-   }
-   else
+   } else {
       hb_retl( 0 );
+   }   
 
 }
 
@@ -457,8 +454,9 @@ HB_FUNC(POLYBEZIER)
 
     w32_ret_BOOL(PolyBezier(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
-  } else
+  } else {
     hb_retl(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -498,8 +496,9 @@ HB_FUNC(POLYBEZIERTO)
 
     w32_ret_BOOL(PolyBezierTo(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
-  } else
+  } else {
     hb_retl(0);
+  }  
 }
 
 ///////////////////////
@@ -584,8 +583,9 @@ HB_FUNC(POLYGON)
 
     w32_ret_BOOL(Polygon(w32_par_HDC(1), Point, iCount));
     hb_xfree(Point);
-  } else
+  } else {
     hb_retl(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -635,8 +635,9 @@ HB_FUNC(POLYPOLYGON)
     w32_ret_BOOL(PolyPolygon(w32_par_HDC(1), Point, PolyPoints, iPolyCount));
     hb_xfree(PolyPoints);
     hb_xfree(Point);
-  } else
+  } else {
     hb_retl(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -649,10 +650,12 @@ HB_FUNC(FILLRECT)
 {
   RECT rc;
 
-  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
+  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc)) {
     hb_retni(FillRect(w32_par_HDC(1), &rc, w32_par_HBRUSH(3)));
-  else
+  }  
+  else {
     hb_retni(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -665,10 +668,12 @@ HB_FUNC(FRAMERECT)
 {
   RECT rc;
 
-  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
+  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc)) {
     hb_retni(FrameRect(w32_par_HDC(1), &rc, w32_par_HBRUSH(3)));
-  else
+  }  
+  else {
     hb_retni(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -681,10 +686,12 @@ HB_FUNC(INVERTRECT)
 {
   RECT rc;
 
-  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
+  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc)) {
     hb_retni(InvertRect(w32_par_HDC(1), &rc));
-  else
+  }
+  else {
     hb_retni(0);
+  }  
 }
 
 /////////////////////////

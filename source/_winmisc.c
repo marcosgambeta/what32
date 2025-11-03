@@ -77,10 +77,11 @@ HB_FUNC(POKEB)
 
 HB_FUNC(PEEK)
 {
-  if (hb_pcount() == 2)
+  if (hb_pcount() == 2) {
     hb_retclen((char *)hb_parnl(1), hb_parnl(2));
-  else
+  } else {
     hb_retc((char *)hb_parnl(1));
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -88,10 +89,11 @@ HB_FUNC(PEEK)
 
 HB_FUNC(POKE)
 {
-  if (hb_pcount() == 3)
+  if (hb_pcount() == 3) {
     hb_xmemcpy((char *)hb_parnl(1), hb_parcx(2), hb_parnl(3));
-  else
+  } else {
     hb_xmemcpy((char *)hb_parnl(1), hb_parcx(2), hb_parclen(2));
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -164,20 +166,24 @@ BOOL Array2Rect(PHB_ITEM aRect, RECT *rc )
 
       PHB_ITEM item;
 
-      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aRect, 1)))
+      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aRect, 1))) {
          return FALSE;
+      }
       rc->left = hb_itemGetNL(item);
 
-      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aRect, 2)))
+      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aRect, 2))) {
          return FALSE;
+      }
       rc->top = hb_itemGetNL(item);
 
-      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aRect, 3)))
+      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aRect, 3))) {
          return FALSE;
+      }
       rc->right = hb_itemGetNL(item);
 
-      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aRect, 4)))
+      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aRect, 4))) {
          return FALSE;
+      }
       rc->bottom = hb_itemGetNL(item);
 
       return TRUE ;
@@ -231,12 +237,14 @@ BOOL Array2Point(PHB_ITEM aPoint, POINT *pt )
 
       PHB_ITEM item;
 
-      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aPoint, 1)))
+      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aPoint, 1))) {
          return FALSE;
+      }
       pt->x = hb_itemGetNL(item);
 
-      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aPoint, 2)))
+      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aPoint, 2))) {
          return FALSE;
+      }
       pt->y = hb_itemGetNL(item);
 
       return TRUE ;
@@ -282,12 +290,14 @@ BOOL Array2Size(PHB_ITEM aSize, SIZE *siz )
 
       PHB_ITEM item;
 
-      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aSize, 1)))
+      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aSize, 1))) {
          return FALSE;
+      }
       siz->cx = hb_itemGetNL(item);
 
-      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aSize, 2)))
+      if (!HB_IS_NUMERIC(item = hb_itemArrayGet(aSize, 2))) {
          return FALSE;
+      }
       siz->cy = hb_itemGetNL(item);
 
       return TRUE ;
@@ -342,10 +352,11 @@ HB_FUNC(MESSAGEBEEP)
 
 HB_FUNC(SETBIT)
 {
-  if (hb_pcount() < 3 || hb_parni(3))
+  if (hb_pcount() < 3 || hb_parni(3)) {
     hb_retnl(hb_parnl(1) | (1 << (hb_parni(2) - 1)));
-  else
+  } else {
     hb_retnl(hb_parnl(1) & ~(1 << (hb_parni(2) - 1)));
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -525,9 +536,9 @@ HB_FUNC(GETCLASSINFO)
 {
   WNDCLASS WndClass;
 
-  if (GetClassInfo(ISNIL(1) ? NULL : w32_par_HINSTANCE(1), w32_par_LPCSTR(2), &WndClass))
-
+  if (GetClassInfo(ISNIL(1) ? NULL : w32_par_HINSTANCE(1), w32_par_LPCSTR(2), &WndClass)) {
     hb_retclen((char *)&WndClass, sizeof(WNDCLASS));
+  }  
 
   // the line below GPFs !
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) &WndClass, sizeof( WNDCLASS ) );
@@ -543,9 +554,9 @@ HB_FUNC(GETCLASSINFOEX)
 {
   WNDCLASSEX WndClassEx;
 
-  if (GetClassInfoEx(ISNIL(1) ? NULL : w32_par_HINSTANCE(1), w32_par_LPCSTR(2), &WndClassEx))
-
+  if (GetClassInfoEx(ISNIL(1) ? NULL : w32_par_HINSTANCE(1), w32_par_LPCSTR(2), &WndClassEx)) {
     hb_retclen((char *)&WndClassEx, sizeof(WNDCLASSEX));
+  }
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) &WndClassEx, sizeof( WNDCLASSEX ) );
 }
 

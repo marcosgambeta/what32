@@ -145,8 +145,9 @@ HB_FUNC(HEADER_GETITEM)
 {
   HDITEM hdi;
   BOOL lRet = Header_GetItem(w32_par_HWND(1), hb_parni(2), &hdi);
-  if (lRet)
+  if (lRet) {
     hb_retclen((char *)&hdi, sizeof(HDITEM));
+  }  
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) hdi, sizeof( HDITEM ) );
 }
 
@@ -226,8 +227,9 @@ HB_FUNC(HEADER_SETORDERARRAY)
     }
 
     hb_retl(Header_SetOrderArray(w32_par_HWND(1), iCount, lpi));
-  } else
+  } else {
     hb_retl(0);
+  }
 }
 
 //-----------------------------------------------------------------------------

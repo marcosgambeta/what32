@@ -38,10 +38,11 @@ HB_FUNC(DRAWFOCUSRECT)
 {
   RECT lprc;
 
-  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprc))
+  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprc)) {
     w32_ret_BOOL(DrawFocusRect(w32_par_HDC(1), &lprc));
-  else
+  } else {
     hb_retl(FALSE);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -88,11 +89,11 @@ HB_FUNC( FILLRECT )
    RECT   lprc ;
    PHB_ITEM pSrc1;
 
-    if (Array2Rect( hb_param( 2 , HB_IT_ARRAY) , &rc) )
+    if (Array2Rect( hb_param( 2 , HB_IT_ARRAY) , &rc) ) {
       hb_retni( FillRect( (HDC) hb_parnl( 1 ), &lprc, (HBRUSH) hb_parnl( 3 ) ) ) ;
-   }
-   else
+   } else {
     hb_retni(0);
+   } 
 }
 
 */
@@ -114,11 +115,11 @@ HB_FUNC( FRAMERECT )
 
    PHB_ITEM pSrc1;
 
- if (Array2Rect( hb_param( 2 , HB_IT_ARRAY) , &lprc) )
+ if (Array2Rect( hb_param( 2 , HB_IT_ARRAY) , &lprc) ) {
       hb_retni( FrameRect( (HDC) hb_parnl( 1 ), &lprc, (HBRUSH) hb_parnl( 3 ) ) ) ;
-   }
-   else
+   } else {
       hb_retni( 0 );
+   }   
 }
 
 */
@@ -139,11 +140,11 @@ HB_FUNC( INVERTRECT )
    RECT lprc ;
    PHB_ITEM pSrc1;
 
- if (Array2Rect( hb_param( 2 , HB_IT_ARRAY) , &lprc) )
+ if (Array2Rect( hb_param( 2 , HB_IT_ARRAY) , &lprc) ) {
     hb_retl( InvertRect( (HDC) hb_parnl( 1 ), &lprc ) ) ;
-   }
-   else
+   } else {
       hb_retl(FALSE);
+   }   
 }
 
 */
@@ -162,8 +163,9 @@ HB_FUNC(SETRECT)
 
   if (SetRect(&lprc, hb_parni(1), hb_parni(2), hb_parni(3), hb_parni(4))) {
     hb_itemRelease(hb_itemReturn(Rect2Array(&lprc)));
-  } else
+  } else {
     hb_ret();
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -179,8 +181,9 @@ HB_FUNC(SETRECTEMPTY)
   RECT lprc;
   if (SetRectEmpty(&lprc)) {
     hb_itemRelease(hb_itemReturn(Rect2Array(&lprc)));
-  } else
+  } else {
     hb_ret();
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -199,10 +202,12 @@ HB_FUNC(COPYRECT)
   if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc)) {
     if (CopyRect(&lprcDst, &lprcSrc)) {
       hb_itemRelease(hb_itemReturn(Rect2Array(&lprcDst)));
-    } else
+    } else {
       hb_ret();
-  } else
+    }
+  } else {
     hb_ret();
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -222,10 +227,12 @@ HB_FUNC(INFLATERECT)
     if (InflateRect(&lprc, hb_parni(2), hb_parni(3))) {
       Rect2ArrayEx(&lprc, pArray);
       hb_retl(TRUE);
-    } else
+    } else {
       hb_retl(FALSE);
-  } else
+    }
+  } else {
     hb_retl(FALSE);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -245,12 +252,14 @@ HB_FUNC(INTERSECTRECT)
   RECT lprcSrc2;
 
   if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc1) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprcSrc2)) {
-    if (IntersectRect(&lprcDst, &lprcSrc1, &lprcSrc2))
+    if (IntersectRect(&lprcDst, &lprcSrc1, &lprcSrc2)) {
       hb_itemRelease(hb_itemReturn(Rect2Array(&lprcDst)));
-    else
+    } else {
       hb_ret();
-  } else
+    }
+  } else {
     hb_ret();
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -272,10 +281,12 @@ HB_FUNC(UNIONRECT)
   if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc1) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprcSrc2)) {
     if (UnionRect(&lprcDst, &lprcSrc1, &lprcSrc2)) {
       hb_itemRelease(hb_itemReturn(Rect2Array(&lprcDst)));
-    } else
+    } else {
       hb_ret();
-  } else
+    }
+  } else {
     hb_ret();
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -297,10 +308,12 @@ HB_FUNC(SUBTRACTRECT)
   if (Array2Rect(hb_param(1, HB_IT_ARRAY), &lprcSrc1) && Array2Rect(hb_param(2, HB_IT_ARRAY), &lprcSrc2)) {
     if (SubtractRect(&lprcDst, &lprcSrc1, &lprcSrc2)) {
       hb_itemRelease(hb_itemReturn(Rect2Array(&lprcDst)));
-    } else
+    } else {
       hb_ret();
-  } else
+    }
+  } else {
     hb_ret();
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -320,10 +333,12 @@ HB_FUNC(OFFSETRECT)
     if (OffsetRect(&lprc, hb_parni(2), hb_parni(3))) {
       Rect2ArrayEx(&lprc, pSrc1);
       hb_retl(TRUE);
-    } else
+    } else {
       hb_retl(FALSE);
-  } else
+    }
+  } else {
     hb_retl(FALSE);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -341,8 +356,9 @@ HB_FUNC(ISRECTEMPTY)
 
   if (ISARRAY(1) && Array2Rect(pSrc1, &lprc)) {
     w32_ret_BOOL(IsRectEmpty(&lprc));
-  } else
+  } else {
     hb_retl(FALSE);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -361,8 +377,9 @@ HB_FUNC(EQUALRECT)
 
   if (Array2Rect(pSrc1, &lprc1) && Array2Rect(pSrc2, &lprc2)) {
     w32_ret_BOOL(EqualRect(&lprc1, &lprc2));
-  } else
+  } else {
     hb_retl(FALSE);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -382,8 +399,9 @@ HB_FUNC(PTINRECT)
 
   if (Array2Rect(pSrc1, &lprc) && Array2Point(pSrc2, &pt)) {
     w32_ret_BOOL((BOOL)PtInRect(&lprc, pt));
-  } else
+  } else {
     hb_retl(FALSE);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -401,10 +419,11 @@ HB_FUNC(RECTVISIBLE)
 {
   RECT rc;
 
-  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
+  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc)) {
     w32_ret_BOOL(RectVisible(w32_par_HDC(1), &rc));
-  else
+  } else {
     hb_retl(0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -430,8 +449,9 @@ HB_FUNC(VALIDATERECT)
 {
   RECT rc;
 
-  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
+  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc)) {
     w32_ret_BOOL(ValidateRect(w32_par_HWND(1), &rc));
-  else
+  } else {
     w32_ret_BOOL(ValidateRect(w32_par_HWND(1), NULL));
+  }
 }

@@ -124,8 +124,9 @@ HB_FUNC(ENUMFONTFAMILIES)
     lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
     hb_retni(EnumFontFamilies(w32_par_HDC(1), w32_par_LPCSTR(2), (FONTENUMPROC)GenericCallblockProc, lParam));
-  } else
+  } else {
     OutputDebugString("EnumFontFamilies(): No codeblock");
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -143,8 +144,9 @@ HB_FUNC(ENUMFONTFAMILIESEX)
     lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
     hb_retni(EnumFontFamiliesEx(w32_par_HDC(1), LogFont, (FONTENUMPROC)GenericCallblockProc, lParam, 0));
-  } else
+  } else {
     OutputDebugString("EnumFontFamiliesEx(): No codeblock");
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -161,8 +163,9 @@ HB_FUNC(ENUMFONTS)
     lParam = (LPARAM)(PHB_ITEM)hb_param(3, HB_IT_BLOCK);
 
     hb_retni(EnumFonts(w32_par_HDC(1), w32_par_LPCSTR(2), (FONTENUMPROC)GenericCallblockProc, lParam));
-  } else
+  } else {
     OutputDebugString("EnumFonts(): No codeblock");
+  }  
 }
 
 /*
@@ -179,8 +182,7 @@ int CALLBACK GenericCallbackProc( LONG param1, LONG param2, int wParam, LPARAM l
 
    pSymTest = hb_dynsymFind( (char *) lParam );
 
-   if ( pSymTest )
-   {
+   if ( pSymTest ) {
       hb_vmPushSymbol( pSymTest->pSymbol );
       hb_vmPushNil();
       hb_vmPushLong( (LONG ) param1 );
@@ -191,9 +193,9 @@ int CALLBACK GenericCallbackProc( LONG param1, LONG param2, int wParam, LPARAM l
       res = hb_itemGetNL( (PHB_ITEM) hb_param( -1, HB_IT_ANY ) );
 
       return res;
-   }
-   else // shouldn't happen
+   } else { // shouldn't happen
       return( 0 );
+   }   
 
 }
 */
@@ -226,8 +228,7 @@ int CALLBACK GenericCallblockProc(LONG param1, LONG param2, int wParam, LPARAM l
     res = hb_itemGetNL((PHB_ITEM)hb_param(-1, HB_IT_ANY));
 
     return res;
-  } else // shouldn't happen
-  {
+  } else { // shouldn't happen
     return (0);
   }
 }
@@ -243,8 +244,9 @@ HB_FUNC(GETFONTDATA)
 {
   char *cBuffer = NULL;
   DWORD dwRet;
-  if (!ISNIL(5) && (hb_parnl(5) > 0))
+  if (!ISNIL(5) && (hb_parnl(5) > 0)) {
     cBuffer = (char *)hb_xgrab(hb_parnl(5));
+  }  
 
   dwRet = GetFontData(w32_par_HDC(1), w32_par_DWORD(2), w32_par_DWORD(3),
                       (ISNIL(5) || (hb_parnl(5) <= 0)) ? NULL : cBuffer, (DWORD)ISNIL(5) ? 0 : hb_parnl(5));

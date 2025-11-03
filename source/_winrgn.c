@@ -37,10 +37,11 @@ HB_FUNC(CREATEELLIPTICRGNINDIRECT)
 {
   RECT rc;
 
-  if (ISARRAY(1) && Array2Rect(hb_param(1, HB_IT_ARRAY), &rc))
+  if (ISARRAY(1) && Array2Rect(hb_param(1, HB_IT_ARRAY), &rc)) {
     hb_retnl((LONG)CreateEllipticRgnIndirect(&rc));
-  else
+  } else {
     hb_retnl(0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -74,9 +75,9 @@ HB_FUNC(CREATEPOLYGONRGN)
     for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
 
-      if (Array2Point(aSub, &pt))
+      if (Array2Point(aSub, &pt)) {
         *(Point + i) = pt;
-      else {
+      } else {
         hb_retnl(0);
         hb_xfree(Point);
         return;
@@ -85,8 +86,9 @@ HB_FUNC(CREATEPOLYGONRGN)
 
     hb_retnl((LONG)CreatePolygonRgn(Point, iCount, hb_parni(2)));
     hb_xfree(Point);
-  } else
+  } else {
     hb_retnl(0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -121,9 +123,9 @@ HB_FUNC(CREATEPOLYPOLYGONRGN)
     for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
 
-      if (Array2Point(aSub, &pt))
+      if (Array2Point(aSub, &pt)) {
         *(Point + i) = pt;
-      else {
+      } else {
         hb_retnl(0);
         hb_xfree(PolyPoints);
         hb_xfree(Point);
@@ -134,8 +136,9 @@ HB_FUNC(CREATEPOLYPOLYGONRGN)
     hb_retnl((LONG)CreatePolyPolygonRgn(Point, PolyPoints, iPolyCount, hb_parni(3)));
     hb_xfree(PolyPoints);
     hb_xfree(Point);
-  } else
+  } else {
     hb_retnl(0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -160,10 +163,11 @@ HB_FUNC(CREATERECTRGNINDIRECT)
 
   RECT rc;
 
-  if (ISARRAY(1) && Array2Rect(hb_param(1, HB_IT_ARRAY), &rc))
+  if (ISARRAY(1) && Array2Rect(hb_param(1, HB_IT_ARRAY), &rc)) {
     hb_retnl((LONG)CreateRectRgnIndirect(&rc));
-  else
+  } else {
     hb_retnl(0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -201,8 +205,9 @@ HB_FUNC(GETREGIONDATA)
   if (nBytes) {
     RgnData = (RGNDATA *)hb_xgrab(nBytes);
     nRet = GetRegionData(w32_par_HRGN(1), nBytes, RgnData);
-    if (nRet == 1)
+    if (nRet == 1) {
       hb_retclen((char *)RgnData, nBytes);
+    }
 
     hb_xfree(RgnData);
   }
@@ -226,8 +231,9 @@ HB_FUNC(RECTINREGION)
 {
   RECT rc;
 
-  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc))
+  if (ISARRAY(2) && Array2Rect(hb_param(2, HB_IT_ARRAY), &rc)) {
     w32_ret_BOOL(RectInRegion(w32_par_HRGN(1), &rc));
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -273,10 +279,11 @@ HB_FUNC( VALIDATERECT )
 {
    RECT rc ;
 
-   if (ISARRAY( 2 ) && Array2Rect( hb_param( 2, HB_IT_ARRAY ), &rc ) )
+   if (ISARRAY( 2 ) && Array2Rect( hb_param( 2, HB_IT_ARRAY ), &rc ) ) {
       hb_retl( ValidateRect( (HWND) hb_parnl( 1 ), &rc ) ) ;
-   else
+   } else {
       hb_retl( ValidateRect( (HWND) hb_parnl( 1 ), NULL) ) ;
+   }
 
 }
 */

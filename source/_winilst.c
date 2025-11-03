@@ -276,9 +276,11 @@ HB_FUNC(IMAGELIST_GETDRAGIMAGE)
   PHB_ITEM aPt1 = hb_param(1, HB_IT_ARRAY);
   PHB_ITEM aPt2 = hb_param(2, HB_IT_ARRAY);
 
-  if (Array2Point(aPt1, &pt))
-    if (Array2Point(aPt2, &ptHotspot))
+  if (Array2Point(aPt1, &pt)) {
+    if (Array2Point(aPt2, &ptHotspot)) {
       hb_retnl((LONG)ImageList_GetDragImage(&pt, &ptHotspot));
+    }
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -293,8 +295,9 @@ HB_FUNC(IMAGELIST_GETICONSIZE)
     hb_storni(cx, 2);
     hb_storni(cy, 3);
     hb_retl(1);
-  } else
+  } else {
     hb_retl(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -314,8 +317,9 @@ HB_FUNC(IMAGELIST_GETIMAGEINFO)
 {
   IMAGEINFO ii;
 
-  if (ImageList_GetImageInfo(w32_par_HIMAGELIST(1), hb_parni(2), &ii))
+  if (ImageList_GetImageInfo(w32_par_HIMAGELIST(1), hb_parni(2), &ii)) {
     hb_retclen((char *)&ii, sizeof(IMAGEINFO));
+  }
 }
 
 //-----------------------------------------------------------------------------

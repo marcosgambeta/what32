@@ -150,11 +150,11 @@ HB_FUNC(GETCLIPCURSOR)
   RECT rc;
   PHB_ITEM aRect = NULL;
 
-  if (GetClipCursor(&rc))
-
+  if (GetClipCursor(&rc)) {
     aRect = Rect2Array(&rc);
   _itemReturn(aRect);
   _itemRelease(aRect);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -222,9 +222,9 @@ HB_FUNC(GETCURSORINFO)
 {
   CURSORINFO pci;
 
-  if (GetCursorInfo(&pci))
-
+  if (GetCursorInfo(&pci)) {
     hb_retclen((char *)&pci, sizeof(CURSORINFO));
+  }
 }
 
 #endif

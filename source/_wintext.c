@@ -88,8 +88,9 @@ HB_FUNC(EXTTEXTOUT)
   w32_ret_BOOL(ExtTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), w32_par_UINT(4), rcOk ? &rc : NULL, (LPCSTR)cText,
                           (UINT)strlen(cText), ISARRAY(7) ? lpDx : NULL));
 
-  if (ISARRAY(7))
+  if (ISARRAY(7)) {
     hb_xfree(lpDx);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -103,13 +104,14 @@ HB_FUNC(DRAWTEXT)
   const char *cText = hb_parcx(2);
   RECT rc;
 
-  if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
+  if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc)) {
     hb_retni(DrawText(w32_par_HDC(1), // handle of device context
                       (LPCTSTR)cText, // address of string
                       strlen(cText),  // number of characters in string
                       &rc, ISNIL(4) ? DT_LEFT : hb_parni(4)));
-  else
+  } else {
     hb_retni(0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -124,16 +126,18 @@ HB_FUNC(DRAWTEXTEX)
   RECT rc;
   DRAWTEXTPARAMS *dtp = NULL;
 
-  if (ISCHAR(5))
+  if (ISCHAR(5)) {
     dtp = (DRAWTEXTPARAMS *)hb_param(5, HB_IT_STRING)->item.asString.value;
+  }  
 
-  if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
+  if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc)) {
     hb_retni(DrawTextEx(w32_par_HDC(1), // handle of device context
                         (LPTSTR)cText,  // address of string
                         strlen(cText),  // number of characters in string
                         (LPRECT)&rc, ISNIL(4) ? DT_LEFT : hb_parni(4), ISCHAR(5) ? (LPDRAWTEXTPARAMS)dtp : NULL));
-  else
+  } else {
     hb_retni(0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -160,8 +164,9 @@ HB_FUNC(TABBEDTEXTOUT)
     hb_retnl((LONG)TabbedTextOut(w32_par_HDC(1), hb_parni(2), hb_parni(3), (LPCSTR)cText, strlen(cText), iCount, aiTabs,
                                  hb_parni(6)));
     hb_xfree(aiTabs);
-  } else
+  } else {
     hb_retnl(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -176,8 +181,9 @@ HB_FUNC(GETTEXTFACE)
   int iRet;
 
   iRet = GetTextFace(w32_par_HDC(1), MAX_PATH, cText);
-  if (iRet)
+  if (iRet) {
     hb_retclen(cText, iRet);
+  }  
 
   hb_xfree(cText);
 }
@@ -206,8 +212,9 @@ HB_FUNC(GETTABBEDTEXTEXTENT)
     w32_ret_DWORD((LONG)GetTabbedTextExtent(w32_par_HDC(1), (LPCTSTR)cText, strlen(cText), iCount, aiTabs));
 
     hb_xfree(aiTabs);
-  } else
+  } else {
     hb_retnl(0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -220,8 +227,9 @@ HB_FUNC(GETTEXTMETRICS)
 {
   TEXTMETRIC tm;
 
-  if (GetTextMetrics(w32_par_HDC(1), &tm))
+  if (GetTextMetrics(w32_par_HDC(1), &tm)) {
     hb_retclen((char *)&tm, sizeof(TEXTMETRIC));
+  }
 }
 
 //-----------------------------------------------------------------------------

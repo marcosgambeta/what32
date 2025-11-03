@@ -78,9 +78,7 @@ HB_FUNC(REGCLOSEKEY)
 
   if (RegCloseKey(hwHandle) == ERROR_SUCCESS) {
     hb_retnl(ERROR_SUCCESS);
-  }
-
-  else {
+  } else {
     hb_retnl(-1);
   }
 }
@@ -97,9 +95,7 @@ HB_FUNC(REGOPENKEYEX)
 
   if (lError > 0) {
     hb_retnl(-1);
-  }
-
-  else {
+  } else {
     hb_stornl(PtrToLong(phwHandle), 5);
     hb_retnl(0);
   }
@@ -197,8 +193,9 @@ HB_FUNC(REGCREATEKEYEX)
   LONG nErr;
   SECURITY_ATTRIBUTES *sa = NULL;
 
-  if (ISCHAR(7))
+  if (ISCHAR(7)) {
     sa = (SECURITY_ATTRIBUTES *)hb_param(7, HB_IT_STRING)->item.asString.value;
+  }  
 
   nErr = RegCreateKeyEx((HKEY)hb_parnl(1), (LPCSTR)hb_parcx(2), (DWORD)0, (LPSTR)hb_parcx(4), w32_par_DWORD(5),
                         w32_par_DWORD(6), sa, &hkResult, &dwDisposition);

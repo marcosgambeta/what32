@@ -86,8 +86,9 @@ HB_FUNC(GETKEYBOARDSTATE)
 {
   BYTE lpKeyState[256];
 
-  if (GetKeyboardState(lpKeyState))
+  if (GetKeyboardState(lpKeyState)) {
     hb_retclen((char *)lpKeyState, 256);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -113,8 +114,9 @@ HB_FUNC(GETKEYNAMETEXT)
 
   char cText[MAX_PATH];
   int iRet = GetKeyNameText(hb_parnl(1), cText, MAX_PATH);
-  if (iRet)
+  if (iRet) {
     hb_retclen(cText, iRet);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -196,8 +198,9 @@ HB_FUNC(CREATEACCELERATORTABLE)
     }
     hb_retnl((LONG)CreateAcceleratorTable(aAccel, iCount));
     hb_xfree(aAccel);
-  } else
+  } else {
     hb_retnl(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -226,8 +229,9 @@ HB_FUNC(COPYACCELERATORTABLE)
   PHB_ITEM item;
   int i;
 
-  if (ISARRAY(2) && ((iCount = hb_parinfa(2, 0)) > 0))
+  if (ISARRAY(2) && ((iCount = hb_parinfa(2, 0)) > 0)) {
     lpAccelDst = (LPACCEL)hb_xgrab(iCount * sizeof(ACCEL));
+  }  
 
   iRet = CopyAcceleratorTable((HACCEL)hb_parnl(1), (iCount == 0 ? NULL : lpAccelDst), iCount);
 
@@ -248,8 +252,9 @@ HB_FUNC(COPYACCELERATORTABLE)
     hb_itemRelease(aSub);
   }
 
-  if (iCount > 0)
+  if (iCount > 0) {
     hb_xfree(lpAccelDst);
+  }  
   hb_retni(iRet);
 }
 

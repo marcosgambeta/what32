@@ -27,10 +27,11 @@ HB_FUNC(DRAGQUERYFILE)
   char *cFile;
   UINT iRet;
 
-  if (hb_parni(4) > 0)
+  if (hb_parni(4) > 0) {
     cFile = (char *)hb_xgrab(hb_parni(4) + 1);
-  else
+  } else {
     cFile = (char *)hb_xgrab(strlen(hb_parcx(3)) + 1);
+  }
 
   iRet = DragQueryFile((HDROP)hb_parnl(1), w32_par_UINT(2), hb_parni(4) > 0 ? cFile : NULL, w32_par_UINT(4));
 
@@ -95,8 +96,9 @@ HB_FUNC(FINDEXECUTABLE)
 
   hb_retnl((LONG)hInst);
 
-  if ((LONG)hInst > 32)
+  if ((LONG)hInst > 32) {
     hb_storc(cBuffer, 3);
+  }
 }
 
 //-----------------------------------------------------------------------------

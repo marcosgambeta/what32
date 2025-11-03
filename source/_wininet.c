@@ -286,8 +286,9 @@ HB_FUNC(FTPCOMMAND)
   hb_retl(bRet);
 
   if (bRet) {
-    if (ISBYREF(6))
+    if (ISBYREF(6)) {
       hb_stornl((ULONG)phFtpCommand, 6);
+    }  
   }
 }
 //---------------------------------------------------------------------//
@@ -371,9 +372,11 @@ HB_FUNC(FTPFINDFIRSTFILE)
 
   hResult = FtpFindFirstFile(hInternet, lpszSearchFile, &FindFileData, dwFlags, dwContext);
 
-  if (hResult)
-    if (ISBYREF(3))
+  if (hResult) {
+    if (ISBYREF(3)) {
       hb_storclen((char *)&FindFileData, sizeof(WIN32_FIND_DATA), 3);
+    }  
+  }
 
   hb_retnl((ULONG)hResult);
 }
@@ -393,10 +396,12 @@ HB_FUNC(INTERNETFINDNEXTFILE)
 
   if (InternetFindNextFile(hFind, &FindFileData)) {
     hb_retl(TRUE);
-    if (ISBYREF(2))
+    if (ISBYREF(2)) {
       hb_storclen((char *)&FindFileData, sizeof(WIN32_FIND_DATA), 2);
-  } else
+    }  
+  } else {
     hb_retl(FALSE);
+  }  
 }
 
 //---------------------------------------------------------------------//
@@ -561,8 +566,9 @@ HB_FUNC(FTPGETCURRENTDIRECTORY)
   hb_retl(bRet);
 
   if (bRet) {
-    if (ISBYREF(2))
+    if (ISBYREF(2)) {
       hb_storclen((char *)lpszCurrentDirectory, (ULONG)dwCurrentDirectory, 2);
+    }
   }
 
   hb_xfree(lpszCurrentDirectory);

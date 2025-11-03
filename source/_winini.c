@@ -80,14 +80,17 @@ HB_FUNC(GETPROFILESTRING)
       hb_xfree(bBuffer);
       nSize *= 2;
       bBuffer = (LPTSTR)hb_xgrab(nSize);
-    } else
+    } else {
       break;
+    }  
   }
 
-  if (dwLen)
+  if (dwLen) {
     hb_retclen((char *)bBuffer, dwLen);
-  else
+  }  
+  else {
     hb_retc(lpDefault);
+  }  
 
   hb_xfree(bBuffer);
 }
@@ -110,13 +113,15 @@ HB_FUNC(GETPRIVATEPROFILESTRING)
       hb_xfree(bBuffer);
       nSize *= 2;
       bBuffer = (LPTSTR)hb_xgrab(nSize);
-    } else
+    } else {
       break;
+    }  
   }
-  if (dwLen)
+  if (dwLen) {
     hb_retclen((char *)bBuffer, dwLen);
-  else
+  } else {
     hb_retc(lpDefault);
+  }
 
   hb_xfree(bBuffer);
 }
@@ -128,10 +133,11 @@ HB_FUNC(WRITEPROFILESTRING)
   char *lpEntry = ISCHAR(2) ? (char *)hb_parcx(2) : NULL;
   char *lpData = ISCHAR(3) ? (char *)hb_parcx(3) : NULL;
 
-  if (WriteProfileString(lpSection, lpEntry, lpData))
+  if (WriteProfileString(lpSection, lpEntry, lpData)) {
     hb_retl(TRUE);
-  else
+  } else {
     hb_retl(FALSE);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -142,10 +148,11 @@ HB_FUNC(WRITEPRIVATEPROFILESTRING)
   char *lpData = ISCHAR(3) ? (char *)hb_parcx(3) : NULL;
   char *lpFileName = (char *)hb_parcx(4);
 
-  if (WritePrivateProfileString(lpSection, lpEntry, lpData, lpFileName))
+  if (WritePrivateProfileString(lpSection, lpEntry, lpData, lpFileName)) {
     hb_retl(TRUE);
-  else
+  } else {
     hb_retl(FALSE);
+  }  
 }
 
 //-----------------------------------------------------------------------------

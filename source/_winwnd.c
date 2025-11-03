@@ -505,10 +505,12 @@ HB_FUNC(CLIENTTOSCREEN)
     if (ClientToScreen(w32_par_HWND(1), &Point)) {
       Point2ArrayEx(&Point, pArray);
       hb_retl(TRUE);
-    } else
+    } else {
       hb_retl(FALSE);
-  } else
+    }
+  } else {
     hb_retl(FALSE);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -529,10 +531,12 @@ HB_FUNC(SCREENTOCLIENT)
     if (ScreenToClient(w32_par_HWND(1), &Point) > 0) {
       Point2ArrayEx(&Point, pArray);
       hb_retl(TRUE);
-    } else
+    } else {
       hb_retl(FALSE);
-  } else
+    }
+  } else {
     hb_retl(FALSE);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -717,8 +721,9 @@ HB_FUNC(GETWINDOWPLACEMENT)
 {
   WINDOWPLACEMENT wndpl;
   wndpl.length = sizeof(WINDOWPLACEMENT);
-  if (GetWindowPlacement(w32_par_HWND(1), &wndpl))
+  if (GetWindowPlacement(w32_par_HWND(1), &wndpl)) {
     hb_retclen((char *)&wndpl, sizeof(WINDOWPLACEMENT));
+  }  
 }
 
 #endif
@@ -831,10 +836,12 @@ HB_FUNC(ADJUSTWINDOWRECT)
     if (AdjustWindowRect(&lpRect, w32_par_DWORD(2), w32_par_BOOL(3)) > 0) {
       Rect2ArrayEx(&lpRect, pArray);
       hb_retl(TRUE);
-    } else
+    } else {
       hb_retl(FALSE);
-  } else
+    }
+  } else {
     hb_retl(FALSE);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -857,8 +864,9 @@ HB_FUNC(ADJUSTWINDOWRECTEX)
   Array2Rect(pArray, &lpRect);
 
   bAjust = AdjustWindowRectEx(&lpRect, w32_par_DWORD(2), w32_par_BOOL(3), w32_par_DWORD(4));
-  if (bAjust)
+  if (bAjust) {
     Rect2ArrayEx(&lpRect, pArray);
+  }
 
   hb_retl(bAjust);
 }
@@ -905,9 +913,9 @@ HB_FUNC(GETWINDOWINFO)
 {
   WINDOWINFO pwi;
 
-  if (GetWindowInfo(w32_par_HWND(1), &pwi))
-
+  if (GetWindowInfo(w32_par_HWND(1), &pwi)) {
     hb_retclen((char *)&pwi, sizeof(WINDOWINFO));
+  }
 }
 
 #endif
@@ -921,9 +929,9 @@ HB_FUNC(GETTITLEBARINFO)
 {
   TITLEBARINFO pti;
 
-  if (GetTitleBarInfo(w32_par_HWND(1), &pti))
-
+  if (GetTitleBarInfo(w32_par_HWND(1), &pti)) {
     hb_retclen((char *)&pti, sizeof(TITLEBARINFO));
+  }  
 }
 
 #endif
@@ -1006,7 +1014,6 @@ HB_FUNC(SETWINDOWEXTEX)
   PHB_ITEM pArray;
 
   if (SetWindowExtEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lpSize) > 0) {
-
     pArray = Size2Array(&lpSize);
     _itemReturn(pArray);
     _itemRelease(pArray);
@@ -1024,9 +1031,7 @@ HB_FUNC(SETWINDOWORGEX)
   POINT lpPoint;
   PHB_ITEM pArray;
 
-  if (SetWindowOrgEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lpPoint) > 0)
-
-  {
+  if (SetWindowOrgEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lpPoint) > 0) {
     pArray = Point2Array(&lpPoint);
     _itemReturn(pArray);
     _itemRelease(pArray);

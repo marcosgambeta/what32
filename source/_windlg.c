@@ -242,8 +242,9 @@ HB_FUNC(MAPDIALOGRECT)
     hb_stornl(lpRect.top, 2, 2);
     hb_stornl(lpRect.right, 2, 3);
     hb_stornl(lpRect.bottom, 2, 4);
-  } else
+  } else {
     hb_retl(FALSE);
+  }
 }
 
 //-----------------------------------------------------------------------------

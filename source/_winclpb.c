@@ -177,15 +177,18 @@ HB_FUNC(GETCLIPBOARDDATA)
     if (hMem) {
       hb_retc((char *)GlobalLock(hMem));
       GlobalUnlock(hMem);
-    } else
+    } else {
       hb_retc("");
+    }  
     break;
 
   case CF_BITMAP:
-    if (IsClipboardFormatAvailable(CF_BITMAP))
+    if (IsClipboardFormatAvailable(CF_BITMAP)) {
       hb_retnl((LONG)DuplicateBitmap((HBITMAP)GetClipboardData(CF_BITMAP)));
-    else
+    }  
+    else {
       hb_retnl(0);
+    }  
     break;
 
   default:
@@ -209,10 +212,12 @@ HB_FUNC(GETCLIPBOARDFORMATNAME)
 
   nRet = GetClipboardFormatName((UINT)hb_parni(1), cName, 127);
 
-  if (nRet == 0)
+  if (nRet == 0) {
     hb_retc("");
-  else
+  }  
+  else {
     hb_retclen(cName, nRet);
+  }  
 }
 
 //----------------------------------------------------------------------------//
@@ -223,19 +228,17 @@ HB_FUNC( SETCLIPBOARDDATA )
    void *pMem ;
    DWORD dwLen ;
 
-   if ( hb_pcount() > 1 )
-   {
+   if ( hb_pcount() > 1 ) {
       dwLen = (DWORD) hb_parclen(2) + ( hb_parni(1) == CF_TEXT ? 1 : 0 ) ;
       hMem = GlobalAlloc( ( GMEM_MOVEABLE | GMEM_DDESHARE) , dwLen ) ;
-      if (  hMem )
-      {
+      if (  hMem ) {
           pMem = GlobalLock( hMem) ;
           memcpy(pMem, hb_parcx(2), dwLen ) ;
           GlobalUnlock( hMem ) ;
           hb_retnl( (ULONG) SetClipboardData( (UINT) hb_parni(1), hMem ) ) ;
-      }
-      else
+      } else {
          hb_retnl(0);
+      }   
    }
 }
 */
@@ -254,15 +257,17 @@ HB_FUNC(SETCLIPBOARDDATA)
     if (hMem) {
       hb_retc((char *)GlobalLock(hMem));
       GlobalUnlock(hMem);
-    } else
+    } else {
       hb_retc("");
+    }  
     break;
 
   case CF_BITMAP:
-    if (IsClipboardFormatAvailable(CF_BITMAP))
+    if (IsClipboardFormatAvailable(CF_BITMAP)) {
       hb_retl((BOOL)SetClipboardData(CF_BITMAP, DuplicateBitmap(w32_par_HBITMAP(2))));
-    else
+    } else {
       hb_retnl(0);
+    }  
     break;
 
   default:

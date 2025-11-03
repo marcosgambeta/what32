@@ -76,10 +76,8 @@ HB_FUNC( GETPROCADDRESS )
 
     if ((dwProcAddr = (ULONG) GetProcAddress( (HMODULE) hb_parnl(1),
                                               ISCHAR( 2 ) ? (LPCSTR) hb_parcx(2) :
-                                              (LPCSTR) MAKELONG((WORD) hb_parni(2), 0) ) ) == 0 )
-    {
-       if ( ISCHAR( 2 ) )
-       {
+                                              (LPCSTR) MAKELONG((WORD) hb_parni(2), 0) ) ) == 0 ) {
+       if ( ISCHAR( 2 ) ) {
             // try forced ANSI flavour ?
            strcpy(cFuncName, hb_parcx(2));
            strcat(cFuncName, "A");
@@ -244,21 +242,25 @@ HB_FUNC(CALLDLL)
   DWORD lpFunction = w32_par_DWORD(2);
   RESULT rc;
 
-  if (hInst == NULL)
+  if (hInst == NULL) {
     return;
+  }
 
-  if ((LPVOID)lpFunction == NULL)
+  if ((LPVOID)lpFunction == NULL) {
     return;
+  }
 
-  if (ISNIL(3))
+  if (ISNIL(3)) {
     Flags = DC_CALL_STD_BO;
-  else
+  } else {
     Flags = hb_parni(3);
+  }
   memset(Parm, 0, sizeof(Parm));
   memset(DblParms, 0, sizeof(DblParms));
 
-  if (iArgCnt > 0)
+  if (iArgCnt > 0) {
     iArgCnt /= 2;
+  }  
 
   // printf( "\nNo. Parameters: %i\n", iArgCnt ) ;
   if (iArgCnt > 0) {
@@ -270,21 +272,23 @@ HB_FUNC(CALLDLL)
       switch (hb_parni(i - 1)) {
       case CTYPE_CHAR_PTR:
         Parm[iCnt].nWidth = sizeof(char *);
-        if (ISNIL(i))
+        if (ISNIL(i)) {
           Parm[iCnt].pArg = NULL;
-        else if (ISNUM(i))
+        } else if (ISNUM(i)) {
           Parm[iCnt].dwArg = (DWORD)MAKEINTRESOURCE(hb_parni(i));
-        else
+        } else {
           Parm[iCnt].dwArg = (DWORD)hb_parc(i);
+        }
         iCnt++;
         break;
       case CTYPE_STRUCTURE_PTR:
       case CTYPE_UNSIGNED_CHAR_PTR:
         Parm[iCnt].nWidth = sizeof(unsigned char *);
-        if (ISNIL(i))
+        if (ISNIL(i)) {
           Parm[iCnt].pArg = NULL;
-        else
+        } else {
           Parm[iCnt].dwArg = (DWORD)hb_parc(i);
+        }
         iCnt++;
         break;
       case CTYPE_BOOL:
@@ -294,45 +298,50 @@ HB_FUNC(CALLDLL)
         break;
       case CTYPE_CHAR:
         Parm[iCnt].nWidth = sizeof(char);
-        if (ISNIL(i))
+        if (ISNIL(i)) {
           Parm[iCnt].pArg = NULL;
-        else
+        } else {
           Parm[iCnt].dwArg = (DWORD)hb_parni(i);
+        }  
         iCnt++;
         break;
       case CTYPE_UNSIGNED_CHAR:
         Parm[iCnt].nWidth = sizeof(unsigned char);
-        if (ISNIL(i))
+        if (ISNIL(i)) {
           Parm[iCnt].pArg = NULL;
-        else
+        } else {
           Parm[iCnt].dwArg = (DWORD)hb_parni(i);
+        }
         iCnt++;
         break;
       case CTYPE_SHORT:
       case CTYPE_UNSIGNED_SHORT:
         Parm[iCnt].nWidth = sizeof(short int);
-        if (ISNIL(i))
+        if (ISNIL(i)) {
           Parm[iCnt].pArg = NULL;
-        else
+        } else {
           Parm[iCnt].dwArg = (DWORD)hb_parni(i);
+        }
         iCnt++;
         break;
       case CTYPE_INT:
       case CTYPE_UNSIGNED_INT:
         Parm[iCnt].nWidth = sizeof(unsigned int);
-        if (ISNIL(i))
+        if (ISNIL(i)) {
           Parm[iCnt].pArg = NULL;
-        else
+        } else {
           Parm[iCnt].dwArg = (DWORD)hb_parnd(i);
+        }
         iCnt++;
         break;
       case CTYPE_LONG:
       case CTYPE_UNSIGNED_LONG:
         Parm[iCnt].nWidth = sizeof(unsigned long int);
-        if (ISNIL(i))
+        if (ISNIL(i)) {
           Parm[iCnt].dwArg = 0;
-        else
+        } else {
           Parm[iCnt].dwArg = (DWORD)hb_parnd(i);
+        }  
         iCnt++;
         break;
       case CTYPE_LONG_PTR:
@@ -343,10 +352,11 @@ HB_FUNC(CALLDLL)
       case CTYPE_SHORT_PTR:
       case CTYPE_UNSIGNED_SHORT_PTR:
         Parm[iCnt].nWidth = sizeof(unsigned long int *);
-        if (ISNIL(i))
+        if (ISNIL(i)) {
           Parm[iCnt].pArg = NULL;
-        else
+        } else {
           Parm[iCnt].dwArg = w32_par_DWORD(i);
+        }  
         iCnt++;
         break;
       case CTYPE_FLOAT_PTR:

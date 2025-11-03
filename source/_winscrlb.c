@@ -49,10 +49,12 @@ HB_FUNC(GETSCROLLRANGE)
       hb_storni(3, *lpMinPos);
       hb_storni(4, *lpMaxPos);
       hb_retl(1);
-    } else
+    } else {
       hb_retl(0);
-  } else
+    }
+  } else {
     hb_retl(0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -96,8 +98,9 @@ HB_FUNC(GETSCROLLINFO)
   si.cbSize = sizeof(SCROLLINFO);
   si.fMask = SIF_ALL;
 
-  if (GetScrollInfo(w32_par_HWND(1), hb_parni(2), &si))
+  if (GetScrollInfo(w32_par_HWND(1), hb_parni(2), &si)) {
     hb_retclen((char *)&si, sizeof(SCROLLINFO));
+  }
 
   // problem
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) &si, sizeof( SCROLLINFO ) );
@@ -115,8 +118,9 @@ HB_FUNC(GETSCROLLBARINFO)
 {
   SCROLLBARINFO sbi;
 
-  if (GetScrollBarInfo(w32_par_HWND(1), hb_parnl(2), &sbi))
+  if (GetScrollBarInfo(w32_par_HWND(1), hb_parnl(2), &sbi)) {
     hb_retclen((char *)&sbi, sizeof(SCROLLBARINFO));
+  }
 
   // problem
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) &sbi, sizeof( SCROLLBARINFO ) );

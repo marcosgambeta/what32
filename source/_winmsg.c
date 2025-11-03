@@ -151,8 +151,9 @@ HB_FUNC(GETMESSAGE)
   if (GetMessage(&Msg, ISNIL(2) ? NULL : w32_par_HWND(2), ISNIL(3) ? 0 : hb_parnl(3), ISNIL(4) ? 0 : hb_parnl(4))) {
     hb_storclen((LPSTR)&Msg, sizeof(MSG), 1);
     hb_retl(1);
-  } else
+  } else {
     hb_retl(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -165,8 +166,9 @@ HB_FUNC(PEEKMESSAGE)
                   ISNIL(4) ? 0 : hb_parnl(4), ISNIL(5) ? PM_NOREMOVE : hb_parnl(5))) {
     hb_storclen((LPSTR)&Msg, sizeof(MSG), 1);
     hb_retl(1);
-  } else
+  } else {
     hb_retl(0);
+  }  
 }
 
 //-----------------------------------------------------------------------------

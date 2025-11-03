@@ -96,8 +96,9 @@ int WINAPI WinMain(HINSTANCE hInstance,     /* handle to current instance */
   GetModuleFileName(hInstance, szAppName, 249);
   argv[0] = szAppName;
 
-  if (*pArgs != 0)
+  if (*pArgs != 0) {
     argv[++argc] = pArgs;
+  }  
 
   while (*pArg != 0) {
     if (*pArg == ' ') {
@@ -107,12 +108,14 @@ int WINAPI WinMain(HINSTANCE hInstance,     /* handle to current instance */
       while (*pArg == ' ')
         pArg++;
 
-      if (*pArg != 0)
+      if (*pArg != 0) {
         argv[argc] = pArg++;
-      else
+      } else {
         argc--;
-    } else
+      }
+    } else {
       pArg++;
+    }  
   }
   argc++;
 

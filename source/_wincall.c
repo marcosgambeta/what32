@@ -129,8 +129,7 @@ RESULT DynaCall(int Flags, DWORD lpFunction,
                 // Arg has a ptr to a variable that has the arg
                 dwVal = *(DWORD *)pArg; // Get first four bytes
                 pArg -= 4;              // Next part of argument
-            }
-            else {
+            } else {
                 // Arg has the real arg
                 dwVal = Parm[nInd].dwArg;
             }
@@ -163,17 +162,14 @@ RESULT DynaCall(int Flags, DWORD lpFunction,
     }
     if (Flags & DC_RETVAL_MATH4) {
         _asm fstp dword ptr [Res]
-    }
-    else if (Flags & DC_RETVAL_MATH8) {
+    } else if (Flags & DC_RETVAL_MATH8) {
         _asm fstp qword ptr [Res]
-    }
-    else if (pRet == NULL) {
+    } else if (pRet == NULL) {
         _asm mov  eax, [dwEAX]
         _asm mov  DWORD PTR [Res], eax
         _asm mov  edx, [dwEDX]
         _asm mov  DWORD PTR [Res + 4], edx
-    }
-    else if (((Flags & DC_BORLAND) == 0) && (nRetSiz <= 8)) {
+    } else if (((Flags & DC_BORLAND) == 0) && (nRetSiz <= 8)) {
         // Microsoft optimized less than 8-bytes structure passing
         _asm mov ecx, DWORD PTR [pRet]
         _asm mov eax, [dwEAX]

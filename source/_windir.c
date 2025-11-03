@@ -165,8 +165,9 @@ HB_FUNC(CREATEDIRECTORY)
 {
   SECURITY_ATTRIBUTES *sa = NULL;
 
-  if (ISCHAR(2))
+  if (ISCHAR(2)) {
     sa = (SECURITY_ATTRIBUTES *)hb_param(2, HB_IT_STRING)->item.asString.value;
+  }  
 
   w32_ret_BOOL(CreateDirectoryA(w32_par_LPCSTR(1), sa));
 }
@@ -297,16 +298,21 @@ HB_FUNC(GETVOLUMEINFORMATION)
                               &VolumeSerialNumber, &MaximumComponentLength, &FileSystemFlags,
                               (LPTSTR)FileSystemNameBuffer, MAX_PATH);
   if (bRet) {
-    if (ISBYREF(2))
+    if (ISBYREF(2)) {
       hb_storc((char *)VolumeNameBuffer, 2);
-    if (ISBYREF(3))
+    }
+    if (ISBYREF(3)) {
       hb_stornl((LONG)VolumeSerialNumber, 3);
-    if (ISBYREF(4))
+    }
+    if (ISBYREF(4)) {
       hb_stornl((LONG)MaximumComponentLength, 4);
-    if (ISBYREF(5))
+    }
+    if (ISBYREF(5)) {
       hb_stornl((LONG)FileSystemFlags, 5);
-    if (ISBYREF(6))
+    }
+    if (ISBYREF(6)) {
       hb_storc((char *)FileSystemNameBuffer, 6);
+    }
   }
 
   hb_retl(bRet);

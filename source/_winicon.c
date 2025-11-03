@@ -183,8 +183,9 @@ HB_FUNC(EXTRACTASSOCIATEDICON)
   hiRet =
       ExtractAssociatedIcon((ISNIL(1) ? GetModuleHandle(NULL) : w32_par_HINSTANCE(1)), (LPSTR)hb_parcx(2), &lpiIcon);
 
-  if (hiRet)
+  if (hiRet) {
     hb_storni(lpiIcon, 2);
+  }  
 
   hb_retnl((LONG)hiRet);
 }

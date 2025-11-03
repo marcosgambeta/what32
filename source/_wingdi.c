@@ -374,9 +374,9 @@ HB_FUNC(LPTODP)
 
     for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
-      if (Array2Point(aSub, &pt))
+      if (Array2Point(aSub, &pt)) {
         *(Point + i) = pt;
-      else {
+      } else {
         hb_retl(0);
         hb_xfree(Point);
         return;
@@ -390,12 +390,14 @@ HB_FUNC(LPTODP)
         hb_itemRelease(aSub);
       }
       hb_retl(1);
-    } else
+    } else {
       hb_retl(0);
+    }  
 
     hb_xfree(Point);
-  } else
+  } else {
     hb_retl(0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -421,9 +423,9 @@ HB_FUNC(DPTOLP)
 
     for (i = 0; i < iCount; i++) {
       aSub = hb_itemArrayGet(aParam, i + 1);
-      if (Array2Point(aSub, &pt))
+      if (Array2Point(aSub, &pt)) {
         *(Point + i) = pt;
-      else {
+      } else {
         hb_retl(0);
         hb_xfree(Point);
         return;
@@ -437,12 +439,14 @@ HB_FUNC(DPTOLP)
         hb_itemRelease(aSub);
       }
       hb_retl(1);
-    } else
+    } else {
       hb_retl(0);
+    }
 
     hb_xfree(Point);
-  } else
+  } else {
     hb_retl(0);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -549,8 +553,9 @@ HB_FUNC(GETRASTERIZERCAPS)
 {
   LPRASTERIZER_STATUS lprs = (LPRASTERIZER_STATUS)hb_param(1, HB_IT_STRING)->item.asString.value;
 
-  if (GetRasterizerCaps(lprs, w32_par_UINT(2)))
+  if (GetRasterizerCaps(lprs, w32_par_UINT(2))) {
     hb_retclen((char *)lprs, sizeof(RASTERIZER_STATUS));
+  }  
   // hb_itemPutCRaw( hb_param( -1, HB_IT_ANY ), (char *) lprs, sizeof(RASTERIZER_STATUS ) );
 }
 
@@ -566,8 +571,9 @@ HB_FUNC(GETASPECTRATIOFILTEREX)
   if (GetAspectRatioFilterEx(w32_par_HDC(1), &lpSize)) {
     Size2ArrayEx(&lpSize, pArray);
     hb_retl(TRUE);
-  } else
+  } else {
     hb_retl(FALSE);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -647,8 +653,9 @@ HB_FUNC(DRAGDETECT)
     pArray = hb_param(2, HB_IT_ARRAY);
     Array2Point(pArray, &PoInt);
     w32_ret_BOOL(DragDetect(w32_par_HWND(1), PoInt));
-  } else
+  } else {
     hb_retl(FALSE);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -726,10 +733,12 @@ HB_FUNC(DRAWFRAMECONTROL)
     if (DrawFrameControl(w32_par_HDC(1), &lpRect, w32_par_UINT(3), w32_par_UINT(4))) {
       Rect2ArrayEx(&lpRect, pArray);
       hb_retl(TRUE);
-    } else
+    } else {
       hb_retl(FALSE);
-  } else
+    }
+  } else {
     hb_retl(FALSE);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -743,12 +752,15 @@ HB_FUNC(DRAWANIMATEDRECTS)
 
   // Your code goes here
   if (Array2Rect(hb_param(3, HB_IT_ARRAY), &lprcFrom) && Array2Rect(hb_param(4, HB_IT_ARRAY), &lprcFrom)) {
-    if (DrawAnimatedRects(w32_par_HWND(1), hb_parni(2), &lprcFrom, &lprcTo))
+    if (DrawAnimatedRects(w32_par_HWND(1), hb_parni(2), &lprcFrom, &lprcTo)) {
       hb_retl(TRUE);
-    else
+    }  
+    else {
       hb_retl(FALSE);
-  } else
+    }
+  } else {
     hb_retl(FALSE);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -762,8 +774,9 @@ HB_FUNC(GETWINDOWORGEX)
   if (GetWindowOrgEx(w32_par_HDC(1), &lpPoInt)) {
     Point2ArrayEx(&lpPoInt, pArray);
     hb_retl(TRUE);
-  } else
+  } else {
     hb_retl(FALSE);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -852,8 +865,9 @@ HB_FUNC(SCALEWINDOWEXTEX)
   if (ScaleWindowExtEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), &lpSize)) {
     Size2ArrayEx(&lpSize, pArray);
     hb_retl(TRUE);
-  } else
+  } else {
     hb_retl(FALSE);
+  }  
 }
 
 //-----------------------------------------------------------------------------

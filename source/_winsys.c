@@ -110,8 +110,9 @@ HB_FUNC(GETTIMEZONEINFORMATION)
 
   hb_retnl(GetTimeZoneInformation(&tzi));
 
-  if (ISBYREF(1))
+  if (ISBYREF(1)) {
     hb_storclen((char *)&tzi, sizeof(tzi), 1);
+  }
 }
 
 //-------------------------------------------------------------------//
@@ -931,8 +932,9 @@ HB_FUNC(CREATEFILE)
 
   SECURITY_ATTRIBUTES *sa = NULL;
 
-  if (ISCHAR(4))
+  if (ISCHAR(4)) {
     sa = (SECURITY_ATTRIBUTES *)hb_param(4, HB_IT_STRING)->item.asString.value;
+  }
 
   hb_retnl((LONG)CreateFile((LPCTSTR)hb_parcx(1), w32_par_DWORD(2), w32_par_DWORD(3),
                             ISCHAR(4) ? (SECURITY_ATTRIBUTES *)sa : NULL, w32_par_DWORD(5), w32_par_DWORD(6),
@@ -967,8 +969,9 @@ HB_FUNC(READFILE)
   BOOL bRet;
   OVERLAPPED *Overlapped = NULL;
 
-  if (ISCHAR(5))
+  if (ISCHAR(5)) {
     Overlapped = (OVERLAPPED *)hb_param(5, HB_IT_STRING)->item.asString.value;
+  }
 
   bRet = ReadFile(w32_par_HANDLE(1), Buffer, w32_par_DWORD(3), &nRead, ISCHAR(5) ? Overlapped : NULL);
 
@@ -996,8 +999,9 @@ HB_FUNC(WRITEFILE)
   DWORD nWritten = 0;
   OVERLAPPED *Overlapped = NULL;
 
-  if (ISCHAR(4))
+  if (ISCHAR(4)) {
     Overlapped = (OVERLAPPED *)hb_param(4, HB_IT_STRING)->item.asString.value;
+  }
 
   hb_retl(WriteFile(w32_par_HANDLE(1), hb_parcx(2), hb_parclen(2), &nWritten, ISCHAR(4) ? Overlapped : NULL));
 

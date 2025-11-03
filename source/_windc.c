@@ -114,8 +114,9 @@ HB_FUNC(CREATEDC)
 {
   DEVMODE *lpInitData = NULL;
 
-  if (!ISNIL(4))
+  if (!ISNIL(4)) {
     lpInitData = (DEVMODE *)hb_param(4, HB_IT_STRING)->item.asString.value;
+  }  
 
   hb_retnl((ULONG)CreateDC((LPCTSTR)hb_parcx(1),        // pointer to string specifying driver name
                            (LPCTSTR)hb_parcx(2),        // pointer to string specifying device name
@@ -132,8 +133,9 @@ HB_FUNC(RESETDC)
 
   DEVMODE *lpInitData = NULL;
 
-  if (!ISNIL(2))
+  if (!ISNIL(2)) {
     lpInitData = (DEVMODE *)hb_param(2, HB_IT_STRING)->item.asString.value;
+  }  
 
   hb_retnl((LONG)ResetDCA(w32_par_HDC(1), ISNIL(2) ? NULL : lpInitData));
 }
@@ -178,8 +180,10 @@ HB_FUNC(SCROLLDC)
     if (ScrollDC(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lprcScroll, &lprcClip, w32_par_HRGN(6), &lprcUpdate)) {
       Rect2ArrayEx(&lprcUpdate, pArray);
       hb_retl(TRUE);
-    } else
+    } else {
       hb_retl(FALSE);
-  } else
+    }
+  } else {
     hb_retl(FALSE);
+  }  
 }

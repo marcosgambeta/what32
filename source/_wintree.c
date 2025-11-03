@@ -61,8 +61,9 @@ HB_FUNC(TVGETSELTEXT) // ( hWnd ) --> cText
     tvi.cchTextMax = 100;
     TreeView_GetItem(hWnd, &tvi);
     hb_retc(tvi.pszText);
-  } else
+  } else {
     hb_retc("");
+  }
 }
 
 //-------------------------------------------------------------------------//

@@ -145,8 +145,9 @@ HB_FUNC(DATETIME_GETRANGE)
 
   dwRet = DateTime_GetRange(w32_par_HWND(1), (SYSTEMTIME *)lpSysTimeArray);
 
-  if (ISBYREF(2))
+  if (ISBYREF(2)) {
     hb_stornl(dwRet, 2);
+  }  
 
   aMinMaxDate = hb_itemArrayNew(2);
   aMinDate = hb_itemArrayNew(8);
@@ -255,8 +256,7 @@ HB_FUNC(DATETIME_GETSYSTEMTIME)
                                                  // This parameter must be a valid pointer; it cannot be NULL.
   );
 
-  if (nRet == GDT_VALID) // Time is valid
-  {
+  if (nRet == GDT_VALID) { // Time is valid
     aSysTime = hb_itemArrayNew(8);
 
     temp = hb_itemPutNL(NULL, SysTime.wYear);
@@ -383,8 +383,7 @@ HB_FUNC(DATETIME_SETSYSTEMTIME)
 {
   SYSTEMTIME SysTime, *lpSysTime;
 
-  if (ISARRAY(3)) // array
-  {
+  if (ISARRAY(3)) { // array
     SysTime.wYear = (WORD)hb_parnl(3, 1);
     SysTime.wMonth = (WORD)hb_parnl(3, 2);
     SysTime.wDayOfWeek = (WORD)hb_parnl(3, 3);
@@ -395,8 +394,7 @@ HB_FUNC(DATETIME_SETSYSTEMTIME)
     SysTime.wMilliseconds = (WORD)hb_parnl(3, 8);
     lpSysTime = &SysTime;
   } else {
-    if (ISCHAR(2)) // xHarbour structure
-    {
+    if (ISCHAR(2)) { // xHarbour structure
       lpSysTime = (SYSTEMTIME *)hb_param(3, HB_IT_STRING)->item.asString.value;
     } else {
       hb_retl(0);

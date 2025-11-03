@@ -49,8 +49,9 @@ HB_FUNC(CHOOSEFONT)
 
   cf->lStructSize = sizeof(CHOOSEFONT);
 
-  if (ChooseFont(cf))
+  if (ChooseFont(cf)) {
     hb_retclen((char *)cf, sizeof(CHOOSEFONT));
+  }  
 }
 
 //----------------------------------------------------------------------------
@@ -113,8 +114,9 @@ HB_FUNC(PRINTDLG)
   if (PrintDlg(pd)) {
     hb_storclen((char *)pd, sizeof(PRINTDLG), 1);
     hb_retl(TRUE);
-  } else
+  } else {
     hb_retl(FALSE);
+  }  
 }
 
 //----------------------------------------------------------------------------
@@ -129,13 +131,12 @@ HB_FUNC( PRINTDLGEX )
 
    pd->lStructSize = sizeof(PRINTDLGEX);
 
-   if ( PrintDlgEx( pd ) )
-   {
+   if ( PrintDlgEx( pd ) ) {
       hb_storclen( (char*) pd, sizeof(PRINTDLGEX), 1 );
       hb_retl(TRUE);
-   }
-   else
+   } else {
      hb_retl(FALSE);
+   }
 }
 */
 
@@ -151,8 +152,9 @@ HB_FUNC(PAGESETUPDLG)
   if (PageSetupDlg(psd)) {
     hb_storclen((char *)psd, sizeof(PAGESETUPDLG), 1);
     hb_retl(TRUE);
-  } else
+  } else {
     hb_retl(FALSE);
+  }  
 }
 
 //----------------------------------------------------------------------------
@@ -173,8 +175,9 @@ HB_FUNC(CHOOSECOLOR)
   cc.rgbResult = (COLORREF)ISNIL(2) ? 0 : hb_parnl(2);
   cc.lpCustColors = crCustClr;
   cc.Flags = (WORD)(ISNIL(4) ? CC_ANYCOLOR | CC_FULLOPEN | CC_RGBINIT : hb_parnl(4));
-  if (ChooseColorA(&cc))
+  if (ChooseColorA(&cc)) {
     hb_retnl(cc.rgbResult);
+  }  
 }
 
 //----------------------------------------------------------------------------

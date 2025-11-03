@@ -143,8 +143,9 @@ HB_FUNC(CREATEENHMETAFILE)
 {
   RECT rc;
 
-  if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
+  if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc)) {
     hb_retnl((LONG)CreateEnhMetaFile(w32_par_HDC(1), w32_par_LPCSTR(2), &rc, ISNIL(4) ? NULL : w32_par_LPCSTR(4)));
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -193,8 +194,9 @@ HB_FUNC(PLAYENHMETAFILE)
 {
   RECT rc;
 
-  if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc))
+  if (ISARRAY(3) && Array2Rect(hb_param(3, HB_IT_ARRAY), &rc)) {
     w32_ret_BOOL(PlayEnhMetaFile(w32_par_HDC(1), w32_par_HENHMETAFILE(2), &rc));
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -222,8 +224,9 @@ HB_FUNC(GETWINMETAFILEBITS)
   if (nBytes) {
     Buffer = (BYTE *)hb_xgrab(nBytes);
 
-    if (GetWinMetaFileBits(w32_par_HENHMETAFILE(1), nBytes, Buffer, hb_parni(2), w32_par_HDC(3)))
+    if (GetWinMetaFileBits(w32_par_HENHMETAFILE(1), nBytes, Buffer, hb_parni(2), w32_par_HDC(3))) {
       hb_retclen((char *)Buffer, nBytes);
+    }
 
     hb_xfree(Buffer);
   }

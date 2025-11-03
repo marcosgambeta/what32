@@ -68,8 +68,9 @@ HB_FUNC(LISTVIEWNOTIFY)
     // TCHAR szString[MAX_PATH];
     if (lpdi->item.iSubItem) {
       if (lpdi->item.mask & LVIF_TEXT) {
-        if (!pSymTest)
+        if (!pSymTest) {
           pSymTest = hb_dynsymFind("_WINLVGETDBINFO");
+        }  
         if (pSymTest) {
           pArray = hb_param(3, HB_IT_ARRAY);
           DArray = hb_param(4, HB_IT_ARRAY);
@@ -89,8 +90,9 @@ HB_FUNC(LISTVIEWNOTIFY)
       }
     } else {
       if (lpdi->item.mask & LVIF_TEXT) {
-        if (!pSymTest)
+        if (!pSymTest) {
           pSymTest = hb_dynsymFind("_WINLVGETDBINFO");
+        }
         if (pSymTest) {
           pArray = hb_param(3, HB_IT_ARRAY);
           DArray = hb_param(4, HB_IT_ARRAY);

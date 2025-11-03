@@ -38,9 +38,9 @@ HB_FUNC(ACCEPT)
   const char *addr;
   int addrlen;
 
-  if (ISNIL(2))
+  if (ISNIL(2)) {
     hb_retnl((LONG)accept((SOCKET)hb_parnl(1), NULL, NULL));
-  else {
+  } else {
     addr = hb_parcx(2);
     addrlen = ISNIL(3) ? hb_parni(3) : hb_parclen(2);
     hb_retnl((LONG)accept((SOCKET)hb_parnl(1), (struct sockaddr *)addr, &addrlen));
@@ -210,8 +210,9 @@ HB_FUNC(RECV)
   int iRet;
 
   iRet = recv((SOCKET)hb_parnl(1), buf, iBuffLen, hb_parni(4));
-  if (iRet && ISBYREF(2))
+  if (iRet && ISBYREF(2)) {
     hb_storclen(buf, iRet, 2);
+  }
 
   hb_retni(iRet);
   hb_xfree(buf);
@@ -233,11 +234,13 @@ HB_FUNC(RECVFROM)
 
   iRet = (int)recvfrom((SOCKET)hb_parnl(1), buf, iBuffLen, hb_parni(4), (struct sockaddr *)from, &iAddrLen);
 
-  if (iRet && ISBYREF(2))
+  if (iRet && ISBYREF(2)) {
     hb_storclen(buf, iRet, 2);
+  }
 
-  if (iAddrLen && ISBYREF(5))
+  if (iAddrLen && ISBYREF(5)) {
     hb_storclen(from, iAddrLen, 5);
+  }
 
   hb_retni(iRet);
   hb_xfree(buf);
@@ -256,26 +259,33 @@ HB_FUNC(SOCKSELECT)
   fd_set *exceptfds = NULL;
   struct timeval *timeout = NULL;
 
-  if (ISCHAR(2))
+  if (ISCHAR(2)) {
     readfds = (fd_set *)hb_param(2, HB_IT_STRING)->item.asString.value;
+  }
 
-  if (ISCHAR(3))
+  if (ISCHAR(3)) {
     writefds = (fd_set *)hb_param(3, HB_IT_STRING)->item.asString.value;
+  }
 
-  if (ISCHAR(4))
+  if (ISCHAR(4)) {
     exceptfds = (fd_set *)hb_param(4, HB_IT_STRING)->item.asString.value;
+  }
 
-  if (ISCHAR(5))
+  if (ISCHAR(5)) {
     timeout = (struct timeval *)hb_param(4, HB_IT_STRING)->item.asString.value;
+  }
 
   hb_retni((int)select(hb_parni(1), readfds, writefds, exceptfds, timeout));
 
-  if (ISCHAR(2) && ISBYREF(2))
+  if (ISCHAR(2) && ISBYREF(2)) {
     hb_storclen((char *)readfds, sizeof(fd_set), 2);
-  if (ISCHAR(3) && ISBYREF(3))
+  }
+  if (ISCHAR(3) && ISBYREF(3)) {
     hb_storclen((char *)writefds, sizeof(fd_set), 3);
-  if (ISCHAR(4) && ISBYREF(4))
+  }
+  if (ISCHAR(4) && ISBYREF(4)) {
     hb_storclen((char *)exceptfds, sizeof(fd_set), 4);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -415,8 +425,9 @@ HB_FUNC(WSASTARTUP)
 
   hb_retni((int)WSAStartup((WORD)hb_parni(1), &WSAData));
 
-  if (ISBYREF(2))
+  if (ISBYREF(2)) {
     hb_storclen((char *)&WSAData, sizeof(WSADATA), 2);
+  }  
 }
 
 //-----------------------------------------------------------------------------
@@ -500,9 +511,9 @@ HB_FUNC(WSAASYNCGETSERVBYNAME)
   HANDLE hRet;
 
   if ((hRet = WSAAsyncGetServByName(w32_par_HWND(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3),
-                                    ISNIL(4) ? NULL : (char *)hb_parcx(4), (char *)buf, (int)MAXGETHOSTSTRUCT)) != 0)
-
+                                    ISNIL(4) ? NULL : (char *)hb_parcx(4), (char *)buf, (int)MAXGETHOSTSTRUCT)) != 0) {
     hb_storclen(buf, sizeof(SERVENT), 5);
+  }
 
   hb_retnl((ULONG)hRet);
   hb_xfree(buf);
@@ -523,9 +534,9 @@ HB_FUNC(WSAASYNCGETSERVBYPORT)
   HANDLE hRet;
 
   if ((hRet = WSAAsyncGetServByPort(w32_par_HWND(1), (unsigned int)hb_parni(2), hb_parni(3),
-                                    ISNIL(4) ? NULL : (char *)hb_parcx(4), (char *)buf, (int)MAXGETHOSTSTRUCT)) != 0)
-
+                                    ISNIL(4) ? NULL : (char *)hb_parcx(4), (char *)buf, (int)MAXGETHOSTSTRUCT)) != 0) {
     hb_storclen(buf, sizeof(SERVENT), 5);
+  }
 
   hb_retnl((ULONG)hRet);
   hb_xfree(buf);
@@ -546,9 +557,9 @@ HB_FUNC(WSAASYNCGETPROTOBYNAME)
   HANDLE hRet;
 
   if ((hRet = WSAAsyncGetProtoByName(w32_par_HWND(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3), (char *)buf,
-                                     (int)MAXGETHOSTSTRUCT)) != 0)
-
+                                     (int)MAXGETHOSTSTRUCT)) != 0) {
     hb_storclen(buf, sizeof(PROTOENT), 4);
+  }
 
   hb_retnl((ULONG)hRet);
   hb_xfree(buf);
@@ -569,9 +580,9 @@ HB_FUNC(WSAASYNCGETPROTOBYNUMBER)
   HANDLE hRet;
 
   if ((hRet = WSAAsyncGetProtoByNumber(w32_par_HWND(1), (unsigned int)hb_parni(2), (int)hb_parni(3), (char *)buf,
-                                       (int)MAXGETHOSTSTRUCT)) != 0)
-
+                                       (int)MAXGETHOSTSTRUCT)) != 0) {
     hb_storclen(buf, sizeof(PROTOENT), 4);
+  }
 
   hb_retnl((ULONG)hRet);
   hb_xfree(buf);
@@ -592,9 +603,9 @@ HB_FUNC(WSAASYNCGETHOSTBYNAME)
   HANDLE hRet;
 
   if ((hRet = WSAAsyncGetHostByName(w32_par_HWND(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3), (char *)buf,
-                                    (int)MAXGETHOSTSTRUCT)) != 0)
-
+                                    (int)MAXGETHOSTSTRUCT)) != 0) {
     hb_storclen(buf, sizeof(HOSTENT), 4);
+  }
 
   hb_retnl((ULONG)hRet);
   hb_xfree(buf);
@@ -616,9 +627,9 @@ HB_FUNC(WSAASYNCGETHOSTBYADDR)
   HANDLE hRet;
 
   if ((hRet = WSAAsyncGetHostByAddr(w32_par_HWND(1), (unsigned int)hb_parni(2), (char *)hb_parcx(3), (int)hb_parclen(3),
-                                    (int)hb_parni(4), (char *)buf, (int)MAXGETHOSTSTRUCT)) != 0)
-
+                                    (int)hb_parni(4), (char *)buf, (int)MAXGETHOSTSTRUCT)) != 0) {
     hb_storclen(buf, sizeof(HOSTENT), 5);
+  }
 
   hb_retnl((ULONG)hRet);
   hb_xfree(buf);
@@ -695,8 +706,9 @@ HB_FUNC(WSAACCEPT)
 
   sRet = WSAAccept((SOCKET)hb_parnl(1), &addr, &addrlen, _WSACondFunc, ISNIL(3) ? 0 : (DWORD_PTR)hb_parnl(3));
 
-  if ((sRet != INVALID_SOCKET) && ISBYREF(2))
+  if ((sRet != INVALID_SOCKET) && ISBYREF(2)) {
     hb_storclen((char *)&addr, addrlen, 2);
+  }
 
   hb_retnl((ULONG)sRet);
 }
