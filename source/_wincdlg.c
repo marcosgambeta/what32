@@ -167,8 +167,9 @@ HB_FUNC(CHOOSECOLOR)
   COLORREF crCustClr[16];
   int i;
 
-  for (i = 0; i < 16; i++)
+  for (i = 0; i < 16; i++) {
     crCustClr[i] = (ISARRAY(3) ? hb_parnl(3, i + 1) : RGB(0, 0, 0)); // GetSysColor(COLOR_BTNFACE)) ;
+  }
 
   cc.lStructSize = sizeof(CHOOSECOLOR);
   cc.hwndOwner = ISNIL(1) ? GetActiveWindow() : w32_par_HWND(1);
