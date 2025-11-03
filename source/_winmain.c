@@ -105,8 +105,9 @@ int WINAPI WinMain(HINSTANCE hInstance,     /* handle to current instance */
       *pArg++ = 0;
       argc++;
 
-      while (*pArg == ' ')
+      while (*pArg == ' ') {
         pArg++;
+      }  
 
       if (*pArg != 0) {
         argv[argc] = pArg++;
