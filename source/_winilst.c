@@ -8,7 +8,7 @@
 
 #include <windows.h>
 #include <commctrl.h>
-#include "hbapi.h"
+#include <hbapi.h>
 
 #include "what32.h"
 
@@ -297,7 +297,7 @@ HB_FUNC(IMAGELIST_GETICONSIZE)
     hb_retl(1);
   } else {
     hb_retl(0);
-  }  
+  }
 }
 
 //-----------------------------------------------------------------------------

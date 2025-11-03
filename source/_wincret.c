@@ -10,11 +10,11 @@
 #include <shlobj.h>
 // #include <commctrl.h>
 
-#include "hbapi.h"
-#include "hbvm.h"
-#include "hbstack.h"
-#include "hbapiitm.h"
-#include "item.api"
+#include <hbapi.h>
+#include <hbvm.h>
+#include <hbstack.h>
+#include <hbapiitm.h>
+#include <item.api>
 
 #include "what32.h"
 

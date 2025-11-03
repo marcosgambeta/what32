@@ -18,8 +18,8 @@ Modified functions:
 #include <windows.h>
 // #include <commctrl.h>
 // #include <winuser.h>
-#include "item.api"
-#include "hbapi.h"
+#include <item.api>
+#include <hbapi.h>
 // #include "commctrl.h"
 
 #include "what32.h"

@@ -1,7 +1,7 @@
 #Define WIN_WANT_VER4
 #define WIN_WANT_ALL
 #Include "winuser.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 //#Include 'debug.ch'
 #Include "commctrl.ch"
 #Include "wintypes.ch"

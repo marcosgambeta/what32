@@ -7,10 +7,10 @@
 
 #define _WIN32_WINNT 0x0400
 
-#include "hbapi.h"
-#include "hbvm.h"
-// #include "hbstack.h"
-#include "hbapiitm.h"
+#include <hbapi.h>
+#include <hbvm.h>
+// #include <hbstack.h>
+#include <hbapiitm.h>
 #if defined(__XCC__)
 #define _MSWSOCK_H
 #endif

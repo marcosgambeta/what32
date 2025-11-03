@@ -7,11 +7,11 @@
 #include <commctrl.h>
 #include <shlobj.h>
 
-#include "item.api"
-#include "hbapi.h"
-#include "hbvm.h"
-#include "hbstack.h"
-#include "hbapiitm.h"
+#include <item.api>
+#include <hbapi.h>
+#include <hbvm.h>
+#include <hbstack.h>
+#include <hbapiitm.h>
 
 #include "what32.h"
 

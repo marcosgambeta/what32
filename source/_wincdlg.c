@@ -14,10 +14,10 @@
 #include <shlobj.h>
 // #include <commdlg.h>
 
-#include "hbapi.h"
-#include "hbvm.h"
-#include "hbstack.h"
-#include "hbapiitm.h"
+#include <hbapi.h>
+#include <hbvm.h>
+#include <hbstack.h>
+#include <hbapiitm.h>
 
 #include "what32.h"
 

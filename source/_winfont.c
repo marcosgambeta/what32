@@ -6,11 +6,11 @@
 #define _WIN32_WINNT 0x0400
 
 #include <windows.h>
-#include "item.api"
-#include "hbapi.h"
-#include "hbvm.h"
-#include "hbstack.h"
-// #include "hbapiitm.h"
+#include <item.api>
+#include <hbapi.h>
+#include <hbvm.h>
+#include <hbstack.h>
+// #include <hbapiitm.h>
 
 #include "what32.h"
 

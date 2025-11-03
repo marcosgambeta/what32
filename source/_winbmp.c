@@ -16,8 +16,8 @@ Modified and non-API functions:
 #define _WIN32_WINNT 0x0400
 
 #include <windows.h>
-#include "item.api"
-#include "hbapi.h"
+#include <item.api>
+#include <hbapi.h>
 
 #include "what32.h"
 

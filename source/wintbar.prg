@@ -4,7 +4,7 @@
 
 
 #Include "winuser.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 #Include "commctrl.ch"
 #Include 'debug.ch'
 #Include "wintypes.ch"

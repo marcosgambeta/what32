@@ -61,10 +61,10 @@ typedef struct _OSVERSIONINFOEX {
 #endif
 #endif
 
-#include "hbapi.h"
-#include "hbvm.h"
-#include "hbstack.h"
-#include "hbapiitm.h"
+#include <hbapi.h>
+#include <hbvm.h>
+#include <hbstack.h>
+#include <hbapiitm.h>
 
 /* add parens to avoid warning */
 #if defined(__BORLANDC__) && (__BORLANDC__ <= 0x620)

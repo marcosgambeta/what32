@@ -58,8 +58,8 @@
 
 #define HB_OS_WIN_USED
 
-#include "hbapi.h"
-#include "hbvm.h"
+#include <hbapi.h>
+#include <hbvm.h>
 
 #if defined(HB_OS_WIN)
 
@@ -107,7 +107,7 @@ int WINAPI WinMain(HINSTANCE hInstance,     /* handle to current instance */
 
       while (*pArg == ' ') {
         pArg++;
-      }  
+      }
 
       if (*pArg != 0) {
         argv[argc] = pArg++;

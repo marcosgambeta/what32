@@ -12,11 +12,11 @@
 #include <commctrl.h>
 
 #include <commdlg.h>
-#include "hbapi.h"
-#include "hbvm.h"
-#include "hbstack.h"
-#include "hbapiitm.h"
-#include "item.api"
+#include <hbapi.h>
+#include <hbvm.h>
+#include <hbstack.h>
+#include <hbapiitm.h>
+#include <item.api>
 
 #include "what32.h"
 

@@ -38,13 +38,13 @@ linking the VMGUI library code into it.
 #include <shlobj.h>
 //#include <commctrl.h>
 
-//#include "hbdate.h"
-#include "hbvmpub.h"
-#include "hbinit.h"
-#include "hbapi.h"
-#include "hbvm.h"
-#include "hbstack.h"
-#include "hbapiitm.h"
+//#include <hbdate.h>
+#include <hbvmpub.h>
+#include <hbinit.h>
+#include <hbapi.h>
+#include <hbvm.h>
+#include <hbstack.h>
+#include <hbapiitm.h>
 #include <ocidl.h>
 #include <olectl.h>
 #include "math.h"

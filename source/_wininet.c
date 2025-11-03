@@ -25,10 +25,10 @@
 #include <shellApi.h>
 #include <wininet.h>
 
-#include "hbapi.h"
-#include "hbvm.h"
-#include "hbstack.h"
-#include "hbapiitm.h"
+#include <hbapi.h>
+#include <hbvm.h>
+#include <hbstack.h>
+#include <hbapiitm.h>
 #include "winreg.h"
 
 #include "what32.h"
@@ -401,7 +401,7 @@ HB_FUNC(INTERNETFINDNEXTFILE)
     }  
   } else {
     hb_retl(FALSE);
-  }  
+  }
 }
 
 //---------------------------------------------------------------------//

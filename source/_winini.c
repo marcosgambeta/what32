@@ -56,10 +56,10 @@
 // #include <shlobj.h>
 #include <windows.h>
 // #include <commctrl.h>
-#include "hbapi.h"
+#include <hbapi.h>
 #include "tchar.h"
-// #include "hbstack.h"
-// #include "hbapiitm.h"
+// #include <hbstack.h>
+// #include <hbapiitm.h>
 
 #include "what32.h"
 

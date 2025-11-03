@@ -8,7 +8,7 @@
 
 
 #Include "winuser.ch"
-#include "hbclass.ch"
+#include <hbclass.ch>
 
 #Include "wintypes.ch"
 #Include "cstruct.ch"

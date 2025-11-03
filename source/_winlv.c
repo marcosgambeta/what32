@@ -4,12 +4,12 @@
 #include <shlobj.h>
 // #include <commctrl.h>
 
-#include "item.api"
-#include "hbapi.h"
+#include <item.api>
+#include <hbapi.h>
 #include "commctrl.h"
-#include "hbvm.h"
-#include "hbstack.h"
-#include "hbapiitm.h"
+#include <hbvm.h>
+#include <hbstack.h>
+#include <hbapiitm.h>
 
 #include "what32.h"
 

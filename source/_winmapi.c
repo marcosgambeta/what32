@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <mapi.h>
-#include "hbapi.h"
+#include <hbapi.h>
 
 /*
    MapiSendMail( 0,                    ;   // hWnd

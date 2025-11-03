@@ -14,10 +14,10 @@
 //-------------------------------------------------------------------//
 
 #include <windows.h>
-#include "hbapi.h"
-#include "hbvm.h"
-#include "hbstack.h"
-#include "hbapiitm.h"
+#include <hbapi.h>
+#include <hbvm.h>
+#include <hbstack.h>
+#include <hbapiitm.h>
 #include "tchar.h"
 
 #include "what32.h"
