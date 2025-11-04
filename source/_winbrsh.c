@@ -132,14 +132,14 @@ HB_FUNC(GETBRUSHORGEX)
 
     temp = _itemPutNL(NULL, Point.x);
     hb_arraySet(aPt, 1, temp);
-    _itemRelease(temp);
+    hb_itemRelease(temp);
 
     temp = _itemPutNL(NULL, Point.y);
     hb_arraySet(aPt, 2, temp);
-    _itemRelease(temp);
+    hb_itemRelease(temp);
 
     hb_itemReturn(aPt);
-    _itemRelease(aPt);
+    hb_itemRelease(aPt);
   }
 }
 
@@ -159,13 +159,13 @@ HB_FUNC(SETBRUSHORGEX)
 
     temp = _itemPutNL(NULL, Point.x);
     hb_arraySet(aPt, 1, temp);
-    _itemRelease(temp);
+    hb_itemRelease(temp);
 
     temp = _itemPutNL(NULL, Point.y);
     hb_arraySet(aPt, 2, temp);
-    _itemRelease(temp);
+    hb_itemRelease(temp);
 
     hb_itemReturn(aPt);
-    _itemRelease(aPt);
+    hb_itemRelease(aPt);
   }
 }

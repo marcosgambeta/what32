@@ -241,7 +241,7 @@ HB_FUNC(GETCLIENTRECT)
   aMetr = Rect2Array(&rc);
 
   hb_itemReturn(aMetr);
-  _itemRelease(aMetr);
+  hb_itemRelease(aMetr);
 }
 
 //-----------------------------------------------------------------------------
@@ -258,7 +258,7 @@ HB_FUNC(GETWINDOWRECT)
   aMetr = Rect2Array(&rc);
 
   hb_itemReturn(aMetr);
-  _itemRelease(aMetr);
+  hb_itemRelease(aMetr);
 }
 
 //-----------------------------------------------------------------------------
@@ -1016,7 +1016,7 @@ HB_FUNC(SETWINDOWEXTEX)
   if (SetWindowExtEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lpSize) > 0) {
     pArray = Size2Array(&lpSize);
     hb_itemReturn(pArray);
-    _itemRelease(pArray);
+    hb_itemRelease(pArray);
   }
 }
 
@@ -1034,7 +1034,7 @@ HB_FUNC(SETWINDOWORGEX)
   if (SetWindowOrgEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &lpPoint) > 0) {
     pArray = Point2Array(&lpPoint);
     hb_itemReturn(pArray);
-    _itemRelease(pArray);
+    hb_itemRelease(pArray);
   }
 }
 

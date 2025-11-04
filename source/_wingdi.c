@@ -527,7 +527,7 @@ HB_FUNC(GETCLIPBOX)
 
   aRect = Rect2Array(&Rect);
   hb_itemReturn(aRect);
-  _itemRelease(aRect);
+  hb_itemRelease(aRect);
 }
 
 //-----------------------------------------------------------------------------
@@ -612,7 +612,7 @@ HB_FUNC(GETUPDATERECT)
   if (GetUpdateRect(w32_par_HWND(1), &Rect, w32_par_BOOL(2))) {
     aRect = Rect2Array(&Rect);
     hb_itemReturn(aRect);
-    _itemRelease(aRect);
+    hb_itemRelease(aRect);
   }
 }
 
@@ -670,54 +670,54 @@ HB_FUNC(GETDRAWITEMSTRUCT)
 
   temp = _itemPutNL(NULL, dis->CtlType);
   hb_arraySet(arrDis, 1, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, dis->CtlID);
   hb_arraySet(arrDis, 2, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, dis->itemID);
   hb_arraySet(arrDis, 3, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, dis->itemAction);
   hb_arraySet(arrDis, 4, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, dis->itemState);
   hb_arraySet(arrDis, 5, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, (LONG)dis->hwndItem);
   hb_arraySet(arrDis, 6, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, (LONG)dis->hDC);
   hb_arraySet(arrDis, 7, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, dis->rcItem.left);
   hb_arraySet(arrDis, 8, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, dis->rcItem.top);
   hb_arraySet(arrDis, 9, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, dis->rcItem.right);
   hb_arraySet(arrDis, 10, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, dis->rcItem.bottom);
   hb_arraySet(arrDis, 11, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, dis->itemData);
   hb_arraySet(arrDis, 12, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   hb_itemReturn(arrDis);
-  _itemRelease(arrDis);
+  hb_itemRelease(arrDis);
 }
 
 //-----------------------------------------------------------------------------

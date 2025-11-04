@@ -77,14 +77,14 @@ HB_FUNC(GETBITMAPSIZE)
 
   tmp = _itemPutNL(NULL, bm.bmWidth);
   hb_arraySet(aArray, 1, tmp);
-  _itemRelease(tmp);
+  hb_itemRelease(tmp);
 
   tmp = _itemPutNL(NULL, bm.bmHeight);
   hb_arraySet(aArray, 2, tmp);
-  _itemRelease(tmp);
+  hb_itemRelease(tmp);
 
   hb_itemReturn(aArray);
-  _itemRelease(aArray);
+  hb_itemRelease(aArray);
 }
 
 //-----------------------------------------------------------------------------
@@ -101,7 +101,7 @@ HB_FUNC(GETBITMAPDIMENSIONEX)
   if (GetBitmapDimensionEx(w32_par_HBITMAP(1), &Size)) {
     aSize = Size2Array(&Size);
     hb_itemReturn(aSize);
-    _itemRelease(aSize);
+    hb_itemRelease(aSize);
   }
 }
 

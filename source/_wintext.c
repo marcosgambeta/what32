@@ -264,7 +264,7 @@ HB_FUNC(GETTEXTEXTENTPOINT32)
   if (GetTextExtentPoint32(w32_par_HDC(1), pstr, strlen(pstr), &sz)) {
     aMetr = Size2Array(&sz);
     hb_itemReturn(aMetr);
-    _itemRelease(aMetr);
+    hb_itemRelease(aMetr);
   }
 }
 

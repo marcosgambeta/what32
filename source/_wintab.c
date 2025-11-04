@@ -141,22 +141,22 @@ HB_FUNC(TABCTRL_GETITEMRECT)
 
   temp = _itemPutNL(NULL, rc.left);
   hb_arraySet(aRect, 1, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, rc.top);
   hb_arraySet(aRect, 2, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, rc.right);
   hb_arraySet(aRect, 3, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   temp = _itemPutNL(NULL, rc.bottom);
   hb_arraySet(aRect, 4, temp);
-  _itemRelease(temp);
+  hb_itemRelease(temp);
 
   hb_itemReturn(aRect);
-  _itemRelease(aRect);
+  hb_itemRelease(aRect);
 }
 
 //---------------------------------------------------------------------------//

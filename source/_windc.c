@@ -154,7 +154,7 @@ HB_FUNC(GETDCORGEX)
   if (GetDCOrgEx(w32_par_HDC(1), &Point)) {
     aPt = Point2Array(&Point);
     hb_itemReturn(aPt);
-    _itemRelease(aPt);
+    hb_itemRelease(aPt);
   }
 }
 

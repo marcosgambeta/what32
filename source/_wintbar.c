@@ -71,7 +71,7 @@ HB_FUNC(GETTOOLBARITEMRECT)
   //   MapWindowPoints((HWND) hb_parnl(1), HWND_DESKTOP, (POINT*)&rc, 2);
   aRect = Rect2Array(&rc);
   hb_itemReturn(aRect);
-  _itemRelease(aRect);
+  hb_itemRelease(aRect);
 }
 
 //-----------------------------------------------------------------------------

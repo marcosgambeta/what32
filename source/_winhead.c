@@ -191,11 +191,11 @@ HB_FUNC(HEADER_GETORDERARRAY)
     for (i = 0; i < iCount; i++) {
       temp = _itemPutNL(NULL, lpi[i]);
       hb_arraySet(aInt, i + 1, temp);
-      _itemRelease(temp);
+      hb_itemRelease(temp);
     }
 
     hb_itemReturn(aInt);
-    _itemRelease(aInt);
+    hb_itemRelease(aInt);
     hb_xfree(lpi);
   }
 }
@@ -245,7 +245,7 @@ HB_FUNC(HEADER_GETITEMRECT)
   if (Header_GetItemRect(w32_par_HWND(1), (WPARAM)hb_parni(2), &rc)) {
     aRc = Rect2Array(&rc);
     hb_itemReturn(aRc);
-    _itemRelease(aRc);
+    hb_itemRelease(aRc);
   }
 }
 
