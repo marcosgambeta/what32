@@ -526,7 +526,7 @@ HB_FUNC(GETCLIPBOX)
   hb_retni(GetClipBox(w32_par_HDC(1), &Rect));
 
   aRect = Rect2Array(&Rect);
-  _itemReturn(aRect);
+  hb_itemReturn(aRect);
   _itemRelease(aRect);
 }
 
@@ -611,7 +611,7 @@ HB_FUNC(GETUPDATERECT)
 
   if (GetUpdateRect(w32_par_HWND(1), &Rect, w32_par_BOOL(2))) {
     aRect = Rect2Array(&Rect);
-    _itemReturn(aRect);
+    hb_itemReturn(aRect);
     _itemRelease(aRect);
   }
 }
@@ -716,7 +716,7 @@ HB_FUNC(GETDRAWITEMSTRUCT)
   hb_arraySet(arrDis, 12, temp);
   _itemRelease(temp);
 
-  _itemReturn(arrDis);
+  hb_itemReturn(arrDis);
   _itemRelease(arrDis);
 }
 

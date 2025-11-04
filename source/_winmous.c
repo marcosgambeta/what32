@@ -124,7 +124,7 @@ HB_FUNC(GETCURSORPOS)
 
   if (GetCursorPos(&Point)) {
     gcPos = Point2Array(&Point);
-    _itemReturn(gcPos);
+    hb_itemReturn(gcPos);
     _itemRelease(gcPos);
   }
 }
@@ -152,7 +152,7 @@ HB_FUNC(GETCLIPCURSOR)
 
   if (GetClipCursor(&rc)) {
     aRect = Rect2Array(&rc);
-  _itemReturn(aRect);
+  hb_itemReturn(aRect);
   _itemRelease(aRect);
   }
 }

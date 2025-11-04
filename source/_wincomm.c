@@ -100,7 +100,7 @@ HB_FUNC(STATUSBARGETRECT)
   HWND hWnd = w32_par_HWND(1);
   SendMessage(hWnd, SB_GETRECT, hb_parnl(2), (LPARAM)&rc);
   aRect = Rect2Array(&rc);
-  _itemReturn(aRect);
+  hb_itemReturn(aRect);
   _itemRelease(aRect);
 }
 
@@ -111,7 +111,7 @@ HB_FUNC(STATUSBARGETPARTS)
   HWND hWnd = w32_par_HWND(1);
   SendMessage(hWnd, SB_GETPARTS, hb_parni(2), (LPARAM)&rc);
   aParts = Rect2Array(&rc);
-  _itemReturn(aParts);
+  hb_itemReturn(aParts);
   _itemRelease(aParts);
 }
 

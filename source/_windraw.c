@@ -47,7 +47,7 @@ HB_FUNC(MOVETOEX)
                &Point)) {
 
     aPt = Point2Array(&Point);
-    _itemReturn(aPt);
+    hb_itemReturn(aPt);
     _itemRelease(aPt);
   }
 }
@@ -65,7 +65,7 @@ HB_FUNC(GETCURRENTPOSITIONEX)
 
   if (GetCurrentPositionEx(w32_par_HDC(1), &pt)) {
     aPt = Point2Array(&pt);
-    _itemReturn(aPt);
+    hb_itemReturn(aPt);
     _itemRelease(aPt);
   }
 }

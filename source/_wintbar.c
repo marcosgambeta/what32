@@ -70,7 +70,7 @@ HB_FUNC(GETTOOLBARITEMRECT)
   SendMessage(w32_par_HWND(1), TB_GETITEMRECT, hb_parni(2), (LPARAM)&rc);
   //   MapWindowPoints((HWND) hb_parnl(1), HWND_DESKTOP, (POINT*)&rc, 2);
   aRect = Rect2Array(&rc);
-  _itemReturn(aRect);
+  hb_itemReturn(aRect);
   _itemRelease(aRect);
 }
 

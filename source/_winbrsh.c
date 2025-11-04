@@ -138,7 +138,7 @@ HB_FUNC(GETBRUSHORGEX)
     hb_arraySet(aPt, 2, temp);
     _itemRelease(temp);
 
-    _itemReturn(aPt);
+    hb_itemReturn(aPt);
     _itemRelease(aPt);
   }
 }
@@ -165,7 +165,7 @@ HB_FUNC(SETBRUSHORGEX)
     hb_arraySet(aPt, 2, temp);
     _itemRelease(temp);
 
-    _itemReturn(aPt);
+    hb_itemReturn(aPt);
     _itemRelease(aPt);
   }
 }

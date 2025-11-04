@@ -64,7 +64,7 @@ HB_FUNC(GETCARETPOS)
 
   if (GetCaretPos((LPPOINT)&Point)) {
     aPt = Point2Array(&Point);
-    _itemReturn(aPt);
+    hb_itemReturn(aPt);
     _itemRelease(aPt);
   }
 }

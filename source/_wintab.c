@@ -155,7 +155,7 @@ HB_FUNC(TABCTRL_GETITEMRECT)
   hb_arraySet(aRect, 4, temp);
   _itemRelease(temp);
 
-  _itemReturn(aRect);
+  hb_itemReturn(aRect);
   _itemRelease(aRect);
 }
 

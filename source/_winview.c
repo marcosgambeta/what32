@@ -31,7 +31,7 @@ HB_FUNC(GETVIEWPORTEXTEX)
 
   if (GetViewportExtEx(w32_par_HDC(1), &siz)) {
     aSize = Size2Array(&siz);
-    _itemReturn(aSize);
+    hb_itemReturn(aSize);
     _itemRelease(aSize);
   }
 }
@@ -49,7 +49,7 @@ HB_FUNC(GETVIEWPORTORGEX)
 
   if (GetViewportOrgEx(w32_par_HDC(1), &pt)) {
     aPoint = Point2Array(&pt);
-    _itemReturn(aPoint);
+    hb_itemReturn(aPoint);
     _itemRelease(aPoint);
   }
 }
@@ -67,7 +67,7 @@ HB_FUNC(GETWINDOWEXTEX)
 
   if (GetWindowExtEx(w32_par_HDC(1), &siz)) {
     aSize = Size2Array(&siz);
-    _itemReturn(aSize);
+    hb_itemReturn(aSize);
     _itemRelease(aSize);
   }
 }
@@ -85,7 +85,7 @@ HB_FUNC(SCALEVIEWPORTEXTEX)
 
   if (ScaleViewportExtEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), hb_parni(4), hb_parni(5), &siz)) {
     aSize = Size2Array(&siz);
-    _itemReturn(aSize);
+    hb_itemReturn(aSize);
     _itemRelease(aSize);
   }
 }
@@ -103,7 +103,7 @@ HB_FUNC(SETVIEWPORTEXTEX)
 
   if (SetViewportExtEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &siz)) {
     aSize = Size2Array(&siz);
-    _itemReturn(aSize);
+    hb_itemReturn(aSize);
     _itemRelease(aSize);
   }
 }
@@ -121,7 +121,7 @@ HB_FUNC(SETVIEWPORTORGEX)
 
   if (SetViewportOrgEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &pt)) {
     aPoint = Point2Array(&pt);
-    _itemReturn(aPoint);
+    hb_itemReturn(aPoint);
     _itemRelease(aPoint);
   }
 }
