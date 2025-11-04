@@ -139,19 +139,19 @@ HB_FUNC(TABCTRL_GETITEMRECT)
 
   TabCtrl_GetItemRect(w32_par_HWND(1), hb_parni(2), &rc);
 
-  temp = _itemPutNL(NULL, rc.left);
+  temp = hb_itemPutNL(NULL, rc.left);
   hb_arraySet(aRect, 1, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, rc.top);
+  temp = hb_itemPutNL(NULL, rc.top);
   hb_arraySet(aRect, 2, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, rc.right);
+  temp = hb_itemPutNL(NULL, rc.right);
   hb_arraySet(aRect, 3, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, rc.bottom);
+  temp = hb_itemPutNL(NULL, rc.bottom);
   hb_arraySet(aRect, 4, temp);
   hb_itemRelease(temp);
 

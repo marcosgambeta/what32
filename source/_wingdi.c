@@ -668,51 +668,51 @@ HB_FUNC(GETDRAWITEMSTRUCT)
   PHB_ITEM arrDis = _itemArrayNew(12);
   PHB_ITEM temp;
 
-  temp = _itemPutNL(NULL, dis->CtlType);
+  temp = hb_itemPutNL(NULL, dis->CtlType);
   hb_arraySet(arrDis, 1, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, dis->CtlID);
+  temp = hb_itemPutNL(NULL, dis->CtlID);
   hb_arraySet(arrDis, 2, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, dis->itemID);
+  temp = hb_itemPutNL(NULL, dis->itemID);
   hb_arraySet(arrDis, 3, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, dis->itemAction);
+  temp = hb_itemPutNL(NULL, dis->itemAction);
   hb_arraySet(arrDis, 4, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, dis->itemState);
+  temp = hb_itemPutNL(NULL, dis->itemState);
   hb_arraySet(arrDis, 5, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, (LONG)dis->hwndItem);
+  temp = hb_itemPutNL(NULL, (LONG)dis->hwndItem);
   hb_arraySet(arrDis, 6, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, (LONG)dis->hDC);
+  temp = hb_itemPutNL(NULL, (LONG)dis->hDC);
   hb_arraySet(arrDis, 7, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, dis->rcItem.left);
+  temp = hb_itemPutNL(NULL, dis->rcItem.left);
   hb_arraySet(arrDis, 8, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, dis->rcItem.top);
+  temp = hb_itemPutNL(NULL, dis->rcItem.top);
   hb_arraySet(arrDis, 9, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, dis->rcItem.right);
+  temp = hb_itemPutNL(NULL, dis->rcItem.right);
   hb_arraySet(arrDis, 10, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, dis->rcItem.bottom);
+  temp = hb_itemPutNL(NULL, dis->rcItem.bottom);
   hb_arraySet(arrDis, 11, temp);
   hb_itemRelease(temp);
 
-  temp = _itemPutNL(NULL, dis->itemData);
+  temp = hb_itemPutNL(NULL, dis->itemData);
   hb_arraySet(arrDis, 12, temp);
   hb_itemRelease(temp);
 

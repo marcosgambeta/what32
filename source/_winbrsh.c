@@ -130,11 +130,11 @@ HB_FUNC(GETBRUSHORGEX)
   if (GetBrushOrgEx(w32_par_HDC(1), &Point)) {
     aPt = _itemArrayNew(2);
 
-    temp = _itemPutNL(NULL, Point.x);
+    temp = hb_itemPutNL(NULL, Point.x);
     hb_arraySet(aPt, 1, temp);
     hb_itemRelease(temp);
 
-    temp = _itemPutNL(NULL, Point.y);
+    temp = hb_itemPutNL(NULL, Point.y);
     hb_arraySet(aPt, 2, temp);
     hb_itemRelease(temp);
 
@@ -157,11 +157,11 @@ HB_FUNC(SETBRUSHORGEX)
   if (SetBrushOrgEx(w32_par_HDC(1), hb_parni(2), hb_parni(3), &Point)) {
     aPt = _itemArrayNew(2);
 
-    temp = _itemPutNL(NULL, Point.x);
+    temp = hb_itemPutNL(NULL, Point.x);
     hb_arraySet(aPt, 1, temp);
     hb_itemRelease(temp);
 
-    temp = _itemPutNL(NULL, Point.y);
+    temp = hb_itemPutNL(NULL, Point.y);
     hb_arraySet(aPt, 2, temp);
     hb_itemRelease(temp);
 

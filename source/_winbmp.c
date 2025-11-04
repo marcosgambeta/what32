@@ -75,11 +75,11 @@ HB_FUNC(GETBITMAPSIZE)
 
   GetObject(hBmp, sizeof(bm), &bm);
 
-  tmp = _itemPutNL(NULL, bm.bmWidth);
+  tmp = hb_itemPutNL(NULL, bm.bmWidth);
   hb_arraySet(aArray, 1, tmp);
   hb_itemRelease(tmp);
 
-  tmp = _itemPutNL(NULL, bm.bmHeight);
+  tmp = hb_itemPutNL(NULL, bm.bmHeight);
   hb_arraySet(aArray, 2, tmp);
   hb_itemRelease(tmp);
 
@@ -121,11 +121,11 @@ HB_FUNC(SETBITMAPDIMENSIONEX)
 
     aSize = hb_itemArrayNew(2);
 
-    temp = _itemPutNL(NULL, Size.cx);
+    temp = hb_itemPutNL(NULL, Size.cx);
     hb_arraySet(aSize, 1, temp);
     hb_itemRelease(temp);
 
-    temp = _itemPutNL(NULL, Size.cy);
+    temp = hb_itemPutNL(NULL, Size.cy);
     hb_arraySet(aSize, 2, temp);
     hb_itemRelease(temp);
 

@@ -189,7 +189,7 @@ HB_FUNC(HEADER_GETORDERARRAY)
   if (lRet) {
     aInt = _itemArrayNew(iCount);
     for (i = 0; i < iCount; i++) {
-      temp = _itemPutNL(NULL, lpi[i]);
+      temp = hb_itemPutNL(NULL, lpi[i]);
       hb_arraySet(aInt, i + 1, temp);
       hb_itemRelease(temp);
     }
