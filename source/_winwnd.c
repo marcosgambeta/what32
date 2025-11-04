@@ -2,7 +2,7 @@
 
 #include <windows.h>
 #include <winuser.h>
-#include <item.api>
+//#include <item.api>
 #include <hbapi.h>
 
 #include "what32.h"

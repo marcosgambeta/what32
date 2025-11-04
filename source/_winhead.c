@@ -10,7 +10,7 @@
 #include <shlobj.h>
 #include <commctrl.h>
 
-#include <item.api>
+//#include <item.api>
 #include <hbapi.h>
 
 #include "what32.h"

@@ -7,7 +7,7 @@
 #include <commctrl.h>
 #include <shlobj.h>
 
-#include <item.api>
+//#include <item.api>
 #include <hbapi.h>
 #include <hbvm.h>
 #include <hbstack.h>

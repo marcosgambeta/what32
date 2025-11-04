@@ -8,7 +8,7 @@
 
 // #include <shlobj.h>
 #include <windows.h>
-#include <item.api>
+//#include <item.api>
 // #include <hbapiitm.h>
 #include <hbapi.h>
 // #include <hbvm.h>
