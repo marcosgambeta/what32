@@ -68,7 +68,7 @@ HB_FUNC(DRAWBITMAP)
 
 HB_FUNC(GETBITMAPSIZE)
 {
-  PHB_ITEM aArray = _itemArrayNew(2);
+  PHB_ITEM aArray = hb_itemArrayNew(2);
   PHB_ITEM tmp;
   BITMAP bm;
   HBITMAP hBmp = w32_par_HBITMAP(1);

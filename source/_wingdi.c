@@ -665,7 +665,7 @@ HB_FUNC(GETDRAWITEMSTRUCT)
 
   DRAWITEMSTRUCT *dis = (DRAWITEMSTRUCT *)hb_parnl(1);
 
-  PHB_ITEM arrDis = _itemArrayNew(12);
+  PHB_ITEM arrDis = hb_itemArrayNew(12);
   PHB_ITEM temp;
 
   temp = hb_itemPutNL(NULL, dis->CtlType);

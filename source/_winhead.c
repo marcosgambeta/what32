@@ -187,7 +187,7 @@ HB_FUNC(HEADER_GETORDERARRAY)
   UINT i;
 
   if (lRet) {
-    aInt = _itemArrayNew(iCount);
+    aInt = hb_itemArrayNew(iCount);
     for (i = 0; i < iCount; i++) {
       temp = hb_itemPutNL(NULL, lpi[i]);
       hb_arraySet(aInt, i + 1, temp);

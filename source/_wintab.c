@@ -134,7 +134,7 @@ HB_FUNC(TABCTRL_GETITEMCOUNT)
 HB_FUNC(TABCTRL_GETITEMRECT)
 {
   RECT rc;
-  PHB_ITEM aRect = _itemArrayNew(4);
+  PHB_ITEM aRect = hb_itemArrayNew(4);
   PHB_ITEM temp;
 
   TabCtrl_GetItemRect(w32_par_HWND(1), hb_parni(2), &rc);
