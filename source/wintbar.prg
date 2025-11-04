@@ -8,7 +8,7 @@
 #Include "commctrl.ch"
 #Include 'debug.ch'
 #Include "wintypes.ch"
-#Include "cstruct.ch"
+#Include <cstruct.ch>
 #Include 'what32.ch'
 
 pragma pack(4)

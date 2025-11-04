@@ -5,7 +5,7 @@
 //#Include 'debug.ch'
 #Include "commctrl.ch"
 #Include "wintypes.ch"
-#Include "cstruct.ch"
+#Include <cstruct.ch>
 #include "wingdi.ch"
 
 

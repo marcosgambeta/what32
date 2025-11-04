@@ -7,7 +7,7 @@
 #Include 'wingdi.ch'
 
 #Include 'wintypes.ch'
-#Include 'cstruct.ch'
+#Include <cstruct.ch>
 
 #Define CTYPE_BOOL 5
 

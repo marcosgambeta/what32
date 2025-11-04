@@ -11,7 +11,7 @@
 #include <hbclass.ch>
 
 #Include "wintypes.ch"
-#Include "cstruct.ch"
+#Include <cstruct.ch>
 
 pragma pack(4)
 
